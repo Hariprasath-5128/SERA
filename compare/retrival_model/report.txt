@@ -1,0 +1,130 @@
+=== Starting Ultimate Embedding Model Benchmark (100 diseases) ===
+1. Fetching dataset and chunking...
+   Processed: keratoderma with woolly hair (4 chunks)
+   Processed: Knobloch syndrome (4 chunks)
+   Processed: coloboma (6 chunks)
+   Processed: lacrimo-auriculo-dento-digital syndrome (5 chunks)
+   Processed: spinocerebellar ataxia type 3 (5 chunks)
+   Processed: pilomatricoma (4 chunks)
+   Processed: Stickler syndrome (5 chunks)
+   Processed: T-cell immunodeficiency, congenital alopecia, and nail dystrophy (4 chunks)
+   Processed: Timothy syndrome (5 chunks)
+   Processed: trisomy 18 (4 chunks)
+   Processed: Aicardi-Goutieres syndrome (6 chunks)
+   Processed: Aarskog-Scott syndrome (4 chunks)
+   Processed: Pallister-Hall syndrome (4 chunks)
+   Processed: Parkinson disease (5 chunks)
+   Processed: ADCY5-related dyskinesia (4 chunks)
+   Processed: proopiomelanocortin deficiency (4 chunks)
+   Processed: primary ciliary dyskinesia (6 chunks)
+   Processed: Pompe disease (4 chunks)
+   Processed: capillary malformation-arteriovenous malformation syndrome (4 chunks)
+   Processed: Chediak-Higashi syndrome (4 chunks)
+   Processed: Mabry syndrome (5 chunks)
+   Processed: Lujan syndrome (4 chunks)
+   Processed: caudal regression syndrome (5 chunks)
+   Processed: Friedreich ataxia (4 chunks)
+   Processed: 47,XYY syndrome (4 chunks)
+   Failed to process https://ghr.nlm.nih.gov/condition/2-methylbutyryl-coa-dehydrogenase-deficiency: HTTP error 404 while fetching https://ghr.nlm.nih.gov/condition/2-methylbutyryl-coa-dehydrogenase-deficiency
+   Failed to process https://ghr.nlm.nih.gov/condition/x-linked-infantile-spasm-syndrome: HTTP error 404 while fetching https://ghr.nlm.nih.gov/condition/x-linked-infantile-spasm-syndrome
+   Processed: Wolff-Parkinson-White syndrome (5 chunks)
+   Processed: Greig cephalopolysyndactyly syndrome (4 chunks)
+   Processed: globozoospermia (4 chunks)
+   Processed: Zellweger spectrum disorder (5 chunks)
+   Processed: fish-eye disease (4 chunks)
+   Processed: familial paroxysmal kinesigenic dyskinesia (4 chunks)
+   Processed: giant axonal neuropathy (4 chunks)
+   Processed: familial osteochondritis dissecans (4 chunks)
+   Processed: Ghosal hematodiaphyseal dysplasia (4 chunks)
+   Processed: Glanzmann thrombasthenia (4 chunks)
+   Processed: fibronectin glomerulopathy (4 chunks)
+   Processed: ZAP70-related severe combined immunodeficiency (4 chunks)
+   Processed: Wolf-Hirschhorn syndrome (4 chunks)
+   Processed: Greenberg dysplasia (4 chunks)
+   Processed: X-linked infantile nystagmus (4 chunks)
+   Processed: 21-hydroxylase deficiency (4 chunks)
+   Processed: 48,XXYY syndrome (5 chunks)
+   Processed: frontometaphyseal dysplasia (4 chunks)
+   Processed: Lowe syndrome (4 chunks)
+   Processed: CATSPER1-related nonsyndromic male infertility (4 chunks)
+   Processed: CHARGE syndrome (5 chunks)
+   Processed: lysinuric protein intolerance (4 chunks)
+   Processed: cap myopathy (4 chunks)
+   Processed: pontocerebellar hypoplasia (5 chunks)
+   Processed: primary hyperoxaluria (4 chunks)
+   Processed: propionic acidemia (4 chunks)
+   Processed: Parkes Weber syndrome (4 chunks)
+   Processed: Adams-Oliver syndrome (5 chunks)
+   Processed: Paget disease of bone (5 chunks)
+   Processed: trisomy 13 (4 chunks)
+   Processed: Aicardi syndrome (5 chunks)
+   Processed: Tietz syndrome (4 chunks)
+   Processed: Tangier disease (4 chunks)
+   Processed: STING-associated vasculopathy with onset in infancy (4 chunks)
+   Processed: Pitt-Hopkins syndrome (5 chunks)
+   Processed: spinocerebellar ataxia type 36 (5 chunks)
+   Processed: L1 syndrome (5 chunks)
+   Processed: Kniest dysplasia (4 chunks)
+   Processed: collagen VI-related myopathy (5 chunks)
+   Processed: keratitis-ichthyosis-deafness syndrome (4 chunks)
+   Processed: Leydig cell hypoplasia (4 chunks)
+   Processed: congenital hepatic fibrosis (4 chunks)
+   Processed: lactate dehydrogenase deficiency (5 chunks)
+   Processed: congenital afibrinogenemia (4 chunks)
+   Processed: cold-induced sweating syndrome (4 chunks)
+   Processed: Koolen-de Vries syndrome (4 chunks)
+   Processed: Stve-Wiedemann syndrome (4 chunks)
+   Processed: spondylocarpotarsal synostosis syndrome (4 chunks)
+   Processed: triple A syndrome (5 chunks)
+   Processed: osteoglophonic dysplasia (5 chunks)
+   Processed: thrombotic thrombocytopenic purpura (4 chunks)
+   Processed: adenine phosphoribosyltransferase deficiency (4 chunks)
+   Processed: pantothenate kinase-associated neurodegeneration (4 chunks)
+   Processed: ovarian cancer (7 chunks)
+   Processed: abdominal wall defect (5 chunks)
+   Processed: primary myelofibrosis (4 chunks)
+   Processed: protein C deficiency (4 chunks)
+   Processed: citrullinemia (5 chunks)
+   Processed: medullary cystic kidney disease type 1 (4 chunks)
+   Processed: CAV3-related distal myopathy (4 chunks)
+   Processed: Loeys-Dietz syndrome (5 chunks)
+   Processed: lymphedema-distichiasis syndrome (4 chunks)
+   Processed: cherubism (4 chunks)
+   Processed: 2-hydroxyglutaric aciduria (4 chunks)
+   Processed: 46,XX testicular disorder of sex development (5 chunks)
+   Processed: Wolfram syndrome (6 chunks)
+   Processed: X-linked intellectual disability, Siderius type (4 chunks)
+   Processed: familial exudative vitreoretinopathy (4 chunks)
+   Processed: giant congenital melanocytic nevus (5 chunks)
+   Processed: familial male-limited precocious puberty (4 chunks)
+   Processed: fibrochondrogenesis (4 chunks)
+   Processed: glucose phosphate isomerase deficiency (4 chunks)
+   Processed: fibrodysplasia ossificans progressiva (4 chunks)
+
+Collected 490 questions. Total chunks to embed: 430
+
+
+
+
+================================================================================
+                 ULTIMATE EMBEDDING MODEL BENCHMARK
+================================================================================
++---------------------+------------+------------+------------+-------+---------------+
+| Model               | Recall@1   | Recall@3   | Recall@5   | MRR   | Avg Latency   |
++=====================+============+============+============+=======+===============+
+| MiniLM              | 0.31       | 0.63       | 0.72       | 0.48  | 3.6ms         |
++---------------------+------------+------------+------------+-------+---------------+
+| BGE Base            | 0.44       | 0.69       | 0.76       | 0.57  | 4.0ms         |
++---------------------+------------+------------+------------+-------+---------------+
+| Nomic               | 0.45       | 0.72       | 0.76       | 0.58  | 5.9ms         |
++---------------------+------------+------------+------------+-------+---------------+
+| PubMedBERT          | 0.36       | 0.68       | 0.74       | 0.52  | 4.3ms         |
++---------------------+------------+------------+------------+-------+---------------+
+| MedCPT (Asymmetric) | 0.26       | 0.54       | 0.62       | 0.40  | 4.4ms         |
++---------------------+------------+------------+------------+-------+---------------+
+| BGE-M3 (Dense)      | 0.52       | 0.72       | 0.77       | 0.62  | 8.0ms         |
++---------------------+------------+------------+------------+-------+---------------+
+| GTE-Large-v1.5      | 0.46       | 0.73       | 0.77       | 0.59  | 74.6ms        |
++---------------------+------------+------------+------------+-------+---------------+
+| ColBERTv2           | ERROR      | ERROR      | ERROR      | ERROR | ERROR         |
++---------------------+------------+------------+------------+-------+---------------+

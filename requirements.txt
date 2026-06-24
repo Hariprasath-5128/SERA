@@ -1,0 +1,7 @@
+httpx
+tenacity
+beautifulsoup4
+lxml
+python-dotenv
+chromadb
+sentence-transformers

@@ -135,7 +135,7 @@ SERA/
 │
 ├── models/
 │   ├── embedding/
-│   │   └── all-MiniLM-L6-v2/
+│   │   └── BAAI/bge-m3/
 │   │
 │   ├── summarizer/
 │   │   ├── llama/
@@ -194,7 +194,7 @@ app/
     html_cleaner.py     # Strip nav/ads/boilerplate → clean article text
     chunker.py          # Semantic + recursive text splitter
     embedder.py         # SentenceTransformer wrapper
-    ingestor.py         # Orchestrates full pipeline → ChromaDB
+    ingestor.py         # Orchestrates full pipeline (with Idempotent Deduplication) → ChromaDB
     benchmark_loader.py # Write question/answer pairs → SQLite benchmark_pairs
   retrieval/
     retriever.py        # Top-k ChromaDB retrieval
@@ -228,7 +228,7 @@ app/
 ```
 Collection: raw_chunks
   id:          str   → "{document_id}_{chunk_idx}"
-  embedding:   List[float] (384-dim, all-MiniLM-L6-v2)
+  embedding:   List[float] (1024-dim, BAAI/bge-m3)
   document:    str   → clean article text chunk
   metadata:
     document_id:          str   → MedQuAD document_id (e.g. "0000613")
@@ -322,7 +322,7 @@ INGESTION PIPELINE (Knowledge Source):
    e. chroma_client.raw_chunks.upsert(chunks)
 
 QUERY PIPELINE:
-4. Embed query → all-MiniLM-L6-v2
+4. Embed query → BAAI/bge-m3
 5. ChromaDB top-k retrieval from raw_chunks
 6. Concatenate chunk texts as context
 7. Call gpt-4o-mini with context + query
@@ -2149,7 +2149,7 @@ CREATE TABLE IF NOT EXISTS maintenance_log (
 |-----------|---------|-----------|
 | `CHUNK_SIZE_TOKENS` | 500 | Balances context density vs retrieval precision |
 | `CHUNK_OVERLAP_TOKENS` | 50 | Prevents boundary information loss |
-| `EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | 384-dim, fast, good semantic quality |
+| `EMBEDDING_MODEL` | `BAAI/bge-m3` | 1024-dim, high-accuracy multi-vector baseline |
 | `EMBEDDING_BATCH_SIZE` | 64 | GPU-efficient batch size |
 | `CRAWL_RATE_PER_SEC` | 1 | NLM rate-limit compliance (1 req/sec) |
 | `CRAWL_TIMEOUT_SEC` | 15 | Per-URL HTTP timeout |
