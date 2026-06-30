@@ -1,0 +1,1357 @@
+# Parsed Sections (No Truncation)
+
+================================================================================
+ DOMAIN: cancer.gov
+================================================================================
+
+### Sample 1: https://www.cancer.gov/types/uterine/patient/endometrial-treatment-pdq
+
+[KEY POINTS]
+- Endometrial cancer is a disease in which malignant (cancer) cells form in the tissues of the endometrium.
+- Obesity and having metabolic syndrome may increase the risk of endometrial cancer.
+- Taking tamoxifen for breast cancer or taking estrogen alone (without progesterone) can increase the risk of endometrial cancer.
+- Signs and symptoms of endometrial cancer include unusual vaginal bleeding or pain in the pelvis.
+- Tests that examine the endometrium are used to diagnose endometrial cancer.
+- Certain factors affect prognosis (chance of recovery) and treatment options.
+- After endometrial cancer has been diagnosed, tests are done to find out if cancer cells have spread within the uterus or to other parts of the body.
+- There are three ways that cancer spreads in the body.
+- Cancer may spread from where it began to other parts of the body.
+- The following stages are used for endometrial cancer: Stage I Stage II Stage III Stage IV
+- Endometrial cancer may be grouped for treatment as follows: Low-risk endometrial cancer High-risk endometrial cancer
+- Endometrial cancer can recur (come back) after it has been treated.
+- There are different types of treatment for patients with endometrial cancer.
+- Five types of standard treatment are used: Surgery Radiation therapy Chemotherapy Hormone therapy Targeted therapy
+- New types of treatment are being tested in clinical trials.
+- Treatment for endometrial cancer may cause side effects.
+- Patients may want to think about taking part in a clinical trial.
+- Patients can enter clinical trials before, during, or after starting their cancer treatment.
+- Follow-up tests may be needed.
+
+[ENDOMETRIAL CANCER IS A DISEASE IN WHICH MALIGNANT (CANCER) CELLS FORM IN THE TISSUES OF THE ENDOMETRIUM.]
+The endometrium is the lining of the uterus, a hollow, muscular organ in a woman’s pelvis. The uterus is where a fetus grows. In most nonpregnant women, the uterus is about 3 inches long. The lower, narrow end of the uterus is the cervix, which leads to the vagina.
+Cancer of the endometrium is different from cancer of the muscle of the uterus, which is called sarcoma of the uterus. See the PDQ summary on Uterine Sarcoma Treatment for more information about uterine sarcoma.
+
+[OBESITY AND HAVING METABOLIC SYNDROME MAY INCREASE THE RISK OF ENDOMETRIAL CANCER.]
+Anything that increases your chance of getting a disease is called a risk factor. Having a risk factor does not mean that you will get cancer; not having risk factors doesn't mean that you will not get cancer. Talk to your doctor if you think you may be at risk for endometrial cancer.
+Risk factors for endometrial cancer include the following:
+- Taking estrogen-only hormone replacement therapy (HRT) after menopause .
+- Taking tamoxifen to prevent or treat breast cancer .
+- Obesity .
+- Having metabolic syndrome .
+- Having type 2 diabetes .
+- Exposure of endometrial tissue to estrogen made by the body. This may be caused by: Never giving birth. Menstruating at an early age. Starting menopause at a later age.
+- Having polycystic ovary syndrome .
+- Having a family history of endometrial cancer in a first-degree relative (mother, sister, or daughter).
+- Having certain genetic conditions , such as Lynch syndrome .
+- Having endometrial hyperplasia .
+Older age is the main risk factor for most cancers. The chance of getting cancer increases as you get older.
+
+[TAKING TAMOXIFEN FOR BREAST CANCER OR TAKING ESTROGEN ALONE (WITHOUT PROGESTERONE) CAN INCREASE THE RISK OF ENDOMETRIAL CANCER.]
+Endometrial cancer may develop in breast cancer patients who have been treated with tamoxifen. A patient who takes this drug and has abnormal vaginal bleeding should have a follow-up exam and a biopsy of the endometrial lining if needed. Women taking estrogen (a hormone that can affect the growth of some cancers) alone also have an increased risk of endometrial cancer. Taking estrogen combined with progesterone (another hormone) does not increase a woman’s risk of endometrial cancer.
+
+[SIGNS AND SYMPTOMS OF ENDOMETRIAL CANCER INCLUDE UNUSUAL VAGINAL BLEEDING OR PAIN IN THE PELVIS.]
+These and other signs and symptoms may be caused by endometrial cancer or by other conditions. Check with your doctor if you have any of the following:
+- Vaginal bleeding or discharge not related to menstruation (periods).
+- Vaginal bleeding after menopause.
+- Difficult or painful urination .
+- Pain during sexual intercourse.
+- Pain in the pelvic area.
+
+[TESTS THAT EXAMINE THE ENDOMETRIUM ARE USED TO DIAGNOSE ENDOMETRIAL CANCER.]
+Because endometrial cancer begins inside the uterus, it does not usually show up in the results of a Pap test. For this reason, a sample of endometrial tissue must be removed and checked under a microscope to look for cancer cells. One of the following procedures may be used:
+- Endometrial biopsy : The removal of tissue from the endometrium (inner lining of the uterus) by inserting a thin, flexible tube through the cervix and into the uterus. The tube is used to gently scrape a small amount of tissue from the endometrium and then remove the tissue samples. A pathologist views the tissue under a microscope to look for cancer cells.
+- Dilatation and curettage : A procedure to remove samples of tissue from the inner lining of the uterus. The cervix is dilated and a curette (spoon-shaped instrument) is inserted into the uterus to remove tissue. The tissue samples are checked under a microscope for signs of disease. This procedure is also called a D&C. Enlarge Dilatation and curettage (D and C). A speculum is inserted into the vagina to widen it in order to look at the cervix (first panel). A dilator is used to widen the cervix (middle panel). A curette is put through the cervix into the uterus to scrape out abnormal tissue (last panel).
+- Hysteroscopy : A procedure to look inside the uterus for abnormal areas. A hysteroscope is inserted through the vagina and cervix into the uterus. A hysteroscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue samples, which are checked under a microscope for signs of cancer.
+Other tests and procedures used to diagnose endometrial cancer include the following:
+- Physical exam and health history : An exam of the body to check general signs of health, including checking for signs of disease, such as lumps or anything else that seems unusual. A history of the patient’s health habits and past illnesses and treatments will also be taken.
+- Transvaginal ultrasound exam : A procedure used to examine the vagina, uterus, fallopian tubes , and bladder . An ultrasound transducer (probe) is inserted into the vagina and used to bounce high-energy sound waves (ultrasound) off internal tissues or organs and make echoes. The echoes form a picture of body tissues called a sonogram . The doctor can identify tumors by looking at the sonogram. Enlarge Transvaginal ultrasound. An ultrasound probe connected to a computer is inserted into the vagina and is gently moved to show different organs. The probe bounces sound waves off internal organs and tissues to make echoes that form a sonogram (computer picture).
+
+[CERTAIN FACTORS AFFECT PROGNOSIS (CHANCE OF RECOVERY) AND TREATMENT OPTIONS.]
+The prognosis and treatment options depend on the following:
+- The stage of the cancer (whether it is in the endometrium only, involves the uterus wall, or has spread to other places in the body).
+- How the cancer cells look under a microscope.
+- Whether the cancer cells are affected by progesterone.
+Endometrial cancer can usually be cured because it is usually diagnosed early.
+
+[AFTER ENDOMETRIAL CANCER HAS BEEN DIAGNOSED, TESTS ARE DONE TO FIND OUT IF CANCER CELLS HAVE SPREAD WITHIN THE UTERUS OR TO OTHER PARTS OF THE BODY.]
+The process used to find out whether the cancer has spread within the uterus or to other parts of the body is called staging. The information gathered from the staging process determines the stage of the disease. It is important to know the stage in order to plan treatment. Certain tests and procedures are used in the staging process. A hysterectomy (an operation in which the uterus is removed) will usually be done to treat endometrial cancer. Tissue samples are taken from the area around the uterus and checked under a microscope for signs of cancer to help find out whether the cancer has spread.
+The following procedures may be used in the staging process:
+- Pelvic exam : An exam of the vagina , cervix , uterus, fallopian tubes , ovaries , and rectum . A speculum is inserted into the vagina and the doctor or nurse looks at the vagina and cervix for signs of disease. A Pap test of the cervix is usually done. The doctor or nurse also inserts one or two lubricated , gloved fingers of one hand into the vagina and places the other hand over the lower abdomen to feel the size, shape, and position of the uterus and ovaries. The doctor or nurse also inserts a lubricated, gloved finger into the rectum to feel for lumps or abnormal areas. Enlarge Pelvic exam. A doctor or nurse inserts one or two lubricated, gloved fingers of one hand into the vagina and presses on the lower abdomen with the other hand. This is done to feel the size, shape, and position of the uterus and ovaries. The vagina, cervix, fallopian tubes, and rectum are also checked.
+- Chest x-ray : An x-ray of the organs and bones inside the chest. An x-ray is a type of energy beam that can go through the body and onto film, making a picture of areas inside the body.
+- CT scan (CAT scan) : A procedure that makes a series of detailed pictures of areas inside the body, taken from different angles. The pictures are made by a computer linked to an x-ray machine. A dye may be injected into a vein or swallowed to help the organs or tissues show up more clearly. This procedure is also called computed tomography, computerized tomography, or computerized axial tomography.
+- MRI (magnetic resonance imaging) : A procedure that uses a magnet, radio waves , and a computer to make a series of detailed pictures of areas inside the body. This procedure is also called nuclear magnetic resonance imaging (NMRI).
+- PET scan (positron emission tomography scan) : A procedure to find malignant tumor cells in the body. A small amount of radioactive glucose (sugar) is injected into a vein. The PET scanner rotates around the body and makes a picture of where glucose is being used in the body. Malignant tumor cells show up brighter in the picture because they are more active and take up more glucose than normal cells do.
+- Lymph node dissection : A surgical procedure in which the lymph nodes are removed from the pelvic area and a sample of tissue is checked under a microscope for signs of cancer. This procedure is also called lymphadenectomy.
+
+[THERE ARE THREE WAYS THAT CANCER SPREADS IN THE BODY.]
+Cancer can spread through tissue, the lymph system, and the blood:
+- Tissue. The cancer spreads from where it began by growing into nearby areas.
+- Lymph system. The cancer spreads from where it began by getting into the lymph system. The cancer travels through the lymph vessels to other parts of the body.
+- Blood. The cancer spreads from where it began by getting into the blood. The cancer travels through the blood vessels to other parts of the body.
+
+[CANCER MAY SPREAD FROM WHERE IT BEGAN TO OTHER PARTS OF THE BODY.]
+When cancer spreads to another part of the body, it is called metastasis. Cancer cells break away from where they began (the primary tumor) and travel through the lymph system or blood.
+- Lymph system. The cancer gets into the lymph system, travels through the lymph vessels, and forms a tumor ( metastatic tumor) in another part of the body.
+- Blood. The cancer gets into the blood, travels through the blood vessels, and forms a tumor (metastatic tumor) in another part of the body.
+The metastatic tumor is the same type of cancer as the primary tumor. For example, if endometrial cancer spreads to the lung, the cancer cells in the lung are actually endometrial cancer cells. The disease is metastatic endometrial cancer, not lung cancer.
+
+[STAGE I]
+In stage I, cancer is found in the uterus only. Stage I is divided into stages IA and IB, based on how far the cancer has spread.
+- Stage IA : Cancer is in the endometrium only or less than halfway through the myometrium (muscle layer of the uterus ).
+- Stage IB : Cancer has spread halfway or more into the myometrium .
+
+[STAGE II]
+In stage II, cancer has spread into connective tissue of the cervix, but has not spread outside the uterus.
+
+[STAGE III]
+In stage III, cancer has spread beyond the uterus and cervix, but has not spread beyond the pelvis. Stage III is divided into stages IIIA, IIIB, and IIIC, based on how far the cancer has spread within the pelvis.
+- Stage IIIA : Cancer has spread to the outer layer of the uterus and/or to the fallopian tubes , ovaries , and ligaments of the uterus. Enlarge Stage IIIA endometrial cancer. Cancer has spread to the outer layer of the uterus and/or to the fallopian tubes, ovaries, or ligaments of the uterus.
+- Stage IIIB : Cancer has spread to the vagina and/or to the parametrium ( connective tissue and fat around the uterus ). Enlarge Stage IIIB endometrial cancer. Cancer has spread to the vagina and/or to the parametrium (connective tissue and fat around the uterus and cervix).
+- Stage IIIC : Cancer has spread to lymph nodes in the pelvis and/or around the aorta (largest artery in the body, which carries blood away from the heart). Enlarge Stage IIIC endometrial cancer. Cancer has spread to lymph nodes in the pelvis and/or around the aorta (the largest artery in the body that carries blood away from the heart).
+
+[STAGE IV]
+In stage IV, cancer has spread beyond the pelvis. Stage IV is divided into stages IVA and IVB, based on how far the cancer has spread.
+- Stage IVA : Cancer has spread to the bladder and/or bowel wall. Enlarge Stage IVA endometrial cancer. Cancer has spread into the bladder and/or bowel.
+- Stage IVB : Cancer has spread to other parts of the body beyond the pelvis , including the abdomen and/or lymph nodes in the groin . Enlarge Stage IVB endometrial cancer. The cancer has spread to parts of the body outside the pelvis, including the abdomen and/or lymph nodes in the groin.
+
+[HIGH-RISK ENDOMETRIAL CANCER]
+[LOW-RISK ENDOMETRIAL CANCER]
+Grades 1 and 2 tumors are usually considered low-risk. They usually do not spread to other parts of the body.
+
+Grade 3 tumors are considered high-risk. They often spread to other parts of the body. Uterine papillary serous, clear cell, and carcinosarcoma are three subtypes of endometrial cancer that are considered grade 3.
+
+[ENDOMETRIAL CANCER CAN RECUR (COME BACK) AFTER IT HAS BEEN TREATED.]
+The cancer may come back in the uterus, the pelvis, in lymph nodes in the abdomen, or in other parts of the body.
+
+[THERE ARE DIFFERENT TYPES OF TREATMENT FOR PATIENTS WITH ENDOMETRIAL CANCER.]
+Different types of treatment are available for patients with endometrial cancer. Some treatments are standard (the currently used treatment), and some are being tested in clinical trials. A treatment clinical trial is a research study meant to help improve current treatments or obtain information on new treatments for patients with cancer. When clinical trials show that a new treatment is better than the standard treatment, the new treatment may become the standard treatment. Patients may want to think about taking part in a clinical trial. Some clinical trials are open only to patients who have not started treatment.
+
+[SURGERY]
+Surgery (removing the cancer in an operation) is the most common treatment for endometrial cancer. The following surgical procedures may be used:
+- Total hysterectomy : Surgery to remove the uterus , including the cervix . If the uterus and cervix are taken out through the vagina , the operation is called a vaginal hysterectomy . If the uterus and cervix are taken out through a large incision (cut) in the abdomen , the operation is called a total abdominal hysterectomy. If the uterus and cervix are taken out through a small incision (cut) in the abdomen using a laparoscope , the operation is called a total laparoscopic hysterectomy. Enlarge Hysterectomy. The uterus is surgically removed with or without other organs or tissues. In a total hysterectomy, the uterus and cervix are removed. In a total hysterectomy with salpingo-oophorectomy, (a) the uterus plus one (unilateral) ovary and fallopian tube are removed; or (b) the uterus plus both (bilateral) ovaries and fallopian tubes are removed. In a radical hysterectomy, the uterus, cervix, both ovaries, both fallopian tubes, and nearby tissue are removed. These procedures are done using a low transverse incision or a vertical incision.
+- Bilateral salpingo-oophorectomy : Surgery to remove both ovaries and both fallopian tubes .
+- Radical hysterectomy : Surgery to remove the uterus, cervix, and part of the vagina. The ovaries, fallopian tubes, or nearby lymph nodes may also be removed.
+- Lymph node dissection : A surgical procedure in which the lymph nodes are removed from the pelvic area and a sample of tissue is checked under a microscope for signs of cancer. This procedure is also called lymphadenectomy.
+After the doctor removes all the cancer that can be seen at the time of the surgery, some patients may be given radiation therapy or hormone treatment after surgery to kill any cancer cells that are left. Treatment given after the surgery, to lower the risk that the cancer will come back, is called adjuvant therapy.
+
+[RADIATION THERAPY]
+Radiation therapy is a cancer treatment that uses high-energy x-rays or other types of radiation to kill cancer cells or keep them from growing. There are two types of radiation therapy:
+- External radiation therapy uses a machine outside the body to send radiation toward the area of the body with cancer.
+- Internal radiation therapy uses a radioactive substance sealed in needles, seeds , wires, or catheters that are placed directly into or near the cancer.
+The way the radiation therapy is given depends on the type and stage of the cancer being treated. External and internal radiation therapy are used to treat endometrial cancer, and may also be used as palliative therapy to relieve symptoms and improve quality of life.
+
+[CHEMOTHERAPY]
+Chemotherapy is a cancer treatment that uses drugs to stop the growth of cancer cells, either by killing the cells or by stopping the cells from dividing. When chemotherapy is taken by mouth or injected into a vein or muscle, the drugs enter the bloodstream and can reach cancer cells throughout the body (systemic chemotherapy). When chemotherapy is placed directly into the cerebrospinal fluid, an organ, or a body cavity such as the abdomen, the drugs mainly affect cancer cells in those areas (regional chemotherapy).
+The way the chemotherapy is given depends on the type and stage of the cancer being treated.
+
+[HORMONE THERAPY]
+Hormone therapy is a cancer treatment that removes hormones or blocks their action and stops cancer cells from growing. Hormones are substances made by glands in the body and circulated in the bloodstream. Some hormones can cause certain cancers to grow. If tests show that the cancer cells have places where hormones can attach (receptors), drugs, surgery, or radiation therapy is used to reduce the production of hormones or block them from working.
+
+[TARGETED THERAPY]
+Targeted therapy is a type of treatment that uses drugs or other substances to identify and attack specific cancer cells. Targeted therapies usually cause less harm to normal cells than chemotherapy or radiation therapy do. Monoclonal antibodies, mTOR inhibitors, and signal transduction inhibitors are three types of targeted therapy used to treat endometrial cancer.
+- Monoclonal antibody therapy: Monoclonal antibodies are immune system proteins made in the laboratory to treat many diseases, including cancer. As a cancer treatment, these antibodies can attach to a specific target on cancer cells or other cells that may help cancer cells grow. The antibodies are able to then kill the cancer cells, block their growth, or keep them from spreading. Monoclonal antibodies are given by infusion . They may be used alone or to carry drugs, toxins , or radioactive material directly to cancer cells. Bevacizumab is used to treat stage III , stage IV , and recurrent endometrial cancer. How do monoclonal antibodies work to treat cancer? This video shows how monoclonal antibodies, such as trastuzumab, pembrolizumab, and rituximab, block molecules cancer cells need to grow, flag cancer cells for destruction by the body’s immune system, or deliver harmful substances to cancer cells.
+- mTOR inhibitor therapy: mTOR inhibitors block a protein called mTOR , which helps control cell division. mTOR inhibitors may keep cancer cells from growing and prevent the growth of new blood vessels that tumors need to grow. Everolimus and ridaforolimus are used to treat stage III, stage IV, and recurrent endometrial cancer.
+- Signal transduction inhibitor therapy: Signal transduction inhibitors block signals that are passed from one molecule to another inside a cell. Blocking these signals may kill cancer cells. Metformin is being studied to treat stage III, stage IV, and recurrent endometrial cancer.
+
+[PATIENTS MAY WANT TO THINK ABOUT TAKING PART IN A CLINICAL TRIAL.]
+For some patients, taking part in a clinical trial may be the best treatment choice. Clinical trials are part of the cancer research process. Clinical trials are done to find out if new cancer treatments are safe and effective or better than the standard treatment.
+Many of today's standard treatments for cancer are based on earlier clinical trials. Patients who take part in a clinical trial may receive the standard treatment or be among the first to receive a new treatment.
+Patients who take part in clinical trials also help improve the way cancer will be treated in the future. Even when clinical trials do not lead to effective new treatments, they often answer important questions and help move research forward.
+
+[PATIENTS CAN ENTER CLINICAL TRIALS BEFORE, DURING, OR AFTER STARTING THEIR CANCER TREATMENT.]
+Some clinical trials only include patients who have not yet received treatment. Other trials test treatments for patients whose cancer has not gotten better. There are also clinical trials that test new ways to stop cancer from recurring (coming back) or reduce the side effects of cancer treatment.
+Clinical trials are taking place in many parts of the country. Information about clinical trials supported by NCI can be found on NCI’s clinical trials search webpage. Clinical trials supported by other organizations can be found on the ClinicalTrials.gov website.
+
+[FOLLOW-UP TESTS MAY BE NEEDED.]
+As you go through treatment, you will have follow-up tests or check-ups. Some tests that were done to diagnose or stage the cancer may be repeated to see how well the treatment is working. Decisions about whether to continue, change, or stop treatment may be based on the results of these tests.
+Some of the tests will continue to be done from time to time after treatment has ended. The results of these tests can show if your condition has changed or if the cancer has recurred (come back).
+
+[TREATMENT OF STAGE I AND STAGE II ENDOMETRIAL CANCER]
+For information about the treatments listed below, see the Treatment Option Overview section.
+Low-risk endometrial cancer (grade 1 or grade 2)
+Treatment of low-risk stage I endometrial cancer and stage II endometrial cancer may include the following:
+- Surgery ( total hysterectomy and bilateral salpingo-oophorectomy ). Lymph nodes in the pelvis and abdomen may also be removed and viewed under a microscope to check for cancer cells .
+- Surgery (total hysterectomy and bilateral salpingo-oophorectomy, with or without removal of lymph nodes in the pelvis and abdomen) followed by internal radiation therapy . In certain cases, external radiation therapy to the pelvis may be used in place of internal radiation therapy.
+- Radiation therapy alone for patients who cannot have surgery.
+- A clinical trial of a new chemotherapy regimen.
+If cancer has spread to the cervix, a radical hysterectomy with bilateral salpingo-oophorectomy may be done.
+High-risk endometrial cancer (grade 3)
+Treatment of high-risk stage I endometrial cancer and stage II endometrial cancer may include the following:
+- Surgery ( radical hysterectomy and bilateral salpingo-oophorectomy ). Lymph nodes in the pelvis and abdomen may also be removed and viewed under a microscope to check for cancer cells .
+- Surgery (radical hysterectomy and bilateral salpingo-oophorectomy) followed by chemotherapy and sometimes radiation therapy .
+- A clinical trial of a new chemotherapy regimen.
+
+[TREATMENT OF STAGE III, STAGE IV, AND RECURRENT ENDOMETRIAL CANCER]
+For information about the treatments listed below, see the Treatment Option Overview section.
+Treatment of stage III endometrial cancer, stage IV endometrial cancer, and recurrent endometrial cancer may include the following:
+- Surgery ( radical hysterectomy and removal of lymph nodes in the pelvis so they can be viewed under a microscope to check for cancer cells ) followed by adjuvant chemotherapy and/or radiation therapy .
+- Chemotherapy and internal and external radiation therapy for patients who cannot have surgery.
+- Hormone therapy for patients who cannot have surgery or radiation therapy.
+- Targeted therapy with mTOR inhibitors ( everolimus or ridaforolimus) or a monoclonal antibody ( bevacizumab ).
+- A clinical trial of a new treatment regimen that may include combination chemotherapy , targeted therapy, such as an mTOR inhibitor (everolimus) or signal transduction inhibitor ( metformin ), and/or hormone therapy, for patients with advanced or recurrent endometrial cancer.
+
+--------------------------------------------------------------------------------
+
+### Sample 2: https://www.cancer.gov/types/lung/patient/small-cell-lung-treatment-pdq
+
+[KEY POINTS]
+- Small cell lung cancer is a type of fast-growing cancer that forms in the tissues of the lung.
+- There are two main types of small cell lung cancer.
+- Smoking is the major risk factor for small cell lung cancer.
+- Signs and symptoms of small cell lung cancer include coughing and shortness of breath.
+- Tests and procedures that examine the lungs are used to diagnose and stage small cell lung cancer.
+- After small cell lung cancer has been diagnosed, tests are done to find out if cancer cells have spread within the chest or to other parts of the body.
+- Some people decide to get a second opinion.
+- Certain factors affect prognosis (chance of recovery) and treatment options.
+- The following stages are used for small cell lung cancer: Limited-stage small cell lung cancer Extensive-stage small cell lung cancer
+- Small cell lung cancer can recur (come back) after it has been treated.
+Cancer stage describes the extent of cancer in the body, such as the size of the tumor, whether it has spread, and how far it has spread from where it first formed. It is important to know the stage of small cell lung cancer to plan the best treatment.
+Small cell lung cancer is usually classified into two stages due to its tendency to spread early.
+- There are different types of treatment for patients with small cell lung cancer.
+- The following types of treatment are used: Surgery Chemotherapy Radiation therapy Immunotherapy Laser therapy Endoscopic stent placement
+- New types of treatment are being tested in clinical trials.
+- Treatment for small cell lung cancer may cause side effects.
+- Follow-up care may be needed.
+
+[SMALL CELL LUNG CANCER IS A TYPE OF FAST-GROWING CANCER THAT FORMS IN THE TISSUES OF THE LUNG.]
+The lungs are a pair of cone-shaped breathing organs in the chest. The lungs bring oxygen into the body as you breathe in. They release carbon dioxide, a waste product of the body's cells, as you breathe out. Each lung has sections called lobes. The left lung has two lobes. The right lung is slightly larger and has three lobes. A thin membrane called the pleura surrounds the lungs. Two tubes called bronchi lead from the trachea (windpipe) to the right and left lungs. Lung cancer may also form in the bronchi. Small tubes called bronchioles and tiny air sacs called alveoli make up the inside of the lungs.
+There are two types of lung cancer: small cell lung cancer and non-small cell lung cancer. Small cell lung cancer is less common than non-small cell lung cancer.
+
+[THERE ARE TWO MAIN TYPES OF SMALL CELL LUNG CANCER.]
+The cancer cells of each type grow and spread in different ways. The types of small cell lung cancer are named for the kinds of cells found in the cancer and how the cells look when viewed under a microscope. The cancer cells of each type grow and spread in different ways:
+- Small cell carcinoma (also called oat cell cancer) is a type of lung cancer that can grow and spread quickly, often leading to the cancer spreading to other parts of the body early in the disease process. This is the most common type of small cell lung cancer.
+- Combined small cell carcinoma is a rare subtype of lung cancer that has characteristics of small cell lung cancer and non-small cell lung cancer in the same tumor.
+
+[SMOKING IS THE MAJOR RISK FACTOR FOR SMALL CELL LUNG CANCER.]
+Lung cancer is caused by certain changes to the way lung cells function, especially how they grow and divide into new cells. There are many risk factors for lung cancer, but many do not directly cause cancer. Instead, they increase the chance of DNA damage in cells that may lead to lung cancer. Learn more about how cancer develops at What Is Cancer?
+A risk factor is anything that increases the chance of getting a disease. Some risk factors for lung cancer, like smoking, can be changed. However, risk factors also include things you cannot change, like your genetics, age, and family history. Learning about risk factors for lung cancer can help you make changes that might lower your risk of getting it.
+Smoking tobacco now or in the past is the most important risk factor for lung cancer. Smoking cigarettes, pipes, or cigars increases the risk of lung cancer. The earlier in life a person starts smoking, the more often a person smokes, and the more years a person smokes, the greater the risk of lung cancer.
+Other risk factors for lung cancer include:
+- being exposed to secondhand smoke
+- being exposed to asbestos , arsenic , chromium, beryllium, nickel, soot, or tar in the workplace
+- being exposed to radiation from: radiation therapy to the breast or chest radon in the home or workplace imaging tests such as CT scans atomic bomb radiation
+- living where there is air pollution
+- having a family history of lung cancer
+- being infected with HIV
+- taking beta carotene supplements and being a heavy smoker
+Older age is the main risk factor for most cancers. The chance of getting cancer increases as you get older.
+Having one or more of these risk factors does not necessarily mean you will get lung cancer. Many people with risk factors never develop lung cancer, whereas others with no known risk factors do. Talk with your doctor if you think you might be at increased risk.
+When smoking is combined with other risk factors, the risk of lung cancer is increased.
+
+[SIGNS AND SYMPTOMS OF SMALL CELL LUNG CANCER INCLUDE COUGHING AND SHORTNESS OF BREATH.]
+These and other signs and symptoms may be caused by small cell lung cancer or by other conditions. Check with your doctor if you have:
+- chest discomfort or pain
+- a cough that doesn't go away or gets worse over time
+- trouble breathing
+- wheezing
+- blood in sputum (mucus coughed up from the lungs)
+- hoarseness
+- trouble swallowing
+- loss of appetite
+- weight loss for no known reason
+- feeling very tired
+- swelling in the face and veins in the neck
+
+[TESTS AND PROCEDURES THAT EXAMINE THE LUNGS ARE USED TO DIAGNOSE AND STAGE SMALL CELL LUNG CANCER.]
+In addition to asking about your personal and family health history and doing a physical exam, your doctor may perform the following tests and procedures:
+- Laboratory tests are medical procedures that test samples of tissue, blood, urine , or other substances in the body. These tests help to diagnose disease, plan and check treatment, or monitor the disease over time.
+- Chest x-ray is a type of radiation that can go through the body and make pictures of the organs and bones inside the chest. Enlarge A chest x-ray is used to take pictures of the structures and organs inside the chest. X-rays pass through the patient's body onto film or a computer.
+- CT scan (CAT scan) uses a computer linked to an x-ray machine to make a series of detailed pictures of areas inside the body, such as the brain, chest, and abdomen. The pictures are taken from different angles and are used to create 3-D views of tissues and organs. A dye may be injected into a vein or swallowed to help the organs or tissues show up more clearly. This procedure is also called computed tomography, computerized tomography, or computerized axial tomography. Learn more about Computed Tomography (CT) Scans and Cancer .
+- Sputum cytology uses a microscope to check for cancer cells in the sputum (mucus coughed up from the lungs).
+- Biopsy is the removal of a sample of cells or tissue from the tumor so that a pathologist can view it under a microscope to check for cancer. The different ways a biopsy can be done include: Fine-needle aspiration (FNA) biopsy of the lung is the removal of tissue or fluid from the lung, using a thin needle. A CT scan, ultrasound , or other imaging procedure is used to find the abnormal tissue or fluid in the lung. A small incision may be made in the skin where the biopsy needle is inserted into the abnormal tissue or fluid. A sample is removed with the needle and sent to the laboratory. A pathologist then views the sample under a microscope to look for cancer cells. A chest x-ray is done after the procedure to make sure no air is leaking from the lung into the chest. Enlarge Fine-needle aspiration biopsy of the lung. The patient lies on a table that slides through the computed tomography (CT) machine, which takes x-ray pictures of the inside of the body. The x-ray pictures help the doctor see where the abnormal tissue is in the lung. A biopsy needle is inserted through the chest wall and into the area of abnormal lung tissue. A small piece of tissue is removed through the needle and checked under the microscope for signs of cancer. Bronchoscopy is a procedure to look inside the trachea and large airways in the lung for abnormal areas. A bronchoscope is inserted through the nose or mouth into the trachea and lungs. A bronchoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue samples, which are checked under a microscope for signs of cancer. Enlarge Bronchoscopy. A bronchoscope is inserted through the mouth, trachea, and major bronchi into the lung, to look for abnormal areas. A bronchoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a cutting tool. Tissue samples may be taken to be checked under a microscope for signs of disease. Thoracoscopy is a surgical procedure to look at the organs inside the chest to check for abnormal areas. An incision (cut) is made between two ribs, and a thoracoscope is inserted into the chest. A thoracoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue or lymph node samples, which are checked under a microscope for signs of cancer. In some cases, this procedure is used to remove part of the esophagus or lung. If certain tissues, organs, or lymph nodes can't be reached, a thoracotomy may be done. In this procedure, a larger incision is made between the ribs and the chest is opened. Thoracentesis is the removal of fluid from the space between the lining of the chest and the lung, using a needle. A pathologist views the fluid under a microscope to look for cancer cells. Mediastinoscopy is a surgical procedure to look at the organs, tissues, and lymph nodes between the lungs for abnormal areas. An incision (cut) is made at the top of the breastbone and a mediastinoscope is inserted into the chest. A mediastinoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue or lymph node samples, which are checked under a microscope for signs of cancer.
+- Light and electron microscopy is a laboratory test in which cells in a sample of tissue are viewed under regular and high-powered microscopes to look for certain changes in the cells.
+- Immunohistochemistry uses antibodies to check for certain antigens (markers) in a sample of a patient's cells or tissue. The antibodies are usually linked to an enzyme or fluorescent dye. After the antibodies bind to a specific antigen in the tissue sample, the enzyme or dye is activated, and the antigen can then be seen under a microscope. This type of test is used to help diagnose cancer and help tell one type of cancer from another type.
+
+[AFTER SMALL CELL LUNG CANCER HAS BEEN DIAGNOSED, TESTS ARE DONE TO FIND OUT IF CANCER CELLS HAVE SPREAD WITHIN THE CHEST OR TO OTHER PARTS OF THE BODY.]
+The process used to find out if cancer has spread within the chest or to other parts of the body is called staging. The information gathered from the staging process determines the stage of the disease. It is important to know the stage in order to plan treatment. Some of the tests used to diagnose small cell lung cancer are also used to stage the disease.
+Imaging tests that may be used in the staging process include:
+- MRI (magnetic resonance imaging) uses a magnet, radio waves , and a computer to make a series of detailed pictures of areas inside the brain, such as the brain. This procedure is also called nuclear magnetic resonance imaging (NMRI).
+- PET scan (positron emission tomography scan) uses a small amount of radioactive sugar (also called radioactive glucose) that is injected into a vein. The PET scanner rotates around the body and makes pictures of where sugar is being used by the body. Cancer cells show up brighter in the pictures because they are more active and take up more sugar than normal cells do. When this procedure is done at the same time as a CT scan, it is called a PET-CT scan.
+- Bone scan checks if there are rapidly dividing cells, such as cancer cells, in the bone. A very small amount of radioactive material is injected into a vein and travels through the bloodstream. The radioactive material collects in the areas of the bones with cancer and is detected by a scanner.
+
+[SOME PEOPLE DECIDE TO GET A SECOND OPINION.]
+You may want to get a second opinion to confirm your cancer diagnosis and treatment plan. If you seek a second opinion, you will need to get medical test results and reports from the first doctor to share with the second doctor. The second doctor will review the pathology report, slides, and scans. They may agree with the first doctor, suggest changes or another treatment approach, or provide more information about your cancer.
+To learn more about choosing a doctor and getting a second opinion, visit Finding Cancer Care. You can contact NCI's Cancer Information Service via chat, email, or phone (both in English and Spanish) for help finding a doctor, hospital, or getting a second opinion. For questions you might want to ask at your appointments, visit Questions to Ask Your Doctor about Cancer.
+
+[CERTAIN FACTORS AFFECT PROGNOSIS (CHANCE OF RECOVERY) AND TREATMENT OPTIONS.]
+The prognosis and treatment options depend on:
+- the stage of the cancer (whether it is in the chest cavity only or has spread to other places in the body)
+- the patient's age, sex, and general health
+For certain patients, prognosis also depends on whether the patient is treated with both chemotherapy and radiation.
+For most people with small cell lung cancer, current treatments do not cure the cancer. If lung cancer is found, you may want to think about taking part in one of the many clinical trials being done to improve treatment. Clinical trials are taking place in most parts of the country for patients with all stages of small cell lung cancer. Information about ongoing clinical trials is available from the NCI website.
+
+[EXTENSIVE-STAGE SMALL CELL LUNG CANCER]
+[LIMITED-STAGE SMALL CELL LUNG CANCER]
+In limited-stage, cancer is in the lung where it started and may have spread to the area between the lungs or to the lymph nodes above the collarbone.
+
+In extensive-stage, cancer has spread beyond the lung or the area between the lungs or the lymph nodes above the collarbone to other places in the body.
+
+[SMALL CELL LUNG CANCER CAN RECUR (COME BACK) AFTER IT HAS BEEN TREATED.]
+Recurrent cancer is cancer that has recurred (come back) after it has been treated. If small cell lung cancer comes back, it may come back in the chest, central nervous system, or in other parts of the body. Tests will be done to help determine where the cancer has returned. The type of treatment for small cell lung cancer will depend on where it has come back.
+Learn more in Recurrent Cancer: When Cancer Comes Back.
+
+[THERE ARE DIFFERENT TYPES OF TREATMENT FOR PATIENTS WITH SMALL CELL LUNG CANCER.]
+Different types of treatments are available for people with small cell lung cancer. You and your cancer care team will work together to decide your treatment plan, which may include more than one type of treatment. Many factors will be considered, such as the stage of the cancer, your overall health, and your preferences. Your plan will include information about your cancer, the goals of treatment, your treatment options and the possible side effects, and the expected length of treatment.
+Talking with your cancer care team before treatment begins about what to expect will be helpful. You'll want to learn what you need to do before treatment begins, how you'll feel while going through it, and what kind of help you will need.
+
+[SURGERY]
+Surgery may be used if the cancer is found in one lung and in nearby lymph nodes only. Because this type of lung cancer is usually found in both lungs, surgery alone is not often used. During surgery, the doctor will also remove lymph nodes to find out if they have cancer in them. Sometimes, surgery may be used to remove a sample of lung tissue to find out the exact type of lung cancer.
+After the doctor removes all the cancer that can be seen at the time of the surgery, some patients may be given chemotherapy or radiation therapy after surgery to kill any cancer cells that are left. Treatment given after the surgery, to lower the risk that the cancer will come back, is called adjuvant therapy.
+
+[CHEMOTHERAPY]
+Chemotherapy (also called chemo) uses drugs to stop the growth of cancer cells, either by killing the cells or by stopping them from dividing.
+Chemotherapy for small cell lung cancer is usually systemic, meaning it is injected into a vein or given by mouth. When given this way, the drugs enter the bloodstream to reach cancer cells throughout the body.
+Chemotherapy drugs used to treat small cell lung cancer may include:
+- carboplatin
+- cisplatin
+- cyclophosphamide
+- doxorubicin
+- etoposide
+- ifosfamide
+- irinotecan
+- vincristine
+Combinations of these chemotherapy drugs may be used. Other chemotherapy drugs not listed here may also be used.
+Chemotherapy may also be combined with other kinds of treatment. For example, it may be combined with radiation therapy or immunotherapy drugs.
+To learn more about how chemotherapy works, how it is given, common side effects, and more, visit Chemotherapy to Treat Cancer and Chemotherapy and You: Support for People With Cancer.
+
+[RADIATION THERAPY]
+Radiation therapy is a cancer treatment that uses high-energy x-rays or other types of radiation to kill cancer cells or keep them from growing. External radiation therapy uses a machine outside the body to send radiation toward the area of the body with cancer. External radiation therapy is used to treat small cell lung cancer, and may also be used as palliative therapy to relieve symptoms and improve quality of life. Radiation therapy to the brain to lessen the risk that cancer will spread to the brain may also be given.
+
+[IMMUNOTHERAPY]
+Immunotherapy helps a person's immune system fight cancer. Your doctor may suggest biomarker tests to help predict your response to certain immunotherapy drugs. Learn more about Biomarker Testing for Cancer Treatment.
+Immunotherapy drugs used to treat small cell lung cancer include:
+- atezolizumab
+- durvalumab
+- tarlatamab
+
+[LASER THERAPY]
+Laser therapy is a cancer treatment that uses a laser beam (a narrow beam of intense light) to kill cancer cells.
+
+[ENDOSCOPIC STENT PLACEMENT]
+An endoscope is a thin, tube-like instrument used to look at tissues inside the body. An endoscope has a light and a lens for viewing and may be used to place a stent in a body structure to keep the structure open. An endoscopic stent can be used to open an airway blocked by abnormal tissue.
+
+[NEW TYPES OF TREATMENT ARE BEING TESTED IN CLINICAL TRIALS.]
+For some people, joining a clinical trial may be an option. There are different types of clinical trials for people with cancer. For example, a treatment trial tests new treatments or new ways of using current treatments. Supportive care and palliative care trials look at ways to improve quality of life, especially for those who have side effects from cancer and its treatment.
+
+[FOLLOW-UP CARE MAY BE NEEDED.]
+As you go through treatment, you will have follow-up tests or check-ups. Some tests that were done to diagnose or stage the cancer may be repeated to see how well the treatment is working. Decisions about whether to continue, change, or stop treatment may be based on the results of these tests.
+Some of the tests will continue to be done from time to time after treatment has ended. The results of these tests can show if your condition has changed or if the cancer has recurred (come back).
+
+[TREATMENT OF LIMITED-STAGE SMALL CELL LUNG CANCER]
+Treatment of limited-stage small cell lung cancer may include:
+- combination chemotherapy and radiation therapy to the chest
+- immunotherapy ( durvalumab ) after chemoradiation therapy
+- combination chemotherapy alone, for patients who cannot receive radiation therapy
+- surgery followed by chemotherapy
+- surgery followed by chemoradiation therapy
+- radiation therapy to the brain, for patients who have had a complete response to chemotherapy, to prevent the spread of cancer to the brain
+
+[TREATMENT OF EXTENSIVE-STAGE SMALL CELL LUNG CANCER]
+Treatment of extensive-stage small cell lung cancer may include:
+- immunotherapy ( atezolizumab or durvalumab ) and combination chemotherapy
+- combination chemotherapy
+- radiation therapy to the brain, spine , bone, or other parts of the body where the cancer has spread, as palliative therapy to relieve symptoms and improve quality of life
+- radiation therapy to the chest if the cancer responded to chemotherapy
+- radiation therapy to the brain after a complete response to chemotherapy, to prevent the spread of cancer to the brain
+
+[TREATMENT OF RECURRENT SMALL CELL LUNG CANCER]
+Treatment of recurrent small cell lung cancer may include:
+- chemotherapy
+- immunotherapy
+- radiation therapy as palliative therapy to relieve symptoms and improve quality of life
+- laser therapy , stent placement to keep airways open, and/or internal radiation therapy as palliative therapy to relieve symptoms and improve quality of life
+
+--------------------------------------------------------------------------------
+
+### Sample 3: https://www.cancer.gov/types/uterine/patient/endometrial-prevention-pdq
+
+[WHAT IS PREVENTION?]
+Cancer prevention is action taken to lower the chance of getting cancer. By preventing cancer, the number of new cases of cancer in a group or population is lowered. Hopefully, this will lower the number of deaths caused by cancer.
+To prevent new cancers from starting, scientists look at risk factors and protective factors. Anything that increases your chance of developing cancer is called a cancer risk factor; anything that decreases your chance of developing cancer is called a cancer protective factor.
+Some risk factors for cancer can be avoided, but many cannot. For example, both smoking and inheriting certain genes are risk factors for some types of cancer, but only smoking can be avoided. Regular exercise and a healthy diet may be protective factors for some types of cancer. Avoiding risk factors and increasing protective factors may lower your risk but it does not mean that you will not get cancer.
+Different ways to prevent cancer are being studied.
+
+[KEY POINTS]
+- Endometrial cancer is a disease in which malignant (cancer) cells form in the tissues of the endometrium.
+- Endometrial cancer is most common in postmenopausal women.
+- Avoiding risk factors and increasing protective factors may help prevent cancer.
+- The following risk factors increase the risk of endometrial cancer: Endometrial hyperplasia Estrogen Tamoxifen Obesity, weight gain, metabolic syndrome, and diabetes Genetic factors
+- The following protective factors decrease the risk of endometrial cancer: Pregnancy and breast-feeding Hormonal contraceptives Weight loss Physical activity
+- It is not known if the following factors affect the risk of endometrial cancer: Fruits, vegetables, and vitamins Hair products, including dyes, bleach, highlights, straighteners, and permanents
+- Cancer prevention clinical trials are used to study ways to prevent cancer.
+- New ways to prevent endometrial cancer are being studied in clinical trials.
+
+[ENDOMETRIAL CANCER IS A DISEASE IN WHICH MALIGNANT (CANCER) CELLS FORM IN THE TISSUES OF THE ENDOMETRIUM.]
+The endometrium is the innermost lining of the uterus. The uterus is a hollow, muscular organ in a woman's pelvis. The uterus is where a fetus grows. In most nonpregnant women, the uterus is about 3 inches long.
+Cancer of the endometrium is different from cancer of the muscle of the uterus, which is called uterine sarcoma. For more information, visit Uterine Sarcoma Treatment.
+Other PDQ summaries containing information related to endometrial cancer include:
+- Endometrial Cancer Screening
+- Endometrial Cancer Treatment
+
+[ENDOMETRIAL CANCER IS MOST COMMON IN POSTMENOPAUSAL WOMEN.]
+Endometrial cancer occurs most often in postmenopausal women, with 60 being the average age at diagnosis.
+From 2012 to 2021, the number of new cases of endometrial cancer increased slightly in White women and by 2% to 3% each year in women of all other racial and ethnic groups. From 2013 to 2022, the number of deaths from endometrial cancer increased by just under 2% each year.
+
+[AVOIDING RISK FACTORS AND INCREASING PROTECTIVE FACTORS MAY HELP PREVENT CANCER.]
+Avoiding cancer risk factors may help prevent certain cancers. Risk factors include smoking, having overweight, and not getting enough exercise. Increasing protective factors such as quitting smoking and exercising may also help prevent some cancers. Talk to your doctor or other health care professional about how you might lower your risk of cancer.
+
+[ENDOMETRIAL HYPERPLASIA]
+Endometrial hyperplasia is an abnormal thickening of the endometrium (lining of the uterus). It is not cancer, but in some cases, it may lead to endometrial cancer.
+
+[ESTROGEN]
+Estrogen is a hormone made by the body. It helps the body develop and maintain female sex characteristics. Estrogen can affect the growth of some cancers, including endometrial cancer.
+A woman's risk of developing endometrial cancer is increased by being exposed to estrogen in the following ways:
+- Estrogen-only hormone therapy : Estrogen may be given to replace the estrogen no longer produced by the ovaries in postmenopausal women or women whose ovaries have been removed. This is called hormone therapy (HT). The use of HT that contains only estrogen increases the risk of endometrial cancer, and the risk grows higher the longer the estrogen is used. For this reason, estrogen therapy alone is usually prescribed only for women who do not have a uterus. When estrogen is combined with progestin (another hormone), it is called combination estrogen-progestin therapy. For postmenopausal women, taking estrogen in combination with progestin does not increase the risk of endometrial cancer, but it does increase the risk of breast cancer . For more information, visit Breast Cancer Prevention .
+- Early menstruation : Beginning to have menstrual periods at an early age increases the number of years the body is exposed to estrogen and increases a woman's risk of endometrial cancer.
+- Late menopause : Women who reach menopause at an older age are exposed to estrogen for a longer time and have an increased risk of endometrial cancer.
+- Never being pregnant : Because estrogen levels are lower during pregnancy, women who have never been pregnant are exposed to estrogen for a longer time than women who have been pregnant. This increases the risk of endometrial cancer.
+
+[TAMOXIFEN]
+Tamoxifen is one of a group of drugs called selective estrogen receptor modulators, or SERMs. Tamoxifen acts like estrogen on some tissues in the body, such as the uterus, but blocks the effects of estrogen on other tissues, such as the breast. Tamoxifen is used to prevent breast cancer in women who are at high risk for the disease. However, using tamoxifen for more than 2 years increases the risk of endometrial cancer. This risk is greater in postmenopausal women.
+Raloxifene is a SERM that is used to prevent bone weakness in postmenopausal women. However, it does not have estrogen-like effects on the uterus and has not been shown to increase the risk of endometrial cancer.
+
+[OBESITY, WEIGHT GAIN, METABOLIC SYNDROME, AND DIABETES]
+Having obesity or gaining weight as an adult increases the risk of endometrial cancer. Obesity is related to other risk factors such as high estrogen levels, having extra fat around the waist, polycystic ovary syndrome, and lack of physical activity.
+Having metabolic syndrome increases the risk of endometrial cancer. Metabolic syndrome is a condition that includes extra fat around the waist, high blood sugar, high blood pressure, and high levels of triglycerides (a type of fat) in the blood.
+Having type 2 diabetes may increase the risk of endometrial cancer.
+
+[GENETIC FACTORS]
+Based on solid evidence, women with certain genetic conditions have an increased risk of developing endometrial cancer.
+Lynch syndrome is an inherited disorder caused by changes in certain genes. Women who have Lynch syndrome have a much higher risk of developing endometrial cancer than women who do not have Lynch syndrome.
+Polycystic ovary syndrome (a disorder of the hormones made by the ovaries) and Cowden syndrome are inherited conditions that are linked to an increased risk of endometrial cancer.
+Women with a family history of endometrial cancer in a first-degree relative (mother, sister, or daughter) are also at increased risk of endometrial cancer.
+
+[PREGNANCY AND BREAST-FEEDING]
+Estrogen levels are lower during pregnancy and when breast-feeding. The risk of endometrial cancer is lower in women who have had children. Breast-feeding also decreases the risk of endometrial cancer.
+
+[HORMONAL CONTRACEPTIVES]
+Taking hormonal contraceptives (birth control pills) that combine estrogen and progestin (combined oral contraceptives) decreases the risk of endometrial cancer. The protective effect of this type of birth control increases with the length of time they are used and can last for many years after oral contraceptive use has been stopped.
+While taking birth control pills, women have a higher risk of blood clots, stroke, and heart attack, especially women who smoke and are older than 35 years.
+New data suggest that other hormonal contraceptives, such as birth control devices that are inserted into a woman's uterus, may also decrease the risk of endometrial cancer.
+
+[WEIGHT LOSS]
+It is not known if losing weight decreases the risk of endometrial cancer. However, having bariatric surgery (a surgery that changes how your digestive system works so you will lose weight) decreases the risk of endometrial cancer. After bariatric surgery, other obesity-related conditions, such as diabetes and metabolic syndrome often improve or go away.
+Having bariatric surgery also includes risks, such as infection, blood clots, breathing or heart problems, and digestive issues.
+
+[FRUITS, VEGETABLES, AND VITAMINS]
+[PHYSICAL ACTIVITY]
+Physical activity (exercise) may lower the risk of endometrial cancer. This includes any physical activity you do at your job or at home.
+
+A diet that includes, fruits, vegetables, phytoestrogen, soy, and vitamin D has not been found to affect the risk of endometrial cancer.
+Taking multivitamins has little or no effect on the risk of common cancers, including endometrial cancer.
+
+[HAIR PRODUCTS, INCLUDING DYES, BLEACH, HIGHLIGHTS, STRAIGHTENERS, AND PERMANENTS]
+There is not enough evidence to show a link between hair products and endometrial cancer. One retrospective study discussed a possible link between certain hair products and uterine cancers, including endometrial cancers.
+
+[CANCER PREVENTION CLINICAL TRIALS ARE USED TO STUDY WAYS TO PREVENT CANCER.]
+Cancer prevention clinical trials are used to study ways to lower the risk of developing certain types of cancer. Some cancer prevention trials include healthy people who may or may not have an increased risk of cancer. Other prevention trials include people who have had cancer and are trying to prevent recurrence or a second cancer.
+The purpose of some cancer prevention clinical trials is to find out whether actions people take can prevent cancer. These may include eating fruits and vegetables, exercising, quitting smoking, or taking certain medicines, vitamins, minerals, or food supplements.
+
+[NEW WAYS TO PREVENT ENDOMETRIAL CANCER ARE BEING STUDIED IN CLINICAL TRIALS.]
+Information about clinical trials supported by NCI can be found on NCI’s clinical trials search webpage. Clinical trials supported by other organizations can be found on the ClinicalTrials.gov website.
+
+--------------------------------------------------------------------------------
+
+### Sample 4: https://www.cancer.gov/types/extragonadal-germ-cell/patient/extragonadal-treatment-pdq
+
+[KEY POINTS]
+- Extragonadal germ cell tumors form from developing sperm or egg cells that travel from the gonads to other parts of the body.
+- Age and sex can affect the risk of extragonadal germ cell tumors.
+- Signs and symptoms of extragonadal germ cell tumors include breathing problems and chest pain.
+- Imaging and blood tests are used to diagnose extragonadal germ cell tumors.
+- Some people decide to get a second opinion.
+- Certain factors affect prognosis (chance of recovery) and treatment options.
+- After an extragonadal germ cell tumor has been diagnosed, tests are done to find out if cancer cells have spread to other parts of the body.
+- There are three ways that cancer spreads in the body.
+- Cancer may spread from where it began to other parts of the body.
+- The following prognostic groups are used for extragonadal germ cell tumors: Good prognosis Intermediate prognosis Poor prognosis
+- There are different types of treatment for patients with extragonadal germ cell tumors.
+- The following types of treatment are used: Radiation therapy Chemotherapy Surgery
+- New types of treatment are being tested in clinical trials. High-dose chemotherapy with stem cell transplant
+- Treatment for extragonadal germ cell tumors may cause side effects.
+- Follow-up care may be needed.
+
+[EXTRAGONADAL GERM CELL TUMORS FORM FROM DEVELOPING SPERM OR EGG CELLS THAT TRAVEL FROM THE GONADS TO OTHER PARTS OF THE BODY.]
+"Extragonadal" means outside of the gonads (sex organs). When cells that are meant to form sperm in the testicles or eggs in the ovaries travel to other parts of the body, they may grow into extragonadal germ cell tumors. These tumors may begin to grow anywhere in the body but usually begin in organs such as the pineal gland in the brain, in the mediastinum (area between the lungs), or in the retroperitoneum (the back wall of the abdomen).
+Extragonadal germ cell tumors can be benign (noncancer) or malignant (cancer). Benign extragonadal germ cell tumors are called benign teratomas. These are more common than malignant extragonadal germ cell tumors and often are very large.
+Malignant extragonadal germ cell tumors are divided into two types, nonseminoma and seminoma. Nonseminomas tend to grow and spread more quickly than seminomas. They usually are large and cause signs and symptoms. If untreated, malignant extragonadal germ cell tumors may spread to the lungs, lymph nodes, bones, liver, or other parts of the body.
+
+[AGE AND SEX CAN AFFECT THE RISK OF EXTRAGONADAL GERM CELL TUMORS.]
+Anything that increases a person's chance of getting a disease is called a risk factor. Not every person with one or more of these risk factors will develop an extragonadal germ cell tumor, and it will develop in some people who don't have any known risk factors. Talk with your doctor if you think you may be at risk. Risk factors for malignant extragonadal germ cell tumors include:
+- being male
+- being age 20 or older
+- having Klinefelter syndrome
+
+[SIGNS AND SYMPTOMS OF EXTRAGONADAL GERM CELL TUMORS INCLUDE BREATHING PROBLEMS AND CHEST PAIN.]
+Malignant extragonadal germ cell tumors may cause signs and symptoms as they grow into nearby areas. Other conditions may cause the same signs and symptoms. Check with your doctor if you have:
+- chest pain
+- breathing problems
+- cough
+- fever
+- headache
+- change in bowel habits
+- feeling very tired
+- trouble walking
+- trouble in seeing or moving the eyes
+
+[IMAGING AND BLOOD TESTS ARE USED TO DIAGNOSE EXTRAGONADAL GERM CELL TUMORS.]
+In addition to asking about your personal and family health history and doing a physical exam, your doctor may perform the following tests and procedures:
+- Chest x-ray is a type of energy beam that can go through the body and onto film, making a picture of areas inside the body.
+- Serum tumor marker test is a procedure in which a sample of blood is examined to measure the amounts of certain substances released into the blood by organs, tissues, or tumor cells in the body. Certain substances are linked to specific types of cancer when found in increased levels in the blood. These are called tumor markers . The following three tumor markers are used to detect extragonadal germ cell tumor: alpha-fetoprotein (AFP) beta-human chorionic gonadotropin (beta-hCG) lactate dehydrogenase (LDH) Blood levels of the tumor markers help determine if the tumor is a seminoma or nonseminoma.
+- CT scan (CAT scan) uses a computer linked to an x-ray machine to make a series of detailed pictures of areas inside the body. The pictures are taken from different angles and are used to create 3-D views of tissues and organs. A dye may be injected into a vein or swallowed to help the organs or tissues show up more clearly. This procedure is also called computed tomography, computerized tomography, or computerized axial tomography. Sometimes a CT scan and a PET scan are done at the same time. A PET scan uses a small amount of radioactive sugar (also called glucose) that is injected into a vein. Then a scanner rotates around the body to make detailed, computerized pictures of areas inside the body where the glucose is taken up. Because cancer cells often take up more glucose than normal cells, the pictures can be used to find cancer cells in the body. When a PET scan and CT scan are done at the same time, it is called a PET-CT.
+- A biopsy is the removal of cells or tissues so they can be viewed under a microscope by a pathologist to check for signs of cancer. The type of biopsy used depends on where the extragonadal germ cell tumor is found. Excisional biopsy is the removal of an entire lump of tissue. Incisional biopsy is the removal of part of a lump or sample of tissue. Core biopsy is the removal of tissue using a wide needle. Fine-needle aspiration (FNA) biopsy is the removal of tissue or fluid using a thin needle.
+
+[SOME PEOPLE DECIDE TO GET A SECOND OPINION.]
+You may want to get a second opinion to confirm your diagnosis and treatment plan. If you seek a second opinion, you will need to get medical test results and reports from the first doctor to share with the second doctor. The second doctor will review the pathology report, slides, and scans. They may agree with the first doctor, suggest changes or another treatment approach, or provide more information about your cancer.
+
+[CERTAIN FACTORS AFFECT PROGNOSIS (CHANCE OF RECOVERY) AND TREATMENT OPTIONS.]
+The prognosis and treatment options depend on:
+- whether the tumor is nonseminoma or seminoma
+- the size of the tumor and where it is in the body
+- the blood levels of AFP , beta-hCG , and LDH
+- whether the tumor has spread to other parts of the body
+- the way the tumor responds to initial treatment
+- whether the tumor has just been diagnosed or has recurred (come back)
+
+[AFTER AN EXTRAGONADAL GERM CELL TUMOR HAS BEEN DIAGNOSED, TESTS ARE DONE TO FIND OUT IF CANCER CELLS HAVE SPREAD TO OTHER PARTS OF THE BODY.]
+The extent or spread of cancer is usually described as stages. For extragonadal germ cell tumors, prognostic groups are used instead of stages. The tumors are grouped according to how well the cancer is expected to respond to treatment. It is important to know the prognostic group in order to plan treatment.
+
+[THERE ARE THREE WAYS THAT CANCER SPREADS IN THE BODY.]
+Cancer can spread through tissue, the lymph system, and the blood:
+- Tissue. The cancer spreads from where it began by growing into nearby areas.
+- Lymph system. The cancer spreads from where it began by getting into the lymph system. The cancer travels through the lymph vessels to other parts of the body.
+- Blood. The cancer spreads from where it began by getting into the blood. The cancer travels through the blood vessels to other parts of the body.
+
+[CANCER MAY SPREAD FROM WHERE IT BEGAN TO OTHER PARTS OF THE BODY.]
+When cancer spreads to another part of the body, it is called metastasis. Cancer cells break away from where they began (the primary tumor) and travel through the lymph system or blood.
+- Lymph system. The cancer gets into the lymph system, travels through the lymph vessels, and forms a tumor ( metastatic tumor) in another part of the body.
+- Blood. The cancer gets into the blood, travels through the blood vessels, and forms a tumor (metastatic tumor) in another part of the body.
+The metastatic tumor is the same type of tumor as the primary tumor. For example, if an extragonadal germ cell tumor spreads to the lung, the tumor cells in the lung are actually cancerous germ cells. The disease is metastatic extragonadal germ cell tumor, not lung cancer.
+
+[GOOD PROGNOSIS]
+A nonseminoma extragonadal germ cell tumor is in the good prognosis group if:
+- the tumor is in the back of the abdomen ; and
+- the tumor has not spread to organs other than the lungs ; and
+- the levels of tumor markers AFP and beta-hCG are normal and LDH is slightly above normal.
+A seminoma extragonadal germ cell tumor is in the good prognosis group if:
+- the tumor has not spread to organs other than the lungs ; and
+- the level of AFP is normal; beta-hCG and LDH may be at any level.
+
+[INTERMEDIATE PROGNOSIS]
+A nonseminoma extragonadal germ cell tumor is in the intermediate prognosis group if:
+- the tumor is in the back of the abdomen ; and
+- the tumor has not spread to organs other than the lungs ; and
+- the level of any one of the tumor markers ( AFP , beta-hCG , or LDH ) is more than slightly above or below normal.
+A seminoma extragonadal germ cell tumor is in the intermediate prognosis group if:
+- the tumor has spread to organs other than the lungs ; and
+- the level of AFP is normal; beta-hCG and LDH may be at any level.
+
+[POOR PROGNOSIS]
+A nonseminoma extragonadal germ cell tumor is in the poor prognosis group if:
+- the tumor is in the chest; or
+- the tumor has spread to organs other than the lungs ; or
+- the level of any one of the tumor markers ( AFP , beta-hCG , or LDH ) is high.
+A seminoma extragonadal germ cell tumor does not have a poor prognosis group.
+
+[THERE ARE DIFFERENT TYPES OF TREATMENT FOR PATIENTS WITH EXTRAGONADAL GERM CELL TUMORS.]
+Different types of treatments are available for extragonadal germ cell tumors. You and your cancer care team will work together to decide your treatment plan, which may include more than one type of treatment. Many factors will be considered, such as the tumor's prognostic group, your overall health, and your preferences. Your plan will include information about your cancer, the goals of treatment, your treatment options and the possible side effects, and the expected length of treatment.
+Talking with your cancer care team before treatment begins about what to expect will be helpful. You’ll want to learn what you need to do before treatment begins, how you’ll feel while going through it, and what kind of help you will need.
+
+[RADIATION THERAPY]
+Radiation therapy uses high-energy x-rays or other types of radiation to kill cancer cells or keep them from growing. External radiation therapy uses a machine outside the body to send radiation toward the area of the body with cancer. External radiation therapy is used to treat seminoma.
+
+[CHEMOTHERAPY]
+Chemotherapy (also called chemo) uses drugs to stop the growth of cancer cells, either by killing the cells or by stopping them from dividing.
+Chemotherapy for extragonadal germ cell tumors is usually systemic, meaning it is injected into a vein or given by mouth. When given this way, the drugs enter the bloodstream to reach cancer cells throughout the body.
+Chemotherapy drugs used to treat extragonadal germ cell tumors may include:
+- bleomycin
+- carboplatin
+- cisplatin
+- etoposide
+- ifosfamide
+Combinations of these drugs may be used. Other chemotherapy drugs not listed here may also be used.
+
+[NEW TYPES OF TREATMENT ARE BEING TESTED IN CLINICAL TRIALS.]
+[SURGERY]
+If you have benign tumors or tumor remaining after chemotherapy or radiation therapy, surgery may be needed.
+
+For some people, joining a clinical trial may be an option. There are different types of clinical trials for people with cancer. For example, a treatment trial tests new treatments or new ways of using current treatments. Supportive care and palliative care trials look at ways to improve quality of life, especially for those who have side effects from cancer and its treatment.
+
+[HIGH-DOSE CHEMOTHERAPY WITH STEM CELL TRANSPLANT]
+High doses of chemotherapy are given to kill cancer cells. Healthy cells, including blood-forming cells, are also destroyed by the cancer treatment. Stem cell transplant is a treatment to replace the blood-forming cells. Stem cells (immature blood cells) are removed from the blood or bone marrow of the patient or a donor and are frozen and stored. After the patient completes chemotherapy, the stored stem cells are thawed and given back to the patient through an infusion. These reinfused stem cells grow into (and restore) the body's blood cells.
+
+[FOLLOW-UP CARE MAY BE NEEDED.]
+As you go through treatment, you will have follow-up tests or check-ups. Some tests that were done to diagnose or stage the cancer may be repeated to see how well the treatment is working. Decisions about whether to continue, change, or stop treatment may be based on the results of these tests.
+Some of the tests will continue to be done from time to time after treatment has ended. The results of these tests can show if your condition has changed or if the cancer has recurred (come back).
+After initial treatment for extragonadal germ cell tumors, your blood levels of AFP and other tumor markers will continue to be checked to find out how well the treatment is working.
+
+[TREATMENT OF SEMINOMA]
+Treatment of seminoma extragonadal germ cell tumors may include:
+- Radiation therapy for small tumors in one area, followed by watchful waiting if there is tumor remaining after treatment.
+- Chemotherapy for larger tumors or tumors that have spread. If a tumor smaller than 3 centimeters remains after chemotherapy, watchful waiting follows. If a larger tumor remains after treatment, surgery or watchful waiting follow.
+
+[TREATMENT OF RECURRENT OR REFRACTORY EXTRAGONADAL GERM CELL TUMORS]
+[TREATMENT OF NONSEMINOMA]
+Treatment of nonseminoma extragonadal germ cell tumors may include:
+- Combination chemotherapy followed by surgery to remove any remaining tumor.
+
+Treatment of extragonadal germ cell tumors that are recurrent (come back after being treated) or refractory (do not get better during treatment) may include:
+- chemotherapy
+- a clinical trial of high-dose chemotherapy with stem cell transplant
+
+--------------------------------------------------------------------------------
+
+### Sample 5: https://www.cancer.gov/types/myeloma/patient/myeloma-treatment-pdq
+
+[KEY POINTS]
+- Plasma cell neoplasms are diseases in which the body makes too many plasma cells.
+- Plasma cell neoplasms can be benign (not cancer) or malignant (cancer).
+- There are several types of plasma cell neoplasms. Monoclonal gammopathy of undetermined significance (MGUS) Plasmacytoma Multiple myeloma
+- Multiple myeloma and other plasma cell neoplasms may cause a condition called amyloidosis.
+- Age can affect the risk of plasma cell neoplasms.
+- Tests that examine the blood, bone marrow, and urine are used to diagnose multiple myeloma and other plasma cell neoplasms.
+- Certain factors affect prognosis (chance of recovery) and treatment options.
+- There are no standard staging systems for monoclonal gammopathy of undetermined significance (MGUS) and plasmacytoma.
+- After multiple myeloma has been diagnosed, tests are done to find out how much cancer is in the body.
+- The stage of multiple myeloma is based on the levels of beta-2-microglobulin and albumin in the blood.
+- The following stages are used for multiple myeloma: Stage I multiple myeloma Stage II multiple myeloma Stage III multiple myeloma
+- Plasma cell neoplasms may not respond to treatment or may come back after treatment.
+- There are different types of treatment for patients with plasma cell neoplasms.
+- The following types of treatment are used: Chemotherapy Other drug therapy Targeted therapy High-dose chemotherapy with stem cell transplant Immunotherapy Radiation therapy Surgery Watchful waiting
+- New types of treatment are being tested in clinical trials. New combinations of therapies
+- Treatment for plasma cell neoplasms may cause side effects.
+- Supportive care is given to lessen the problems caused by the disease or its treatment.
+- Patients may want to think about taking part in a clinical trial.
+- Patients can enter clinical trials before, during, or after starting their cancer treatment.
+- Follow-up tests may be needed.
+
+[PLASMA CELL NEOPLASMS ARE DISEASES IN WHICH THE BODY MAKES TOO MANY PLASMA CELLS.]
+Plasma cells develop from B lymphocytes (B cells), a type of white blood cell that is made in the bone marrow. Normally, when bacteria or viruses enter the body, some of the B cells will change into plasma cells. The plasma cells make antibodies to fight bacteria and viruses, to stop infection and disease.
+Plasma cell neoplasms are diseases in which abnormal plasma cells form tumors in the bones or soft tissues of the body. The plasma cells also make an antibody protein, called M protein, that is not needed by the body and does not help fight infection. These antibody proteins build up in the bone marrow and can cause the blood to thicken or can damage the kidneys.
+
+[PLASMA CELL NEOPLASMS CAN BE BENIGN (NOT CANCER) OR MALIGNANT (CANCER).]
+Monoclonal gammopathy of undetermined significance (MGUS) is not cancer but can become cancer. The following types of plasma cell neoplasms are cancer:
+- Lymphoplasmacytic lymphoma (also called Waldenström macroglobulinemia). For more information, see Non-Hodgkin Lymphoma Treatment .
+- Plasmacytoma .
+- Multiple myeloma .
+
+[MONOCLONAL GAMMOPATHY OF UNDETERMINED SIGNIFICANCE (MGUS)]
+In this type of plasma cell neoplasm, less than 10% of the bone marrow is made up of abnormal plasma cells and there is no cancer. The abnormal plasma cells make M protein, which is sometimes found during a routine blood or urine test. In most patients, the amount of M protein stays the same and there are no signs, symptoms, or health problems.
+In some patients, MGUS may later become a more serious condition, such as amyloidosis, or cause problems with the kidneys, heart, or nerves. MGUS can also become cancer, such as multiple myeloma, lymphoplasmacytic lymphoma, or chronic lymphocytic leukemia.
+
+[PLASMACYTOMA]
+In this type of plasma cell neoplasm, the abnormal plasma cells (myeloma cells) are in one place and form one tumor, called a plasmacytoma. Sometimes plasmacytoma can be cured. There are two types of plasmacytoma.
+- In isolated plasmacytoma of bone, one plasma cell tumor is found in the bone, less than 10% of the bone marrow is made up of plasma cells, and there are no other signs of cancer . Plasmacytoma of the bone often becomes multiple myeloma .
+- In extramedullary plasmacytoma, one plasma cell tumor is found in soft tissue but not in the bone or the bone marrow. Extramedullary plasmacytomas commonly form in tissues of the throat , tonsil , and paranasal sinuses .
+Signs and symptoms depend on where the tumor is.
+- In bone, the plasmacytoma may cause pain or broken bones.
+- In soft tissue, the tumor may press on nearby areas and cause pain or other problems. For example, a plasmacytoma in the throat can make it hard to swallow.
+
+[MULTIPLE MYELOMA]
+In multiple myeloma, abnormal plasma cells (myeloma cells) build up in the bone marrow and form tumors in many bones of the body. These tumors may keep the bone marrow from making enough healthy blood cells. Normally, the bone marrow makes stem cells (immature cells) that become three types of mature blood cells:
+- Red blood cells that carry oxygen and other substances to all tissues of the body.
+- White blood cells that fight infection and disease.
+- Platelets that form blood clots to help prevent bleeding.
+As the number of myeloma cells increases, fewer red blood cells, white blood cells, and platelets are made. The myeloma cells also damage and weaken the bone.
+Sometimes multiple myeloma does not cause any signs or symptoms. This is called smoldering multiple myeloma. It may be found when a blood or urine test is done for another condition. Signs and symptoms may be caused by multiple myeloma or other conditions. Check with your doctor if you have any of the following:
+- Bone pain, especially in the back or ribs.
+- Bones that break easily.
+- Fever for no known reason or frequent infections.
+- Easy bruising or bleeding.
+- Trouble breathing.
+- Weakness of the arms or legs.
+- Feeling very tired.
+A tumor can damage the bone and cause hypercalcemia (too much calcium in the blood). This can affect many organs in the body, including the kidneys, nerves, heart, muscles, and digestive tract, and cause serious health problems.
+Hypercalcemia may cause the following signs and symptoms:
+- Loss of appetite .
+- Nausea or vomiting .
+- Feeling thirsty.
+- Frequent urination .
+- Constipation .
+- Feeling very tired.
+- Muscle weakness.
+- Restlessness.
+- Confusion or trouble thinking.
+
+[MULTIPLE MYELOMA AND OTHER PLASMA CELL NEOPLASMS MAY CAUSE A CONDITION CALLED AMYLOIDOSIS.]
+In rare cases, multiple myeloma can cause peripheral nerves (nerves that are not in the brain or spinal cord) and organs to fail. This may be caused by a condition called amyloidosis. Antibody proteins build up and stick together in peripheral nerves and organs, such as the kidney and heart. This can cause the nerves and organs to become stiff and unable to work the way they should.
+Amyloidosis may cause the following signs and symptoms:
+- Feeling very tired.
+- Purple spots on the skin.
+- Enlarged tongue.
+- Diarrhea .
+- Swelling caused by fluid in your body's tissues.
+- Tingling or numbness in your legs and feet.
+
+[AGE CAN AFFECT THE RISK OF PLASMA CELL NEOPLASMS.]
+Anything that increases a person's chance of getting a disease is called a risk factor. Not every person with one or more of these risk factors will develop plasma cell neoplasms, and they will develop in people who don't have any known risk factors. Talk with your doctor if you think you may be at risk.
+Plasma cell neoplasms are most common in people who are middle aged or older. For multiple myeloma and plasmacytoma, other risk factors include the following:
+- Being Black.
+- Being male.
+- Having a personal history of MGUS or plasmacytoma.
+- Being exposed to radiation or certain chemicals .
+Studies about how racial, social, and financial factors affect access to treatment and rates of plasma cell neoplasms are ongoing.
+
+[TESTS THAT EXAMINE THE BLOOD, BONE MARROW, AND URINE ARE USED TO DIAGNOSE MULTIPLE MYELOMA AND OTHER PLASMA CELL NEOPLASMS.]
+In addition to asking about your personal and family health history and doing a physical exam, your doctor may perform the following tests and procedures:
+- Blood and urine immunoglobulin studies : A procedure in which a blood or urine sample is checked to measure the amounts of certain antibodies (immunoglobulins). For multiple myeloma, beta-2-microglobulin , M protein, free light chains, and other proteins made by the myeloma cells are measured. A higher-than-normal amount of these substances can be a sign of disease.
+- Bone marrow aspiration and biopsy : The removal of bone marrow, blood, and a small piece of bone by inserting a hollow needle into the hipbone or breastbone . A pathologist views the bone marrow, blood, and bone under a microscope to look for abnormal cells. Enlarge Bone marrow aspiration and biopsy. After a small area of skin is numbed, a long, hollow needle is inserted through the patient's skin and hip bone into the bone marrow. A sample of bone marrow and a small piece of bone are removed for examination under a microscope. The following tests may be done on the sample of tissue removed during the bone marrow aspiration and biopsy: Cytogenetic analysis : A laboratory test in which the chromosomes of cells in a sample of bone marrow are counted and checked for any changes, such as broken, missing, rearranged, or extra chromosomes. Changes in certain chromosomes may be a sign of cancer. Cytogenetic analysis is used to help diagnose cancer, plan treatment, or find out how well treatment is working. FISH (fluorescence in situ hybridization) : A laboratory test used to look at and count genes or chromosomes in cells and tissues. Pieces of DNA that contain fluorescent dyes are made in the laboratory and added to a sample of a patient’s cells or tissues. When these dyed pieces of DNA attach to certain genes or areas of chromosomes in the sample, they light up when viewed under a fluorescent microscope. The FISH test is used to help diagnose cancer and help plan treatment. Flow cytometry : A laboratory test that measures the number of cells in a sample, the percentage of live cells in a sample, and certain characteristics of the cells, such as size, shape, and the presence of tumor (or other) markers on the cell surface. The cells from a sample of a patient's bone marrow are stained with a fluorescent dye, placed in a fluid, and then passed one at a time through a beam of light. The test results are based on how the cells that were stained with the fluorescent dye react to the beam of light. This test is used to help diagnose and manage certain types of cancers, such as leukemia and lymphoma .
+- Skeletal bone survey : In a skeletal bone survey, x-rays of all the bones in the body are taken. The x-rays are used to find areas where the bone is damaged. An x-ray is a type of energy beam that can go through the body and onto film, making a picture of areas inside the body.
+- Complete blood count (CBC) with differential : A procedure in which a sample of blood is drawn and checked for the following: The number of red blood cells and platelets. The number and type of white blood cells. The amount of hemoglobin (the protein that carries oxygen ) in the red blood cells. The portion of the blood sample made up of red blood cells.
+- Blood chemistry studies : A procedure in which a blood sample is checked to measure the amounts of certain substances, such as calcium or albumin , released into the blood by organs and tissues in the body. An unusual (higher or lower than normal) amount of a substance can be a sign of disease.
+- Twenty-four-hour urine test : A test in which urine is collected for 24 hours to measure the amounts of certain substances. An unusual (higher or lower than normal) amount of a substance can be a sign of disease in the organ or tissue that makes it. A higher than normal amount of protein may be a sign of multiple myeloma.
+- MRI (magnetic resonance imaging) : A procedure that uses a magnet, radio waves , and a computer to make a series of detailed pictures of areas inside the body. This procedure is also called nuclear magnetic resonance imaging (NMRI). An MRI of the spine and pelvis may be used to find areas where the bone is damaged.
+- PET scan (positron emission tomography scan) : A procedure to find malignant tumor cells in the body. A small amount of radioactive glucose (sugar) is injected into a vein . The PET scanner rotates around the body and makes a picture of where glucose is being used in the body. Malignant tumor cells show up brighter in the picture because they are more active and take up more glucose than normal cells do.
+- CT scan (CAT scan) : A procedure that makes a series of detailed pictures of areas inside the body, such as the spine, taken from different angles. The pictures are made by a computer linked to an x-ray machine. A dye may be injected into a vein or swallowed to help the organs or tissues show up more clearly. This procedure is also called computed tomography, computerized tomography, or computerized axial tomography.
+- PET-CT scan : A procedure that combines the pictures from a positron emission tomography (PET) scan and a computed tomography (CT) scan. The PET and CT scans are done at the same time with the same machine. The combined scans give more detailed pictures of areas inside the body, such as the spine, than either scan gives by itself.
+
+[CERTAIN FACTORS AFFECT PROGNOSIS (CHANCE OF RECOVERY) AND TREATMENT OPTIONS.]
+The prognosis depends on the following:
+- The type of plasma cell neoplasm.
+- The stage of the disease.
+- Whether a certain immunoglobulin (antibody) is present.
+- Whether there are certain genetic changes.
+- Whether the kidney is damaged.
+- Whether the cancer responds to initial treatment or recurs (comes back).
+Treatment options depend on the following:
+- The type of plasma cell neoplasm.
+- The age and general health of the patient.
+- Whether there are signs, symptoms, or health problems, such as kidney failure or infection, related to the disease.
+- Whether the cancer responds to initial treatment or recurs (comes back).
+
+[AFTER MULTIPLE MYELOMA HAS BEEN DIAGNOSED, TESTS ARE DONE TO FIND OUT HOW MUCH CANCER IS IN THE BODY.]
+The process used to find out the amount of cancer in the body is called staging. It is important to know the stage in order to plan treatment.
+The following tests and procedures may be used to find out how much cancer is in the body:
+- Skeletal bone survey : In a skeletal bone survey, x-rays of all the bones in the body are taken. The x-rays are used to find areas where the bone is damaged. An x-ray is a type of energy beam that can go through the body and onto film, making a picture of areas inside the body.
+- MRI (magnetic resonance imaging) : A procedure that uses a magnet, radio waves , and a computer to make a series of detailed pictures of areas inside the body, such as the bone marrow . This procedure is also called nuclear magnetic resonance imaging (NMRI).
+- Bone densitometry : A procedure that uses a special type of x-ray to measure bone density .
+
+[THE STAGE OF MULTIPLE MYELOMA IS BASED ON THE LEVELS OF BETA-2-MICROGLOBULIN AND ALBUMIN IN THE BLOOD.]
+Beta-2-microglobulin and albumin are found in the blood. Beta-2-microglobulin is a protein found on plasma cells. Albumin makes up the biggest part of the blood plasma. It keeps fluid from leaking out of blood vessels. It also brings nutrients to tissues, and carries hormones, vitamins, drugs, and other substances, such as calcium, all through the body. In the blood of patients with multiple myeloma, the amount of beta-2-microglobulin is increased and the amount of albumin is decreased.
+
+[STAGE II MULTIPLE MYELOMA]
+[STAGE I MULTIPLE MYELOMA]
+In stage I multiple myeloma, the blood levels are as follows:
+- beta-2-microglobulin level is lower than 3.5 mg/L; and
+- albumin level is 3.5 g/dL or higher.
+
+In stage II multiple myeloma, the blood levels are in between the levels for stage I and stage III.
+
+[STAGE III MULTIPLE MYELOMA]
+In stage III multiple myeloma, the blood level of beta-2-microglobulin is 5.5 mg/L or higher and the patient also has one of the following:
+- high levels of lactate dehydrogenase (LDH); or
+- certain changes in the chromosomes .
+
+[PLASMA CELL NEOPLASMS MAY NOT RESPOND TO TREATMENT OR MAY COME BACK AFTER TREATMENT.]
+Plasma cell neoplasms are called refractory when the number of plasma cells keeps going up even though treatment is given. Plasma cell neoplasms are called relapsed when they have come back after treatment.
+
+[THERE ARE DIFFERENT TYPES OF TREATMENT FOR PATIENTS WITH PLASMA CELL NEOPLASMS.]
+Different types of treatments are available for patients with plasma cell neoplasms. Some treatments are standard (the currently used treatment), and some are being tested in clinical trials. A treatment clinical trial is a research study meant to help improve current treatments or obtain information on new treatments for patients with cancer. When clinical trials show that a new treatment is better than the standard treatment, the new treatment may become the standard treatment. Patients may want to think about taking part in a clinical trial. Some clinical trials are open only to patients who have not started treatment.
+
+[CHEMOTHERAPY]
+Chemotherapy is a cancer treatment that uses drugs to stop the growth of cancer cells, either by killing the cells or by stopping them from dividing. When chemotherapy is taken by mouth or injected into a vein or muscle, the drugs enter the bloodstream and can reach cancer cells throughout the body (systemic chemotherapy).
+See Drugs Approved for Multiple Myeloma and Other Plasma Cell Neoplasms.
+
+[OTHER DRUG THERAPY]
+Corticosteroids are steroids that have antitumor effects in multiple myeloma.
+
+[TARGETED THERAPY]
+Targeted therapy is a type of treatment that uses drugs or other substances to identify and attack specific cancer cells. Several types of targeted therapy may be used to treat multiple myeloma and other plasma cell neoplasms. There are different types of targeted therapy:
+- Proteasome inhibitor therapy : This treatment blocks the action of proteasomes in cancer cells. A proteasome is a protein that removes other proteins no longer needed by the cell. When the proteins are not removed from the cell, they build up and may cause the cancer cell to die. Bortezomib , carfilzomib , and ixazomib are proteasome inhibitors used in the treatment of multiple myeloma and other plasma cell neoplasms.
+- Monoclonal antibody therapy: Monoclonal antibodies are immune system proteins made in the laboratory to treat many diseases, including cancer. As a cancer treatment, these antibodies can attach to a specific target on cancer cells or other cells that may help cancer cells grow. The antibodies are able to then kill the cancer cells, block their growth, or keep them from spreading. Monoclonal antibodies are given by infusion . They may be used alone or to carry drugs, toxins , or radioactive material directly to cancer cells. Daratumumab and elotuzumab are monoclonal antibodies used in the treatment of multiple myeloma and other plasma cell neoplasms. Denosumab is a monoclonal antibody used to slow bone loss and reduce bone pain in patients with multiple myeloma. How do monoclonal antibodies work to treat cancer? This video shows how monoclonal antibodies, such as trastuzumab, pembrolizumab, and rituximab, block molecules cancer cells need to grow, flag cancer cells for destruction by the body’s immune system, or deliver harmful substances to cancer cells.
+- BCL2 inhibitor therapy: This treatment blocks a protein called BCL2. Blocking this protein may help kill cancer cells and may make them more sensitive to anticancer drugs. Venetoclax is a BCL2 inhibitor being studied in the treatment of relapsed or refractory multiple myeloma.
+See Drugs Approved for Multiple Myeloma and Other Plasma Cell Neoplasms.
+
+[HIGH-DOSE CHEMOTHERAPY WITH STEM CELL TRANSPLANT]
+High doses of chemotherapy are given to kill cancer cells. Healthy cells, including blood-forming cells, are also destroyed by the cancer treatment. Stem cell transplant is a treatment to replace the blood-forming cells. Stem cells (immature blood cells) are removed from the blood or bone marrow of the patient (autologous) or a donor (allogeneic) and are frozen and stored. After the patient completes chemotherapy, the stored stem cells are thawed and given back to the patient through an infusion. These reinfused stem cells grow into (and restore) the body's blood cells.
+
+[IMMUNOTHERAPY]
+Immunotherapy is a treatment that uses the patient's immune system to fight cancer. Substances made by the body or made in a laboratory are used to boost, direct, or restore the body's natural defenses against cancer. This cancer treatment is a type of biologic therapy.
+- Immunomodulator therapy: Thalidomide , lenalidomide , and pomalidomide are immunomodulators used to treat multiple myeloma and other plasma cell neoplasms.
+- CAR T-cell therapy : This treatment changes the patient's T cells (a type of immune system cell) so they will attack certain proteins on the surface of cancer cells. T cells are taken from the patient and special receptors are added to their surface in the laboratory. The changed cells are called chimeric antigen receptor (CAR) T cells. The CAR T cells are grown in the laboratory and given to the patient by infusion. The CAR T cells multiply in the patient's blood and attack cancer cells. CAR T-cell therapy is being studied in the treatment of multiple myeloma that has recurred (come back). Enlarge CAR T-cell therapy. A type of treatment in which a patient’s T cells (a type of immune cell) are changed in the laboratory so they will bind to cancer cells and kill them. Blood from a vein in the patient’s arm flows through a tube to an apheresis machine (not shown), which removes the white blood cells, including the T cells, and sends the rest of the blood back to the patient. Then, the gene for a special receptor called a chimeric antigen receptor (CAR) is inserted into the T cells in the laboratory. Millions of the CAR T cells are grown in the laboratory and then given to the patient by infusion. The CAR T cells are able to bind to an antigen on the cancer cells and kill them.
+See Drugs Approved for Multiple Myeloma and Other Plasma Cell Neoplasms.
+
+[RADIATION THERAPY]
+Radiation therapy is a cancer treatment that uses high-energy x-rays or other types of radiation to kill cancer cells or keep them from growing. External radiation therapy uses a machine outside the body to send radiation toward the area of the body with cancer.
+
+[SURGERY]
+Surgery to remove the tumor may be done. After the doctor removes all the cancer that can be seen at the time of the surgery, some patients may be given radiation therapy after surgery to kill any cancer cells that are left. Treatment given after the surgery, to lower the risk that the cancer will come back, is called adjuvant therapy.
+
+[NEW COMBINATIONS OF THERAPIES]
+[WATCHFUL WAITING]
+Watchful waiting is closely monitoring a patient’s condition without giving any treatment until signs or symptoms appear or change.
+
+Clinical trials are studying different combinations of immunotherapy, chemotherapy, steroid therapy, and drugs. New treatment regimens using selinexor are also being studied.
+
+[SUPPORTIVE CARE IS GIVEN TO LESSEN THE PROBLEMS CAUSED BY THE DISEASE OR ITS TREATMENT.]
+This therapy controls problems or side effects caused by the disease or its treatment, and improves quality of life. Supportive care is given to treat problems caused by multiple myeloma and other plasma cell neoplasms.
+Supportive care may include the following:
+- Plasmapheresis : If the blood becomes thick with extra antibody proteins and interferes with circulation , plasmapheresis is done to remove extra plasma and antibody proteins from the blood. In this procedure blood is removed from the patient and sent through a machine that separates the plasma (the liquid part of the blood) from the blood cells. The patient's plasma contains the unneeded antibodies and is not returned to the patient. The normal blood cells are returned to the bloodstream along with donated plasma or a plasma replacement. Plasmapheresis does not keep new antibodies from forming.
+- Induction therapy with stem cell transplant: If amyloidosis occurs, treatment may include induction therapy followed by stem cell transplant using the patient's own stem cells.
+- Immunotherapy: Immunotherapy with thalidomide, lenalidomide, or pomalidomide is given to treat amyloidosis.
+- Targeted therapy: Targeted therapy with proteasome inhibitors is given to decrease how much immunoglobulin M is in the blood and treat amyloidosis. Targeted therapy with daratumumab is given with or without other drugs to treat amyloidosis. Targeted therapy with a monoclonal antibody is given to slow bone loss and reduce bone pain.
+- Radiation therapy: Radiation therapy is given for bone lesions of the spine .
+- Chemotherapy: Chemotherapy is given to reduce back pain from osteoporosis or compression fractures of the spine.
+- Bisphosphonate therapy: Bisphosphonate therapy is given to slow bone loss and reduce bone pain. For more information on bisphosphonates and problems related to their use, see Oral Complications of Cancer Therapies .
+
+[PATIENTS MAY WANT TO THINK ABOUT TAKING PART IN A CLINICAL TRIAL.]
+For some patients, taking part in a clinical trial may be the best treatment choice. Clinical trials are part of the cancer research process. Clinical trials are done to find out if new cancer treatments are safe and effective or better than the standard treatment.
+Many of today's standard treatments for cancer are based on earlier clinical trials. Patients who take part in a clinical trial may receive the standard treatment or be among the first to receive a new treatment.
+Patients who take part in clinical trials also help improve the way cancer will be treated in the future. Even when clinical trials do not lead to effective new treatments, they often answer important questions and help move research forward.
+
+[PATIENTS CAN ENTER CLINICAL TRIALS BEFORE, DURING, OR AFTER STARTING THEIR CANCER TREATMENT.]
+Some clinical trials only include patients who have not yet received treatment. Other trials test treatments for patients whose cancer has not gotten better. There are also clinical trials that test new ways to stop cancer from recurring (coming back) or reduce the side effects of cancer treatment.
+Clinical trials are taking place in many parts of the country. Information about clinical trials supported by NCI can be found on NCI’s clinical trials search webpage. Clinical trials supported by other organizations can be found on the ClinicalTrials.gov website.
+
+[FOLLOW-UP TESTS MAY BE NEEDED.]
+As you go through treatment, you will have follow-up tests or check-ups. Some tests that were done to diagnose or stage the cancer may be repeated to see how well the treatment is working. Decisions about whether to continue, change, or stop treatment may be based on the results of these tests.
+Some of the tests will continue to be done from time to time after treatment has ended. The results of these tests can show if your condition has changed or if the cancer has recurred (come back).
+
+[TREATMENT OF MONOCLONAL GAMMOPATHY OF UNDETERMINED SIGNIFICANCE]
+For information about the treatments listed below, see the Treatment Option Overview section.
+Treatment of monoclonal gammopathy of undetermined significance (MGUS) is usually watchful waiting. Regular blood tests to check the level of M protein in the blood and physical exams to check for signs or symptoms of cancer will be done.
+
+[TREATMENT OF ISOLATED PLASMACYTOMA OF BONE]
+For information about the treatments listed below, see the Treatment Option Overview section.
+Treatment of isolated plasmacytoma of bone is usually radiation therapy to the bone lesion.
+
+[TREATMENT OF EXTRAMEDULLARY PLASMACYTOMA]
+For information about the treatments listed below, see the Treatment Option Overview section.
+Treatment of extramedullary plasmacytoma may include the following:
+- Radiation therapy to the tumor and nearby lymph nodes .
+- Surgery , usually followed by radiation therapy.
+- Watchful waiting after initial treatment , followed by radiation therapy, surgery, or chemotherapy if the tumor grows or causes signs or symptoms .
+
+[TREATMENT OF MULTIPLE MYELOMA]
+For information about the treatments listed below, see the Treatment Option Overview section.
+Patients without signs or symptoms may not need treatment. These patients can have watchful waiting until signs or symptoms appear.
+When signs or symptoms appear, there are two categories for patients receiving treatment:
+- Younger, fit patients who are eligible for a stem cell transplant .
+- Older, unfit patients who are not eligible for a stem cell transplant.
+Patients younger than 65 years are usually considered younger and fit. Patients older than 75 years are usually not eligible for a stem cell transplant. For patients between the ages of 65 and 75 years, fitness is determined by their overall health and other factors.
+The treatment of multiple myeloma is usually done in phases:
+- Induction therapy : This is the first phase of treatment. Its goal is to reduce the amount of disease, and may include one or more of the following: For younger, fit patients (eligible for a transplant): Chemotherapy . Targeted therapy with a proteasome inhibitor ( bortezomib ) and a monoclonal antibody ( daratumumab ). Immunotherapy ( lenalidomide ). Corticosteroid therapy ( dexamethasone ). For older, unfit patients (not eligible for a transplant): Chemotherapy. Targeted therapy with a proteasome inhibitor (bortezomib or carfilzomib ) or a monoclonal antibody (daratumumab). Immunotherapy (lenalidomide). Corticosteroid therapy (dexamethasone).
+- Consolidation therapy : This is the second phase of treatment. Treatment in the consolidation phase is to kill any remaining cancer cells . High-dose chemotherapy is followed by either: one autologous stem cell transplant , in which the patient's stem cells from the blood or bone marrow are used; or two autologous stem cell transplants followed by an autologous or allogeneic stem cell transplant , in which the patient receives stem cells from the blood or bone marrow of a donor ; or one allogeneic stem cell transplant.
+- Maintenance therapy : After the initial treatment , maintenance therapy is often given to help keep the disease in remission for a longer time. Several types of treatment are being studied for this use, including the following: Chemotherapy. Immunotherapy (lenalidomide). Corticosteroid therapy ( prednisone or dexamethasone). Targeted therapy with a proteasome inhibitor (bortezomib or ixazomib ) or a monoclonal antibody (daratumumab).
+
+[TREATMENT OF RELAPSED OR REFRACTORY MULTIPLE MYELOMA]
+For information about the treatments listed below, see the Treatment Option Overview section.
+Treatment of relapsed or refractory multiple myeloma may include the following:
+- Watchful waiting for patients whose disease is stable .
+- A different treatment than treatment already given, for patients whose tumor kept growing during treatment. See Multiple Myeloma treatment options.
+- The same drugs used before the relapse may be used if the relapse occurs one or more years after initial treatment. See Multiple Myeloma treatment options.
+Drugs used may include the following:
+- Targeted therapy with monoclonal antibodies ( daratumumab , elotuzumab , or isatuximab ).
+- Targeted therapy with proteasome inhibitors ( bortezomib , carfilzomib , or ixazomib ).
+- Immunotherapy ( pomalidomide , lenalidomide , or thalidomide ).
+- Chemotherapy .
+- Corticosteroid therapy.
+- A clinical trial of CAR T-cell therapy .
+- A clinical trial of targeted therapy with a small molecule inhibitor ( selinexor ) and corticosteroid therapy.
+- A clinical trial of targeted therapy with a BCL2 inhibitor ( venetoclax ).
+
+--------------------------------------------------------------------------------
+
+### Sample 6: https://www.cancer.gov/types/uterine/patient/uterine-sarcoma-treatment-pdq
+
+[KEY POINTS]
+- Uterine sarcoma is a disease in which malignant (cancer) cells form in the muscles of the uterus or other tissues that support the uterus.
+- Past treatment with radiation therapy to the pelvis can increase the risk of uterine sarcoma.
+- Signs of uterine sarcoma include abnormal bleeding.
+- Tests that examine the uterus are used to diagnose uterine sarcoma.
+- Certain factors affect prognosis (chance of recovery) and treatment options.
+- After uterine sarcoma has been diagnosed, tests are done to find out if cancer cells have spread within the uterus or to other parts of the body.
+- Uterine sarcoma may be diagnosed, staged, and treated in the same surgery.
+- There are three ways that cancer spreads in the body. Cancer may spread from where it began to other parts of the body.
+- The following FIGO staging system is used for leiomyosarcomas and endometrial stromal sarcomas: Stage I Stage II Stage III Stage IV
+- The following FIGO staging system is used for adenosarcomas: Stage I Stage II Stage III Stage IV
+- Uterine sarcoma can recur (come back) after it has been treated.
+- There are different types of treatment for patients with uterine sarcoma.
+- The following types of treatment are used: Surgery Radiation therapy Chemotherapy Hormone therapy
+- New types of treatment are being tested in clinical trials.
+- Treatment for uterine sarcoma may cause side effects.
+- Patients may want to think about taking part in a clinical trial.
+- Patients can enter clinical trials before, during, or after starting their cancer treatment.
+- Follow-up care may be needed.
+
+[UTERINE SARCOMA IS A DISEASE IN WHICH MALIGNANT (CANCER) CELLS FORM IN THE MUSCLES OF THE UTERUS OR OTHER TISSUES THAT SUPPORT THE UTERUS.]
+The uterus is part of the female reproductive system. The uterus is the hollow, pear-shaped organ in the pelvis, where a fetus grows. The cervix is at the lower, narrow end of the uterus, and leads to the vagina.
+Uterine sarcoma is a very rare kind of cancer that forms in the uterine muscles or in tissues that support the uterus. For more information about other types of sarcomas, visit Soft Tissue Sarcoma Treatment.
+Uterine sarcoma is different from endometrial cancer, a disease in which cancer forms in the tissue that lines the uterus. Carcinosarcoma is a subtype of endometrial cancer and is staged using endometrial cancer definitions. For more information, visit Endometrial Cancer Treatment.
+Uterine sarcomas include leiomyosarcomas, endometrial stromal sarcomas, and adenosarcomas.
+
+[PAST TREATMENT WITH RADIATION THERAPY TO THE PELVIS CAN INCREASE THE RISK OF UTERINE SARCOMA.]
+Anything that increases a person's chance of getting a disease is called a risk factor. Not every person with one or more of these risk factors will develop an uterine sarcoma, and it will develop in some people who don't have any known risk factors. Talk with your doctor if you think you may be at risk. Risk factors for uterine sarcoma include:
+- Past treatment with radiation therapy to the pelvis.
+- Treatment with tamoxifen for breast cancer . If you are taking this drug , have a pelvic exam every year and report any vaginal bleeding (other than menstrual bleeding) as soon as possible.
+
+[SIGNS OF UTERINE SARCOMA INCLUDE ABNORMAL BLEEDING.]
+Abnormal bleeding from the vagina and other signs and symptoms may be caused by uterine sarcoma or by other conditions. Check with your doctor if you have:
+- Bleeding that is not part of menstrual periods .
+- Bleeding after menopause .
+- A mass in the vagina.
+- Pain or a feeling of fullness in the abdomen .
+- Frequent urination .
+
+[TESTS THAT EXAMINE THE UTERUS ARE USED TO DIAGNOSE UTERINE SARCOMA.]
+In addition to asking about your personal and family health history and doing a physical exam, your doctor may perform the following tests and procedures:
+- Pelvic exam : An exam of the vagina, cervix, uterus, fallopian tubes , ovaries , and rectum . A speculum is inserted into the vagina and the doctor or nurse looks at the vagina and cervix for signs of disease. A Pap test of the cervix is usually done. The doctor or nurse also inserts one or two lubricated , gloved fingers of one hand into the vagina and places the other hand over the lower abdomen to feel the size, shape, and position of the uterus and ovaries. The doctor or nurse also inserts a lubricated, gloved finger into the rectum to feel for lumps or abnormal areas. Enlarge Pelvic exam. A doctor or nurse inserts one or two lubricated, gloved fingers of one hand into the vagina and presses on the lower abdomen with the other hand. This is done to feel the size, shape, and position of the uterus and ovaries. The vagina, cervix, fallopian tubes, and rectum are also checked.
+- Pap test : A procedure to collect cells from the surface of the cervix and vagina. A piece of cotton, a brush, or a small wooden stick is used to gently scrape cells from the cervix and vagina. The cells are viewed under a microscope to find out if they are abnormal. This procedure is also called a Pap smear. Because uterine sarcoma begins inside the uterus, this cancer may not show up on the Pap test. Enlarge Pap test. A speculum is inserted into the vagina to widen it. Then, a brush is inserted into the vagina to collect cells from the cervix. The cells are checked under a microscope for signs of disease.
+- Transvaginal ultrasound exam : A procedure used to examine the vagina, uterus, fallopian tubes, and bladder . An ultrasound transducer (probe) is inserted into the vagina and used to bounce high-energy sound waves ( ultrasound ) off internal tissues or organs and make echoes. The echoes form a picture of body tissues called a sonogram . The doctor can identify tumors by looking at the sonogram. Enlarge Transvaginal ultrasound. An ultrasound probe connected to a computer is inserted into the vagina and is gently moved to show different organs. The probe bounces sound waves off internal organs and tissues to make echoes that form a sonogram (computer picture).
+- Dilatation and curettage : A procedure to remove samples of tissue from the inner lining of the uterus. The cervix is dilated and a curette (spoon-shaped instrument) is inserted into the uterus to remove tissue. The tissue samples are checked under a microscope for signs of disease. This procedure is also called a D&C. Enlarge Dilatation and curettage (D and C). A speculum is inserted into the vagina to widen it in order to look at the cervix (first panel). A dilator is used to widen the cervix (middle panel). A curette is put through the cervix into the uterus to scrape out abnormal tissue (last panel).
+- Endometrial biopsy : The removal of tissue from the endometrium (inner lining of the uterus) by inserting a thin, flexible tube through the cervix and into the uterus. The tube is used to gently scrape a small amount of tissue from the endometrium and then remove the tissue samples. A pathologist views the tissue under a microscope to look for cancer cells.
+
+[CERTAIN FACTORS AFFECT PROGNOSIS (CHANCE OF RECOVERY) AND TREATMENT OPTIONS.]
+The prognosis and treatment options depend on:
+- The stage of the cancer.
+- The type and size of the tumor.
+- The patient's general health.
+- Whether the cancer has just been diagnosed or has recurred (come back).
+
+[AFTER UTERINE SARCOMA HAS BEEN DIAGNOSED, TESTS ARE DONE TO FIND OUT IF CANCER CELLS HAVE SPREAD WITHIN THE UTERUS OR TO OTHER PARTS OF THE BODY.]
+The process used to find out if cancer has spread within the uterus or to other parts of the body is called staging. The information gathered from the staging process determines the stage of the disease. It is important to know the stage in order to plan treatment. The following procedures may be used in the staging process:
+- Blood chemistry studies : A procedure in which a blood sample is checked to measure the amounts of certain substances released into the blood by organs and tissues in the body. An unusual (higher or lower than normal) amount of a substance can be a sign of disease.
+- CA-125 assay : A test that measures the level of CA-125 in the blood. CA-125 is a substance released by cells into the bloodstream. An increased CA-125 level is sometimes a sign of cancer or other condition .
+- Chest x-ray : An x-ray of the organs and bones inside the chest. An x-ray is a type of energy beam that can go through the body and onto film, making a picture of areas inside the body.
+- Transvaginal ultrasound exam : A procedure used to examine the vagina , uterus, fallopian tubes , and bladder . An ultrasound transducer (probe) is inserted into the vagina and used to bounce high-energy sound waves ( ultrasound ) off internal tissues or organs and make echoes. The echoes form a picture of body tissues called a sonogram . The doctor can identify tumors by looking at the sonogram. Enlarge Transvaginal ultrasound. An ultrasound probe connected to a computer is inserted into the vagina and is gently moved to show different organs. The probe bounces sound waves off internal organs and tissues to make echoes that form a sonogram (computer picture).
+- CT scan (CAT scan) : A procedure that makes a series of detailed pictures of areas inside the body, such as the abdomen and pelvis , taken from different angles. The pictures are made by a computer linked to an x-ray machine. A dye may be injected into a vein or swallowed to help the organs or tissues to show up more clearly. This procedure is also called computed tomography, computerized tomography, or computerized axial tomography.
+- Cystoscopy : A procedure to look inside the bladder and urethra to check for abnormal areas. A cystoscope is inserted through the urethra into the bladder. A cystoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue samples, which are checked under a microscope for signs of cancer. Enlarge Cystoscopy. A cystoscope (a thin, tube-like instrument with a light and a lens for viewing) is inserted through the urethra into the bladder. Fluid is used to fill the bladder. The doctor looks at an image of the inner wall of the bladder on a computer monitor to check for abnormal areas.
+
+[UTERINE SARCOMA MAY BE DIAGNOSED, STAGED, AND TREATED IN THE SAME SURGERY.]
+Surgery is used to diagnose, stage, and treat uterine sarcoma. During this surgery, the doctor removes as much of the cancer as possible. The following procedures may be used to diagnose, stage, and treat uterine sarcoma:
+- Laparotomy : A surgical procedure in which an incision (cut) is made in the wall of the abdomen to check the inside of the abdomen for signs of disease. The size of the incision depends on the reason the laparotomy is being done. Sometimes organs are removed or tissue samples are taken and checked under a microscope for signs of disease.
+- Abdominal and pelvic washings: A procedure in which a saline solution is placed into the abdominal and pelvic body cavities . After a short time, the fluid is removed and viewed under a microscope to check for cancer cells.
+- Total abdominal hysterectomy : A surgical procedure to remove the uterus and cervix through a large incision (cut) in the abdomen. Enlarge Hysterectomy. The uterus is surgically removed with or without other organs or tissues. In a total hysterectomy, the uterus and cervix are removed. In a total hysterectomy with salpingo-oophorectomy, (a) the uterus plus one (unilateral) ovary and fallopian tube are removed; or (b) the uterus plus both (bilateral) ovaries and fallopian tubes are removed. In a radical hysterectomy, the uterus, cervix, both ovaries, both fallopian tubes, and nearby tissue are removed. These procedures are done using a low transverse incision or a vertical incision.
+- Bilateral salpingo-oophorectomy : Surgery to remove both ovaries and both fallopian tubes.
+- Lymphadenectomy : A surgical procedure in which lymph nodes are removed and checked under a microscope for signs of cancer. For a regional lymphadenectomy , some of the lymph nodes in the tumor area are removed. For a radical lymphadenectomy , most or all of the lymph nodes in the tumor area are removed. This procedure is also called lymph node dissection.
+Treatment in addition to surgery may be given, as described in the Treatment Option Overview section of this summary.
+
+[CANCER MAY SPREAD FROM WHERE IT BEGAN TO OTHER PARTS OF THE BODY.]
+When cancer spreads to another part of the body, it is called metastasis. Cancer cells break away from where they began (the primary tumor) and travel through the lymph system or blood.
+- Lymph system. The cancer gets into the lymph system, travels through the lymph vessels, and forms a tumor ( metastatic tumor) in another part of the body.
+- Blood. The cancer gets into the blood, travels through the blood vessels, and forms a tumor (metastatic tumor) in another part of the body.
+The metastatic tumor is the same type of cancer as the primary tumor. For example, if uterine sarcoma spreads to the lung, the cancer cells in the lung are actually uterine sarcoma cells. The disease is metastatic uterine sarcoma, not lung cancer.
+Cancer can spread through tissue, the lymph system, and the blood:
+- Tissue. The cancer spreads from where it began by growing into nearby areas.
+- Lymph system. The cancer spreads from where it began by getting into the lymph system. The cancer travels through the lymph vessels to other parts of the body.
+- Blood. The cancer spreads from where it began by getting into the blood. The cancer travels through the blood vessels to other parts of the body.
+
+[STAGE I]
+In stage I, the tumor is found in the uterus only. Stage I is divided into stages IA and IB:
+- In stage IA, the tumor is 5 centimeters or smaller.
+- In stage IB, the tumor is larger than 5 centimeters.
+In stage I, the tumor is found in the uterus only. Stage I is divided into stages IA, IB, and IC:
+- In stage IA, the tumor is found in the endometrium or endocervix (the inner part of the cervix that forms a canal connecting the vagina to the uterus).
+- In stage IB, the tumor has spread halfway or less into the myometrium (the muscular outer layer of the uterus).
+- In stage IC, the tumor has spread more than halfway into the myometrium.
+
+[STAGE II]
+In stage II, the tumor has spread beyond the uterus but has not spread beyond the pelvis. Stage II is divided into stages IIA and IIB:
+- In stage IIA, the tumor has spread to the ovary , fallopian tube , or connective tissues around the uterus.
+- In stage IIB, the tumor has spread to other tissues in the pelvis.
+In stage II, the tumor has spread outside the uterus into the pelvis. Stage II is divided into stages IIA and IIB:
+- In stage IIA, the tumor has spread to the ovary , fallopian tube , or connective tissues around the uterus.
+- In stage IIB, the tumor has spread to other tissues in the pelvis.
+
+[STAGE III]
+In stage III, the tumor has spread into tissues in the abdomen. Stage III is divided into stages IIIA, IIIB, and IIIC:
+- In stage IIIA, the tumor has spread to one site in the abdomen.
+- In stage IIIB, the tumor has spread to more than one site in the abdomen.
+- In stage IIIC, the tumor has spread to lymph nodes in the pelvis and/or around the abdominal aorta (the largest blood vessel in the abdomen).
+In stage III, the tumor has spread into tissues in the abdomen. Stage III is divided into stages IIIA, IIIB, and IIIC:
+- In stage IIIA, the tumor has spread to one site in the abdomen.
+- In stage IIIB, the tumor has spread to more than one site in the abdomen.
+- In stage IIIC, the tumor has spread to lymph nodes in the pelvis and/or around the abdominal aorta (the largest blood vessel in the abdomen).
+
+[STAGE IV]
+Stage IV is divided into stages IVA and IVB:
+- In stage IVA, the tumor has spread into the bladder and/or the rectum .
+- In stage IVB, the tumor has spread to distant parts of the body.
+Stage IV is divided into stages IVA and IVB:
+- In stage IVA, the tumor has spread into the bladder and/or the rectum .
+- In stage IVB, the tumor has spread to distant parts of the body.
+
+[UTERINE SARCOMA CAN RECUR (COME BACK) AFTER IT HAS BEEN TREATED.]
+The cancer may come back in the uterus, the pelvis, or in other parts of the body.
+
+[THERE ARE DIFFERENT TYPES OF TREATMENT FOR PATIENTS WITH UTERINE SARCOMA.]
+Different types of treatments are available for patients with uterine sarcoma. Some treatments are standard (the currently used treatment), and some are being tested in clinical trials. A treatment clinical trial is a research study meant to help improve current treatments or obtain information on new treatments for patients with cancer. When clinical trials show that a new treatment is better than the standard treatment, the new treatment may become the standard treatment. Patients may want to think about taking part in a clinical trial. Some clinical trials are open only to patients who have not started treatment.
+
+[SURGERY]
+Surgery is the most common treatment for uterine sarcoma, as described in the Stages of Uterine Sarcoma section of this summary.
+After the doctor removes all the cancer that can be seen at the time of the surgery, some patients may be given chemotherapy or radiation therapy after surgery to kill any cancer cells that are left. Treatment given after the surgery, to lower the risk that the cancer will come back, is called adjuvant therapy.
+
+[RADIATION THERAPY]
+Radiation therapy is a cancer treatment that uses high energy x-rays or other types of radiation to kill cancer cells or keep them from growing. There are two types of radiation therapy:
+- External radiation therapy uses a machine outside the body to send radiation toward the area of the body with cancer.
+- Internal radiation therapy uses a radioactive substance sealed in needles, seeds , wires, or catheters that are placed directly into or near the cancer.
+The way the radiation therapy is given depends on the type and stage of the cancer being treated. External and internal radiation therapy are used to treat uterine sarcoma, and may also be used as palliative therapy to relieve symptoms and improve quality of life.
+
+[CHEMOTHERAPY]
+Chemotherapy is a cancer treatment that uses drugs to stop the growth of cancer cells, either by killing the cells or by stopping them from dividing. When chemotherapy is taken by mouth or injected into a vein or muscle, the drugs enter the bloodstream and can reach cancer cells throughout the body (systemic chemotherapy).
+
+[HORMONE THERAPY]
+Hormone therapy is a cancer treatment that removes hormones or blocks their action and stops cancer cells from growing. Hormones are substances produced by glands in the body and circulated in the bloodstream. Some hormones can cause certain cancers to grow. If tests show the cancer cells have places where hormones can attach (receptors), drugs, surgery, or radiation therapy is used to reduce the production of hormones or block them from working.
+
+[PATIENTS MAY WANT TO THINK ABOUT TAKING PART IN A CLINICAL TRIAL.]
+For some patients, taking part in a clinical trial may be the best treatment choice. Clinical trials are part of the cancer research process. Clinical trials are done to find out if new cancer treatments are safe and effective or better than the standard treatment.
+Many of today's standard treatments for cancer are based on earlier clinical trials. Patients who take part in a clinical trial may receive the standard treatment or be among the first to receive a new treatment.
+Patients who take part in clinical trials also help improve the way cancer will be treated in the future. Even when clinical trials do not lead to effective new treatments, they often answer important questions and help move research forward.
+
+[PATIENTS CAN ENTER CLINICAL TRIALS BEFORE, DURING, OR AFTER STARTING THEIR CANCER TREATMENT.]
+Some clinical trials only include patients who have not yet received treatment. Other trials test treatments for patients whose cancer has not gotten better. There are also clinical trials that test new ways to stop cancer from recurring (coming back) or reduce the side effects of cancer treatment.
+Clinical trials are taking place in many parts of the country. Information about clinical trials supported by NCI can be found on NCI’s clinical trials search webpage. Clinical trials supported by other organizations can be found on the ClinicalTrials.gov website.
+
+[FOLLOW-UP CARE MAY BE NEEDED.]
+As you go through treatment, you will have follow-up tests or check-ups. Some tests that were done to diagnose or stage the cancer may be repeated to see how well the treatment is working. Decisions about whether to continue, change, or stop treatment may be based on the results of these tests.
+Some of the tests will continue to be done from time to time after treatment has ended. The results of these tests can show if your condition has changed or if the cancer has recurred (come back).
+
+[TREATMENT OF STAGE I UTERINE SARCOMA]
+For information about the treatments listed below, visit the Treatment Option Overview section.
+Treatment of stage I leiomyosarcoma of the uterus, stage I endometrial stromal sarcoma, and stage I adenosarcoma of the uterus may include:
+- Surgery ( total abdominal hysterectomy , bilateral salpingo-oophorectomy , and lymphadenectomy ).
+- Surgery followed by radiation therapy to the pelvis .
+- Surgery followed by chemotherapy .
+
+[TREATMENT OF STAGE II UTERINE SARCOMA]
+For information about the treatments listed below, visit the Treatment Option Overview section.
+Treatment of stage II leiomyosarcoma of the uterus, stage II endometrial stromal sarcoma, and stage II adenosarcoma of the uterus may include:
+- Surgery ( total abdominal hysterectomy , bilateral salpingo-oophorectomy , and lymphadenectomy ).
+- Surgery followed by radiation therapy to the pelvis .
+- Surgery followed by chemotherapy .
+
+[TREATMENT OF STAGE III UTERINE SARCOMA]
+For information about the treatments listed below, visit the Treatment Option Overview section.
+Treatment of stage III leiomyosarcoma of the uterus, stage III endometrial stromal sarcoma, and stage III adenosarcoma of the uterus may include:
+- Surgery ( total abdominal hysterectomy , bilateral salpingo-oophorectomy , lymphadenectomy , and removal of all other tissue where tumor is found).
+- A clinical trial of surgery followed by radiation therapy to the pelvis .
+- A clinical trial of surgery followed by chemotherapy .
+
+[TREATMENT OF STAGE IV UTERINE SARCOMA]
+There is no standard treatment for patients with stage IV leiomyosarcoma of the uterus, stage IV endometrial stromal sarcoma, or stage IV adenosarcoma of the uterus. Treatment may include a clinical trial using chemotherapy.
+
+[TREATMENT OF RECURRENT UTERINE SARCOMA]
+For information about the treatments listed below, visit the Treatment Option Overview section.
+There is no standard treatment for recurrent uterine sarcoma. Treatment may include a clinical trial using chemotherapy.
+For patients with recurrent carcinosarcoma (a certain type of tumor), treatment may include:
+- Radiation therapy as palliative therapy to relieve symptoms (such as pain, nausea , or bowel problems) and improve the quality of life .
+- Hormone therapy .
+- A clinical trial of a new treatment.
+
+--------------------------------------------------------------------------------
+
+### Sample 7: https://www.cancer.gov/types/lung/patient/non-small-cell-lung-treatment-pdq
+
+[KEY POINTS]
+- Non-small cell lung cancer is a type of cancer that forms in the tissues of the lung.
+- There are several types of non-small cell lung cancer.
+- Smoking is the major risk factor for non-small cell lung cancer.
+- Signs and symptoms of non-small cell lung cancer include coughing and shortness of breath.
+- Tests that examine the lungs are used to diagnose and stage non-small cell lung cancer.
+- If lung cancer is suspected, you will have a biopsy.
+- After non-small cell lung cancer has been diagnosed, tests are done to find out if cancer cells have spread within the chest or to other parts of the body.
+- Some people decide to get a second opinion.
+- Certain factors affect the prognosis (chance of recovery) and treatment options.
+- The following stages are used for non-small cell lung cancer: Occult (hidden) stage non-small cell lung cancer Stage 0 (carcinoma in situ) Stage I (also called stage 1) non-small cell lung cancer Stage II (also called stage 2) non-small cell lung cancer Stage III (also called stage 3) non-small cell lung cancer Stage IV (also called stage 4) non-small cell lung cancer
+- Non-small cell lung cancer can recur (come back) after it has been treated.
+Cancer stage describes the extent of cancer in the body, such as the size of the tumor, whether it has spread, and how far it has spread from where it first formed. It is important to know the stage of non-small cell lung cancer to plan the best treatment.
+There are several staging systems for cancer that describe the extent of the cancer. Non-small cell lung cancer staging usually uses the TNM staging system. The cancer may be described by this staging system in your pathology report. Based on the TNM results, a stage (I, II, III, or IV, also written as 1, 2, 3, or 4) is assigned to your cancer. When talking to you about your diagnosis, your doctor may describe the cancer as one of these stages.
+Learn about tests to stage non-small lung cell cancer. Learn more about Cancer Staging.
+- There are different types of treatment for people with non-small cell lung cancer.
+- The following types of treatment are used: Surgery Radiation therapy Chemotherapy Targeted therapy Immunotherapy Laser therapy Photodynamic therapy (PDT) Cryosurgery Electrocautery
+- New types of treatment are being tested in clinical trials.
+- Treatment for non-small cell lung cancer may cause side effects.
+- Follow-up care may be needed.
+
+[NON-SMALL CELL LUNG CANCER IS A TYPE OF CANCER THAT FORMS IN THE TISSUES OF THE LUNG.]
+The lungs are a pair of cone-shaped breathing organs in the chest. The lungs bring oxygen into the body as you breathe in. They release carbon dioxide, a waste product of the body's cells, as you breathe out. Each lung has sections called lobes. The left lung has two lobes. The right lung is slightly larger and has three lobes. Two tubes called bronchi lead from the trachea (windpipe) to the right and left lungs. Lung cancer may also form in the bronchi. Tiny air sacs called alveoli and small tubes called bronchioles make up the inside of the lungs.
+A thin membrane called the pleura covers the outside of each lung and lines the inside wall of the chest cavity. This creates a sac called the pleural cavity. The pleural cavity normally contains a small amount of fluid that helps the lungs move smoothly in the chest when you breathe.
+There are two main types of lung cancer: non-small cell lung cancer and small cell lung cancer. Non-small cell lung cancer is more common than small cell lung cancer.
+
+[THERE ARE SEVERAL TYPES OF NON-SMALL CELL LUNG CANCER.]
+Each type of non-small cell lung cancer has different kinds of cancer cells. The cancer cells of each type grow and spread in different ways. The types of non-small cell lung cancer are named for the kinds of cells found in the cancer and how the cells look under a microscope:
+- Squamous cell carcinoma is a type of lung cancer that forms in the thin, flat cells lining the inside of the lungs. This is also called epidermoid carcinoma.
+- Large cell carcinoma is a type of lung cancer that may begin in several types of large cells.
+- Adenocarcinoma is a type of lung cancer that begins in the cells that line the alveoli and make substances such as mucus .
+Less common types of non-small cell lung cancer include adenosquamous carcinoma, sarcomatoid carcinoma, salivary gland carcinoma, carcinoid tumor, and unclassified carcinoma.
+
+[SMOKING IS THE MAJOR RISK FACTOR FOR NON-SMALL CELL LUNG CANCER.]
+Lung cancer is caused by certain changes to the way lung cells function, especially how they grow and divide into new cells. There are many risk factors for lung cancer, but many do not directly cause cancer. Instead, they increase the chance of DNA damage in cells that may lead to lung cancer. Learn more about how cancer develops at What Is Cancer?
+A risk factor is anything that increases the chance of getting a disease. Some risk factors for lung cancer, like smoking, can be changed. However, risk factors also include things you cannot change, like your genetics, age, and family history. Learning about risk factors for lung cancer can help you make changes that might lower your risk of getting it.
+Smoking tobacco now or in the past is the most important risk factor for lung cancer. Smoking cigarettes, pipes, or cigars increases the risk of lung cancer. The earlier in life a person starts smoking, the more often a person smokes, and the more years a person smokes, the greater the risk of lung cancer.
+Other risk factors for lung cancer include:
+- being exposed to secondhand smoke
+- being exposed to asbestos , arsenic , chromium, beryllium, nickel, soot, or tar in the workplace
+- being exposed to radiation from: radiation therapy to the breast or chest radon in the home or workplace imaging tests such as CT scans atomic bomb radiation
+- living where there is air pollution
+- having a family history of lung cancer
+- being infected with HIV
+- taking beta carotene supplements and being a heavy smoker
+Older age is the main risk factor for most cancers. The chance of getting cancer increases as you get older.
+Having one or more of these risk factors does not necessarily mean you will get lung cancer. Many people with risk factors never develop lung cancer, whereas others with no known risk factors do. Talk with your doctor if you think you might be at increased risk.
+When smoking is combined with other risk factors, the risk of lung cancer is increased.
+
+[SIGNS AND SYMPTOMS OF NON-SMALL CELL LUNG CANCER INCLUDE COUGHING AND SHORTNESS OF BREATH.]
+Sometimes lung cancer does not cause any signs or symptoms. It may be found during a chest x-ray done for another condition. Signs and symptoms may be caused by lung cancer or by other conditions. Check with your doctor if you have:
+- chest discomfort or pain
+- a cough that doesn't go away or gets worse over time
+- trouble breathing
+- wheezing
+- blood in sputum (mucus coughed up from the lungs)
+- hoarseness
+- loss of appetite
+- weight loss for no known reason
+- fatigue
+- trouble swallowing
+- swelling in the face and/or veins in the neck
+
+[TESTS THAT EXAMINE THE LUNGS ARE USED TO DIAGNOSE AND STAGE NON-SMALL CELL LUNG CANCER.]
+Non-small cell lung cancer is usually diagnosed with tests and procedures that make pictures of the lung and the area around it. The process used to find out if cancer cells have spread within and around the lung is called staging. Tests and procedures to detect, diagnose, and stage non-small cell lung cancer are usually done at the same time. To plan treatment, it is important to know the stage of the disease and whether the cancer can be removed by surgery.
+In addition to asking about your personal and family health history and doing a physical exam, your doctor may perform the following tests and procedures:
+- Laboratory tests are medical procedures that test samples of tissue, blood, urine , or other substances in the body. These tests help to diagnose disease, plan and check treatment, or monitor the disease over time.
+- Chest x-ray is a type of radiation that can go through the body and make pictures of the organs and bones inside the chest. Enlarge A chest x-ray is used to take pictures of the structures and organs inside the chest. X-rays pass through the patient's body onto film or a computer.
+- CT scan (CAT scan) of the brain, chest, and abdomen uses a computer linked to an x-ray machine to make a series of detailed pictures of areas inside the body. The pictures are taken from different angles and are used to create 3-D views of tissues and organs. A dye may be injected into a vein or swallowed to help the organs or tissues show up more clearly. This procedure is also called computed tomography, computerized tomography, or computerized axial tomography.
+
+[IF LUNG CANCER IS SUSPECTED, YOU WILL HAVE A BIOPSY.]
+You may have one of the following types of biopsies:
+- Fine-needle aspiration (FNA) biopsy of the lung is the removal of tissue or fluid from the lung using a thin needle. A CT scan, ultrasound , or other imaging procedure is used to locate the abnormal tissue or fluid in the lung. A small incision may be made in the skin where the biopsy needle is inserted into the abnormal tissue or fluid. A sample is removed with the needle and sent to the laboratory. A pathologist then views the sample under a microscope to look for cancer cells. A chest x-ray is done after the procedure to make sure no air is leaking from the lung into the chest. Enlarge Fine-needle aspiration biopsy of the lung. The patient lies on a table that slides through the computed tomography (CT) machine, which takes x-ray pictures of the inside of the body. The x-ray pictures help the doctor see where the abnormal tissue is in the lung. A biopsy needle is inserted through the chest wall and into the area of abnormal lung tissue. A small piece of tissue is removed through the needle and checked under the microscope for signs of cancer. An endoscopic ultrasound (EUS) is a type of ultrasound that may be used to guide an FNA biopsy of the lung, lymph nodes , or other areas. EUS is a procedure in which an endoscope is inserted into the body. An endoscope is a thin, tube-like instrument with a light and a lens for viewing. A probe at the end of the endoscope is used to bounce high-energy sound waves (ultrasound) off internal tissues or organs and make echoes. The echoes form a picture of body tissues called a sonogram . Enlarge Endoscopic ultrasound-guided fine-needle aspiration biopsy. An endoscope that has an ultrasound probe and a biopsy needle is inserted through the mouth and into the esophagus. The probe bounces sound waves off body tissues to make echoes that form a sonogram (computer picture) of the lymph nodes near the esophagus. The sonogram helps the doctor see where to place the biopsy needle to remove tissue from the lymph nodes. This tissue is checked under a microscope for signs of cancer.
+- Bronchoscopy is a procedure to look inside the trachea and large airways in the lung for abnormal areas. A bronchoscope is inserted through the nose or mouth into the trachea and lungs. A bronchoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue samples, which are checked under a microscope for signs of cancer. Enlarge Bronchoscopy. A bronchoscope is inserted through the mouth, trachea, and major bronchi into the lung, to look for abnormal areas. A bronchoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a cutting tool. Tissue samples may be taken to be checked under a microscope for signs of disease.
+- Thoracoscopy is a surgical procedure to look at the organs inside the chest to check for abnormal areas. An incision (cut) is made between two ribs, and a thoracoscope is inserted into the chest. A thoracoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue or lymph node samples, which are checked under a microscope for signs of cancer. In some cases, this procedure is used to remove part of the esophagus or lung. If certain tissues, organs, or lymph nodes can't be reached, a thoracotomy may be done. In this procedure, a larger incision is made between the ribs and the chest is opened.
+- Thoracentesis is the removal of fluid from the space between the lining of the chest and the lung using a needle. A pathologist views the fluid under a microscope to look for cancer cells.
+- Mediastinoscopy is a surgical procedure to look at the organs, tissues, and lymph nodes between the lungs for abnormal areas. An incision (cut) is made at the top of the breastbone and a mediastinoscope is inserted into the chest. A mediastinoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue or lymph node samples, which are checked under a microscope for signs of cancer.
+- Anterior mediastinotomy is a surgical procedure to look at the organs and tissues between the lungs and between the breastbone and heart for abnormal areas. An incision (cut) is made next to the breastbone and a mediastinoscope is inserted into the chest. A mediastinoscope is a thin, tube-like instrument with a light and a lens for viewing. It may also have a tool to remove tissue or lymph node samples, which are checked under a microscope for signs of cancer. This is also called the Chamberlain procedure.
+- Lymph node biopsy is the removal of all or part of a lymph node. A pathologist views the lymph node tissue under a microscope to check for cancer cells. A lymph node biopsy may be done at the same time as other types of biopsies.
+One or more of the following laboratory tests may be done to study the tissue from the biopsy:
+- Molecular tests check for certain genes , proteins , or other molecules in a sample of tissue, blood, or other body fluid. Molecular tests check for certain gene or chromosome changes that occur in non-small cell lung cancer.
+- Immunohistochemistry uses antibodies to check for certain antigens ( markers ) in a sample of a patient's tissue. The antibodies are usually linked to an enzyme or a fluorescent dye. After the antibodies bind to a specific antigen in the tissue sample, the enzyme or dye is activated, and the antigen can then be seen under a microscope. This type of test is used to help diagnose cancer and to help tell one type of cancer from another type of cancer.
+
+[AFTER NON-SMALL CELL LUNG CANCER HAS BEEN DIAGNOSED, TESTS ARE DONE TO FIND OUT IF CANCER CELLS HAVE SPREAD WITHIN THE CHEST OR TO OTHER PARTS OF THE BODY.]
+The process used to find out if cancer has spread within the chest or to other parts of the body is called staging. The information gathered from the staging process determines the stage of the disease. It is important to know the stage in order to plan treatment. Some of the tests used to diagnose non-small cell lung cancer are also used to stage the disease.
+Imaging tests that may be used in the staging process include:
+- MRI (magnetic resonance imaging) of the brain uses a magnet, radio waves , and a computer to make a series of detailed pictures of areas inside the brain. This procedure is also called nuclear magnetic resonance imaging (NMRI).
+- PET scan (positron emission tomography scan) uses a small amount of radioactive glucose (sugar) that is injected into a vein. Then a scanner rotates around the body to make detailed, computerized pictures of areas inside the body where the glucose is taken up. Because cancer cells often take up more glucose than normal cells, the pictures can be used to find cancer cells in the body. A PET scan and CT scan may be done at the same time. This is called a PET-CT .
+- Bone scan checks for cancer cells in the bone. A very small amount of radioactive material is injected into a vein and travels through the bloodstream. The radioactive material collects in the bones with cancer and is detected by a scanner.
+- Pulmonary function test (PFT) checks how well the lungs are working. It measures how much air the lungs can hold and how quickly air moves into and out of the lungs. It also measures how much oxygen is used and how much carbon dioxide is given off during breathing. This is also called lung function test.
+- Bone marrow aspiration and biopsy is the removal of bone marrow , blood, and a small piece of bone by inserting a hollow needle into the hipbone or breastbone . A pathologist views the bone marrow, blood, and bone under a microscope to look for signs of cancer.
+
+[SOME PEOPLE DECIDE TO GET A SECOND OPINION.]
+You may want to get a second opinion to confirm your non-small cell lung cancer diagnosis and treatment plan. If you seek a second opinion, you will need to get medical test results and reports from the first doctor to share with the second doctor. The second doctor will review the pathology report, slides, and scans. They may agree with the first doctor, suggest changes or another treatment approach, or provide more information about your cancer.
+
+[CERTAIN FACTORS AFFECT THE PROGNOSIS (CHANCE OF RECOVERY) AND TREATMENT OPTIONS.]
+The prognosis and treatment options depend on:
+- the stage of the cancer (the size of the tumor and whether it is in the lung only or has spread to other places in the body)
+- the type of lung cancer
+- whether the cancer has mutations (changes) in certain genes, such as the epidermal growth factor receptor (EGFR) gene or the anaplastic lymphoma kinase (ALK) gene
+- whether there are signs and symptoms such as coughing or trouble breathing
+- your general health
+For most people with non-small cell lung cancer, current treatments do not cure the cancer. If lung cancer is found, you may want to think about taking part in one of the many clinical trials being done to improve treatment or quality of life. Clinical trials are taking place in most parts of the country for people with all stages of non-small cell lung cancer. Information about ongoing clinical trials is available at Clinical Trials Information for Patients and Caregivers.
+
+[OCCULT (HIDDEN) STAGE NON-SMALL CELL LUNG CANCER]
+In the occult (hidden) stage, cancer cannot be seen by imaging or bronchoscopy. Cancer cells are found in sputum or bronchial washings (a sample of cells taken from inside the airways that lead to the lungs). Cancer may have spread to other parts of the body.
+
+[STAGE 0 (CARCINOMA IN SITU)]
+In stage 0, abnormal cells are found in the lining of the airways. These abnormal cells may become cancer and spread into nearby normal tissue. Stage 0 may be adenocarcinoma in situ (AIS) or squamous cell carcinoma in situ (SCIS).
+
+[STAGE I (ALSO CALLED STAGE 1) NON-SMALL CELL LUNG CANCER]
+In stage I, cancer has formed. Stage I is divided into stages IA and IB.
+- Stage IA: Enlarge Stage IA lung cancer. The tumor is in the lung only and is 3 centimeters or smaller. Cancer has not spread to the lymph nodes. The tumor is in the lung only and is 3 centimeters or smaller. Cancer has not spread to the lymph nodes .
+- Stage IB: Enlarge Stage IB lung cancer. The tumor is larger than 3 centimeters but not larger than 4 centimeters. Cancer has not spread to the lymph nodes; OR the tumor is 4 centimeters or smaller. Cancer has not spread to the lymph nodes and one or more of the following is found: (a) cancer has spread to the main bronchus, but has not spread to the carina; and/or (b) cancer has spread to the inner membrane that covers the lung; and/or (c) part of the lung or the whole lung has collapsed or has pneumonitis (inflammation of the lung). The tumor is larger than 3 centimeters but not larger than 4 centimeters. Cancer has not spread to the lymph nodes. or The tumor is 4 centimeters or smaller and one or more of the following is found: Cancer has spread to the main bronchus , but has not spread to the carina . Cancer has spread to the innermost layer of the membrane that covers the lung. Part of the lung or the whole lung has collapsed or has developed pneumonitis . Cancer has not spread to the lymph nodes.
+
+[STAGE II (ALSO CALLED STAGE 2) NON-SMALL CELL LUNG CANCER]
+Stage II is divided into stages IIA and IIB.
+- Stage IIA: Enlarge Stage IIA lung cancer. The tumor is larger than 4 centimeters but not larger than 5 centimeters. Cancer has not spread to the lymph nodes and one or more of the following may be found: (a) cancer has spread to the main bronchus, but has not spread to the carina; and/or (b) cancer has spread to the inner membrane that covers the lung; and/or (c) part of the lung or the whole lung has collapsed or has pneumonitis (inflammation of the lung). The tumor is larger than 4 centimeters but not larger than 5 centimeters. Cancer has not spread to the lymph nodes and one or more of the following may be found: Cancer has spread to the main bronchus , but has not spread to the carina . Cancer has spread to the innermost layer of the membrane that covers the lung. Part of the lung or the whole lung has collapsed or has developed pneumonitis .
+- Stage IIB: Enlarge Stage IIB lung cancer (1). The primary tumor is 5 centimeters or smaller and cancer has spread to the lymph nodes on the same side of the chest as the primary tumor. The lymph nodes with cancer are in the lung or near the bronchus. The tumor is 5 centimeters or smaller and cancer has spread to lymph nodes on the same side of the chest as the primary tumor . The lymph nodes with cancer are in the lung or near the bronchus. Also, one or more of the following may be found: Cancer has spread to the main bronchus, but has not spread to the carina. Cancer has spread to the innermost layer of the membrane that covers the lung. Part of the lung or the whole lung has collapsed or has developed pneumonitis. or Enlarge Stage IIB lung cancer (2). Cancer has not spread to lymph nodes and one or more of the following is found: (a) the primary tumor is larger than 5 centimeters but not larger than 7 centimeters; and/or (b) there are one or more separate tumors in the same lobe of the lung as the primary tumor; and/or cancer has spread to any of the following: (c) the chest wall and/or the membrane that lines the inside of the chest wall, (d) the nerve that controls the diaphragm, and/or (e) the outer layer of tissue of the sac around the heart. Cancer has not spread to the lymph nodes and one or more of the following is found: The tumor is larger than 5 centimeters but not larger than 7 centimeters. There are one or more separate tumors in the same lobe of the lung as the primary tumor. Cancer has spread to any of the following: the membrane that lines the inside of the chest wall the chest wall the nerve that controls the diaphragm the outer layer of tissue of the sac around the heart
+
+[STAGE III (ALSO CALLED STAGE 3) NON-SMALL CELL LUNG CANCER]
+Stage III is divided into stages IIIA, IIIB, and IIIC.
+- Stage IIIA: Enlarge Stage IIIA lung cancer (1). The tumor is 5 centimeters or smaller and cancer has spread to lymph nodes on the same side of the chest as the primary tumor. The lymph nodes with cancer are around the trachea or aorta (not shown), or where the trachea divides into the bronchi. Also, one or more of the following may be found: (a) cancer has spread to the main bronchus, but has not spread to the carina; and/or (b) cancer has spread to the inner membrane that covers the lung; and/or (c) part of the lung or the whole lung has collapsed or has pneumonitis (inflammation of the lung). The tumor is 5 centimeters or smaller and cancer has spread to lymph nodes on the same side of the chest as the primary tumor . The lymph nodes with cancer are around the trachea or aorta , or where the trachea divides into the bronchi . Also, one or more of the following may be found: Cancer has spread to the main bronchus , but has not spread to the carina . Cancer has spread to the innermost layer of the membrane that covers the lung. Part of the lung or the whole lung has collapsed or has developed pneumonitis . or Enlarge Stage IIIA lung cancer (2). Cancer has spread to lymph nodes on the same side of the chest as the primary tumor. The lymph nodes with cancer are in the lung or near the bronchus. Also, one or more of the following is found: (a) the tumor is larger than 5 centimeters but not larger than 7 centimeters; and/or (b) there are one or more separate tumors in the same lobe of the lung as the primary tumor; and/or cancer has spread to any of the following: (c) the chest wall and/or the membrane that lines the inside of the chest wall, (d) the nerve that controls the diaphragm, and/or (e) the outer layer of tissue of the sac around the heart. Cancer has spread to lymph nodes on the same side of the chest as the primary tumor. The lymph nodes with cancer are in the lung or near the bronchus. Also, one or more of the following is found: The tumor is larger than 5 centimeters but not larger than 7 centimeters. There are one or more separate tumors in the same lobe of the lung as the primary tumor. Cancer has spread to any of the following: the membrane that lines the inside of the chest wall the chest wall the nerve that controls the diaphragm the outer layer of tissue of the sac around the heart or Enlarge Stage IIIA lung cancer (3). Cancer may have spread to lymph nodes on the same side of the chest as the primary tumor. The lymph nodes with cancer are in the lung or near the bronchus. Also, one or more of the following is found: (a) the primary tumor is larger than 7 centimeters; and/or (b) there are one or more separate tumors in a different lobe of the lung with the primary tumor; and/or the tumor is any size and cancer has spread to any of the following: (c) trachea, (d) carina, (e) esophagus, (f) breastbone or backbone, (g) diaphragm, (h) heart, (i) major blood vessels that lead to or from the heart (aorta or vena cava), or the nerve that controls the larynx (not shown). Cancer may have spread to lymph nodes on the same side of the chest as the primary tumor. The lymph nodes with cancer are in the lung or near the bronchus. Also, one or more of the following is found: The tumor is larger than 7 centimeters. There are one or more separate tumors in a different lobe of the lung with the primary tumor. The tumor is any size and cancer has spread to any of the following: the trachea the carina the esophagus the breastbone or backbone the diaphragm the heart the major blood vessels that lead to or from the heart (aorta or vena cava ) the nerve that controls the larynx (voice box)
+- Stage IIIB: Enlarge Stage IIIB lung cancer (1). The primary tumor is 5 centimeters or smaller and cancer has spread to lymph nodes above the collarbone on the same side of the chest as the primary tumor or to any lymph nodes on the opposite side of the chest as the primary tumor. Also, one or more of the following may be found: (a) cancer has spread to the main bronchus, but has not spread to the carina; and/or (b) cancer has spread to the inner membrane that covers the lung; and/or (c) part of the lung or the whole lung has collapsed or has pneumonitis (inflammation of the lung). The tumor is 5 centimeters or smaller and cancer has spread to lymph nodes above the collarbone on the same side of the chest as the primary tumor or to any lymph nodes on the opposite side of the chest as the primary tumor. Also, one or more of the following may be found: Cancer has spread to the main bronchus, but has not spread to the carina. Cancer has spread to the innermost layer of the membrane that covers the lung. Part of the lung or the whole lung has collapsed or has developed pneumonitis. or Enlarge Stage IIIB lung cancer (2). The tumor may be any size and cancer has spread to lymph nodes on the same side of the chest as the primary tumor. The lymph nodes with cancer are around the trachea or aorta (not shown), or where the trachea divides into the bronchi. Also, one or more of the following is found: (a) there are one or more separate tumors in the same lobe or a different lobe of the lung with the primary tumor; and/or (b) cancer has spread to any of the following: the chest wall or the membrane that lines the inside of the chest wall, the nerve that controls the voice box, the trachea, the carina, the esophagus, the breastbone or backbone (not shown), the diaphragm, the nerve that controls the diaphragm, the heart, the major blood vessels that lead to or from the heart (aorta or vena cava), or the outer layer of tissue of the sac around the heart. The tumor may be any size and cancer has spread to lymph nodes on the same side of the chest as the primary tumor. The lymph nodes with cancer are around the trachea or aorta, or where the trachea divides into the bronchi. Also, one or more of the following is found: There are one or more separate tumors in the same lobe or a different lobe of the lung with the primary tumor. Cancer has spread to any of the following: the membrane that lines the inside of the chest wall the chest wall the nerve that controls the diaphragm the outer layer of tissue of the sac around the heart the trachea the carina the esophagus the breastbone or backbone the diaphragm the heart the major blood vessels that lead to or from the heart (aorta or vena cava) the nerve that controls the larynx (voice box)
+- Stage IIIC: Enlarge Stage IIIC lung cancer. The tumor may be any size and cancer has spread to lymph nodes above the collarbone on the same side of the chest as the primary tumor or to any lymph nodes on the opposite side of the chest as the primary tumor. Also, one or more of the following is found: (a) there are one or more separate tumors in the same lobe or a different lobe of the lung with the primary tumor; and/or (b) cancer has spread to any of the following: the chest wall or the membrane that lines the inside of the chest wall, the nerve that controls the voice box, the trachea, the carina, the esophagus, the breastbone or backbone (not shown), the diaphragm, the nerve that controls the diaphragm, the heart, the major blood vessels that lead to or from the heart (aorta or vena cava), or the outer layer of tissue of the sac around the heart. The tumor may be any size and cancer has spread to lymph nodes above the collarbone on the same side of the chest as the primary tumor or to any lymph nodes on the opposite side of the chest as the primary tumor. Also, one or more of the following is found: There are one or more separate tumors in the same lobe or a different lobe of the lung with the primary tumor. Cancer has spread to any of the following: the membrane that lines the inside of the chest wall the chest wall the nerve that controls the diaphragm the outer layer of tissue of the sac around the heart the trachea the carina the esophagus the breastbone or backbone the diaphragm the heart the major blood vessels that lead to or from the heart (aorta or vena cava) the nerve that controls the larynx (voice box)
+
+[STAGE IV (ALSO CALLED STAGE 4) NON-SMALL CELL LUNG CANCER]
+Stage IV is divided into stages IVA and IVB.
+- Stage IVA: Enlarge Stage IVA lung cancer. The tumor may be any size and cancer may have spread to the lymph nodes. One or more of the following is found: (a) there are one or more tumors in the lung that does not have the primary tumor; and/or (b) cancer is found in fluid around the lungs or heart or there are cancer nodules in the lining around the lungs or the sac around the heart; and/or (c) cancer has spread to one place in an organ or tissue not near the lung, such as the brain, adrenal gland, kidney, liver, or bone, or to a lymph node that is not near the lung. The tumor may be any size and cancer may have spread to the lymph nodes . One or more of the following is found: There are one or more tumors in the lung that does not have the primary tumor . Cancer is found in the lining around the lungs or the sac around the heart. Cancer is found in fluid around the lungs or the heart. Cancer has spread to one place in an organ not near the lung, such as the brain, liver , adrenal gland , kidney , bone, or to a lymph node that is not near the lung.
+- Stage IVB: Enlarge Stage IVB lung cancer. The cancer has spread to multiple places in one or more organs that are not near the lung, such as the brain, adrenal gland, kidney, liver, distant lymph nodes, or bone. Cancer has spread to multiple places in one or more organs that are not near the lung.
+
+[NON-SMALL CELL LUNG CANCER CAN RECUR (COME BACK) AFTER IT HAS BEEN TREATED.]
+Recurrent non-small cell lung cancer is cancer that has come back after it has been treated. If non-small cell lung cancer comes back, it may come back in the brain, lung, chest, or in other parts of the body. Tests will be done to help determine where the cancer has returned. The type of treatment for non-small cell lung cancer will depend on where it has come back.
+Learn more in Recurrent Cancer: When Cancer Comes Back.
+
+[THERE ARE DIFFERENT TYPES OF TREATMENT FOR PEOPLE WITH NON-SMALL CELL LUNG CANCER.]
+Different types of treatments are available for people with non-small cell lung cancer. You and your cancer care team will work together to decide your treatment plan, which may include more than one type of treatment. Many factors will be considered, such as the stage of the cancer, your overall health, and your preferences. Your plan will include information about your cancer, the goals of treatment, your treatment options and the possible side effects, and the expected length of treatment.
+Talking with your cancer care team before treatment begins about what to expect will be helpful. You'll want to learn what you need to do before treatment begins, how you'll feel while going through it, and what kind of help you will need.
+
+[SURGERY]
+Four types of surgery are used to treat lung cancer:
+- Wedge resection is surgery to remove a tumor and some of the normal tissue around it. When a slightly larger amount of tissue is taken, it is called a segmental resection . Enlarge Wedge resection of the lung. Part of the lung lobe containing the cancer and a small amount of healthy tissue around it is removed.
+- Lobectomy is surgery to remove a whole lobe (section) of the lung. Enlarge Lobectomy. A lobe of the lung is removed.
+- Pneumonectomy is surgery to remove one whole lung. Enlarge Pneumonectomy. The whole lung is removed.
+- Sleeve resection is surgery to remove part of the bronchus .
+After the doctor removes all the cancer that can be seen at the time of the surgery, some people may be given chemotherapy or radiation therapy after surgery to kill any cancer cells that are left. Treatment given after the surgery to lower the risk that the cancer will come back is called adjuvant therapy.
+
+[RADIATION THERAPY]
+Radiation therapy is a cancer treatment that uses high-energy x-rays or other types of radiation to kill cancer cells or keep them from growing. There are two types of radiation therapy:
+- External radiation therapy uses a machine outside the body to send radiation toward the area of the body with cancer. Certain ways of giving external radiation therapy can help keep radiation from damaging nearby healthy tissue: Stereotactic body radiation therapy uses special equipment to ensure you are in the same position for each radiation treatment. Once a day for several days, a radiation machine aims a larger than usual dose of radiation directly at the tumor. By having you in the same position for each treatment, there is less damage to nearby healthy tissue. This procedure is also called stereotactic external beam radiation therapy and stereotaxic radiation therapy. Stereotactic radiosurgery is used to treat lung cancer that has spread to the brain. A rigid head frame is attached to the skull to keep the head still during the radiation treatment. A machine aims a single large dose of radiation directly at the tumor in the brain. This procedure does not involve surgery. It is also called stereotaxic radiosurgery, radiosurgery, and radiation surgery.
+- Internal radiation therapy uses a radioactive substance sealed in needles, seeds , wires, or catheters that are placed directly into or near the cancer.
+For tumors in the airways, radiation is given directly to the tumor through an endoscope.
+The way the radiation therapy is given depends on the type and stage of the cancer being treated. It also depends on where the cancer is found. External and internal radiation therapy are used to treat non-small cell lung cancer.
+
+[CHEMOTHERAPY]
+Chemotherapy (also called chemo) uses drugs to stop the growth of cancer cells, either by killing the cells or by stopping them from dividing.
+Chemotherapy for non-small cell lung cancer is usually systemic, meaning it is injected into a vein or given by mouth. When given this way, the drugs enter the bloodstream to reach cancer cells throughout the body.
+Chemotherapy drugs used to treat non-small cell lung cancer may include:
+- carboplatin
+- cisplatin
+- docetaxel
+- doxorubicin
+- etoposide
+- gemcitabine
+- paclitaxel
+- pemetrexed
+- vinorelbine
+Combinations of these chemotherapy drugs may be used. Other chemotherapy drugs not listed here may also be used.
+Chemotherapy may also be combined with other kinds of treatment. For example, it may be combined with radiation therapy or immunotherapy drugs.
+
+[TARGETED THERAPY]
+Targeted therapy uses drugs or other substances to identify and attack specific cancer cells. Your doctor may suggest biomarker tests to help predict your response to certain targeted therapy drugs. Learn more about Biomarker Testing for Cancer Treatment.
+Targeted therapies used to treat non-small cell lung cancer include:
+- adagrasib
+- afatinib
+- alectinib
+- amivantamab
+- bevacizumab
+- brigatinib
+- capmatinib
+- ceritinib
+- cetuximab
+- crizotinib
+- dabrafenib
+- dacomitinib
+- entrectinib
+- erlotinib
+- everolimus
+- gefitinib
+- larotrectinib
+- lazertinib
+- lorlatinib
+- necitumumab
+- osimertinib
+- pralsetinib
+- ramucirumab
+- repotrectinib
+- selpercatinib
+- sotorasib
+- tepotinib
+- trametinib
+
+[IMMUNOTHERAPY]
+Immunotherapy helps a person's immune system fight cancer. Your doctor may suggest biomarker tests to help predict your response to certain immunotherapy drugs. Learn more about Biomarker Testing for Cancer Treatment.
+Immunotherapy drugs used to treat non-small cell lung cancer include:
+- atezolizumab
+- cemiplimab-rwlc
+- durvalumab
+- ipilimumab
+- nivolumab
+- pembrolizumab
+- tremelimumab
+
+[LASER THERAPY]
+Laser therapy is a cancer treatment that uses a laser beam (a narrow beam of intense light) to kill cancer cells.
+
+[PHOTODYNAMIC THERAPY (PDT)]
+Photodynamic therapy (PDT) is a cancer treatment that uses a drug and a certain type of laser light to kill cancer cells. A drug that is not active until it is exposed to light is injected into a vein. The drug collects more in cancer cells than in normal cells. Fiberoptic tubes are then used to carry the laser light to the cancer cells, where the drug becomes active and kills the cells. Photodynamic therapy causes little damage to healthy tissue. It is used mainly to treat tumors on or just under the skin or in the lining of internal organs. When the tumor is in the airways, PDT is given directly to the tumor through an endoscope.
+
+[CRYOSURGERY]
+Cryosurgery is a treatment that uses an instrument to freeze and destroy abnormal tissue, such as carcinoma in situ. This type of treatment is also called cryotherapy. For tumors in the airways, cryosurgery is done through an endoscope.
+
+[ELECTROCAUTERY]
+Electrocautery is a treatment that uses a probe or needle heated by an electric current to destroy abnormal tissue. For tumors in the airways, electrocautery is done through an endoscope.
+
+[NEW TYPES OF TREATMENT ARE BEING TESTED IN CLINICAL TRIALS.]
+For some people, joining a clinical trial may be an option. There are different types of clinical trials for people with cancer. For example, a treatment trial tests new treatments or new ways of using current treatments. Supportive care and palliative care trials look at ways to improve quality of life, especially for those who have side effects from cancer and its treatment.
+
+[FOLLOW-UP CARE MAY BE NEEDED.]
+As you go through treatment, you will have follow-up tests or check-ups. Some tests that were done to diagnose or stage the cancer may be repeated to see how well the treatment is working. Decisions about whether to continue, change, or stop treatment may be based on the results of these tests.
+Some of the tests will continue to be done from time to time after treatment has ended. The results of these tests can show if your condition has changed or if the cancer has recurred (come back).
+
+[TREATMENT OF OCCULT NON-SMALL CELL LUNG CANCER]
+Treatment of occult non-small cell lung cancer depends on the stage of the disease. Occult tumors are often found at an early stage (the tumor is in the lung only) and sometimes can be cured by surgery.
+
+[TREATMENT OF STAGE 0 (CARCINOMA IN SITU)]
+Treatment of stage 0 may include:
+- surgery ( wedge resection or segmental resection )
+- photodynamic therapy , electrocautery , cryosurgery , or laser surgery for tumors in or near the bronchus
+
+[TREATMENT OF STAGE I NON-SMALL CELL LUNG CANCER]
+Treatment of stage IA non-small cell lung cancer and stage IB non-small cell lung cancer may include:
+- surgery ( wedge resection , segmental resection , sleeve resection , or lobectomy )
+- surgery followed by targeted therapy
+- surgery followed by chemotherapy and immunotherapy
+- external radiation therapy , including stereotactic body radiation therapy for people who cannot have surgery or choose not to have surgery
+
+[TREATMENT OF STAGE II NON-SMALL CELL LUNG CANCER]
+Treatment of stage IIA non-small cell lung cancer and stage IIB non-small cell lung cancer may include:
+- surgery ( wedge resection , segmental resection , sleeve resection , lobectomy , or pneumonectomy )
+- surgery followed by chemotherapy
+- surgery followed by targeted therapy
+- surgery followed by chemotherapy and immunotherapy
+- surgery followed by immunotherapy
+- surgery followed by radiation therapy
+- chemotherapy followed by surgery
+- immunotherapy and chemotherapy followed by surgery
+- immunotherapy and chemotherapy followed by surgery and more immunotherapy
+- external radiation therapy for people who cannot have surgery
+
+[TREATMENT OF STAGE IIIA NON-SMALL CELL LUNG CANCER]
+Treatment of stage IIIA non-small cell lung cancer that can be removed with surgery may include:
+- chemotherapy followed by surgery
+- chemotherapy and radiation therapy followed by surgery
+- immunotherapy and chemotherapy followed by surgery
+- immunotherapy and chemotherapy followed by surgery and more immunotherapy
+- surgery followed by chemotherapy
+- surgery followed by targeted therapy
+- surgery followed by chemotherapy and immunotherapy
+- surgery followed by immunotherapy
+- surgery followed by chemotherapy and radiation therapy
+- surgery followed by radiation therapy
+Treatment of stage IIIA non-small cell lung cancer that cannot be removed with surgery may include:
+- chemotherapy and radiation therapy
+- chemotherapy and radiation therapy followed by immunotherapy
+- external radiation therapy alone
+- internal radiation therapy or laser surgery as palliative treatment to relieve symptoms and improve quality of life
+Non-small cell lung cancer of the superior sulcus, often called Pancoast tumor, begins in the upper part of the lung and spreads to nearby tissues such as the chest wall, large blood vessels, and spine. Treatment of Pancoast tumors may include:
+- surgery
+- chemotherapy and radiation therapy followed by surgery
+- radiation therapy alone
+Some stage IIIA non-small cell lung tumors that have grown into the chest wall may be completely removed. Treatment of chest wall tumors may include:
+- surgery
+- surgery and radiation therapy
+- radiation therapy alone
+- chemotherapy combined with radiation therapy and/or surgery
+
+[TREATMENT OF STAGE IIIB AND STAGE IIIC NON-SMALL CELL LUNG CANCER]
+Treatment of stage IIIB non-small cell lung cancer and stage IIIC non-small cell lung cancer may include:
+- chemotherapy followed by external radiation therapy
+- chemotherapy with radiation therapy
+- immunotherapy and chemotherapy followed by surgery and more immunotherapy
+- immunotherapy before or after chemotherapy and radiation therapy
+- targeted therapy before or after chemotherapy and radiation therapy
+- external radiation therapy alone for people who cannot have chemotherapy
+- external radiation therapy as palliative therapy to relieve symptoms and improve quality of life
+- laser therapy and/or internal radiation therapy to relieve symptoms and improve quality of life
+
+[TREATMENT OF NEWLY DIAGNOSED STAGE IV, RELAPSED, AND RECURRENT NON-SMALL CELL LUNG CANCER]
+Treatment of newly stage IV, relapsed, and recurrent non-small cell lung cancer may include:
+- one or more chemotherapy drugs with or without targeted therapy
+- combination chemotherapy followed by more chemotherapy as maintenance therapy to help keep cancer from progressing
+- targeted therapy
+- one or more immunotherapy drugs
+
+[TREATMENT OF PROGRESSIVE STAGE IV, RELAPSED, AND RECURRENT NON-SMALL CELL LUNG CANCER]
+Treatment of progressive stage IV, relapsed, and recurrent non-small cell lung cancer may include:
+- chemotherapy
+- targeted therapy with or without chemotherapy
+- immunotherapy
+
+--------------------------------------------------------------------------------
+

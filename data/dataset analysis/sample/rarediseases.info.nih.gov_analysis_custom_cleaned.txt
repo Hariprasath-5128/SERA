@@ -1,0 +1,138 @@
+# Parsed Sections (No Truncation)
+
+================================================================================
+ DOMAIN: rarediseases.info.nih.gov
+================================================================================
+
+### Sample 1: https://rarediseases.info.nih.gov/gard/2932/hypothalamic-dysfunction
+
+[DESCRIPTION]
+ Guides expand submenu for Guides Patients, Families and Friends expand submenu for Patients, Families and Friends How to Find a Disease Specialist Tips for the Undiagnosed Support for Patients and Families Tips for Finding Financial Aid Help with Travel Costs How to Get Involved in Research FAQs About Chromosome Disorders Medical and Science Glossaries Healthcare Professionals expand submenu for Healthcare Professionals Caring for Your Patient with a Rare Disease ICD Coding for Rare Diseases Researchers expand submenu for Researchers Finding Funding Opportunities Teachers and Students expand submenu for Teachers and Students Teaching Resources K's Korner News expand submenu for News In The Spotlight News Archive Connect with GARD Media Requests About GARD expand submenu for About GARD Contact GARD About GARD Videos Brochures and Publications En Español expand submenu for En Español Enfermedades Contacte GARD Guías de Información expand submenu for Guías de Información Preguntas Más Frecuentes Sobre Enfermedades Raras Como Encontrar un Especialista en su Enfermedad Consejos Para una Condición no Diagnosticada Ayuda para Pacientes y Familias Ayuda Financiera para Mi Enfermedad Participe en Estudios de Investigación Preguntas Más Frecuentes Sobre los Trastornos Cromosómicos Sobre GARD Home © Positive Exposure text go Title placeholder for the horizontal scroll slider Back to top × Listen
+
+[SUMMARY]
+Hypothalamic dysfunction
+refers to a condition in which the
+hypothalamus
+is not working properly. The hypothalamus produces
+hormones
+that control body temperature, hunger, moods, release of hormones from many glands such as the
+pituitary gland
+, sex drive, sleep, and thirst. The signs and symptoms patients have vary depending on the hormones missing. A number of different causes including anorexia, bleeding, genetic disorder,
+tumors
+, and more have been linked to hypothalamic dysfunction. Treatment depends on the cause of the hypothalamic dysfunction.
+[1]
+Last updated: 4/13/2010
+
+--------------------------------------------------------------------------------
+
+### Sample 2: https://rarediseases.info.nih.gov/gard/12867/cushing-disease
+
+[DESCRIPTION]
+Many rare diseases have limited information. Currently, GARD aims to provide the following information for this disease:
+
+
+
+Patient organizations can help patients and families connect. They build public awareness of the disease and are a driving force behind research to improve patients' lives. They may offer online and in-person resources to help people live well with their disease. Many collaborate with medical experts and researchers.Services of patient organizations differ, but may include:
+
+Organization Name
+Who They Serve
+Helpful Links
+Country
+Cushing disease
+United States
+Cushing disease
+United States
+Cushing disease
+Rare Diseases
+United States
+Rare Diseases
+United States
+Rare Diseases
+United States
+Rare Diseases
+United States
+GARDGenetic and Rare Diseases Information CenterPlease contact GARD if you need help finding additional information or resources on rare diseases, including clinical studies. Our Information Specialists are available to you by phone or by filling out our contact form. Note, GARD cannot enroll individuals in clinical studies.ClinicalTrials.gov, an affiliate of NIH, provides current information on clinical research studies in the United States and abroad. Talk to a trusted doctor before choosing to participate in any clinical study. We recommend checking this site often and searching for studies with related terms/synonyms to improve results.GARDGenetic and Rare Diseases Information CenterPlease contact GARD if you need help finding additional information or resources on rare diseases, including clinical studies. Our Information Specialists are available to you by phone or by filling out our contact form. Note, GARD cannot enroll individuals in clinical studies.
+Learn about symptoms, cause, support, and research for a rare disease.
+Take steps toward getting a diagnosis by working with your doctor, finding the right specialists, and coordinating medical care.
+Find resources for patients and caregivers that address the challenges of living with a rare disease.
+Take steps toward getting a diagnosis by working with your doctor, finding the right specialists, and coordinating medical care.
+
+
+--------------------------------------------------------------------------------
+
+### Sample 7: https://rarediseases.info.nih.gov/gard/4119/mental-retardation-x-linked-syndromic-11
+
+[DESCRIPTION]
+SMRXS; Syndromic X-linked intellectual disability Shashi type
+
+[SYMPTOMS]
+This table lists symptoms that people with this disease may have. For most diseases, symptoms will vary from person to person. People with the same disease may not have
+                                all the symptoms listed. This information comes from a database called the
+Human Phenotype Ontology
+                                (HPO)
+. The HPO collects information on symptoms that have been described in medical resources. The HPO
+                                is updated regularly. Use the HPO ID to access more in-depth information about a symptom.
+Showing
+of
+13
+|
+View All
+Medical Terms
+Other Names
+Learn More:
+HPO ID
+Percent of people who have these symptoms is not available through HPO
+Blepharophimosis
+Narrow opening between the eyelids
+0000581
+Bulbous nose
+0000414
+Coarse facial features
+Coarse facial appearance
+0000280
+Intellectual disability
+, moderate
+IQ between 34 and 49
+0002342
+Macroorchidism
+Large testis
+0000053
+Macrotia
+Large ears
+0000400
+Narrow palpebral fissure
+Small opening between the eyelids
+0045025
+Obesity
+Having too much body fat
+0001513
+Periorbital fullness
+Puffiness around eye
+0000629
+Prominent supraorbital ridges
+Prominent brow
+0000336
+Specific learning disability
+0001328
+Thick lower lip vermilion
+Increased volume of lower lip
+Plump lower lip
+Prominent lower lip
+[
+more
+]
+0000179
+X-linked recessive
+inheritance
+0001419
+Showing
+of
+13
+|
+View All
+Do you have more information about symptoms of this disease? We want to hear from you.
+Last updated: 2/1/2021
+Do you have updated information on this disease? We want to hear from you.
+
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,97 @@
+# Parsed Sections (No Truncation)
+
+================================================================================
+ DOMAIN: ninds.nih.gov
+================================================================================
+
+### Sample 1: http://www.ninds.nih.gov/disorders/chiari/chiari.htm
+
+[WHAT IS CHIARI MALFORMATION?]
+Chiari malformations (CMs) are structural defects in the cerebellum, the part of the brain that controls balance. When the indented bony space at the lower rear of the skull is smaller than normal, the cerebellum and brain stem can be pushed downward. The resulting pressure on the cerebellum can block the flow of cerebrospinal fluid (the liquid that surrounds and protects the brain and spinal cord) and can cause a range of symptoms including dizziness, muscle weakness, numbness, vision problems, headache, and problems with balance and coordination. Symptoms may change for some individuals depending on buildup of CNS and any resulting pressure on tissue and nerves. CMs are classified by the severity of the disorder and the parts of the brain that protrude into the spinal canal. The most common is Type I, which may not cause symptoms and is often found by accident during an examination for another condition. Type II (also called Arnold-Chiari malformation) is usually accompanied by a myelomeningocele-a form of spina bifida that occurs when the spinal canal and backbone do not close before birth, causing the spinal cord to protrude through an opening in the back. This can cause partial or complete paralysis below the spinal opening. Type III is the most serious form of CM, and causes severe neurological defects. Other conditions sometimes associated with CM include hydrocephalus, syringomyelia (a fluid-filled cyst in the spinal cord), and spinal curvature.
+
+[IS THERE ANY TREATMENT?]
+Medications may ease certain symptoms, such as pain. Surgery is the only treatment available to correct functional disturbances or halt the progression of damage to the central nervous system. More than one surgery may be needed to treat the condition. Some CMs have no noticeable symptoms and do not interfere with the person's activities of daily living.
+
+[WHAT IS THE PROGNOSIS?]
+Many people with Type I CM are asymptomatic and do not know they have the condition. Many individuals with the more severe types of CM and have surgery see a reduction in their symptoms and/or prolonged periods of relative stability, although paralysis is generally permanent.
+
+--------------------------------------------------------------------------------
+
+### Sample 2: http://www.ninds.nih.gov/disorders/msa/msa.htm
+
+[WHAT IS MULTIPLE SYSTEM ATROPHY?]
+Multiple system atrophy (MSA) is a progressive neurodegenerative disorder characterized by symptoms of autonomic nervous system failure such as fainting spells and bladder control problems, combined with motor control symptoms such as tremor, rigidity, and loss of muscle coordination. MSA affects both men and women primarily in their 50s. Although what causes MSA is unknown, the disorder's symptoms reflect the loss of nerve cells in several different areas in the brain and spinal cord that control the autonomic nervous system and coordinate muscle movements. The loss of nerve cells may be due to the buildup of a protein called alpha-synuclein in the cells that support nerve cells in the brain.
+
+[IS THERE ANY TREATMENT?]
+There is no cure for MSA. Currently, there are no treatments to delay the progress of neurodegeneration in the brain. But there are treatments available to help people cope with some of the more disabling symptoms of MSA. In some individuals, levodopa may improve motor function, but the benefit may not continue as the disease progresses.
+
+[WHAT IS THE PROGNOSIS?]
+The disease tends to advance rapidly over the course of 5 to 10 years, with progressive loss of motor skills, eventual confinement to bed, and death. There is no remission from the disease. There is currently no cure.
+
+--------------------------------------------------------------------------------
+
+### Sample 3: http://www.ninds.nih.gov/disorders/alpersdisease/alpersdisease.htm
+
+[WHAT IS ALPERS' DISEASE?]
+Alpers' disease is a progressive, neurodevelopmental, mitochondrial DNA depletion syndrome characterized by three co-occurring clinical symptoms: psychomotor regression (dementia); seizures; and liver disease. It is an autosomal recessive disease caused by mutation in the gene for the mitochondrial DNA polymerase POLG. The disease occurs in about one in 100,000 persons. Most individuals with Alpers' disease do not show symptoms at birth and develop normally for weeks to years before the onset of symptoms. Diagnosis is established by testing for the POLG gene. Symptoms typically occur months before tissue samples show the mitochondrial DNA depletion, so that these depletion studies cannot be used for early diagnosis. About 80 percent of individuals with Alpers' disease develop symptoms in the first two years of life, and 20 percent develop symptoms between ages 2 and 25. The first symptoms of the disorder are usually nonspecific and may include hypoglycemia secondary to underlying liver disease, failure to thrive, infection-associated encephalopathy, spasticity, myoclonus (involuntary jerking of a muscle or group of muscles), seizures, or liver failure. An increased protein level is seen in cerebrospinal fluid analysis. Cortical blindness (loss of vision due to damage to the area of the cortex that controls vision) develops in about 25 percent of cases. Gastrointestinal dysfunction and cardiomyopathy may occur. Dementia is typically episodic and often associated with an infection that occurs while another disease is in process. Seizures may be difficult to control and unrelenting seizures can cause developmental regression as well. "Alpers-like" disorders without liver disease are genetically different and have a different clinical course. Fewer than one-third of individuals with the "Alpers-like" phenotype without liver disease have POLG mutations.
+
+[IS THERE ANY TREATMENT?]
+There is no cure for Alpers' disease and no way to slow its progression. Treatment is symptomatic and supportive. Anticonvulsants may be used to treat the seizures, but at times the seizures do not respond well to therapy, even at high doses. Therefore, the benefit of seizure control should be weights against what could be excessive sedation from the anticonvulsant.. Valproate should not be used since it can increase the risk of liver failure. Physical therapy may help to relieve spasticity and maintain or increase muscle tone.
+
+[WHAT IS THE PROGNOSIS?]
+The prognosis for individuals with Alpers' disease is poor. Those with the disease usually die within their first decade of life. Continuous, unrelenting seizures often lead to death. Liver failure and cardiorespiratory failure due to brain, spinal cord, and nerve involvement may also occur.
+
+--------------------------------------------------------------------------------
+
+### Sample 4: http://www.ninds.nih.gov/disorders/ramsay2/ramsay2.htm
+
+[WHAT IS HERPES ZOSTER OTICUS?]
+Herpes zoster oticus, also called Ramsay Hunt Syndrome or Ramsay Hunt Syndrome type II, is a common complication of shingles. Shingles is an infection caused by the varicella-zoster virus, which is the virus that causes chickenpox. Shingles occurs in people who have had chickenpox and represents a reactivation of the dormant varicella-zoster virus. Herpes zoster oticus, which is caused by the spread of the varicella-zoster virus to facial nerves, is characterized by intense ear pain, a rash around the ear, mouth, face, neck, and scalp, and paralysis of facial nerves. Other symptoms may include hearing loss, vertigo (abnormal sensation of movement), and tinnitus (abnormal sounds). Taste loss in the tongue and dry mouth and eyes may also occur.
+
+[IS THERE ANY TREATMENT?]
+Some cases of herpes zoster oticus do not require treatment. When treatment is needed, medications such as antiviral drugs or corticosteroids may be prescribed. Vertigo may be treated with the drug diazepam
+
+[WHAT IS THE PROGNOSIS?]
+Generally, the prognosis of herpes zoster oticus is good. However, in some cases, hearing loss may be permanent. Vertigo may last for days or weeks. Facial paralysis may be temporary or permanent.
+
+--------------------------------------------------------------------------------
+
+### Sample 5: http://www.ninds.nih.gov/disorders/lambert_eaton/lambert_eaton.htm
+
+[WHAT IS LAMBERT-EATON MYASTHENIC SYNDROME?]
+Lambert-Eaton myasthenic syndrome (LEMS) is a disorder of the neuromuscular junction-the site where nerve cells meet muscle cells and help activate the muscles. It is caused by a disruption of electrical impulses between these nerve and muscle cells. LEMS is an autoimmune condition; in such disorders the immune system, which normally protects the body from foreign organisms, mistakenly attacks the body's own tissues. The disruption of electrical impulses is associated with antibodies produced as a consequence of this autoimmunity. Symptoms include muscle weakness, a tingling sensation in the affected areas, fatigue, and dry mouth. LEMS is closely associated with cancer, in particular small cell lung cancer. More than half the individuals diagnosed with LEMS also develop small cell lung cancer. LEMS may appear up to 3 years before cancer is diagnosed.
+
+[IS THERE ANY TREATMENT?]
+There is no cure for LEMS. Treatment is directed at decreasing the autoimmune response (through the use of steroids, plasmapheresis, or high-dose intravenous immunoglobulin) or improving the transmission of the disrupted electrical impulses by giving drugs such as di-amino pyridine or pyridostigmine bromide (Mestinon). For patients with small cell lung cancer, treatment of the cancer is the first priority.
+
+[WHAT IS THE PROGNOSIS?]
+The prognosis for individuals with LEMS varies. Those with LEMS not associated with malignancy have a benign overall prognosis. Generally the presence of cancer determines the prognosis.
+
+--------------------------------------------------------------------------------
+
+### Sample 6: http://www.ninds.nih.gov/disorders/absence_septum_pellucidum/absence_septum_pellucidum.htm
+
+[WHAT IS ABSENCE OF THE SEPTUM PELLUCIDUM?]
+The septum pellucidum (SP) is a thin membrane located at the midline of the brain between the two cerebral hemispheres, or halves of the brain.. It is connected to the corpus callosum -- a collection of nerve fibers that connect the cerebral hemispherers. This rare abnormality accompanies various malformations of the brain that affect intelligence, behavior, and the neurodevelopmental process, and seizures may occur. Children who are born without this membrane and also have other abnormalities--pituitary deficiencies and abnormal development of the optic disk--have a disorder known as septo-optic dysplasia. More information about this condition can be located at the NINDS Septo-Optic Dysplasia Information Page.
+
+[IS THERE ANY TREATMENT?]
+Absence of the SP alone is not a disorder but is instead a characteristic noted in children with septo-optic dysplasia or other developmental anomalies.
+
+[WHAT IS THE PROGNOSIS?]
+When the absence of the septum pellucidum is part of septo-optic dysplasia, the prognosis varies according to the presence and severity of associated symptoms. By itself, absence of the septum pellucidum is not life-threatening.
+
+--------------------------------------------------------------------------------
+
+### Sample 7: http://www.ninds.nih.gov/disorders/neurotoxicity/neurotoxicity.htm
+
+[WHAT IS NEUROTOXICITY?]
+Neurotoxicity occurs when the exposure to natural or manmade toxic substances (neurotoxicants) alters the normal activity of the nervous system. This can eventually disrupt or even kill neurons, key cells that transmit and process signals in the brain and other parts of the nervous system. Neurotoxicity can result from exposure to substances used in chemotherapy, radiation treatment, drug therapies, and organ transplants, as well as exposure to heavy metals such as lead and mercury, certain foods and food additives, pesticides, industrial and/or cleaning solvents, cosmetics, and some naturally occurring substances. Symptoms may appear immediately after exposure or be delayed. They may include limb weakness or numbness; loss of memory, vision, and/or intellect; headache; cognitive and behavioral problems; and sexual dysfunction. Individuals with certain disorders may be especially vulnerable to neurotoxicants.
+
+[IS THERE ANY TREATMENT?]
+Treatment involves eliminating or reducing exposure to the toxic substance, followed by symptomatic and supportive therapy.
+
+[WHAT IS THE PROGNOSIS?]
+The prognosis depends upon the length and degree of exposure and the severity of neurological injury. In some instances, exposure to neurotoxicants can be fatal. In others, patients may survive but not fully recover. In other situations, many individuals recover completely after treatment.
+
+--------------------------------------------------------------------------------
+

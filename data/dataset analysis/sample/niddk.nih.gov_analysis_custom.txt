@@ -1,0 +1,581 @@
+# Parsed Sections (No Truncation)
+
+================================================================================
+ DOMAIN: niddk.nih.gov
+================================================================================
+
+### Sample 1: http://www.niddk.nih.gov/health-information/health-topics/endocrine/acromegaly/Pages/fact-sheet.aspx
+
+[WHAT IS ACROMEGALY?]
+Acromegaly is a hormonal disorder that results from too much growth hormone (GH) in the body. The pituitary, a small gland in the brain, makes GH. In acromegaly, the pituitary produces excessive amounts of GH. Usually the excess GH comes from benign, or noncancerous, tumors on the pituitary. These benign tumors are called adenomas.
+Acromegaly is most often diagnosed in middle-aged adults, although symptoms can appear at any age. If not treated, acromegaly can result in serious illness and premature death. Acromegaly is treatable in most patients, but because of its slow and often "sneaky" onset, it often is not diagnosed early or correctly. The most serious health consequences of acromegaly are type 2 diabetes, high blood pressure, increased risk of cardiovascular disease, and arthritis. Patients with acromegaly are also at increased risk for colon polyps, which may develop into colon cancer if not removed.
+When GH-producing tumors occur in childhood, the disease that results is called gigantism rather than acromegaly. A child's height is determined by the length of the so-called long bones in the legs. In response to GH, these bones grow in length at the growth plates—areas near either end of the bone. Growth plates fuse after puberty, so the excessive GH production in adults does not result in increased height. However, prolonged exposure to excess GH before the growth plates fuse causes increased growth of the long bones and thus increased height. Pediatricians may become concerned about this possibility if a child's growth rate suddenly and markedly increases beyond what would be predicted by previous growth and how tall the child's parents are.
+
+[WHAT ARE THE SYMPTOMS OF ACROMEGALY?]
+The name acromegaly comes from the Greek words for "extremities" and "enlargement," reflecting one of its most common symptoms—the abnormal growth of the hands and feet. Swelling of the hands and feet is often an early feature, with patients noticing a change in ring or shoe size, particularly shoe width. Gradually, bone changes alter the patient's facial features: The brow and lower jaw protrude, the nasal bone enlarges, and the teeth space out.
+Overgrowth of bone and cartilage often leads to arthritis. When tissue thickens, it may trap nerves, causing carpal tunnel syndrome, which results in numbness and weakness of the hands. Body organs, including the heart, may enlarge.
+Other symptoms of acromegaly include
+- joint aches
+- thick, coarse, oily skin
+- skin tags
+- enlarged lips, nose, and tongue
+- deepening of the voice due to enlarged sinuses and vocal cords
+- sleep apnea-breaks in breathing during sleep due to obstruction of the airway
+- excessive sweating and skin odor
+- fatigue and weakness
+- headaches
+- impaired vision
+- abnormalities of the menstrual cycle and sometimes breast discharge in women
+- erectile dysfunction in men
+- decreased libido
+
+[WHAT CAUSES ACROMEGALY?]
+Acromegaly is caused by prolonged overproduction of GH by the pituitary gland. The pituitary produces several important hormones that control body functions such as growth and development, reproduction, and metabolism. But hormones never seem to act simply and directly. They usually "cascade" or flow in a series, affecting each other's production or release into the bloodstream.
+GH is part of a cascade of hormones that, as the name implies, regulates the physical growth of the body. This cascade begins in a part of the brain called the hypothalamus. The hypothalamus makes hormones that regulate the pituitary. One of the hormones in the GH series, or "axis," is growth hormone-releasing hormone (GHRH), which stimulates the pituitary gland to produce GH.
+Secretion of GH by the pituitary into the bloodstream stimulates the liver to produce another hormone called insulin-like growth factor I (IGF-I). IGF-I is what actually causes tissue growth in the body. High levels of IGF-I, in turn, signal the pituitary to reduce GH production.
+The hypothalamus makes another hormone called somatostatin, which inhibits GH production and release. Normally, GHRH, somatostatin, GH, and IGF-I levels in the body are tightly regulated by each other and by sleep, exercise, stress, food intake, and blood sugar levels. If the pituitary continues to make GH independent of the normal regulatory mechanisms, the level of IGF-I continues to rise, leading to bone overgrowth and organ enlargement. High levels of IGF-I also cause changes in glucose (sugar) and lipid (fat) metabolism and can lead to diabetes, high blood pressure, and heart disease.
+
+[PITUITARY TUMORS]
+In more than 95 percent of people with acromegaly, a benign tumor of the pituitary gland, called an adenoma, produces excess GH. Pituitary tumors are labeled either micro- or macro-adenomas, depending on their size. Most GH-secreting tumors are macro-adenomas, meaning they are larger than 1 centimeter. Depending on their location, these larger tumors may compress surrounding brain structures. For example, a tumor growing upward may affect the optic chiasm-where the optic nerves cross—leading to visual problems and vision loss. If the tumor grows to the side, it may enter an area of the brain called the cavernous sinus where there are many nerves, potentially damaging them.
+Compression of the surrounding normal pituitary tissue can alter production of other hormones. These hormonal shifts can lead to changes in menstruation and breast discharge in women and erectile dysfunction in men. If the tumor affects the part of the pituitary that controls the thyroid—another hormone-producing gland—then thyroid hormones may decrease. Too little thyroid hormone can cause weight gain, fatigue, and hair and skin changes. If the tumor affects the part of the pituitary that controls the adrenal gland, the hormone cortisol may decrease. Too little cortisol can cause weight loss, dizziness, fatigue, low blood pressure, and nausea.
+Some GH-secreting tumors may also secrete too much of other pituitary hormones. For example, they may produce prolactin, the hormone that stimulates the mammary glands to produce milk. Rarely, adenomas may produce thyroid-stimulating hormone. Doctors should assess all pituitary hormones in people with acromegaly.
+Rates of GH production and the aggressiveness of the tumor vary greatly among people with adenomas. Some adenomas grow slowly and symptoms of GH excess are often not noticed for many years. Other adenomas grow more rapidly and invade surrounding brain areas or the venous sinuses, which are located near the pituitary gland. Younger patients tend to have more aggressive tumors. Regardless of size, these tumors are always benign.
+Most pituitary tumors develop spontaneously and are not genetically inherited. They are the result of a genetic alteration in a single pituitary cell, which leads to increased cell division and tumor formation. This genetic change, or mutation, is not present at birth, but happens later in life. The mutation occurs in a gene that regulates the transmission of chemical signals within pituitary cells. It permanently switches on the signal that tells the cell to divide and secrete GH. The events within the cell that cause disordered pituitary cell growth and GH oversecretion currently are the subject of intensive research.
+
+[NONPITUITARY TUMORS]
+Rarely, acromegaly is caused not by pituitary tumors but by tumors of the pancreas, lungs, and other parts of the brain. These tumors also lead to excess GH, either because they produce GH themselves or, more frequently, because they produce GHRH, the hormone that stimulates the pituitary to make GH. When these non-pituitary tumors are surgically removed, GH levels fall and the symptoms of acromegaly improve.
+In patients with GHRH-producing, non-pituitary tumors, the pituitary still may be enlarged and may be mistaken for a tumor. Physicians should carefully analyze all "pituitary tumors" removed from patients with acromegaly so they do not overlook the rare possibility that a tumor elsewhere in the body is causing the disorder.
+
+[HOW COMMON IS ACROMEGALY?]
+Small pituitary adenomas are common, affecting about 17 percent of the population.1 However, research suggests most of these tumors do not cause symptoms and rarely produce excess GH.2 Scientists estimate that three to four out of every million people develop acromegaly each year and about 60 out of every million people suffer from the disease at any time.3 Because the clinical diagnosis of acromegaly is often missed, these numbers probably underestimate the frequency of the disease.
+
+[BLOOD TESTS]
+If acromegaly is suspected, a doctor must measure the GH level in a person’s blood to determine if it is elevated. However, a single measurement of an elevated blood GH level is not enough to diagnose acromegaly: Because GH is secreted by the pituitary in impulses, or spurts, its concentration in the blood can vary widely from minute to minute. At a given moment, a person with acromegaly may have a normal GH level, whereas a GH level in a healthy person may even be five times higher.
+More accurate information is obtained when GH is measured under conditions that normally suppress GH secretion. Health care professionals often use the oral glucose tolerance test to diagnose acromegaly because drinking 75 to 100 grams of glucose solution lowers blood GH levels to less than 1 nanogram per milliliter (ng/ml) in healthy people. In people with GH overproduction, this suppression does not occur. The oral glucose tolerance test is a highly reliable method for confirming a diagnosis of acromegaly.
+Physicians also can measure IGF-I levels, which increase as GH levels go up, in people with suspected acromegaly. Because IGF-I levels are much more stable than GH levels over the course of the day, they are often a more practical and reliable screening measure. Elevated IGF-I levels almost always indicate acromegaly. However, a pregnant woman’s IGF-I levels are two to three times higher than normal. In addition, physicians must be aware that IGF-I levels decline with age and may also be abnormally low in people with poorly controlled diabetes or liver or kidney disease.
+
+[IMAGING]
+After acromegaly has been diagnosed by measuring GH or IGF-I levels, a magnetic resonance imaging (MRI) scan of the pituitary is used to locate and detect the size of the tumor causing GH overproduction. MRI is the most sensitive imaging technique, but computerized tomography (CT) scans can be used if the patient should not have MRI. For example, people who have pacemakers or other types of implants containing metal should not have an MRI scan because MRI machines contain powerful magnets.
+If a head scan fails to detect a pituitary tumor, the physician should look for non-pituitary "ectopic" tumors in the chest, abdomen, or pelvis as the cause of excess GH. The presence of such tumors usually can be diagnosed by measuring GHRH in the blood and by a CT scan of possible tumor sites.
+Rarely, a pituitary tumor secreting GH may be too tiny to detect even with a sensitive MRI scan.
+
+[HOW IS ACROMEGALY TREATED?]
+Currently, treatment options include surgical removal of the tumor, medical therapy, and radiation therapy of the pituitary.
+Goals of treatment are to
+- reduce excess hormone production to normal levels
+- relieve the pressure that the growing pituitary tumor may be exerting on the surrounding brain areas
+- preserve normal pituitary function or treat hormone deficiencies
+- improve the symptoms of acromegaly
+
+[SURGERY]
+Surgery is the first option recommended for most people with acromegaly, as it is often a rapid and effective treatment. The surgeon reaches the pituitary via an incision through the nose or inside the upper lip and, with special tools, removes the tumor tissue in a procedure called transsphenoidal surgery. This procedure promptly relieves the pressure on the surrounding brain regions and leads to a rapid lowering of GH levels. If the surgery is successful, facial appearance and soft tissue swelling improve within a few days.
+Surgery is most successful in patients with blood GH levels below 45 ng/ml before the operation and with pituitary tumors no larger than 10 millimeters (mm) in diameter. Success depends in large part on the skill and experience of the surgeon, as well as the location of the tumor. Even with the most experienced neurosurgeon, the chance of a cure is small if the tumor has extended into critical brain structures or into the cavernous sinus where surgery could be risky.
+The success rate also depends on what level of GH is defined as a cure. The best measure of surgical success is normalization of GH and IGF-I levels. The overall rate of remission-control of the disease-after surgery ranges from 55 to 80 percent. (See For More Information to locate a board-certified neurosurgeon.)
+A possible complication of surgery is damage to the surrounding normal pituitary tissue, which requires lifelong use of pituitary hormone replacement. The part of the pituitary that stores antidiuretic hormone—a hormone important in water balance—may be temporarily or, rarely, permanently damaged and the patient may require medical therapy. Other potential problems include cerebrospinal fluid leaks and, rarely, meningitis. Cerebrospinal fluid bathes the brain and can leak from the nose if the incision area doesn’t heal well. Meningitis is a bacterial or viral infection of the meninges, the outer covering of the brain.
+Even when surgery is successful and hormone levels return to normal, people with acromegaly must be carefully monitored for years for possible recurrence of the disease. More commonly, hormone levels improve, but do not return to normal. Additional treatment, usually medications, may be required.
+
+[MEDICAL THERAPY]
+Medical therapy is most often used if surgery does not result in a cure and sometimes to shrink large tumors before surgery. Three medication groups are used to treat acromegaly.
+Somatostatin analogs (SSAs) are the first medication group used to treat acromegaly. They shut off GH production and are effective in lowering GH and IGF-I levels in 50 to 70 percent of patients. SSAs also reduce tumor size in around 0 to 50 percent of patients but only to a modest degree. Several studies have shown that SSAs are safe and effective for long-term treatment and in treating patients with acromegaly caused by nonpituitary tumors. Long-acting SSAs are given by intramuscular injection once a month.
+Digestive problems-such as loose stools, nausea, and gas-are a side effect in about half of people taking SSAs. However, the effects are usually temporary and rarely severe. About 10 to 20 percent of patients develop gallstones, but the gallstones do not usually cause symptoms. In rare cases, treatment can result in elevated blood glucose levels. More commonly, SSAs reduce the need for insulin and improve blood glucose control in some people with acromegaly who already have diabetes.
+The second medication group is the GH receptor antagonists (GHRAs), which interfere with the action of GH. They normalize IGF-I levels in more than 90 percent of patients. They do not, however, lower GH levels. Given once a day through injection, GHRAs are usually well-tolerated by patients. The long-term effects of these drugs on tumor growth are still under study. Side effects can include headaches, fatigue, and abnormal liver function.
+Dopamine agonists make up the third medication group. These drugs are not as effective as the other medications at lowering GH or IGF-I levels, and they normalize IGF-I levels in only a minority of patients. Dopamine agonists are sometimes effective in patients who have mild degrees of excess GH and have both acromegaly and hyperprolactinemia—too much of the hormone prolactin. Dopamine agonists can be used in combination with SSAs. Side effects can include nausea, headache, and lightheadedness.
+Agonist: A drug that binds to a receptor of a cell and triggers a response by the cell, mimicking the action of a naturally occurring substance.
+Antagonist: A chemical that acts within the body to reduce the physiological activity of another chemical substance or hormone.
+
+[RADIATION THERAPY]
+Radiation therapy is usually reserved for people who have some tumor remaining after surgery and do not respond to medications. Because radiation leads to a slow lowering of GH and IGF-I levels, these patients often also receive medication to lower hormone levels. The full effect of this therapy may not occur for many years.
+The two types of radiation delivery are conventional and stereotactic. Conventional radiation delivery targets the tumor with external beams but can damage surrounding tissue. The treatment delivers small doses of radiation multiple times over 4 to 6 weeks, giving normal tissue time to heal between treatments.
+Stereotactic delivery allows precise targeting of a high-dose beam of radiation at the tumor from varying angles. The patient must wear a rigid head frame to keep the head still. The types of stereotactic radiation delivery currently available are proton beam, linear accelerator (LINAC), and gamma knife. With stereotactic delivery, the tumor must be at least 5 mm from the optic chiasm to prevent radiation damage. This treatment can sometimes be done in a single session, reducing the risk of damage to surrounding tissue.
+All forms of radiation therapy cause a gradual decline in production of other pituitary hormones over time, resulting in the need for hormone replacement in most patients. Radiation also can impair a patient’s fertility. Vision loss and brain injury are rare complications. Rarely, secondary tumors can develop many years later in areas that were in the path of the radiation beam.
+
+[WHICH TREATMENT FOR ACROMEGALY IS MOST EFFECTIVE?]
+No single treatment is effective for all patients. Treatment should be individualized, and often combined, depending on patient characteristics such as age and tumor size.
+If the tumor has not yet invaded surrounding nonpituitary tissues, removal of the pituitary adenoma by an experienced neurosurgeon is usually the first choice. Even if a cure is not possible, surgery may be performed if the patient has symptoms of neurological problems such as loss of peripheral vision or cranial nerve problems. After surgery, hormone levels are measured to determine whether a cure has been achieved. This determination can take up to 8 weeks because IGF-I lasts a long time in the body's circulation. If cured, a patient must be monitored for a long time for increasing GH levels.
+If surgery does not normalize hormone levels or a relapse occurs, an endocrinologist should recommend additional drug therapy. With each medication, long-term therapy is necessary because their withdrawal can lead to rising GH levels and tumor re-expansion.
+Radiation therapy is generally reserved for patients whose tumors are not completely removed by surgery, who are not good candidates for surgery because of other health problems, or who do not respond adequately to surgery and medication.
+
+[POINTS TO REMEMBER]
+- Acromegaly is a hormonal disorder that results from too much growth hormone (GH) in the body.
+- In most people with acromegaly, a benign tumor of the pituitary gland produces excess GH.
+- Common features of acromegaly include abnormal growth of the hands and feet; bone growth in the face that leads to a protruding lower jaw and brow and an enlarged nasal bone; joint aches; thick, coarse, oily skin; and enlarged lips, nose, and tongue.
+- Acromegaly can cause sleep apnea, fatigue and weakness, headaches, impaired vision, menstrual abnormalities in women, and erectile dysfunction in men.
+- Acromegaly is diagnosed through a blood test. Magnetic resonance imaging (MRI) of the pituitary is then used to locate and detect the size of the tumor causing GH overproduction.
+- The first line of treatment is usually surgical removal of the tumor. Medication or radiation may be used instead of or in addition to surgery.
+
+--------------------------------------------------------------------------------
+
+### Sample 2: http://www.niddk.nih.gov/health-information/health-topics/urologic-disease/vesicoureteral-reflux-vur/Pages/facts.aspx
+
+[WHAT IS VESICOURETERAL REFLUX (VUR)?]
+Vesicoureteral reflux is the abnormal flow of urine from the bladder to the upper urinary tract. The urinary tract is the body’s drainage system for removing wastes and extra water. The urinary tract includes two kidneys, two ureters, a bladder, and a urethra. Blood flows through the kidneys, and the kidneys filter out wastes and extra water, making urine. The urine travels down two narrow tubes called the ureters. The urine is then stored in a balloonlike organ called the bladder. When the bladder empties, urine flows out of the body through a tube called the urethra at the bottom of the bladder.
+In VUR, urine may flow back—reflux—into one or both ureters and, in some cases, to one or both kidneys. VUR that affects only one ureter and kidney is called unilateral reflux, and VUR that affects both ureters and kidneys is called bilateral reflux.
+
+[WHO GETS VUR?]
+Vesicoureteral reflux is more common in infants and young children, but older children and even adults can be affected. About 10 percent of children have VUR.1 Studies estimate that VUR occurs in about 32 percent of siblings of an affected child. This rate may be as low as 7 percent in older siblings and as high as 100 percent in identical twins. These findings indicate that VUR is an inherited condition.2
+
+[WHAT ARE THE TYPES OF VUR?]
+The two types of VUR are primary and secondary. Most cases of VUR are primary and typically affect only one ureter and kidney. With primary VUR, a child is born with a ureter that did not grow long enough during the child’s development in the womb. The valve formed by the ureter pressing against the bladder wall does not close properly, so urine refluxes from the bladder to the ureter and eventually to the kidney. This type of VUR can get better or disappear as a child gets older. As a child grows, the ureter gets longer and function of the valve improves.
+Secondary VUR occurs when a blockage in the urinary tract causes an increase in pressure and pushes urine back up into the ureters. Children with secondary VUR often have bilateral reflux. VUR caused by a physical defect typically results from an abnormal fold of tissue in the urethra that keeps urine from flowing freely out of the bladder.
+VUR is usually classified as grade I through V, with grade I being the least severe and grade V being the most severe.
+
+[WHAT ARE THE SYMPTOMS OF VUR?]
+In many cases, a child with VUR has no symptoms. When symptoms are present, the most common is a urinary tract infection (UTI). VUR can lead to infection because urine that remains in the child’s urinary tract provides a place for bacteria to grow. Studies estimate that 30 percent of children and up to 70 percent of infants with a UTI have VUR.2
+
+[WHAT ARE THE COMPLICATIONS OF VUR?]
+When a child with VUR gets a UTI, bacteria can move into the kidney and lead to scarring. Scarring of the kidney can be associated with high blood pressure and kidney failure. However, most children with VUR who get a UTI recover without long-term complications.
+
+[HOW IS VUR DIAGNOSED?]
+The most common tests used to diagnose VUR include
+- Voiding cystourethrogram (VCUG). VCUG is an x-ray image of the bladder and urethra taken during urination, also called voiding. The bladder and urethra are filled with a special dye, called contrast medium, to make the urethra clearly visible. The x-ray machine captures a video of the contrast medium when the child urinates. The procedure is performed in a health care provider’s office, outpatient center, or hospital by an x-ray technician supervised by a radiologist—a doctor who specializes in medical imaging—who then interprets the images. Anesthesia is not needed, but sedation may be used for some children. This test can show abnormalities of the inside of the urethra and bladder.
+- Radionuclide cystogram (RNC). RNC is a type of nuclear scan that involves placing radioactive material into the bladder. A scanner then detects the radioactive material as the child urinates or after the bladder is empty. The procedure is performed in a health care provider’s office, outpatient center, or hospital by a specially trained technician, and the images are interpreted by a radiologist. Anesthesia is not needed, but sedation may be used for some children. RNC is more sensitive than VCUG but does not provide as much detail of the bladder anatomy.
+- Abdominal ultrasound. Ultrasound uses a device, called a transducer, that bounces safe, painless sound waves off organs to create an image of their structure. An abdominal ultrasound can create images of the entire urinary tract, including the kidneys and bladder. The procedure is performed in a health care provider’s office, outpatient center, or hospital by a specially trained technician, and the images are interpreted by a radiologist; anesthesia is not needed. Ultrasound may be used before VCUG or RNC if the child’s family or health care provider wants to avoid exposure to x-ray radiation or radioactive material.
+Testing is usually done on
+- infants diagnosed during pregnancy with urine blockage affecting the kidneys
+- children younger than 5 years of age with a UTI
+- children with a UTI and fever, called febrile UTI, regardless of age
+- males with a UTI who are not sexually active, regardless of age or fever
+- children with a family history of VUR, including an affected sibling
+More information about urine blockage in infants is provided in the NIDDK health topic, Urine Blockage in Newborns.
+VUR is an unlikely cause of UTI in some children, so these tests are not done until other causes of UTI are ruled out for
+- children 5 years of age and older with a UTI
+- children with a UTI but no fever
+- sexually active males with a UTI
+
+[WHAT OTHER TESTS DO CHILDREN WITH VUR NEED?]
+Following diagnosis, children with VUR should have a general medical evaluation that includes blood pressure measurement, as high blood pressure is an indicator of kidney damage. If both kidneys are affected, a child’s blood should be tested for creatinine—a waste product of normal muscle breakdown. Healthy kidneys remove creatinine from the blood; when the kidneys are damaged, creatinine builds up in the blood. The urine may be tested for the presence of protein and bacteria. Protein in the urine is another indication of damaged kidneys.
+Children with VUR should also be assessed for bladder/bowel dysfunction (BBD). BBD symptoms include
+- having to urinate often or suddenly
+- long periods of time between bathroom visits
+- daytime wetting
+- pain in the penis or perineum—the area between the anus and genitals
+- posturing to prevent wetting
+- constipation—a condition in which a child has fewer than two bowel movements in a week; the bowel movements may be painful
+- fecal incontinence—inability to hold stool in the colon and rectum, which are parts of the large intestine
+Children who have VUR along with any BBD symptoms are at greater risk of kidney damage due to infection.
+
+[HOW IS PRIMARY VUR TREATED?]
+The standard treatment for primary VUR has included prompt treatment of UTIs and long-term use of antibiotics to prevent UTIs, also called antimicrobial prophylaxis, until VUR goes away on its own. Antibiotics are bacteria-fighting medications. Surgery has also been used in certain cases.
+Several studies have raised questions about long-term use of antibiotics for prevention of UTIs. The studies found little or no effect on prevention of kidney damage. Long-term use may also make the child resistant to the antibiotic, meaning the medication does not work as well, and the child may be sicker longer and may need to take medications that are even stronger.
+Current recommendations from the American Urological Association include the following:
+- children younger than 1 year of age— continuous antibiotics should be used if a child has a history of febrile UTI or VUR grade III through V that was identified through screening
+- children older than 1 year of age with BBD—continuous antibiotics should be used while BBD is being treated
+- children older than 1 year of age without BBD—continuous antibiotics can be used at the discretion of the health care provider but is not automatically recommended; however, UTIs should be promptly treated
+Surgery has traditionally been considered for a child with kidney infection, fever, and severe reflux that has not improved within a year. However, some health care providers recommend surgery when a scan of the kidneys shows evidence of inflammation. Several surgical approaches can be used to alter the ureter and prevent urine from refluxing.
+Deflux, a gellike liquid containing complex sugars, is an alternative to surgery for treatment of VUR. A small amount of Deflux is injected into the bladder wall near the opening of the ureter. This injection creates a bulge in the tissue that makes it harder for urine to flow back up the ureter. The health care provider uses a special tube to see inside the bladder during the procedure. Deflux injection is an outpatient procedure done under general anesthesia, so the child can go home the same day.
+
+[HOW IS SECONDARY VUR TREATED?]
+Secondary VUR is treated by removing the blockage causing the reflux. Treatment may involve
+- surgery
+- antibiotics
+- intermittent catheterization—draining the bladder by inserting a thin tube, called a catheter, through the urethra to the bladder
+
+[EATING, DIET, AND NUTRITION]
+Eating, diet, and nutrition have not been shown to play a role in causing or preventing VUR.
+
+[POINTS TO REMEMBER]
+- Vesicoureteral reflux (VUR) is the abnormal flow of urine from the bladder to the upper urinary tract.
+- VUR is more common in infants and young children, but older children and even adults can be affected. About 10 percent of children have VUR.
+- In many cases, a child with VUR has no symptoms. When symptoms are present, the most common is a urinary tract infection (UTI).
+- When a child with VUR gets a UTI, bacteria can move into the kidney and lead to scarring. Scarring of the kidney can be associated with high blood pressure and kidney failure.
+- Voiding cystourethrogram (VCUG), radionuclide cystogram (RNC), and abdominal ultrasound are used to diagnose VUR.
+- Children with VUR should also be assessed for bladder/bowel dysfunction (BBD). Children who have VUR along with any BBD symptoms are at greater risk of kidney damage due to infection.
+- The standard treatment for primary VUR has included prompt treatment of UTIs and long-term use of antibiotics to prevent UTIs, also called antimicrobial prophylaxis, until VUR goes away on its own. Surgery has also been used in certain cases.
+- Secondary VUR is treated by removing the blockage causing the reflux.
+
+--------------------------------------------------------------------------------
+
+### Sample 3: http://www.niddk.nih.gov/health-information/health-topics/kidney-disease/medullary-sponge-kidney-msk/Pages/index.aspx
+
+[DESCRIPTION]
+Medullary sponge kidney, also known as Cacchi-Ricci disease, is a birth defect where changes occur in the tubules, or tiny tubes, inside a fetus’ kidneys.
+In a normal kidney, urine flows through these tubules as the kidney is being formed during a fetus’ growth. In medullary sponge kidney, tiny, fluid-filled sacs called cysts form in the tubules within the medulla—the inner part of the kidney—creating a spongelike appearance. The cysts keep urine from flowing freely through the tubules.
+Symptoms of medullary sponge kidney do not usually appear until the teenage years or the 20s. Medullary sponge kidney can affect one or both kidneys.
+
+Complications of medullary sponge kidney include
+- hematuria, or blood in the urine
+- kidney stones
+- urinary tract infections (UTIs)
+Medullary sponge kidney rarely leads to more serious problems, such as chronic kidney disease or kidney failure.
+
+Scientists do not fully understand the cause of medullary sponge kidney or why cysts form in the tubules during fetal development. Even though medullary sponge kidney is present at birth, most cases do not appear to be inherited.
+
+Medullary sponge kidney affects about one person per 5,000 people in the United States. Researchers have reported that 12 to 20 percent of people who develop calcium-based kidney stones have medullary sponge kidney1.
+
+Medullary sponge kidney affects all races and geographic regions. Among people who are more likely to develop calcium-based kidney stones, women are more likely than men to have medullary sponge kidney.2
+
+Many people with medullary sponge kidney have no symptoms. The first sign that a person has medullary sponge kidney is usually a UTI or a kidney stone. UTIs and kidney stones share many of the same signs and symptoms:
+- burning or painful urination
+- pain in the back, lower abdomen, or groin
+- cloudy, dark, or bloody urine
+- foul-smelling urine
+- fever and chills
+- vomiting
+People who experience these symptoms should see or call a health care provider as soon as possible.
+
+A health care provider diagnoses medullary sponge kidney based on
+- a medical and family history
+- a physical exam
+- imaging studies
+
+[MEDICAL AND FAMILY HISTORY]
+Taking a medical and family history can help diagnose medullary sponge kidney. A health care provider will suspect medullary sponge kidney when a person has repeated UTIs or kidney stones.
+
+[PHYSICAL EXAM]
+No physical signs are usually present in a patient with medullary sponge kidney, except for blood in the urine. Health care providers usually confirm a diagnosis of medullary sponge kidney with imaging studies.
+
+[IMAGING STUDIES]
+Imaging is the medical term for tests that use different methods to see bones, tissues, and organs inside the body. Health care providers commonly choose one or more of three imaging techniques to diagnose medullary sponge kidney:
+- intravenous pyelogram
+- computerized tomography (CT) scan
+- ultrasound
+A radiologist—a doctor who specializes in medical imaging—interprets the images from these studies, and patients do not need anesthesia.
+
+[INTRAVENOUS PYELOGRAM]
+In an intravenous pyelogram, a health care provider injects a special dye, called contrast medium, into a vein in the patient’s arm. The contrast medium travels through the body to the kidneys. The kidneys excrete the contrast medium into urine, which makes the urine visible on an x-ray. An x-ray technician performs this procedure at a health care provider’s office, an outpatient center, or a hospital. An intravenous pyelogram can show any blockage in the urinary tract, and the cysts show up as clusters of light.
+
+[COMPUTERIZED TOMOGRAPHY SCANS]
+Computerized tomography scans use a combination of x-rays and computer technology to create images. For a CT scan, a health care provider may give the patient a solution to drink and an injection of contrast medium. CT scans require the patient to lie on a table that slides into a tunnel-shaped device where the x-rays are taken. An x-ray technician performs the procedure in an outpatient center or a hospital. CT scans can show expanded or stretched tubules.
+
+[ULTRASOUND]
+Ultrasound uses a device, called a transducer, that bounces safe, painless sound waves off organs to create an image of their structure. A specially trained technician performs the procedure in a health care provider’s office, an outpatient center, or a hospital. Ultrasound can show kidney stones and calcium deposits within the kidney.
+
+Scientists have not discovered a way to reverse medullary sponge kidney. Once a health care provider is sure a person has medullary sponge kidney, treatment focuses on
+- curing an existing UTI
+- removing any kidney stones
+
+[CURING AN EXISTING URINARY TRACT INFECTION]
+To treat a UTI, the health care provider may prescribe a medication called an antibiotic that kills bacteria. The choice of medication and length of treatment depend on the person’s medical history and the type of bacteria causing the infection. More information is provided in the NIDDK health topic, Urinary Tract Infections in Adults.
+
+[REMOVING KIDNEY STONES]
+Treatment for kidney stones usually depends on their size and what they are made of, as well as whether they are causing pain or obstructing the urinary tract. Kidney stones may be treated by a general practitioner or by a urologist—a doctor who specializes in the urinary tract.
+Small stones usually pass through the urinary tract without treatment. Still, the person may need pain medication and should drink lots of liquids to help move the stone along. Pain control may consist of oral or intravenous (IV) medication, depending on the duration and severity of the pain. People may need IV fluids if they become dehydrated from vomiting or an inability to drink.
+A person with a larger stone, or one that blocks urine flow and causes great pain, may need more urgent treatment, such as
+- shock wave lithotripsy. A machine called a lithotripter is used to break up the kidney stone into smaller pieces to pass more easily through the urinary tract. The patient may need local or general anesthesia.
+- ureteroscopy. A ureteroscope—a long, tubelike instrument with an eyepiece—is used to find and retrieve the stone with a small basket or to break the stone up with laser energy. Local or general anesthesia may be required.
+- percutaneous nephrolithotomy. In this procedure, a wire-thin viewing instrument, called a nephroscope, is used to locate and remove the stones. During the procedure, which requires general anesthesia, a tube is inserted directly into the kidney through a small incision in the patient’s back.
+More information is provided in the NIDDK health topic, Kidney Stones in Adults.
+
+Scientists have not yet found a way to prevent medullary sponge kidney. However, health care providers can recommend medications and dietary changes to prevent future UTIs and kidney stones.
+
+Health care providers may prescribe certain medications to prevent UTIs and kidney stones:
+- A person with medullary sponge kidney may need to continue taking a low-dose antibiotic to prevent recurrent infections.
+- Medications that reduce calcium in the urine may help prevent calcium kidney stones. These medications may include potassium citratethiazide
+
+The following changes in diet may help prevent UTIs and kidney stone formation:
+- Drinking plenty of water and other liquids can help flush bacteria from the urinary tract and dilute urine so kidney stones cannot form. A person should drink enough liquid to produce about 2 to 2.5 quarts of urine every day.3
+- Reducing sodium intake, mostly from salt, may help prevent kidney stones. Diets high in sodium can increase the excretion of calcium into the urine and thus increase the chance of calciumcontaining kidney stones forming.
+- Foods rich in animal proteins such as meat, eggs, and fish can increase the chance of uric acid stones and calcium stones forming. People who form stones should limit their meat consumption to 6 to 8 ounces a day.4
+- People who are more likely to develop calcium oxalate stones should include 1,000 milligrams of calcium in their diet every day. Adults older than 50 years should consume 1,200 milligrams of calcium daily.3 Calcium in the digestive tract binds to oxalate from food and keeps it from entering the blood and the urinary tract, where it can form stones.
+People with medullary sponge kidney should talk with their health care provider or a dietitian before making any dietary changes. A dietitian can help a person plan healthy meals.
+
+- Medullary sponge kidney, also known as Cacchi-Ricci disease, is a birth defect where changes occur in the tubules, or tiny tubes, inside a fetus’ kidneys.
+- Symptoms of medullary sponge kidney do not usually appear until the teenage years or the 20s. Medullary sponge kidney can affect one or both kidneys.
+- Complications of medullary sponge kidney include hematuria, or blood in the urinekidney stonesurinary tract infections (UTIs)
+- Many people with medullary sponge kidney have no symptoms. The first sign that a person has medullary sponge kidney is usually a UTI or a kidney stone. UTIs and kidney stones share many of the same signs and symptoms: burning or painful urinationpain in the back, lower abdomen, or groincloudy, dark, or bloody urinefoul-smelling urinefever and chillsvomiting
+- Health care providers commonly choose one or more of three imaging techniques to diagnose medullary sponge kidney: intravenous pyelogramcomputerized tomography (CT) scanultrasound
+- Scientists have not discovered a way to reverse medullary sponge kidney. Once a health care provider is sure a person has medullary sponge kidney, treatment focuses on curing an existing UTIremoving any kidney stones
+- Scientists have not yet found a way to prevent medullary sponge kidney. However, health care providers can recommend medications and dietary changes to prevent future UTIs and kidney stones.
+
+--------------------------------------------------------------------------------
+
+### Sample 4: http://www.niddk.nih.gov/health-information/health-topics/urologic-disease/kidney-stones-in-adults/Pages/facts.aspx
+
+[WHAT IS A KIDNEY STONE?]
+A kidney stone is a solid piece of material that forms in a kidney when substances that are normally found in the urine become highly concentrated. A stone may stay in the kidney or travel down the urinary tract. Kidney stones vary in size. A small stone may pass on its own, causing little or no pain. A larger stone may get stuck along the urinary tract and can block the flow of urine, causing severe pain or bleeding.
+Kidney stones are one of the most common disorders of the urinary tract. Each year in the United States, people make more than a million visits to health care providers and more than 300,000 people go to emergency rooms for kidney stone problems.1
+Urolithiasis is the medical term used to describe stones occurring in the urinary tract. Other frequently used terms are urinary tract stone disease and nephrolithiasis. Terms that describe the location of the stone in the urinary tract are sometimes used. For example, a ureteral stone—or ureterolithiasis—is a kidney stone found in the ureter.
+
+[WHAT IS THE URINARY TRACT?]
+The urinary tract is the body’s drainage system for removing wastes and extra water. The urinary tract includes two kidneys, two ureters, a bladder, and a urethra. The kidneys are two bean-shaped organs, each about the size of a fist. They are located near the middle of the back, just below the rib cage, one on each side of the spine. Every day, the two kidneys process about 200 quarts of blood to produce about 1 to 2 quarts of urine, composed of wastes and extra water. The urine flows from the kidneys to the bladder through tubes called ureters. The bladder stores urine until releasing it through urination. When the bladder empties, urine flows out of the body through a tube called the urethra at the bottom of the bladder.
+
+[WHO GETS KIDNEY STONES?]
+Anyone can get a kidney stone, but some people are more likely to get one. Men are affected more often than women, and kidney stones are more common in non-Hispanic white people than in non-Hispanic black people and Mexican Americans. Overweight and obese people are more likely to get a kidney stone than people of normal weight. In the United States, 8.8 percent of the population, or one in 11 people, have had a kidney stone.2
+
+[WHAT CAUSES KIDNEY STONES?]
+Kidney stones can form when substances in the urine—such as calcium, oxalate, and phosphorus—become highly concentrated. Certain foods may promote stone formation in people who are susceptible, but scientists do not believe that eating any specific food causes stones to form in people who are not susceptible. People who do not drink enough fluids may also be at higher risk, as their urine is more concentrated.
+People who are at increased risk of kidney stones are those with
+- hypercalciuria, a condition that runs in families in which urine contains unusually large amounts of calcium; this is the most common condition found in those who form calcium stones
+- a family history of kidney stones
+- cystic kidney diseases, which are disorders that cause fluid-filled sacs to form on the kidneys
+- hyperparathyroidism, a condition in which the parathyroid glands, which are four pea-sized glands located in the neck, release too much hormone, causing extra calcium in the blood
+- renal tubular acidosis, a disease that occurs when the kidneys fail to excrete acids into the urine, which causes a person’s blood to remain too acidic
+- cystinuria, a condition in which urine contains high levels of the amino acid cystine
+- hyperoxaluria, a condition in which urine contains unusually large amounts of oxalate
+- hyperuricosuria, a disorder of uric acid metabolism
+- gout, a disorder that causes painful swelling of the joints
+- blockage of the urinary tract
+- chronic inflammation of the bowel
+- a history of gastrointestinal (GI) tract surgery
+Others at increased risk of kidney stones are people taking certain medications including
+- diuretics—medications that help the kidneys remove fluid from the body
+- calcium-based antacids
+- the protease inhibitor indinavir (Crixivan), a medication used to treat HIV infection
+- the anti-seizure medication topiramate (Topamax)
+
+[WHAT ARE THE TYPES OF KIDNEY STONES?]
+Four major types of kidney stones can form:
+- Calcium stones are the most common type of kidney stone and occur in two major forms: calcium oxalate and calcium phosphate. Calcium oxalate stones are more common. Calcium oxalate stone formation may be caused by high calcium and high oxalate excretion. Calcium phosphate stones are caused by the combination of high urine calcium and alkaline urine, meaning the urine has a high pH.
+- Uric acid stones form when the urine is persistently acidic. A diet rich in purines—substances found in animal protein such as meats, fish, and shellfish—may increase uric acid in urine. If uric acid becomes concentrated in the urine, it can settle and form a stone by itself or along with calcium.
+- Struvite stones result from kidney infections. Eliminating infected stones from the urinary tract and staying infection-free can prevent more struvite stones.
+- Cystine stones result from a genetic disorder that causes cystine to leak through the kidneys and into the urine, forming crystals that tend to accumulate into stones.
+
+[WHAT DO KIDNEY STONES LOOK LIKE?]
+Kidney stones vary in size and shape. Stones may be as small as a grain of sand or as large as a pearl. Some stones are even as big as golf balls. Stones may be smooth or jagged and are usually yellow or brown.
+
+[WHAT ARE THE SYMPTOMS OF KIDNEY STONES?]
+People with kidney stones may have pain while urinating, see blood in the urine, or feel a sharp pain in the back or lower abdomen. The pain may last for a short or long time. People may experience nausea and vomiting with the pain. However, people who have small stones that pass easily through the urinary tract may not have symptoms at all.
+
+[HOW ARE KIDNEY STONES DIAGNOSED?]
+To diagnose kidney stones, the health care provider will perform a physical exam and take a medical history. The medical history may include questions about family history of kidney stones, diet, GI problems, and other diseases and disorders. The health care provider may perform urine, blood, and imaging tests, such as an x ray or computerized tomography (CT) scan to complete the diagnosis.
+- Urinalysis. Urinalysis is testing of a urine sample. The urine sample is collected in a special container in a health care provider’s office or commercial facility and can be tested in the same location or sent to a lab for analysis. Urinalysis can show whether the person has an infection or the urine contains substances that form stones.
+- Blood test. A blood test involves drawing blood at a health care provider’s office or commercial facility and sending the sample to a lab for analysis. The blood test can show biochemical problems that can lead to kidney stones.
+- Abdominal x ray. An abdominal x ray is a picture created using radiation and recorded on film or on a computer. The amount of radiation used is small. An x ray is performed at a hospital or outpatient center by an x-ray technician, and the images are interpreted by a radiologist—a doctor who specializes in medical imaging. Anesthesia is not needed. The person will lie on a table or stand during the x ray. The x-ray machine is positioned over the abdominal area. The person will hold his or her breath as the picture is taken so that the picture will not be blurry. The person may be asked to change position for additional pictures. The x rays can show the location of stones in the kidney or urinary tract.
+- CT scans. CT scans use a combination of x rays and computer technology to create three-dimensional (3-D) images. A CT scan may include the injection of a special dye, called contrast medium. CT scans require the person to lie on a table that slides into a tunnel-shaped device where the x rays are taken. The procedure is performed in an outpatient center or hospital by an x-ray technician, and the images are interpreted by a radiologist. Anesthesia is not needed. CT scans can show stone locations and conditions that may have caused the stone to form.
+
+[HOW ARE KIDNEY STONES TREATED?]
+Treatment for kidney stones usually depends on their size and what they are made of, as well as whether they are causing pain or obstructing the urinary tract. Kidney stones may be treated by a general practitioner or by a urologist—a doctor who specializes in the urinary tract. Small stones usually pass through the urinary tract without treatment. Still, the person may need pain medication and should drink lots of fluids to help move the stone along. Pain control may consist of oral or intravenous (IV) medication, depending on the duration and severity of the pain. IV fluids may be needed if the person becomes dehydrated from vomiting or an inability to drink. A person with a larger stone, or one that blocks urine flow and causes great pain, may need more urgent treatment, such as
+- Shock wave lithotripsy. A machine called a lithotripter is used to crush the kidney stone. The procedure is performed by a urologist on an outpatient basis and anesthesia is used. In shock wave lithotripsy, the person lies on a table or, less commonly, in a tub of water above the lithotripter. The lithotripter generates shock waves that pass through the person’s body to break the kidney stone into smaller pieces to pass more readily through the urinary tract.
+- Ureteroscopy. A ureteroscope—a long, tubelike instrument with an eyepiece—is used to find and retrieve the stone with a small basket or to break the stone up with laser energy. The procedure is performed by a urologist in a hospital with anesthesia. The urologist inserts the ureteroscope into the person’s urethra and slides the scope through the bladder and into the ureter. The urologist removes the stone or, if the stone is large, uses a flexible fiber attached to a laser generator to break the stone into smaller pieces that can pass out of the body in the urine. The person usually goes home the same day.
+- Percutaneous nephrolithotomy. In this procedure, a wire-thin viewing instrument called a nephroscope is used to locate and remove the stone. The procedure is performed by a urologist in a hospital with anesthesia. During the procedure, a tube is inserted directly into the kidney through a small incision in the person’s back. For large stones, an ultrasonic probe that acts as a lithotripter may be needed to deliver shock waves that break the stone into small pieces that can be removed more easily. The person may have to stay in the hospital for several days after the procedure and may have a small tube called a nephrostomy tube inserted through the skin into the kidney. The nephrostomy tube drains urine and any residual stone fragments from the kidney into a urine collection bag. The tube is usually left in the kidney for 2 or 3 days while the person remains in the hospital.
+
+[HOW ARE KIDNEY STONES PREVENTED?]
+The first step in preventing kidney stones is to understand what is causing the stones to form. The health care provider may ask the person to try to catch the kidney stone as it passes, so it can be sent to a lab for analysis. Stones that are retrieved surgically can also be sent to a lab for analysis.
+The health care provider may ask the person to collect urine for 24 hours after a stone has passed or been removed to measure daily urine volume and mineral levels. Producing too little urine or having a mineral abnormality can make a person more likely to form stones. Kidney stones may be prevented through changes in eating, diet, and nutrition and medications.
+
+[EATING, DIET, AND NUTRITION]
+People can help prevent kidney stones by making changes in their fluid intake. Depending on the type of kidney stone a person has, changes in the amounts of sodium, animal protein, calcium, and oxalate consumed can also help.
+Drinking enough fluids each day is the best way to help prevent most types of kidney stones. Health care providers recommend that a person drink 2 to 3 liters of fluid a day. People with cystine stones may need to drink even more. Though water is best, other fluids may also help prevent kidney stones, such as orange juice or lemonade. Talk with your health care provider if you can’t drink the recommended amount due to other health problems, such as urinary incontinence, urinary frequency, or kidney failure.
+Recommendations based on the specific type of kidney stone include the following:
+
+[CALCIUM OXALATE STONES]
+- reducing sodium
+- reducing animal protein, such as meat, eggs, and fish
+- getting enough calcium from food or taking calcium supplements with food
+- avoiding foods high in oxalate, such as spinach, rhubarb, nuts, and wheat bran
+
+[URIC ACID STONES]
+[CALCIUM PHOSPHATE STONES]
+- reducing sodium
+- reducing animal protein
+- getting enough calcium from food or taking calcium supplements with food
+
+More information about how changes in diet affect kidney stone formation is provided in the NIDDK health topic, Diet for Kidney Stone Prevention.
+
+[MEDICATIONS]
+The health care provider may prescribe certain medications to help prevent kidney stones based on the type of stone formed or conditions that make a person more prone to form stones:
+- hyperuricosuria—allopurinol (Zyloprim), which decreases uric acid in the blood and urine
+- hypercalciuria—diuretics, such as hydrochlorothiazide
+- hyperoxaluria—potassium citrate to raise the citrate and pH of urine
+- uric acid stones—allopurinol and potassium citrate
+- cystine stones—mercaptopropionyl glycine, which decreases cystine in the urine, and potassium citrate
+- struvite stones—antibiotics, which are bacteria-fighting medications, when needed to treat infections, or acetohydroxamic acid with long-term antibiotic medications to prevent infection
+People with hyperparathyroidism sometimes develop calcium stones. Treatment in these cases is usually surgery to remove the parathyroid glands. In most cases, only one of the glands is enlarged. Removing the glands cures hyperparathyroidism and prevents kidney stones.
+
+[POINTS TO REMEMBER]
+- A kidney stone is a solid piece of material that forms in a kidney when substances that are normally found in the urine become highly concentrated.
+- Kidney stones are one of the most common disorders of the urinary tract.
+- Certain foods may promote stone formation in people who are susceptible, but scientists do not believe that eating any specific food causes stones to form in people who are not susceptible.
+- People with kidney stones may have pain while urinating, see blood in the urine, or feel a sharp pain in the back or lower abdomen. However, people who have small stones that pass easily through the urinary tract may not have symptoms at all.
+- To diagnose kidney stones, the health care provider will perform a physical exam and take a medical history. The health care provider may perform urine, blood, and imaging tests to complete the diagnosis.
+- Treatment for kidney stones usually depends on their size and what they are made of, as well as whether they are causing pain or obstructing the urinary tract. Treatments may include shock wave lithotripsy, ureteroscopy, or percutaneous nephrolithotomy.
+- Kidney stones may be prevented through changes in eating, diet, and nutrition and medications.
+
+--------------------------------------------------------------------------------
+
+### Sample 5: http://www.niddk.nih.gov/health-information/health-topics/kidney-disease/henoch-schönlein-purpura-hsp/Pages/facts.aspx
+
+[WHAT IS HENOCH-SCHÖNLEIN PURPURA (HSP)?]
+Henoch-Schönlein purpura is a disease that causes small blood vessels in the body to become inflamed and leak. The primary symptom is a rash that looks like many small raised bruises. HSP can also affect the kidneys, digestive tract, and joints. HSP can occur any time in life, but it is most common in children between 2 and 6 years of age.1 Most people recover from HSP completely, though kidney damage is the most likely long-term complication. In adults, HSP can lead to chronic kidney disease (CKD) and kidney failure, described as end-stage renal disease when treated with blood-filtering treatments called dialysis or a kidney transplant.
+
+[WHAT ARE THE CAUSES OF HSP?]
+Henoch-Schönlein purpura is caused by an abnormal immune system response in which the body’s immune system attacks the body’s own cells and organs. Usually, the immune system makes antibodies, or proteins, to protect the body from foreign substances such as bacteria or viruses. In HSP, these antibodies attack the blood vessels. The factors that cause this immune system response are not known. However, in 30 to 50 percent of cases, people have an upper respiratory tract infection, such as a cold, before getting HSP.2 HSP has also been associated with
+- infectious agents such as chickenpox, measles, hepatitis, and HIV viruses
+- medications
+- foods
+- insect bites
+- exposure to cold weather
+- trauma
+Genetics may increase the risk of HSP, as it has occurred in different members of the same family, including in twins.
+
+[WHAT ARE THE SYMPTOMS OF HSP?]
+The symptoms of HSP include the following:
+- Rash. Leaking blood vessels in the skin cause a rash that looks like bruises or small red dots on the legs, arms, and buttocks. The rash may first look like hives and then change to look like bruises, and it may spread to the chest, back, and face. The rash does not disappear or turn pale when pressed.
+- Digestive tract problems. HSP can cause vomiting and abdominal pain, which can range from mild to severe. Blood may also appear in the stool, though severe bleeding is rare.
+- Arthritis. Pain and swelling can occur in the joints, usually in the knees and ankles and less frequently in the elbows and wrists.
+- Kidney involvement. Hematuria— blood in the urine—is a common sign that HSP has affected the kidneys. Proteinuria—large amounts of protein in the urine—or development of high blood pressure suggests more severe kidney problems.
+- Other symptoms. In some cases, boys with HSP develop swelling of the testicles. Symptoms affecting the central nervous system, such as seizures, and lungs, such as pneumonia, have been seen in rare cases.
+Though the rash affects all people with HSP, pain in the joints or abdomen precedes the rash in about one-third of cases by as many as 14 days.1
+
+[WHAT ARE THE COMPLICATIONS OF HSP?]
+In children, the risk of kidney damage leading to long-term problems may be as high as 15 percent, but kidney failure affects only about 1 percent of children with HSP.1 Up to 40 percent of adults with HSP will have CKD or kidney failure within 15 years after diagnosis.3
+A rare complication of HSP is intussusception of the bowel, which includes the small and large intestines. With this condition, a section of the bowel folds into itself like a telescope, causing the bowel to become blocked.
+Women with a history of HSP who become pregnant are at higher risk for high blood pressure and proteinuria during pregnancy.
+
+[HOW IS HSP DIAGNOSED?]
+A diagnosis of HSP is suspected when a person has the characteristic rash and one of the following:
+- abdominal pain
+- joint pain
+- antibody deposits on the skin
+- hematuria or proteinuria
+Antibody deposits on the skin can confirm the diagnosis of HSP. These deposits can be detected using a skin biopsy, a procedure that involves taking a piece of skin tissue for examination with a microscope. A skin biopsy is performed by a health care provider in a hospital with little or no sedation and local anesthetic. The skin tissue is examined in a lab by a pathologist—a doctor who specializes in diagnosing diseases.
+A kidney biopsy may also be needed. A kidney biopsy is performed by a health care provider in a hospital with light sedation and local anesthetic. The health care provider uses imaging techniques such as ultrasound or a computerized tomography scan to guide the biopsy needle into the organ. The kidney tissue is examined in a lab by a pathologist. The test can confirm diagnosis and be used to determine the extent of kidney involvement, which will help guide treatment decisions.
+Hematuria and proteinuria are detected using urinalysis, which is testing of a urine sample. The urine sample is collected in a special container in a health care provider’s office or commercial facility and can be tested in the same location or sent to a lab for analysis. For the test, a nurse or technician places a strip of chemically treated paper, called a dipstick, into the urine sample. Patches on the dipstick change color when blood or protein are present in urine.
+
+[HOW IS HSP TREATED?]
+No specific treatment for HSP exists. The main goal of treatment is to relieve symptoms such as joint pain, abdominal pain, and swelling. People with kidney involvement may receive treatment aimed at preventing long-term kidney disease.
+Treatment is rarely required for the rash. Joint pain is often treated with nonsteroidal anti-inflammatory medications, such as aspirin or ibuprofen. Recent research has shown corticosteroids—medications that decrease swelling and reduce the activity of the immune system—to be even more effective in treating joint pain. Corticosteroids are also used to treat abdominal pain.
+Though rare, surgery may be needed to treat intussusception or to determine the cause of swollen testicles.
+HSP that affects the kidneys may be treated with corticosteroid and immunosuppressive medications. Immunosuppressive medications prevent the body from making antibodies. Adults with severe, acute kidney failure are treated with high-dose corticosteroids and the immunosuppressive cyclophosphamide (Cytoxan).
+People with HSP that is causing high blood pressure may need to take medications that—when taken as prescribed by their health care provider—lower their blood pressure and can also significantly slow the progression of kidney disease. Two types of blood pressure lowering medications, angiotensin-converting enzyme (ACE) inhibitors and angiotensin receptor blockers (ARBs), have proven effective in slowing the progression of kidney disease. Many people require two or more medications to control their blood pressure. In addition to an ACE inhibitor or an ARB, a diuretic—a medication that helps the kidneys remove fluid from the blood—may be prescribed. Beta blockers, calcium channel blockers, and other blood pressure medications may also be needed.
+Blood and urine tests are used to check the kidney function of people with HSP for at least 6 months after the main symptoms disappear.
+
+[POINTS TO REMEMBER]
+[EATING, DIET, AND NUTRITION]
+Eating, diet, and nutrition have not been shown to play a role in causing or preventing HSP.
+
+- Henoch-Schönlein purpura (HSP) is a disease that causes small blood vessels in the body to become inflamed and leak.
+- HSP is caused by an abnormal immune system response in which the body’s immune system attacks the body’s own cells and organs. The factors that cause this immune system response are not known.
+- The symptoms of HSP include the following: rashdigestive tract problemsarthritiskidney involvement
+- In children, the risk of kidney damage leading to long-term problems may be as high as 15 percent, but kidney failure affects only about 1 percent of children with HSP. Up to 40 percent of adults with HSP will have CKD or kidney failure within 15 years after diagnosis.
+- A diagnosis of HSP is suspected when a person has the characteristic rash and one of the following: abdominal painjoint painantibody deposits on the skinhematuria or proteinuria
+- Antibody deposits on the skin can confirm the diagnosis of HSP.
+- No specific treatment for HSP exists. The main goal of treatment is to relieve symptoms such as joint pain, abdominal pain, and swelling. People with kidney involvement may receive treatment aimed at preventing long-term kidney disease.
+
+--------------------------------------------------------------------------------
+
+### Sample 6: http://www.niddk.nih.gov/health-information/health-topics/kidney-disease/nephrotic-syndrome-in-adults/Pages/facts.aspx
+
+[WHAT IS NEPHROTIC SYNDROME?]
+Nephrotic syndrome is a collection of symptoms that indicate kidney damage. Nephrotic syndrome includes the following:
+- proteinuria—large amounts of protein in the urine
+- hyperlipidemia—higher than normal fat and cholesterol levels in the blood
+- edema, or swelling, usually in the legs, feet, or ankles and less often in the hands or face
+- hypoalbuminia—low levels of albumin in the blood
+Albumin is a protein that acts like a sponge, drawing extra fluid from the body into the bloodstream where it remains until removed by the kidneys. When albumin leaks into the urine, the blood loses its capacity to absorb extra fluid from the body, causing edema.
+Nephrotic syndrome results from a problem with the kidneys’ filters, called glomeruli. Glomeruli are tiny blood vessels in the kidneys that remove wastes and excess fluids from the blood and send them to the bladder as urine.
+As blood passes through healthy kidneys, the glomeruli filter out the waste products and allow the blood to retain cells and proteins the body needs. However, proteins from the blood, such as albumin, can leak into the urine when the glomeruli are damaged. In nephrotic syndrome, damaged glomeruli allow 3 grams or more of protein to leak into the urine when measured over a 24-hour period, which is more than 20 times the amount that healthy glomeruli allow.
+
+[WHAT CAUSES NEPHROTIC SYNDROME?]
+Nephrotic syndrome can be caused by diseases that affect only the kidneys, such as focal segmental glomerulosclerosis (FSGS) or membranous nephropathy. Diseases that affect only the kidneys are called primary causes of nephrotic syndrome. The glomeruli are usually the targets of these diseases for reasons that are not fully understood. In FSGS—the most common primary cause of nephrotic syndrome—scar tissue forms in parts of the glomeruli. In membranous nephropathy, immune molecules form harmful deposits on the glomeruli.
+Nephrotic syndrome can also be caused by systemic diseases, which are diseases that affect many parts of the body, such as diabetes or lupus. Systemic diseases that affect the kidneys are called secondary causes of nephrotic syndrome. More than 50 percent of nephrotic syndrome cases in adults have secondary causes, with diabetes being the most common.1
+
+[WHAT ARE THE SIGNS AND SYMPTOMS OF NEPHROTIC SYNDROME?]
+In addition to proteinuria, hyperlipidemia, edema, and hypoalbumina, people with nephrotic syndrome may experience
+- weight gain
+- fatigue
+- foamy urine
+- loss of appetite
+
+[WHAT ARE THE COMPLICATIONS OF NEPHROTIC SYNDROME?]
+The loss of different proteins from the body can lead to a variety of complications in people with nephrotic syndrome. Blood clots can form when proteins that normally prevent them are lost through the urine. Blood clots can block the flow of blood and oxygen through a blood vessel. Loss of immunoglobulins—immune system proteins that help fight disease and infection—leads to an increased risk of infections. These infections include pneumonia, a lung infection; cellulitis, a skin infection; peritonitis, an abdominal infection; and meningitis, a brain and spine infection. Medications given to treat nephrotic syndrome can also increase the risk of these infections. Other complications of nephrotic syndrome include
+- hypothyroidism—a condition in which the thyroid gland does not produce enough thyroid hormone to meet the body’s needs
+- anemia—a condition in which red blood cells are fewer or smaller than normal, which means less oxygen is carried to the body’s cells
+- coronary artery disease, also called coronary heart disease—heart disease caused by narrowing of the arteries that supply blood to the heart
+- high blood pressure, also called hypertension—a condition in which blood flows through the blood vessels with a force greater than normal
+- acute kidney injury—sudden and temporary loss of kidney function
+
+[HOW IS NEPHROTIC SYNDROME DIAGNOSED?]
+Urine samples are taken to diagnose people suspected of having nephrotic syndrome.
+Nephrotic syndrome is diagnosed when large amounts of protein are found in the urine. The blood protein albumin makes up much of the protein that is lost, though many other important proteins are also lost in nephrotic syndrome.
+The presence of albumin in the urine can be detected with a dipstick test performed on a urine sample. The urine sample is collected in a special container in a health care provider’s office or commercial facility and can be tested in the same location or sent to a lab for analysis. For the test, a nurse or technician places a strip of chemically treated paper, called a dipstick, into the urine. Patches on the dipstick change color when protein is present in urine.
+A more precise measurement is usually needed to confirm the diagnosis. Either a single urine sample or a 24-hour collection of urine can be sent to a lab for analysis. With the single urine sample, the lab measures both albumin and creatinine, a waste product of normal muscle breakdown. The comparison of the measurements is called a urine albumin-to-creatinine ratio. A urine sample containing more than 30 milligrams of albumin for each gram of creatinine may signal a problem. With a 24-hour collection of urine, the lab measures only the amount of albumin present. The single urine sample is easier to collect than the 24-hour sample and is usually sufficient to confirm diagnosis, though the 24-hour collection may be used in some cases.
+Once nephrotic syndrome is diagnosed, blood tests are usually needed to check for systemic diseases that may be causing the nephrotic syndrome and to find out how well the kidneys are working overall. A blood test involves drawing blood at a health care provider’s office or commercial facility and sending the sample to a lab for analysis.
+Though blood tests can point toward systemic diseases, a kidney biopsy is usually needed to diagnose the specific underlying disease causing the nephrotic syndrome and to determine the best treatment. A kidney biopsy is a procedure that involves taking a piece of kidney tissue for examination with a microscope. Kidney biopsies are performed by a health care provider in a hospital with light sedation and local anesthetic. A biopsy is often not needed for a person with diabetes because the person’s medical history and lab tests may be enough to diagnose the problem as being a result of diabetes.
+
+[HOW IS NEPHROTIC SYNDROME TREATED?]
+Treating nephrotic syndrome includes addressing the underlying cause as well as taking steps to reduce high blood pressure, edema, high cholesterol, and the risks of infection. Treatment usually includes medications and changes in diet.
+Medications that lower blood pressure can also significantly slow the progression of kidney disease causing nephrotic syndrome. Two types of blood pressure lowering medications, angiotensin-converting enzyme (ACE) inhibitors and angiotensin receptor blockers (ARBs), have proven effective in slowing the progression of kidney disease by reducing the pressure inside the glomeruli and thereby reducing proteinuria. Many people require two or more medications to control their blood pressure. In addition to an ACE inhibitor or an ARB, a diuretic—a medication that aids the kidneys in removing fluid from the blood—can also be useful in helping to reduce blood pressure as well as edema. Beta blockers, calcium channel blockers, and other blood pressure medications may also be needed.
+Statin medications may be given to lower cholesterol.
+People with nephrotic syndrome should receive the pneumococcal vaccine, which helps protect against a bacterium that commonly causes infection, and yearly flu shots.
+Blood thinning medications are usually only given to people with nephrotic syndrome who develop a blood clot; these medications are not used as a preventive measure.
+Nephrotic syndrome may go away once the underlying cause has been treated. More information about treating the underlying causes of nephrotic syndrome is provided in the NIDDK health topic, Glomerular Diseases.
+
+[EATING, DIET, AND NUTRITION]
+Eating, diet, and nutrition have not been shown to play a role in causing or preventing nephrotic syndrome in adults. For people who have developed nephrotic syndrome, limiting intake of dietary sodium, often from salt, and fluid may be recommended to help reduce edema. A diet low in saturated fat and cholesterol may also be recommended to help control hyperlipidemia.
+
+[POINTS TO REMEMBER]
+- Nephrotic syndrome includes the following: proteinuria—large amounts of protein in the urinehyperlipidemia—higher than normal fat and cholesterol levels in the bloodedema, or swelling, usually in the legs, feet, or ankles and less often in the hands or facehypoalbuminia—low levels albumin in the blood
+- Primary causes of nephrotic syndrome are diseases that affect only the kidneys, such as focal segmental glomerulosclerosis (FSGS). Secondary causes of nephrotic syndrome are diseases that affect many parts of the body, such as diabetes.
+- In addition to proteinuria, hyperlipidemia, edema, and hypoalbumina, people with nephrotic syndrome may experience weight gainfatiguefoamy urineloss of appetite
+- The loss of different proteins from the body can lead to a variety of complications in people with nephrotic syndrome.
+- Treating nephrotic syndrome includes addressing the underlying cause and taking steps to reduce high blood pressure, edema, high cholesterol, and the risks of infection. Treatment usually includes medications and changes in diet.
+
+--------------------------------------------------------------------------------
+
+### Sample 7: http://www.niddk.nih.gov/health-information/health-topics/endocrine/prolactinoma/Pages/fact-sheet.aspx
+
+[WHAT IS A PROLACTINOMA?]
+A prolactinoma is a benign noncancerous tumor of the pituitary gland that produces a hormone called prolactin. Prolactinomas are the most common type of pituitary tumor. Symptoms of prolactinoma are caused by hyperprolactinemia --- too much prolactin in the blood --- or by pressure of the tumor on surrounding tissues.
+Prolactin stimulates the breast to produce milk during pregnancy. After giving birth, a mother’s prolactin levels fall unless she breastfeeds her infant. Each time the baby nurses, prolactin levels rise to maintain milk production.
+
+[WHAT IS THE PITUITARY GLAND?]
+The pituitary gland, sometimes called the master gland, plays a critical role in regulating growth and development, metabolism, and reproduction. It produces prolactin and other key hormones including
+- growth hormone, which regulates growth
+- adrenocorticotropin (ACTH), which stimulates the adrenal glands to produce cortisol, a hormone important in metabolism and the body's response to stress
+- thyrotropin, which signals the thyroid gland to produce thyroid hormone, also involved in metabolism and growth
+- luteinizing hormone and follicle-stimulating hormone, which regulate ovulation and estrogen and progesterone production in women and sperm formation and testosterone production in men
+The pituitary gland sits in the middle of the head in a bony box called the sella turcica. The optic nerves sit directly above the pituitary gland. Enlargement of the gland can cause symptoms such as headaches or visual disturbances. Pituitary tumors may also impair production of one or more pituitary hormones, causing reduced pituitary function, also called hypopituitarism.
+
+[WHAT ARE THE SYMPTOMS OF PROLACTINOMA?]
+[HOW COMMON IS PROLACTINOMA?]
+Although small benign pituitary tumors are fairly common in the general population, symptomatic prolactinomas are uncommon. Prolactinomas occur more often in women than men and rarely occur in children.
+
+In women, high levels of prolactin in the blood often cause infertility and changes in menstruation. In some women, periods may stop. In others, periods may become irregular or menstrual flow may change. Women who are not pregnant or nursing may begin producing breast milk. Some women may experience a loss of libido-interest in sex. Intercourse may become painful because of vaginal dryness.
+In men, the most common symptom of prolactinoma is erectile dysfunction. Because men have no reliable indicator such as changes in menstruation to signal a problem, many men delay going to the doctor until they have headaches or eye problems caused by the enlarged pituitary pressing against nearby optic nerves. They may not recognize a gradual loss of sexual function or libido. Only after treatment do some men realize they had a problem with sexual function.
+
+[WHAT CAUSES PROLACTINOMA?]
+The cause of pituitary tumors remains largely unknown. Most pituitary tumors are sporadic, meaning they are not genetically passed from parents to their children.
+
+[WHAT ELSE CAUSES PROLACTIN TO RISE?]
+In some people, high blood levels of prolactin can be traced to causes other than prolactinoma.
+Prescription drugs. Prolactin secretion in the pituitary is normally suppressed by the brain chemical dopamine. Drugs that block the effects of dopamine at the pituitary or deplete dopamine stores in the brain may cause the pituitary to secrete prolactin. These drugs include older antipsychotic medications such as trifluoperazine (Stelazine) and haloperidol (Haldol); the newer antipsychotic drugs risperidone (Risperdal) and molindone (Moban); metoclopramide (Reglan), used to treat gastroesophageal reflux and the nausea caused by certain cancer drugs; and less often, verapamil, alpha-methyldopa (Aldochlor, Aldoril), and reserpine (Serpalan, Serpasil), used to control high blood pressure. Some antidepressants may cause hyperprolactinemia, but further research is needed.
+Other pituitary tumors. Other tumors arising in or near the pituitary may block the flow of dopamine from the brain to the prolactin-secreting cells. Such tumors include those that cause acromegaly, a condition caused by too much growth hormone, and Cushing's syndrome, caused by too much cortisol. Other pituitary tumors that do not result in excess hormone production may also block the flow of dopamine.
+Hypothyroidism. Increased prolactin levels are often seen in people with hypothyroidism, a condition in which the thyroid does not produce enough thyroid hormone. Doctors routinely test people with hyperprolactinemia for hypothyroidism.
+Chest involvement. Nipple stimulation also can cause a modest increase in the amount of prolactin in the blood. Similarly, chest wall injury or shingles involving the chest wall may also cause hyperprolactinemia.
+
+[HOW IS PROLACTINOMA DIAGNOSED?]
+A doctor will test for prolactin blood levels in women with unexplained milk secretion, called galactorrhea, or with irregular menses or infertility and in men with impaired sexual function and, in rare cases, milk secretion. If prolactin levels are high, a doctor will test thyroid function and ask first about other conditions and medications known to raise prolactin secretion. The doctor may also request magnetic resonance imaging (MRI), which is the most sensitive test for detecting pituitary tumors and determining their size. MRI scans may be repeated periodically to assess tumor progression and the effects of therapy. Computerized tomography (CT) scan also gives an image of the pituitary but is less precise than the MRI.
+The doctor will also look for damage to surrounding tissues and perform tests to assess whether production of other pituitary hormones is normal. Depending on the size of the tumor, the doctor may request an eye exam with measurement of visual fields.
+
+[HOW IS PROLACTINOMA TREATED?]
+The goals of treatment are to return prolactin secretion to normal, reduce tumor size, correct any visual abnormalities, and restore normal pituitary function. In the case of large tumors, only partial achievement of these goals may be possible.
+
+[MEDICAL TREATMENT]
+Because dopamine is the chemical that normally inhibits prolactin secretion, doctors may treat prolactinoma with the dopamine agonists bromocriptine (Parlodel) or cabergoline (Dostinex). Agonists are drugs that act like a naturally occurring substance. These drugs shrink the tumor and return prolactin levels to normal in approximately 80 percent of patients. Both drugs have been approved by the U.S. Food and Drug Administration for the treatment of hyperprolactinemia. Bromocriptine is the only dopamine agonist approved for the treatment of infertility. This drug has been in use longer than cabergoline and has a well-established safety record.
+Nausea and dizziness are possible side effects of bromocriptine. To avoid these side effects, bromocriptine treatment must be started slowly. A typical starting dose is one-quarter to one-half of a 2.5 milligram (mg) tablet taken at bedtime with a snack. The dose is gradually increased every 3 to 7 days as needed and taken in divided doses with meals or at bedtime with a snack. Most people are successfully treated with 7.5 mg a day or less, although some people need 15 mg or more each day. Because bromocriptine is short acting, it should be taken either twice or three times daily.
+Bromocriptine treatment should not be stopped without consulting a qualified endocrinologist-a doctor specializing in disorders of the hormone-producing glands. Prolactin levels rise again in most people when the drug is discontinued. In some, however, prolactin levels remain normal, so the doctor may suggest reducing or discontinuing treatment every 2 years on a trial basis.
+Cabergoline is a newer drug that may be more effective than bromocriptine in normalizing prolactin levels and shrinking tumor size. Cabergoline also has less frequent and less severe side effects. Cabergoline is more expensive than bromocriptine and, being newer on the market, its long-term safety record is less well defined. As with bromocriptine therapy, nausea and dizziness are possible side effects but may be avoided if treatment is started slowly. The usual starting dose is .25 mg twice a week. The dose may be increased every 4 weeks as needed, up to 1 mg two times a week. Cabergoline should not be stopped without consulting a qualified endocrinologist.
+Recent studies suggest prolactin levels are more likely to remain normal after discontinuing long-term cabergoline therapy than after discontinuing bromocriptine. More research is needed to confirm these findings.
+In people taking cabergoline or bromocriptine to treat Parkinson's disease at doses more than 10 times higher than those used for prolactinomas, heart valve damage has been reported. Rare cases of valve damage have been reported in people taking low doses of cabergoline to treat hyperprolactinemia. Before starting these medications, the doctor will order an echocardiogram. An echocardiogram is a sonogram of the heart that checks the heart valves and heart function.
+Because limited information exists about the risks of long-term, low-dose cabergoline use, doctors generally prescribe the lowest effective dose and periodically reassess the need for continuing therapy. People taking cabergoline who develop symptoms of shortness of breath or swelling of the feet should promptly notify their physician because these may be signs of heart valve damage.
+
+[SURGERY]
+Surgery to remove all or part of the tumor should only be considered if medical therapy cannot be tolerated or if it fails to reduce prolactin levels, restore normal reproduction and pituitary function, and reduce tumor size. If medical therapy is only partially successful, it should be continued, possibly combined with surgery or radiation.
+Most often, the tumor is removed through the nasal cavity. Rarely, if the tumor is large or has spread to nearby brain tissue, the surgeon will access the tumor through an opening in the skull.
+The results of surgery depend a great deal on tumor size and prolactin levels as well as the skill and experience of the neurosurgeon. The higher the prolactin level before surgery, the lower the chance of normalizing serum prolactin. Serum is the portion of the blood used in measuring prolactin levels. In the best medical centers, surgery corrects prolactin levels in about 80 percent of patients with small tumors and a serum prolactin less than 200 nanograms per milliliter (ng/ml). A surgical cure for large tumors is lower, at 30 to 40 percent. Even in patients with large tumors that cannot be completely removed, drug therapy may be able to return serum prolactin to the normal range-20 ng/ml or less-after surgery. Depending on the size of the tumor and how much of it is removed, studies show that 20 to 50 percent will recur, usually within 5 years.
+Because the results of surgery are so dependent on the skill and knowledge of the neurosurgeon, a patient should ask the surgeon about the number of operations he or she has performed to remove pituitary tumors and for success and complication rates in comparison to major medical centers. The best results come from surgeons who have performed hundreds or even thousands of such operations. To find a surgeon, contact The Pituitary Society (see For More Information).
+
+[RADIATION]
+Rarely, radiation therapy is used if medical therapy and surgery fail to reduce prolactin levels. Depending on the size and location of the tumor, radiation is delivered in low doses over the course of 5 to 6 weeks or in a single high dose. Radiation therapy is effective about 30 percent of the time.
+
+[HOW DOES PROLACTINOMA AFFECT PREGNANCY?]
+If a woman has a small prolactinoma, she can usually conceive and have a normal pregnancy after effective medical therapy. If she had a successful pregnancy before, the chance of her having more successful pregnancies is high.
+A woman with prolactinoma should discuss her plans to conceive with her physician so she can be carefully evaluated prior to becoming pregnant. This evaluation will include an MRI scan to assess the size of the tumor and an eye examination with measurement of visual fields. As soon as a woman is pregnant, her doctor will usually advise her to stop taking bromocriptine or cabergoline. Although these drugs are safe for the fetus in early pregnancy, their safety throughout an entire pregnancy has not been established. Many doctors prefer to use bromocriptine in patients who plan to become pregnant because it has a longer record of safety in early pregnancy than cabergoline.
+The pituitary enlarges and prolactin production increases during pregnancy in women without pituitary disorders. Women with prolactin-secreting tumors may experience further pituitary enlargement and must be closely monitored during pregnancy. Less than 3 percent of pregnant women with small prolactinomas have symptoms of tumor growth such as headaches or vision problems. In women with large prolactinomas, the risk of symptomatic tumor growth is greater, and may be as high as 30 percent.
+Most endocrinologists see patients every 2 months throughout the pregnancy. A woman should consult her endocrinologist promptly if she develops symptoms of tumor growth-particularly headaches, vision changes, nausea, vomiting, excessive thirst or urination, or extreme lethargy. Bromocriptine or, less often, cabergoline treatment may be reinitiated and additional treatment may be required if the woman develops symptoms during pregnancy.
+
+[HOW DO ORAL CONTRACEPTIVES AND HORMONE REPLACEMENT THERAPY AFFECT PROLACTINOMA?]
+Oral contraceptives are not thought to contribute to the development of prolactinomas, although some studies have found increased prolactin levels in women taking these medications. Because oral contraceptives may produce regular menstrual bleeding in women who would otherwise have irregular menses due to hyperprolactinemia, prolactinoma may not be diagnosed until women stop oral contraceptives and find their menses are absent or irregular. Women with prolactinoma treated with bromocriptine or cabergoline may safely take oral contraceptives. Similarly, postmenopausal women treated with medical therapy or surgery for prolactinoma may be candidates for estrogen replacement therapy.
+
+[IS OSTEOPOROSIS A RISK IN WOMEN WITH HIGH PROLACTIN LEVELS?]
+Women whose ovaries produce inadequate estrogen are at increased risk for osteoporosis. Hyperprolactinemia can reduce estrogen production. Although estrogen production may be restored after treatment for hyperprolactinemia, even a year or 2 without estrogen can compromise bone strength. Women should protect themselves from osteoporosis by increasing exercise and calcium intake through diet or supplements and by not smoking. Women treated for hyperprolactinemia may want to have periodic bone density measurements and discuss estrogen replacement therapy or other bone-strengthening medications with their doctor.
+
+- A prolactinoma is a benign tumor of the pituitary gland that produces the hormone prolactin. Prolactin stimulates the breast to produce milk during pregnancy.
+- In women, high levels of prolactin in the blood often cause infertility and changes in menstruation. Women who are not pregnant or nursing may begin producing breast milk. In men, the most common symptom of prolactinoma is erectile dysfunction.
+- Prolactinoma is diagnosed through a blood test. Additional tests rule out other causes of high prolactin levels, such as medications or thyroid problems. Magnetic resonance imaging (MRI) is then used to detect pituitary tumors and determine their size.
+- The first line of treatment is usually medication to shrink the tumor and return prolactin levels to normal. Sometimes surgery or radiation may be necessary.
+- Women with prolactinoma should be carefully evaluated before becoming pregnant and monitored during pregnancy by an endocrinologist.
+
+--------------------------------------------------------------------------------
+

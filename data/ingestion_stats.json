@@ -1,0 +1,92 @@
+{
+    "ghr.nlm.nih.gov": {
+        "live": 1086,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 1086,
+        "total_dataset_links": 1086
+    },
+    "rarediseases.info.nih.gov": {
+        "live": 2307,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 2307,
+        "total_dataset_links": 2307
+    },
+    "www.ninds.nih.gov": {
+        "live": 8,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 8,
+        "total_dataset_links": 8
+    },
+    "www.nlm.nih.gov": {
+        "live": 4312,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 4312,
+        "total_dataset_links": 4312
+    },
+    "www.cancer.gov": {
+        "live": 106,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 106,
+        "total_dataset_links": 106
+    },
+    "www.nhlbi.nih.gov": {
+        "live": 31,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 31,
+        "total_dataset_links": 31
+    },
+    "nihseniorhealth.gov": {
+        "live": 48,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 48,
+        "total_dataset_links": 48
+    },
+    "www.cdc.gov": {
+        "live": 26,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 26,
+        "total_dataset_links": 26
+    },
+    "www.niddk.nih.gov": {
+        "live": 104,
+        "wayback": 0,
+        "skipped": 0,
+        "skipped_urls": [],
+        "topics": 0,
+        "words": 0,
+        "samples": 104,
+        "total_dataset_links": 104
+    }
+}

@@ -5,3 +5,7 @@ lxml
 python-dotenv
 chromadb
 sentence-transformers
+openai
+fastapi
+uvicorn
+pydantic

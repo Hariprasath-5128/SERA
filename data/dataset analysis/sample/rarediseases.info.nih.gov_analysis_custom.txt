@@ -1,0 +1,263 @@
+# Parsed Sections (No Truncation)
+
+================================================================================
+ DOMAIN: rarediseases.info.nih.gov
+================================================================================
+
+### Sample 1: https://rarediseases.info.nih.gov/diseases/12867/cushing-disease
+[PITUITARY DEPENDENT HYPERCORTISOLISM]
+- Other Names:
+- acth producing pituitary adenoma; corticotroph pituitary adenoma; cushing basophilism; cushing disease; cushing disease due to pituitary adenoma; cushing disease, pituitary; cushing's disease; pita4; pituitary acth hypersecretion; pituitary adenoma 4, acth-secreting; pituitary adenoma 4, acth-secreting, somatic; pituitary adenoma, acth-secreting; pituitary adenoma, acth-secreting, somatic; pituitary corticotroph micro-adenoma; pituitary cushing syndrome; pituitary dependent cushing disease; pituitary dependent cushing syndrome; pituitary hyperadrenal corticism; pituitary-dependent cushing syndrome
+
+[ABOUT PITUITARY DEPENDENT HYPERCORTISOLISM]
+Many rare diseases have limited information. Currently, GARD aims to provide the following information for this disease:
+- Symptoms:May start to appear as an Adult.
+- Cause:This disease is caused by a change in the genetic material (DNA).
+
+[GENETIC MUTATIONS]
+If you suspect you may have this disease, you may want to start collecting your family health history. Information such as other family members who have had similar symptoms, when their/your symptoms first appeared, or exposures to any potential disease-causing environmental factors should be discussed with your medical team. This tool from the Surgeon General can help you collect your family health history.
+
+[CAN DISEASES BE PASSED DOWN FROM PARENT TO CHILD?]
+A biological parent can sometimes pass down genetic changes, called mutations, that cause a disease or increase the chances of developing it. This is called inheritance. Knowing if other family members have had the disease, also known as your family health history, can give your medical team important information. The Surgeon General offers a tool to help you collect your family health history.
+
+[AUTOSOMAL DOMINANT]
+People affected by an autosomal dominant disease have a 50% chance of passing on the mutated gene to their biological child.
+
+[WHEN DO SYMPTOMS OF PITUITARY DEPENDENT HYPERCORTISOLISM BEGIN?]
+The age symptoms may begin to appear differs between diseases. Symptoms may begin in a single age range, or during several age ranges. The symptoms of some diseases may begin at any age. Knowing when symptoms may have appeared can help medical providers find the correct diagnosis. Prenatal Before Birth Newborn Birth-4 weeks Infant 1-23 months Child 2-11 years Adolescent 12-18 years Adult Selected19-65 years Older Adult 65+ yearsSymptoms may start to appear as an Adult.This information comes from Orphanet
+
+[SYMPTOMS]
+ABDOMINAL OBESITY:
+Excessive fat around the stomach and abdomen.
+Synonyms: Abdominal obesity; Central obesity
+
+ABNORMAL LIBIDO:
+Any deviation from the normal sexual drive or desire for sexual activity.
+
+ABNORMALITY OF THE CARDIOVASCULAR SYSTEM:
+Any abnormality of the cardiovascular system.
+Synonyms: Abnormality of the cardiovascular system; Cardiovascular abnormality
+
+ABNORMALITY OF THE RESPIRATORY SYSTEM:
+An abnormality of the respiratory system, which include the airways, lungs, and the respiratory muscles.
+Synonyms: Respiratory abnormality
+
+ACNE:
+A skin condition in which there is an increase in sebum secretion by the pilosebaceous apparatus associated with open comedones (blackheads), closed comedones (whiteheads), and pustular nodules (papules, pustules, and cysts).
+Synonyms: Acne
+
+ADRENAL HYPERPLASIA:
+Enlargement of the adrenal gland.
+Synonyms: Enlarged adrenal glands
+
+AMENORRHEA:
+Absence of menses for an interval of time equivalent to a total of more than (or equal to) 3 previous cycles or 6 months.
+Synonyms: Abnormal absence of menstruation
+
+ATYPICAL BEHAVIOR:
+Atypical behavior is an abnormality in a person's actions that can be controlled or modulated by the will of the individual. While abnormal behaviors can be difficult to control, they are distinct from other abnormal actions that cannot be affected by the individual's will.
+Synonyms: Behavioral abnormality; Behavioral changes; Behavioral disorders; Behavioral disturbances; Behavioral problems; Behavioral symptoms; Behavioral/psychiatric abnormalities; Behavioural symptoms; Behavioural/Psychiatric abnormality; Psychiatric disorders; Psychiatric disturbances
+
+AVASCULAR NECROSIS:
+A disease where there is cellular death (necrosis) of bone components due to interruption of the blood supply.
+Synonyms: Aseptic bone necrosis; Aseptic necrosis; Bone infarction; Death of bone due to decreased blood supply; Ischemic bone necrosis; Osteochondronecrosis; Osteonecrosis
+
+BRUISING SUSCEPTIBILITY:
+An ecchymosis (bruise) refers to the skin discoloration caused by the escape of blood into the tissues from ruptured blood vessels. This term refers to an abnormally increased susceptibility to bruising. The corresponding phenotypic abnormality is generally elicited on medical history as a report of frequent ecchymoses or bruising without adequate trauma.
+Synonyms: Bruisability; Bruise easily; Bruising susceptibility; Easy bruisability; Easy bruising
+
+CAPILLARY FRAGILITY:
+Reduced resistance to rupture of capillary blood vessels. Capillary fragility may manifest as a bleeding diathesis with spontaneous ecchymoses (bruises).
+
+DECREASED TOTAL EOSINOPHIL COUNT:
+Abnormal decrease of absolute number of eosinophils in the blood, per microlitre, compared to a reference range for a given sex and age-group.
+Synonyms: Decreased eosinophil count
+
+DECREASED TOTAL LYMPHOCYTE COUNT:
+A reduced number of lymphocytes in the blood.
+Synonyms: Absolute lymphocyte count decrease; Decreased blood lymphocyte number; Low lymphocyte number; Lymphocytopenia; Lymphopenia
+
+DEMENTIA:
+A loss of global cognitive ability of sufficient amount to interfere with normal social or occupational function. Dementia represents a loss of previously present cognitive abilities, generally in adults, and can affect memory, thinking, language, judgment, and behavior.
+Synonyms: Dementia; Dementia, progressive; Progressive dementia
+
+DEPRESSION:
+Frequently experiencing feelings of being down, miserable, and/or hopeless; struggling to recover from these moods; having a pessimistic outlook on the future; feeling a pervasive sense of shame; having a low self-worth; experiencing thoughts of suicide and engaging in suicidal behavior.
+Synonyms: Depression; Depressive episode; Depressivity
+
+DIABETES MELLITUS:
+A group of abnormalities characterized by hyperglycemia and glucose intolerance.
+
+DORSOCERVICAL FAT PAD:
+An area of fat accumulation at the back of the neck in the form of a hump.
+Synonyms: Buffalo hump
+
+ECCHYMOSIS:
+A purpuric lesion that is larger than 1 cm in diameter.
+Synonyms: Ecchymoses
+
+EMOTIONAL LABILITY:
+Unstable emotional experiences and frequent mood changes; emotions that are easily aroused, intense, and/or disproportionate to events and circumstances.
+
+FATIGUABLE WEAKNESS OF PROXIMAL LIMB MUSCLES:
+A type of weakness of a skeletal muscle of proximal part of a limb that occurs after a muscle group is used and lessens if the muscle group has some rest. That is, there is diminution of strength with repetitive muscle actions.
+
+FLUSHING:
+Recurrent episodes of redness of the skin together with a sensation of warmth or burning of the affected areas of skin.
+
+HEADACHE:
+Cephalgia, or pain sensed in various parts of the head, not confined to the area of distribution of any nerve.
+Synonyms: Headache; Headaches
+
+HIRSUTISM:
+Abnormally increased hair growth referring to a male pattern of body hair (androgenic hair).
+Synonyms: Excessive hairiness
+
+HYPERPIGMENTATION OF THE SKIN:
+A darkening of the skin related to an increase in melanin production and deposition.
+Synonyms: Cutaneous hyperpigmentation; Hyperpigmented lesion; Increased skin pigmentation; Patchy darkened skin; Skin hyperpigmentation
+
+HYPERTENSION:
+The presence of chronic increased pressure in the systemic arterial system.
+Synonyms: Arterial hypertension; Systemic hypertension
+
+IMMUNODEFICIENCY:
+Failure of the immune system to protect the body adequately from infection, due to the absence or insufficiency of some component process or substance.
+Synonyms: Decreased immune function; Immune deficiency
+
+IMPAIRED GLUCOSE TOLERANCE:
+An abnormal resistance to glucose, i.e., a reduction in the ability to maintain glucose levels in the blood stream within normal limits following oral or intravenous administration of glucose.
+Synonyms: Decreased glucose tolerance; Glucose tolerance decreased
+
+INCREASED BODY WEIGHT:
+Abnormally increased body weight.
+Synonyms: Increased body weight
+
+INCREASED CIRCULATING ACTH LEVEL:
+An abnormal increased in the concentration of corticotropin, also known as adrenocorticotropic hormone (ACTH), in the blood.
+Synonyms: High blood corticotropin levels; Increased circulating ACTH level; Increased plasma ACTH
+
+INCREASED CIRCULATING CORTISOL LEVEL:
+Overproduction of the hormone of cortisol by the adrenal cortex, resulting in a characteristic combination of clinical symptoms termed Cushing syndrome, with truncal obesity, a round, full face, striae atrophicae and acne, muscle weakness, and other features.
+Synonyms: Cushing syndrome; Hypercortisolism; Increased circulating cortisol level; Increased cortisol production
+
+INCREASED TOTAL LEUKOCYTE COUNT:
+An abnormal increase in the number of leukocytes in the blood.
+Synonyms: Elevated white blood count; High white blood count; Increased blood leukocyte number; Leukocytosis
+
+INCREASED URINARY CORTISOL LEVEL:
+Abnormally increased concentration of cortisol in the urine.
+Synonyms: High urine cortisol level
+
+INTRA-ORAL HYPERPIGMENTATION:
+Increased pigmentation, either focal or generalized, of the mucosa of the mouth.
+Synonyms: Hyperpigmentation of oral mucosa; Oral mucosa melanin pigmentation; Oral racial pigmentation
+
+LARGE SELLA TURCICA:
+An abnormal enlargement of the sella turcica.
+Synonyms: Big sella turcica; Enlarged sella turcica; Hyperplasia of sella turcica; Prominent sella turcica
+
+LIVEDO RETICULARIS:
+Livedo reticularis is characterized by the presence of a bluish purple, mottled or netlike pattern in unbroken circles on the skin. Exposure to cold environments usually intensifies the vascular pattern. Presumably, the condition results from slow or stagnant blood flow, vessel-wall pathology, and decreased oxygen tension.
+
+MEMORY IMPAIRMENT:
+An impairment of memory as manifested by a reduced ability to remember things such as dates and names, and increased forgetfulness.
+Synonyms: Amnesia; Forgetfulness; Memory impairment; Memory loss; Memory problems; Poor memory
+
+MOON FACIES:
+A rounded, puffy face with fat deposits in the temporal fossa and cheeks, a double chin.
+Synonyms: Moon face; Puffy face; Puffy facies
+
+MUSCLE WEAKNESS:
+Reduced strength of muscles.
+Synonyms: Muscle weakness; Muscular weakness
+
+MYOCARDIAL INFARCTION:
+Necrosis of the myocardium caused by an obstruction of the blood supply to the heart and often associated with chest pain, shortness of breath, palpitations, and anxiety as well as characteristic EKG findings and elevation of serum markers including creatine kinase-MB fraction and troponin.
+Synonyms: Heart attack; MI
+
+OLIGOMENORRHEA:
+Infrequent menses (less than 6 per year or more than 35 days between cycles).
+Synonyms: Light or infrequent menstrual periods
+
+OSTEOPOROSIS:
+Osteoporosis is a systemic skeletal disease characterized by low bone density and microarchitectural deterioration of bone tissue with a consequent increase in bone fragility. According to the WHO criteria, osteoporosis is defined as a BMD that lies 2.5 standard deviations or more below the average value for young healthy adults (a T-score below -2.5 SD).
+
+PANIC ATTACK:
+A sudden episode of intense fear in a situation where there is no danger or apparent cause.
+Synonyms: Panic attack
+
+PARANOIA:
+The feeling and belief that one is being targeted or is a focus of negative or untoward actions, overt or covert, from others. The affected individual expresses a concern that people are in general against the individual and are engaging in subtle behaviors to make things difficult for them. The origins of such thinking may arise from real events and become amplified over time. Paranoia may also arise in the absence of any action or interaction between the person and their environment.
+Synonyms: Paranoia
+
+PEDAL EDEMA:
+An abnormal accumulation of excess fluid in the lower extremity resulting in swelling of the feet and extending upward to the lower leg.
+Synonyms: Edema of the lower limbs; Fluid accumulation in lower limbs; Leg edema; Lower leg swelling; Peripheral edema of lower extremity
+
+PITUITARY CORTICOTROPIC CELL ADENOMA:
+A type of pituitary adenoma that produces adrenocorticotropic hormone (ACTH).
+Synonyms: ACTH-producing pituitary adenoma; Corticotropin-secreting pituitary adenoma
+
+POOR WOUND HEALING:
+A reduced ability to heal cutaneous wounds.
+Synonyms: Poor wound healing
+
+PROXIMAL AMYOTROPHY:
+Amyotrophy (muscular atrophy) affecting the proximal musculature.
+Synonyms: Muscle atrophy, proximal; Proximal muscle atrophy; Proximal muscle wasting; Symmetric proximal muscular atrophy; Symmetrical, proximal limb muscle atrophy; Wasting of muscles near the body
+
+PSYCHOSIS:
+A condition characterized by changes in personality and thought patterns, often accompanied by hallucinations and delusional beliefs, is known as psychosis.
+Synonyms: Psychosis
+
+PSYCHOTIC EPISODES:
+Periods of time during which an individual experiences significant disturbances in their thoughts, perceptions, emotions, and behavior, resulting in a loss of touch with reality. These episodes are hallmark features of psychotic disorders such as schizophrenia, schizoaffective disorder, and certain forms of bipolar disorder.
+Synonyms: Psychotic episodes
+
+PURPURA:
+Purpura (from Latin: purpura, meaning purple) is the appearance of red or purple discolorations on the skin that do not blanch on applying pressure. They are caused by bleeding underneath the skin. This term refers to an abnormally increased susceptibility to developing purpura. Purpura are larger than petechiae.
+Synonyms: Red or purple spots on the skin
+
+RECURRENT CUTANEOUS FUNGAL INFECTIONS:
+Increased susceptibility to cutaneous fungal infections, as manifested by recurrent episodes of cutaneous fungal infections.
+
+SECONDARY AMENORRHEA:
+Synonyms: Previous menstrual periods stop
+
+SKIN ULCER:
+A discontinuity of the skin exhibiting complete loss of the epidermis and often portions of the dermis and even subcutaneous fat.
+Synonyms: Open skin sore
+
+SPARSE SCALP HAIR:
+Decreased number of hairs per unit area of skin of the scalp.
+Synonyms: Decreased number of scalp follicles; Hypotrichosis on scalp; Reduced amount of scalp hair; Reduced/lack of hair on scalp; Reduction in the number of scalp follicles; Scalp hypotrichosis; Sparse scalp hair; Thinning scalp hair
+
+STRIAE DISTENSAE:
+Thinned, erythematous, depressed bands of atrophic skin. Initially, striae appear as flattened and thinned, pinkish linear regions of the skin. Striae tend to enlarge in length and become reddish or purplish. Later, striae tend to appear as white, depressed bands that are parallel to the lines of skin tension. Striae distensae occur most often in areas that have been subject to distension such as the lower back, buttocks, thighs, breast, abdomen, and shoulders.
+Synonyms: Purplish striae; Stretch marks; Striae; Striae atrophicae; Striae cutis distensae
+
+STROKE:
+Sudden impairment of blood flow to a part of the brain due to occlusion or rupture of an artery to the brain.
+Synonyms: Cerebral vascular events; Cerebrovascular accident; Stroke
+
+SUICIDAL IDEATION:
+Frequent thoughts about or preoccupation with killing oneself.
+Synonyms: Suicidal perseveration; Suicidality
+
+THIN SKIN:
+Reduction in thickness of the skin, generally associated with a loss of suppleness and elasticity of the skin.
+Synonyms: Thin skin
+
+TRUNCAL OBESITY:
+Obesity located preferentially in the trunk of the body as opposed to the extremities.
+Synonyms: Centripetal obesity; Truncal obesity
+
+VERTEBRAL COMPRESSION FRACTURE:
+Synonyms: Compression fracture of a vertebral body; Fractures of vertebral bodies; Vertebral body compression; Vertebral collapse; Vertebral compression; Vertebral compression fractures; Vertebral compression or collapse
+
+VISUAL FIELD DEFECT:
+Synonyms: Partial loss of field of vision; Visual field defects
+
+--------------------------------------------------------------------------------
+

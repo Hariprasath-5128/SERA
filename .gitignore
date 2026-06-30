@@ -1,6 +1,5 @@
 *.pdf
 .env
-data/
 __pycache__/
 *.pyc
 *.pyo
@@ -9,3 +8,5 @@ __pycache__/
 .venv/
 venv/
 env/
+data/chroma/
+data/sqlite/
