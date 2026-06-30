@@ -16,12 +16,13 @@ class MedQuADRow:
 
 def stream_medquad() -> Iterator[MedQuADRow]:
     """
-    Streams the MedQuAD dataset from HuggingFace.
+    Downloads and loads the MedQuAD dataset from HuggingFace.
     """
     # Uses HF_TOKEN from environment if required for access
     token = os.environ.get("HF_TOKEN")
     
-    ds = load_dataset("lavita/MedQuAD", split="train", streaming=True, token=token)
+    # Removed streaming=True to download the dataset completely into memory/disk cache
+    ds = load_dataset("lavita/MedQuAD", split="train", token=token)
     
     for row in ds:
         yield MedQuADRow(
