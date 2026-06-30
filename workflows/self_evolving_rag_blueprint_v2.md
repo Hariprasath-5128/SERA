@@ -611,7 +611,7 @@ CREATE TABLE query_log (
     raw_query     TEXT NOT NULL,
     cluster_id    INTEGER REFERENCES query_clusters(id),
     retrieved_chunks TEXT,              -- JSON array (raw_chunk IDs only)
-    timestamp     DATETIME DEFAULT CURRENT_TIMESTAMP
+    timestamp    DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
