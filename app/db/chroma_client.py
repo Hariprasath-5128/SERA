@@ -70,3 +70,37 @@ class ChromaClient:
                 metadatas=metadatas
             )
             logger.info(f"Inserted {len(ids)} chunks into ChromaDB.")
+
+    @classmethod
+    def backup_chroma(cls, backup_dir: str):
+        """
+        Safely copies the ChromaDB persistence directory to the backup directory.
+        """
+        import os
+        import shutil
+        from pathlib import Path
+        
+        os.makedirs(backup_dir, exist_ok=True)
+        dest_path = Path(backup_dir) / "chroma"
+        
+        logger.info("chroma_client: backing up ChromaDB to %s", dest_path)
+        
+        if os.path.exists(CHROMA_PERSIST_PATH):
+            if os.path.exists(dest_path):
+                shutil.rmtree(dest_path)
+            shutil.copytree(CHROMA_PERSIST_PATH, dest_path)
+
+    @classmethod
+    def reset_to_ground_truth(cls):
+        """
+        Wipe all learned data (Phase 2+) while retaining Phase 1 ground truth.
+        This deletes the super_nodes collection entirely.
+        """
+        from app.config import CHROMA_SUPER_COLLECTION
+        client = cls.get_client()
+        try:
+            client.delete_collection(CHROMA_SUPER_COLLECTION)
+            logger.warning("chroma_client: RESETTING TO GROUND TRUTH. Deleted super_nodes collection.")
+        except Exception:
+            # Collection might not exist yet, which is fine
+            pass

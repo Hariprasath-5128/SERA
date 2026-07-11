@@ -89,11 +89,10 @@ def run_ingestion():
     init_db()
     
     # Pre-load already processed Q&A to support resume capability
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT id, source_url FROM benchmark_qa")
-    existing_qas = cursor.fetchall()
-    conn.close()
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, source_url FROM benchmark_qa")
+        existing_qas = cursor.fetchall()
     
     processed_qa_ids = {row[0] for row in existing_qas}
     embedded_doc_urls = {row[1] for row in existing_qas}

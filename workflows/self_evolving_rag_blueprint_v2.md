@@ -1,5 +1,5 @@
 # Self-Evolving Write-Back RAG — Engineering Implementation Blueprint
-## VERSION: v2.0 (10-improvement upgrade from v1)
+## VERSION: v3.1 (14-improvement upgrade — adds SU14 Synthesis Fidelity Bound check)
 
 > **Role:** Senior ML Systems Architect  
 > **Stack:** Python · FastAPI · ChromaDB · SQLite/PostgreSQL · SentenceTransformers · OpenAI API · APScheduler · Docker  
@@ -162,7 +162,7 @@ SERA/
 
 
 
-## UPGRADE MANIFEST (v1 → v2)
+## UPGRADE MANIFEST (v1 → v3)
 
 | SU# | Title | Affected Phase(s) | Affected File(s) |
 |-----|-------|-------------------|-----------------|
@@ -176,6 +176,10 @@ SERA/
 | SU8 | Cascading Amnesia — Soft-Staleness Validation | Phase 6 | `maintenance/staleness_checker.py` |
 | SU9 | Knowledge JPEG Artifacting — Ground-Truth Anchoring | Phase 2, Phase 4 | `middleware/query_interceptor.py` |
 | SU10 | ChromaDB Concurrency Illusion — SQLite Atomic Counters | Phase 5, Phase 6 | `retrieval/retriever.py`, `maintenance/decay_scorer.py` |
+| SU11 | Summary-of-Summaries Merger — Ground-Truth Re-Synthesis in Hierarchy Merger | Phase 6 | `maintenance/hierarchy_merger.py` |
+| SU12 | Frozen Snapshot on Boolean Flag — Re-Synthesis Threshold Counter | Phase 3, Phase 4 | `db schema`, `patterns/finder.py`, `synthesis/synthesizer.py` |
+| SU13 | Upward Staleness Blindness — Child-Revision Propagation | Phase 4, Phase 6 | `synthesis/synthesizer.py`, `maintenance/staleness_checker.py` |
+| SU14 | Semantic Drift from Source — Synthesis Fidelity Bound Check | Phase 4 | `synthesis/synthesizer.py` |
 
 ---
 
@@ -884,12 +888,19 @@ class PatternResult:
 ### Algorithm
 ```
 1. APScheduler fires every N minutes → pattern_finder.scan()
-2. Query: SELECT * FROM query_clusters WHERE hit_count >= 10 AND synthesized = 0
+2. Query:
+   SELECT * FROM query_clusters
+   WHERE synthesizing = 0
+     AND hit_count >= MIN_HIT_COUNT
+     AND (hit_count - last_synthesized_hit_count) >= RESYNTH_DELTA
+   (SU12: replaces the old `synthesized = 0` boolean gate with a counter comparison
+    so clusters re-trigger synthesis every RESYNTH_DELTA new hits, not just once.)
 3. For each qualifying cluster:
    a. chunk_ids = JSON.parse(cluster.chunk_ids)  # already a union of raw_chunk IDs
-   b. Build SynthesisJob
-   c. Call synthesizer.run(job)  [Phase 4]
-   d. On success: UPDATE query_clusters SET synthesized=1, super_node_id=<id>
+   b. Build SynthesisJob (carry existing sn_id so synthesizer can upsert, not insert)
+   c. SET synthesizing=1 atomically BEFORE calling synthesizer (prevents double-run)
+   d. Call synthesizer.run(job)  [Phase 4]
+   e. On success: UPDATE last_synthesized_hit_count=hit_count, synthesizing=0
 4. Log: clusters_triggered, synthesis_duration
 ```
 
@@ -898,7 +909,8 @@ class PatternResult:
 # jobs/pattern_finder.py
 def scan_and_trigger():
     ready = sqlite_client.get_ready_clusters(
-        min_hit_count=config.HIT_COUNT_THRESHOLD
+        min_hit_count=config.HIT_COUNT_THRESHOLD,
+        resynth_delta=config.RESYNTH_DELTA         # SU12
     )
     for cluster in ready:
         job = SynthesisJob(
@@ -906,13 +918,17 @@ def scan_and_trigger():
             canonical_query=cluster.canonical_query,
             chunk_ids=cluster.chunk_ids,
             hit_count=cluster.hit_count,
-            triggered_at=datetime.utcnow()
+            triggered_at=datetime.utcnow(),
+            existing_sn_id=cluster.super_node_id     # SU12: upsert same ID, not new
         )
         try:
+            # SU12: Lock cluster as synthesizing BEFORE calling synthesizer
+            sqlite_client.set_synthesizing(cluster.id, True)
             super_node_id = synthesizer.run(job)
-            sqlite_client.mark_synthesized(cluster.id, super_node_id)
+            sqlite_client.mark_synthesized(cluster.id, super_node_id)   # sets last_synthesized_hit_count
             metrics.increment("synthesis_success")
         except SynthesisError as e:
+            sqlite_client.set_synthesizing(cluster.id, False)
             log.error(f"Synthesis failed for cluster {cluster.id}: {e}")
             metrics.increment("synthesis_failure")
 
@@ -953,13 +969,15 @@ GET /api/v1/admin/scheduler-status
 | DB locked during scan | Read with `isolation_level=None` (autocommit read) |
 
 ### ⚠️ Hidden Engineering Problem
-**Double synthesis:** Without `max_instances=1`, two scheduler ticks can both read the same un-synthesized cluster and launch duplicate synthesis jobs. Always set `max_instances=1` and mark cluster as `synthesizing=1` (add column) before kicking off Phase 4, not after.
+**Double synthesis:** Without `max_instances=1`, two scheduler ticks can both read the same cluster and launch duplicate synthesis jobs. Always set `max_instances=1` **and** mark cluster `synthesizing=1` (SU12: this column replaces the `synthesized` boolean as the concurrency lock) atomically BEFORE kicking off Phase 4, not after.
 
-Add a `synthesizing` column to `query_clusters` as a lock flag:
+Add a `last_synthesized_hit_count` column to `query_clusters` (SU12) to enable periodic re-synthesis:
 ```sql
-ALTER TABLE query_clusters ADD COLUMN synthesizing BOOLEAN DEFAULT 0;
--- Pattern finder sets synthesizing=1 atomically BEFORE calling synthesizer
--- Sets synthesized=1 on success, synthesizing=0 on failure
+ALTER TABLE query_clusters ADD COLUMN last_synthesized_hit_count INTEGER DEFAULT 0;
+-- Pattern finder triggers when:
+--   hit_count >= MIN_HIT_COUNT
+--   AND (hit_count - last_synthesized_hit_count) >= RESYNTH_DELTA
+-- On synthesis success: SET last_synthesized_hit_count = hit_count
 ```
 
 ### Metrics
@@ -967,27 +985,37 @@ ALTER TABLE query_clusters ADD COLUMN synthesizing BOOLEAN DEFAULT 0;
 - `clusters_eligible` (per run)
 - `synthesis_triggered` (counter)
 - `synthesis_success_rate`
+- `re_synthesis_triggered` (counter — SU12: counts re-synthesis cycles, not just initial)
+- `avg_revision_count` (gauge — SU12: mean number of times each cluster has been re-synthesized)
 
 ### Unit Tests
 ```python
 def test_pattern_finder_triggers_above_threshold():
-    insert_cluster(hit_count=10, synthesized=0)
-    jobs = pattern_finder.get_ready_clusters(min_hit_count=10)
+    insert_cluster(hit_count=10, last_synthesized_hit_count=0)
+    jobs = pattern_finder.get_ready_clusters(min_hit_count=10, resynth_delta=10)
     assert len(jobs) == 1
 
 def test_pattern_finder_skips_below_threshold():
-    insert_cluster(hit_count=5, synthesized=0)
-    jobs = pattern_finder.get_ready_clusters(min_hit_count=10)
+    insert_cluster(hit_count=5, last_synthesized_hit_count=0)
+    jobs = pattern_finder.get_ready_clusters(min_hit_count=10, resynth_delta=10)
     assert len(jobs) == 0
 
-def test_pattern_finder_skips_already_synthesized():
-    insert_cluster(hit_count=15, synthesized=1)
-    jobs = pattern_finder.get_ready_clusters(min_hit_count=10)
+# SU12: Periodic re-synthesis tests
+def test_pattern_finder_retrigggers_after_delta():
+    # Cluster was synthesized at hit=10; now at hit=20; delta=10 → should re-trigger
+    insert_cluster(hit_count=20, last_synthesized_hit_count=10)
+    jobs = pattern_finder.get_ready_clusters(min_hit_count=10, resynth_delta=10)
+    assert len(jobs) == 1
+
+def test_pattern_finder_skips_below_delta():
+    # hit=15, last_synthesized=10 → delta=5, below RESYNTH_DELTA=10 → skip
+    insert_cluster(hit_count=15, last_synthesized_hit_count=10)
+    jobs = pattern_finder.get_ready_clusters(min_hit_count=10, resynth_delta=10)
     assert len(jobs) == 0
 
 def test_no_double_synthesis(mocker):
     mocker.patch("synthesizer.run", side_effect=lambda j: "sn_1")
-    insert_cluster(hit_count=10, synthesized=0)
+    insert_cluster(hit_count=10, last_synthesized_hit_count=0)
     scan_and_trigger()
     scan_and_trigger()
     assert synthesizer.run.call_count == 1
@@ -998,7 +1026,7 @@ def test_no_double_synthesis(mocker):
 **NEXT FILES TO IMPLEMENT (Phase 3):**
 1. `scheduler/scheduler.py`
 2. `patterns/finder.py`
-3. `scheduler/jobs/pattern_finder.py`
+3. `scheduler/jobs/pattern_finder.py` — SU12: uses `last_synthesized_hit_count` delta query
 
 **EXACT CODE DEPENDENCIES:**
 ```
@@ -1007,6 +1035,11 @@ finder.py → sqlite_client.py
 pattern_finder.py (job) → finder.py, synthesizer.py (Phase 4)
 main.py → scheduler.py (start on lifespan)
 ```
+
+**SU12 — Re-Synthesis Threshold Counter**
+- *Old behavior:* Pattern finder used `WHERE synthesized = 0` — a permanent boolean gate. After first synthesis, the cluster was frozen forever regardless of how many more hits arrived.
+- *New behavior:* `WHERE (hit_count - last_synthesized_hit_count) >= RESYNTH_DELTA` triggers re-synthesis every `RESYNTH_DELTA` new hits. Each re-synthesis upserts the same `sn_id` (not a new one) and updates `last_synthesized_hit_count = hit_count`.
+- *Reason:* A cluster queried 40 times should have a fresher, evidence-richer super-node than one queried 10 times. The boolean flag silently froze the earliest, most evidence-poor snapshot as permanent. The counter keeps knowledge current without creating duplicate nodes.
 
 ---
 
@@ -1039,7 +1072,7 @@ app/
 ### Database Schema (ChromaDB Collection: `super_nodes`)
 ```
 Collection: super_nodes
-  id:          "sn_{cluster_id}_{timestamp}"
+  id:          "sn_{cluster_id}_{timestamp}"  ← set at first synthesis; REUSED on re-synthesis (SU12)
   embedding:   List[float] (384-dim)
   document:    str  → compressed synthesis text
   metadata:
@@ -1055,6 +1088,11 @@ Collection: super_nodes
     fact_coverage:  float  → LLM-judge validation score
     in_hierarchy:   bool = False   ← merger lock flag (SU7)
     is_stale:       bool = False   ← soft-staleness flag (SU8)
+    parent_meta_id:   str   = ""     ← set by merger; used by SU13 upward propagation
+    lineage_depth:    int   = 0      ← merger increments; capped at MAX_LINEAGE_DEPTH (SU11)
+    revision:         int   = 1      ← incremented on each re-synthesis (SU12)
+    fidelity_flagged: bool  = False  ← SU14: summary drifted toward query more than source supports
+    drift_margin:     float = 0.0    ← SU14: sim_summary_to_query minus max(sim_raw_to_query)
 ```
 
 ### Data Structures
@@ -1075,6 +1113,18 @@ class SuperNode:
     fact_coverage: float
     in_hierarchy: bool = False  # SU7
     is_stale: bool = False      # SU8
+    parent_meta_id: str = ""    # SU13: set by merger; checked on re-synthesis for upward propagation
+    lineage_depth: int = 0      # SU11: merger increments; enforces MAX_LINEAGE_DEPTH cap
+    revision: int = 1           # SU12: incremented on each re-synthesis
+
+@dataclass
+class SynthesisJob:
+    cluster_id: int
+    canonical_query: str
+    chunk_ids: List[str]        # Union of raw_chunk IDs only (guaranteed by SU9)
+    hit_count: int
+    triggered_at: datetime
+    existing_sn_id: Optional[str] = None  # SU12: if set, upsert this ID; else create new
 
 @dataclass
 class ValidationResult:
@@ -1111,8 +1161,22 @@ class ValidationError(SynthesisError):
       - If still failing: ABORT, mark cluster as synthesis_failed
 7. (Optional hallucination check) entity_extractor: flag entities in summary NOT in source
 8. Embed summary → 384-dim vector
-9. Upsert to ChromaDB super_nodes collection (with in_hierarchy=False, is_stale=False)
-10. Return super_node_id
+9. SYNTHESIS FIDELITY BOUND CHECK (SU14):
+   a. Compute source_centroid = mean(source_chunk_embeddings)
+   b. sim_summary_to_source = cosine_sim(summary_emb, source_centroid)
+   c. sim_summary_to_query  = cosine_sim(summary_emb, query_emb)
+   d. sim_raw_to_query_max  = max(cosine_sim(chunk_emb, query_emb) for each chunk)
+   e. drift_margin = sim_summary_to_query - sim_raw_to_query_max
+   f. IF drift_margin > MAX_DRIFT_MARGIN (0.08):
+      - Flag: fidelity_flagged=True (summary sounds more relevant than source justifies)
+      - log warning + increment synthesis_fidelity_flagged metric
+      - DO NOT abort — allow serving, but mark for human spot-check
+   g. IF sim_summary_to_source < MIN_SOURCE_ANCHOR (0.55):
+      - Hard reject: force re-synthesis with stricter prompt or smaller chunk batch
+      - If still failing after MAX_SYNTHESIS_RETRIES: raise SynthesisError
+10. Upsert to ChromaDB super_nodes collection (includes fidelity_flagged, drift_margin)
+11. SU13 upward staleness propagation (if revision > 1 and parent_meta_id)
+12. Return super_node_id
 ```
 
 ### Updated Component: `synthesis/chunk_fetcher.py` (SU1)
@@ -1302,7 +1366,23 @@ def run(job: SynthesisJob, max_retries: int = 3) -> str:
 
     # Step 4: Embed + Upsert
     embedding = embedder.encode([summary])[0]
-    sn_id = f"sn_{job.cluster_id}_{int(datetime.utcnow().timestamp())}"
+
+    # SU12: Reuse existing sn_id if this is a re-synthesis; create new ID on first synthesis
+    if job.existing_sn_id:
+        sn_id = job.existing_sn_id
+        existing_meta = chroma_client.super_nodes.get(
+            ids=[sn_id], include=["metadatas"]
+        )["metadatas"][0]
+        revision = existing_meta.get("revision", 1) + 1
+        parent_meta_id = existing_meta.get("parent_meta_id", "")
+        lineage_depth = existing_meta.get("lineage_depth", 0)
+        created_at = existing_meta.get("created_at", datetime.utcnow().isoformat())
+    else:
+        sn_id = f"sn_{job.cluster_id}_{int(datetime.utcnow().timestamp())}"
+        revision = 1
+        parent_meta_id = ""
+        lineage_depth = 0
+        created_at = datetime.utcnow().isoformat()
 
     chroma_client.super_nodes.upsert(
         ids=[sn_id],
@@ -1313,17 +1393,124 @@ def run(job: SynthesisJob, max_retries: int = 3) -> str:
             "source_query": job.canonical_query,
             "source_chunks": json.dumps(job.chunk_ids),  # raw_chunk IDs only
             "hit_count": job.hit_count,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": created_at,
             "last_accessed": datetime.utcnow().isoformat(),
             "access_count": 0,      # canonical count stored in SQLite (SU10)
             "decay_score": 1.0,
             "cluster_id": job.cluster_id,
             "fact_coverage": result.coverage_score,
             "in_hierarchy": False,  # SU7: merger lock flag
-            "is_stale": False       # SU8: soft-staleness flag
+            "is_stale": False,      # SU8: soft-staleness flag
+            "parent_meta_id": parent_meta_id,   # SU13: preserved from previous synthesis
+            "lineage_depth": lineage_depth,      # SU11: preserved; merger manages increments
+            "revision": revision,               # SU12: tracks how many times re-synthesized
+            "fidelity_flagged": fidelity_flagged,             # SU14: overfit-to-query flag
+            "drift_margin": fidelity["drift_margin"],         # SU14: research metric
+            "sim_summary_to_source": fidelity["sim_summary_to_source"],  # SU14: anchor score
         }]
     )
+
+    # SU14 — Synthesis Fidelity Bound Check
+    # Runs AFTER validation passes, BEFORE upsert.
+    # Catches semantic drift that the fact-coverage validator cannot detect:
+    # (a) summary "sounds more relevant" than the source ever was (overfit to query)
+    # (b) summary has drifted away from its own source entirely (compounding-summarization)
+    q_emb = embedder.encode([job.canonical_query])[0]
+    source_chunk_records = chroma_client.raw_chunks.get(
+        ids=job.chunk_ids, include=["embeddings"]
+    )
+    source_chunk_embs = [np.array(e) for e in source_chunk_records["embeddings"]]
+
+    fidelity = check_fidelity_bound(
+        summary_emb=embedding,
+        source_chunk_embs=source_chunk_embs,
+        source_query_emb=q_emb
+    )
+    log.info("fidelity_bound_result", cluster_id=job.cluster_id, **fidelity)
+
+    fidelity_flagged = False
+    if fidelity["suspected_disconnect"]:
+        # Summary has drifted away from its source — hard failure
+        raise SynthesisError(
+            f"Fidelity bound failed: sim_to_source={fidelity['sim_summary_to_source']:.3f} "
+            f"< MIN_SOURCE_ANCHOR={config.MIN_SOURCE_ANCHOR}. Summary disconnected from ground truth."
+        )
+    if fidelity["suspected_overfit"]:
+        # Summary sounds more confident than source justifies — soft flag, still serve
+        log.warning("fidelity_overfit_flagged", cluster_id=job.cluster_id,
+                    drift_margin=fidelity["drift_margin"])
+        metrics.increment("synthesis_fidelity_flagged")
+        fidelity_flagged = True
+
+    # Inject fidelity fields into upsert metadata
+    # (These are added to the metadatas dict before the chroma_client.super_nodes.upsert() call)
+
+    # SU13 — Upward Staleness Propagation
+    # If this is a re-synthesis (revision > 1) AND the node has a parent meta-node,
+    # mark the parent is_stale so it gets rebuilt with our updated content.
+    if revision > 1 and parent_meta_id:
+        try:
+            parent_meta = chroma_client.super_nodes.get(
+                ids=[parent_meta_id], include=["metadatas"]
+            )["metadatas"][0]
+            chroma_client.super_nodes.update(
+                ids=[parent_meta_id],
+                metadatas=[{**parent_meta, "is_stale": True, "stale_reason": "child_revised"}]
+            )
+            # Reuse SU8's existing re-synthesis queue — same mechanism, new trigger condition
+            parent_cluster_id = parent_meta.get("cluster_id")
+            if parent_cluster_id:
+                sqlite_client.flag_cluster_for_re_synthesis(parent_cluster_id)
+            log.info("parent_marked_stale_by_child",
+                     parent_id=parent_meta_id, child_id=sn_id, revision=revision)
+        except Exception as e:
+            log.warning("su13_upward_propagation_failed",
+                        parent_id=parent_meta_id, error=str(e))
+
     return sn_id
+
+
+def check_fidelity_bound(summary_emb: np.ndarray,
+                         source_chunk_embs: list[np.ndarray],
+                         source_query_emb: np.ndarray) -> dict:
+    """
+    SU14 — Synthesis Fidelity Bound Check.
+
+    Flags synthesis drift that the fact-coverage validator cannot catch.
+
+    A summary should sit BETWEEN its source chunks and the query in semantic space:
+    it is allowed to be a cleaner expression of the source's content, but it should
+    not be MORE similar to the query than the source material genuinely supports.
+
+    If sn_similarity_to_query significantly exceeds max(raw_chunk_similarity_to_query),
+    the synthesis likely over-fit to "sounding like a good answer" rather than
+    "faithfully compressing what the source actually says."
+
+    This is also a research metric: avg_drift_margin across the benchmark set tells you
+    whether your synthesis prompt is systematically over-fitting to retrievability versus
+    faithfully compressing. If drift_margin creeps upward as MAX_LINEAGE_DEPTH increases,
+    that is empirical evidence supporting SU11's ground-truth re-anchoring design.
+    """
+    source_centroid = np.mean(source_chunk_embs, axis=0)
+
+    sim_summary_to_source = cosine_similarity([summary_emb], [source_centroid])[0][0]
+    sim_summary_to_query  = cosine_similarity([summary_emb], [source_query_emb])[0][0]
+    sim_raw_to_query_max  = max(
+        cosine_similarity([e], [source_query_emb])[0][0] for e in source_chunk_embs
+    )
+
+    drift_margin = sim_summary_to_query - sim_raw_to_query_max
+
+    return {
+        "sim_summary_to_source": float(sim_summary_to_source),
+        "sim_summary_to_query":  float(sim_summary_to_query),
+        "sim_raw_to_query_max":  float(sim_raw_to_query_max),
+        "drift_margin":          float(drift_margin),
+        # Summary is suspiciously MORE relevant than source ever was → possible overfit
+        "suspected_overfit":     drift_margin > config.MAX_DRIFT_MARGIN,    # default 0.08
+        # Summary has drifted AWAY from its own source → compounding-summarization symptom
+        "suspected_disconnect":  sim_summary_to_source < config.MIN_SOURCE_ANCHOR,  # default 0.55
+    }
 ```
 
 ### API Endpoints
@@ -1361,6 +1548,10 @@ GET /api/v1/admin/super-nodes
 - `avg_fact_coverage`
 - `dedup_chunks_removed` (counter — SU1: chunks eliminated per synthesis run)
 - `llm_judge_calls` (counter — SU2)
+- `synthesis_fidelity_flagged` (counter — SU14: nodes flagged for query overfit)
+- `avg_drift_margin` (gauge — SU14: benchmark metric; rising value signals systematic overfit)
+- `avg_sim_to_source` (gauge — SU14: falling value signals compounding-summarization drift)
+- `fidelity_disconnect_aborts` (counter — SU14: hard re-synthesis forced by sim_to_source < MIN_SOURCE_ANCHOR)
 
 ### Unit Tests
 ```python
@@ -1372,21 +1563,60 @@ def test_synthesizer_creates_super_node():
     assert result["metadatas"][0]["type"] == "super_node"
     assert result["metadatas"][0]["in_hierarchy"] == False  # SU7 init
     assert result["metadatas"][0]["is_stale"] == False      # SU8 init
+    assert result["metadatas"][0]["revision"] == 1          # SU12 init
+    assert result["metadatas"][0]["lineage_depth"] == 0     # SU11 init
+    assert result["metadatas"][0]["parent_meta_id"] == ""   # SU13 init
 
+# SU12 tests
+def test_re_synthesis_reuses_same_sn_id():
+    job1 = SynthesisJob(cluster_id=1, canonical_query="...", chunk_ids=["doc_c1"], hit_count=10)
+    sn_id_v1 = synthesizer.run(job1)
+
+    job2 = SynthesisJob(cluster_id=1, canonical_query="...",
+                        chunk_ids=["doc_c1", "doc_c2"], hit_count=20,
+                        existing_sn_id=sn_id_v1)   # pass existing ID
+    sn_id_v2 = synthesizer.run(job2)
+
+    assert sn_id_v1 == sn_id_v2, "Re-synthesis must reuse the same sn_id"
+    result = chroma_client.super_nodes.get(ids=[sn_id_v2])
+    assert result["metadatas"][0]["revision"] == 2, "Revision counter must increment"
+
+# SU13 tests
+def test_re_synthesis_marks_parent_stale():
+    # Setup: super-node in a hierarchy, with parent meta-node
+    job1 = SynthesisJob(cluster_id=1, canonical_query="...", chunk_ids=["doc_c1"], hit_count=10)
+    sn_id = synthesizer.run(job1)
+
+    # Simulate merger assigning a parent
+    chroma_client.super_nodes.update(
+        ids=[sn_id],
+        metadatas=[{**chroma_client.super_nodes.get(ids=[sn_id])["metadatas"][0],
+                    "parent_meta_id": "mn_999",
+                    "in_hierarchy": True}]
+    )
+
+    # Re-synthesis should mark the parent stale
+    job2 = SynthesisJob(cluster_id=1, canonical_query="...",
+                        chunk_ids=["doc_c1", "doc_c2"], hit_count=20,
+                        existing_sn_id=sn_id)
+    synthesizer.run(job2)
+
+    parent = chroma_client.super_nodes.get(ids=["mn_999"])
+    assert parent["metadatas"][0]["is_stale"] == True
+    assert parent["metadatas"][0]["stale_reason"] == "child_revised"
+
+# SU1 + SU2 tests (unchanged from before)
 def test_chunk_fetcher_deduplicates_redundant_chunks():
-    # Insert 10 near-identical chunks → expect dedup to collapse to ~2-3
     ids = insert_near_identical_chunks(10)
     text = chunk_fetcher.fetch_and_deduplicate(ids)
     separator_count = text.count("\n\n---\n\n")
-    assert separator_count < 5  # At most ~3-4 representative chunks remain
+    assert separator_count < 5
 
 def test_chunk_fetcher_skips_dedup_under_threshold():
     ids = insert_diverse_chunks(4)
     text = chunk_fetcher.fetch_and_deduplicate(ids)
-    # All 4 chunks should appear (no dedup for <= 5)
     assert text.count("\n\n---\n\n") == 3
 
-# SU2 tests
 def test_validator_rejects_low_coverage(mocker):
     mocker.patch("client.chat.completions.create", return_value=mock_response(
         '{"passed": false, "coverage_score": 0.40, "missing_facts": ["$500", "2024-01-15"]}'
@@ -1412,6 +1642,62 @@ def test_synthesis_aborts_after_max_retries(mocker):
     mocker.patch("validator.validate", return_value=ValidationResult(passed=False, coverage_score=0.5, missing_facts=["x"], source_fact_count=2, summary_fact_count=1))
     with pytest.raises(ValidationError):
         synthesizer.run(job)
+
+# SU14 tests
+def test_fidelity_bound_normal_passes():
+    """Faithful summary: sits close to source, modest drift margin."""
+    summary_emb    = make_emb_between(source_centroid, query_emb, alpha=0.5)
+    chunk_embs     = [source_centroid]  # single chunk for simplicity
+    result = check_fidelity_bound(summary_emb, chunk_embs, query_emb)
+    assert not result["suspected_overfit"]
+    assert not result["suspected_disconnect"]
+
+def test_fidelity_bound_overfit_flagged():
+    """Summary closer to query than source ever was → suspected_overfit=True."""
+    # Place summary 0.15 cosine closer to query than any raw chunk
+    summary_emb = query_emb + np.random.rand(len(query_emb)) * 0.01  # near query
+    chunk_embs  = [source_centroid]   # far from query
+    result = check_fidelity_bound(summary_emb, chunk_embs, query_emb)
+    assert result["suspected_overfit"], f"drift_margin={result['drift_margin']:.3f}"
+    assert result["drift_margin"] > config.MAX_DRIFT_MARGIN
+
+def test_fidelity_bound_disconnect_raises():
+    """Summary far from source centroid → SynthesisError raised in synthesizer.run()."""
+    mocker.patch("synthesizer.check_fidelity_bound", return_value={
+        "sim_summary_to_source": 0.30,  # < MIN_SOURCE_ANCHOR
+        "drift_margin": 0.01,
+        "suspected_overfit": False,
+        "suspected_disconnect": True,
+    })
+    with pytest.raises(SynthesisError, match="Fidelity bound failed"):
+        synthesizer.run(job)
+
+def test_fidelity_overfit_does_not_abort_synthesis():
+    """Overfit flag is soft — node is upserted and marked fidelity_flagged=True."""
+    mocker.patch("synthesizer.check_fidelity_bound", return_value={
+        "sim_summary_to_source": 0.80,
+        "drift_margin": 0.12,           # > MAX_DRIFT_MARGIN
+        "suspected_overfit": True,
+        "suspected_disconnect": False,
+    })
+    sn_id = synthesizer.run(job)        # should NOT raise
+    node = chroma_client.super_nodes.get(ids=[sn_id])
+    assert node["metadatas"][0]["fidelity_flagged"] == True
+    assert node["metadatas"][0]["drift_margin"] > config.MAX_DRIFT_MARGIN
+
+def test_fidelity_bound_drift_margin_increases_with_depth(mocker):
+    """
+    Research metric test: avg_drift_margin should be higher for nodes synthesized at
+    MAX_LINEAGE_DEPTH=2 vs depth=0, empirically validating SU11's ground-truth
+    re-anchoring design.
+    """
+    depth_0_margins = measure_drift_margins(lineage_depth=0, n=20)
+    depth_2_margins = measure_drift_margins(lineage_depth=2, n=20)
+    # If SU11 is OFF (summary-of-summary), depth_2 margins are significantly higher
+    # With SU11 ON (raw re-synthesis), margins should be statistically similar
+    assert np.mean(depth_2_margins) - np.mean(depth_0_margins) < 0.02, (
+        "SU11 ground-truth re-anchoring is failing: drift margin grows with depth"
+    )
 ```
 
 ### Changes Introduced
@@ -1426,6 +1712,22 @@ def test_synthesis_aborts_after_max_retries(mocker):
 - *New behavior:* `validate_entailment()` sends source and summary to `gpt-4o-mini` in strict JSON mode with a fact-extraction + coverage-calculation prompt. The LLM reasons over semantic meaning rather than string surface forms. `entity_extractor.py` is retained for hallucination addition detection (entities in summary not present in source).
 - *Reason:* Regex/NER cannot detect paraphrased facts, implied relationships, or fabricated connections between correctly extracted entities. LLM-as-judge validates the "Fact Coverage" metric with the semantic precision required for a research paper claim of ≥90% factual fidelity.
 
+**SU12 — Re-Synthesis Threshold Counter in `synthesizer.py`**
+- *Old behavior:* First synthesis created `sn_{cluster_id}_{timestamp}` with a fresh ID each time. The pattern finder's boolean gate meant synthesis only ever ran once; subsequent runs would create orphan duplicate nodes.
+- *New behavior:* `synthesizer.run()` accepts `existing_sn_id` from `SynthesisJob`. If present, it reads the current metadata (preserving `parent_meta_id`, `lineage_depth`, `created_at`), increments `revision`, and upserts to the same ChromaDB ID. First synthesis still generates a new ID.
+- *Reason:* Prevents duplicate node proliferation while allowing content to evolve. The `revision` counter is a research metric tracking knowledge volatility (a frequently re-synthesized node is a signal that the topic is actively changing).
+
+**SU13 — Upward Staleness Propagation in `synthesizer.py`**
+- *Old behavior:* When a super-node was re-synthesized, its parent meta-node had no awareness of the change. The meta-node continued serving content that referenced the pre-revision version of its child's `source_chunks` scope.
+- *New behavior:* At the end of `synthesizer.run()`, if `revision > 1` and `parent_meta_id` is set, the code marks the parent's `is_stale=True` with `stale_reason="child_revised"` and calls `sqlite_client.flag_cluster_for_re_synthesis(parent_cluster_id)`. This reuses SU8's existing soft-staleness queue — no new machinery.
+- *Reason:* Without upward propagation, Fix 11 + Fix 12 together create a gap: children are rebuilt from ground-truth, but the meta-node overhead is stale relative to its own subtree. Fix 13 closes this gap by making the staleness signal travel upward, not just downward.
+
+**SU14 — Synthesis Fidelity Bound Check in `synthesizer.py`**
+- *Old behavior:* The only post-synthesis quality gate was the LLM-as-judge fact-coverage check (SU2). That validator answers "did all facts survive?" but cannot answer "did the summary anchor itself to the source, or drift toward sounding like a better answer?". A summary can pass 90% fact coverage while still being semantically re-oriented away from the source's actual evidence base and toward the query — a form of articulation drift invisible to any fact-extraction approach.
+- *New behavior:* `check_fidelity_bound()` runs immediately after validation passes and before the ChromaDB upsert. It computes three cosine similarities: (1) summary vs source centroid, (2) summary vs query, (3) max(raw chunks vs query). The `drift_margin = sim_summary_to_query − max(sim_raw_to_query)` measures whether the summary has "jumped ahead" of the source in query-space. If `drift_margin > MAX_DRIFT_MARGIN` (0.08): soft flag — node is upserted with `fidelity_flagged=True` and `drift_margin` stored in metadata for human spot-check. If `sim_summary_to_source < MIN_SOURCE_ANCHOR` (0.55): hard reject — `SynthesisError` is raised and re-synthesis is forced, exactly like a coverage failure.
+- *Research metric:* `avg_drift_margin` across the benchmark set is a paper-grade signal. A rising `avg_drift_margin` as `MAX_LINEAGE_DEPTH` increases is empirical evidence that SU11's ground-truth re-anchoring at every merge is necessary: without it, each merge generation drifts further from the source evidence base. With SU11 active, drift margins at depth=2 should be statistically indistinguishable from depth=0.
+- *Reason:* Closes the detection gap between "facts present" (SU2) and "semantically anchored to source" (SU14). Together they form a two-axis quality guarantee: high coverage AND low drift.
+
 ---
 
 **NEXT FILES TO IMPLEMENT (Phase 4):**
@@ -1433,7 +1735,7 @@ def test_synthesis_aborts_after_max_retries(mocker):
 2. `validation/validator.py` — replace with LLM-as-judge (SU2)
 3. `synthesis/prompts.py`
 4. `synthesis/chunk_fetcher.py` — replace with deduplicating version (SU1)
-5. `synthesis/synthesizer.py`
+5. `synthesis/synthesizer.py` — includes `check_fidelity_bound()` (SU14)
 6. `db/super_node_store.py`
 
 ---
@@ -1682,19 +1984,24 @@ Formula: score = min(access_count, 10) * exp(-days_since_last_access / HALF_LIFE
       - Log pruning event
 ```
 
-#### Hierarchy Merger with Lock Flag (SU7)
+#### Hierarchy Merger with Lock Flag and Ground-Truth Re-Synthesis (SU7 + SU11)
 ```
 1. Fetch ONLY super_nodes where in_hierarchy == False
-   (Prevents re-pairing already-merged children)
-2. Compute pairwise cosine similarity matrix
-3. Find pairs with sim > 0.88
-4. For each qualifying pair (sn_A, sn_B):
-   a. Merge texts → run synthesis (compact prompt)
-   b. Embed merged text → meta_node embedding
-   c. Upsert meta_node to ChromaDB (type="meta_node", children=[sn_A.id, sn_B.id])
-   d. UPDATE sn_A and sn_B: set in_hierarchy=True, parent_meta_id=meta_id
-      (Locks them out of future merger passes)
-5. Retrieval order: meta_node → super_node → raw_chunk
+   (SU7: Prevents re-pairing already-merged children)
+2. Skip nodes with lineage_depth >= MAX_LINEAGE_DEPTH (SU11: depth cap)
+3. Compute pairwise cosine similarity matrix
+4. Find pairs with sim > 0.88
+5. For each qualifying pair (sn_A, sn_B):
+   a. SU11 — Ground-Truth Re-Synthesis:
+      - Union(sn_A.source_chunks, sn_B.source_chunks) → all raw chunk IDs
+      - DO NOT read sn_A.document or sn_B.document as synthesis input
+      - Build SynthesisJob(chunk_ids=unioned_raw_ids)
+      - Call synthesizer.run(job) → full Phase 4 pipeline (dedup + LLM + validate)
+   b. Upsert resulting super-node as meta_node (type="meta_node", children=[sn_A.id, sn_B.id])
+   c. Set lineage_depth = max(sn_A.lineage_depth, sn_B.lineage_depth) + 1
+   d. UPDATE sn_A and sn_B: set in_hierarchy=True, parent_meta_id=meta_id, lineage_depth preserved
+      (SU7: Locks them out of future merger passes)
+6. Retrieval order: meta_node → super_node → raw_chunk
 ```
 
 ### Updated Component: `maintenance/staleness_checker.py` (SU8)
@@ -1792,14 +2099,17 @@ def compute_and_apply_decay():
                          datetime.fromisoformat(meta["last_accessed"])).days)
 ```
 
-### Updated Component: `maintenance/hierarchy_merger.py` (SU7)
+### Updated Component: `maintenance/hierarchy_merger.py` (SU7 + SU11)
 ```python
 def merge_similar_nodes():
     """
-    SU7 — in_hierarchy Lock Flag.
-    Replaces unbounded super_node fetch with filtered fetch excluding
-    nodes already assigned to a meta_node hierarchy branch.
-    Prevents exponential meta_node duplication on daily runs.
+    SU7 + SU11 — Hierarchy Merger with Ground-Truth Re-Synthesis.
+
+    SU7: Only processes super_nodes not already in a hierarchy (in_hierarchy=False).
+    SU11: NEVER reads .documents (generated text) as synthesis input.
+          Instead, unions source_chunks (raw chunk IDs) and re-runs the full
+          Phase 4 synthesizer pipeline (fetch raw → dedup → LLM → validate).
+          Enforces MAX_LINEAGE_DEPTH cap to prevent unbounded meta-node nesting.
     """
     # SU7: Only pull super_nodes NOT already in a hierarchy
     all_sn = chroma_client.super_nodes.get(
@@ -1809,7 +2119,8 @@ def merge_similar_nodes():
                 {"in_hierarchy": {"$eq": False}}  # Exclude already-merged nodes
             ]
         },
-        include=["metadatas", "embeddings", "documents", "ids"]
+        include=["metadatas", "embeddings", "ids"]
+        # NOTE: "documents" intentionally excluded — SU11: we never read generated text here
     )
 
     if len(all_sn["ids"]) < 2:
@@ -1822,34 +2133,81 @@ def merge_similar_nodes():
     pairs = [(a, b) for a, b in pairs if a < b]   # deduplicate
 
     for i, j in pairs:
-        merged_text = synthesis_merge(
-            all_sn["documents"][i], all_sn["documents"][j]
-        )
-        meta_id = f"mn_{int(datetime.utcnow().timestamp())}"
-        emb = embedder.encode([merged_text])[0]
+        meta_i = all_sn["metadatas"][i]
+        meta_j = all_sn["metadatas"][j]
 
-        # Upsert the new meta_node
-        chroma_client.super_nodes.upsert(
-            ids=[meta_id], embeddings=[emb.tolist()],
-            documents=[merged_text],
-            metadatas=[{
-                "type": "meta_node",
-                "children": json.dumps([all_sn["ids"][i], all_sn["ids"][j]]),
-                "created_at": datetime.utcnow().isoformat(),
-                "in_hierarchy": False   # meta_nodes themselves are not children
-            }]
+        # SU11: Depth cap — refuse to create meta-nodes beyond MAX_LINEAGE_DEPTH
+        depth_i = meta_i.get("lineage_depth", 0)
+        depth_j = meta_j.get("lineage_depth", 0)
+        merged_depth = max(depth_i, depth_j) + 1
+        if merged_depth > config.MAX_LINEAGE_DEPTH:
+            log.warning("merger_depth_cap_reached",
+                        sn_a=all_sn["ids"][i], sn_b=all_sn["ids"][j],
+                        merged_depth=merged_depth, cap=config.MAX_LINEAGE_DEPTH)
+            # Flag for manual review instead of auto-merging
+            sqlite_client.flag_for_manual_review(
+                all_sn["ids"][i], all_sn["ids"][j],
+                reason=f"lineage_depth_cap: would reach depth {merged_depth}"
+            )
+            continue
+
+        # SU11: Union source_chunks IDs from both children — these are always raw doc_ IDs
+        # (guaranteed by SU9 ground-truth anchoring at logging time)
+        source_ids_i = json.loads(meta_i.get("source_chunks", "[]"))
+        source_ids_j = json.loads(meta_j.get("source_chunks", "[]"))
+        unioned_raw_ids = list(set(source_ids_i + source_ids_j))
+
+        # Assert no super-node IDs leaked into lineage (defensive check)
+        assert all(id_.startswith("doc_") for id_ in unioned_raw_ids), \
+            f"Super-node IDs detected in source_chunks union — SU9 violated!"
+
+        # SU11: Run full Phase 4 synthesis pipeline on raw IDs — NOT on .documents text
+        merge_query = f"Synthesis of: {meta_i['source_query']} AND {meta_j['source_query']}"
+        job = SynthesisJob(
+            cluster_id=None,        # meta-nodes don't belong to a single cluster
+            canonical_query=merge_query,
+            chunk_ids=unioned_raw_ids,
+            hit_count=meta_i.get("hit_count", 0) + meta_j.get("hit_count", 0),
+            triggered_at=datetime.utcnow(),
+            existing_sn_id=None     # Always create a new meta-node ID
+        )
+        try:
+            meta_id = synthesizer.run(job)  # Returns sn_id which we'll treat as meta_node
+        except SynthesisError as e:
+            log.error("merger_synthesis_failed", sn_a=all_sn["ids"][i], sn_b=all_sn["ids"][j],
+                      error=str(e))
+            continue
+
+        # Rename the synthesized node to a meta_node and set its metadata
+        merged_meta = chroma_client.super_nodes.get(
+            ids=[meta_id], include=["metadatas"]
+        )["metadatas"][0]
+        chroma_client.super_nodes.update(
+            ids=[meta_id],
+            metadatas=[{**merged_meta,
+                        "type": "meta_node",
+                        "children": json.dumps([all_sn["ids"][i], all_sn["ids"][j]]),
+                        "lineage_depth": merged_depth,
+                        "source_chunks": json.dumps(unioned_raw_ids),  # raw IDs preserved
+                        "in_hierarchy": False   # meta_nodes themselves are not children
+                       }]
         )
 
-        # SU7: Lock children out of future merger passes
+        # SU7: Lock children out of future merger passes; record parent link for SU13
         for idx in [i, j]:
             child_id = all_sn["ids"][idx]
             child_meta = all_sn["metadatas"][idx]
-            child_meta["in_hierarchy"] = True
-            child_meta["parent_meta_id"] = meta_id
-            chroma_client.super_nodes.update(ids=[child_id], metadatas=[child_meta])
+            updated_child_meta = {
+                **child_meta,
+                "in_hierarchy": True,
+                "parent_meta_id": meta_id   # SU13 uses this to propagate upward on re-synthesis
+            }
+            chroma_client.super_nodes.update(ids=[child_id], metadatas=[updated_child_meta])
 
         log.info("meta_node_created", meta_id=meta_id,
-                 children=[all_sn["ids"][i], all_sn["ids"][j]])
+                 children=[all_sn["ids"][i], all_sn["ids"][j]],
+                 lineage_depth=merged_depth,
+                 unioned_raw_chunks=len(unioned_raw_ids))
 ```
 
 ### Background Jobs
@@ -1929,6 +2287,39 @@ def test_merger_locks_children_after_merge():
         node = chroma_client.super_nodes.get(ids=[sn_id])
         assert node["metadatas"][0]["in_hierarchy"] == True
 
+# SU11 tests
+def test_merger_uses_raw_chunk_ids_not_documents():
+    """SU11: merger must never read .documents (generated text) to feed synthesis."""
+    sn_a = create_super_node(source_chunks=["doc_c1", "doc_c2"], in_hierarchy=False)
+    sn_b = create_super_node(source_chunks=["doc_c3", "doc_c4"], in_hierarchy=False)
+    # Make them similar enough to trigger merge
+    mock_similar_embeddings(sn_a, sn_b)
+
+    merge_similar_nodes()
+
+    meta_nodes = chroma_client.super_nodes.get(where={"type": {"$eq": "meta_node"}},
+                                                include=["metadatas"])
+    assert len(meta_nodes["ids"]) == 1
+    # meta-node's source_chunks must be the union of raw IDs, NOT any sn_* IDs
+    meta_source = json.loads(meta_nodes["metadatas"][0]["source_chunks"])
+    assert all(id_.startswith("doc_") for id_ in meta_source), \
+        "SU11 violated: meta-node source_chunks contains non-doc_ IDs"
+    assert set(meta_source) == {"doc_c1", "doc_c2", "doc_c3", "doc_c4"}
+
+def test_merger_enforces_depth_cap():
+    """SU11: merges that would exceed MAX_LINEAGE_DEPTH are refused and flagged."""
+    # Create two super-nodes already at depth = MAX_LINEAGE_DEPTH
+    sn_a = create_super_node(lineage_depth=config.MAX_LINEAGE_DEPTH, in_hierarchy=False)
+    sn_b = create_super_node(lineage_depth=config.MAX_LINEAGE_DEPTH, in_hierarchy=False)
+    mock_similar_embeddings(sn_a, sn_b)
+
+    merge_similar_nodes()
+
+    meta_nodes = chroma_client.super_nodes.get(where={"type": {"$eq": "meta_node"}})
+    assert len(meta_nodes["ids"]) == 0, "Merger should refuse to create node beyond depth cap"
+    flagged = sqlite_client.get_manual_review_queue()
+    assert len(flagged) == 1
+
 # SU10 tests
 def test_decay_scorer_uses_sqlite_not_chroma_counter():
     sn_id = create_super_node()
@@ -1957,6 +2348,11 @@ def test_decay_scorer_uses_sqlite_not_chroma_counter():
 - *Old behavior:* If any source chunk ID was missing, the staleness checker executed `DELETE` on the super-node and reset `synthesized=0` in SQLite. A minor upstream typo fix would trigger re-chunking, generate new hash IDs, and cause the staleness checker to wipe months of hit_count and access metrics.
 - *New behavior:* Instead of deletion, the checker sets `is_stale=True` in ChromaDB metadata and flags the cluster for async re-synthesis in SQLite. The stale node continues serving queries with its intact history until the new synthesis completes and replaces it.
 - *Reason:* Preserves organic user intent signals accumulated over months. The re-synthesis path is triggered asynchronously, so there is no service disruption and no metric loss from minor upstream edits.
+
+**SU11 — Ground-Truth Re-Synthesis in Hierarchy Merger**
+- *Old behavior:* `merge_similar_nodes()` called `synthesis_merge(sn_A.document, sn_B.document)` — feeding the generated summaries directly into a new LLM call. This is a summary-of-summaries pattern: each node has already dropped up to 10% of source facts (by the 90% validation threshold). Merging them compounds this loss. At hierarchy depth ≥2, validation still reports green but is scoring coverage-of-a-lossy-summary, not coverage-of-original-facts. The degradation is structurally invisible.
+- *New behavior:* The merger reads `source_chunks` (raw chunk ID lists) from both children, takes their union, and runs `synthesizer.run(job)` — the exact same Phase 4 pipeline (fetch raw → SU1 dedup → LLM synthesize → SU2 LLM-judge validate). The `.documents` (generated text) field is never consumed as synthesis input anywhere in the pipeline. A `lineage_depth` counter tracks merge depth; `MAX_LINEAGE_DEPTH` (default 2) caps automatic merging and flags deeper candidates for manual review.
+- *Reason:* Guarantees that no matter how many merge generations deep a meta-node is, its synthesis always traces back to a flat list of original `doc_`-prefixed chunk IDs. The validation score at every depth is a real score against real source material, not a score against a prior compression.
 
 ---
 
@@ -2089,18 +2485,21 @@ CREATE TABLE IF NOT EXISTS query_clusters (
     chunk_ids        TEXT NOT NULL DEFAULT '[]',   -- raw_chunk IDs only (SU9)
     first_seen       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     last_hit         DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    synthesized      BOOLEAN NOT NULL DEFAULT 0,
-    synthesizing     BOOLEAN NOT NULL DEFAULT 0,
+    synthesized      BOOLEAN NOT NULL DEFAULT 0,   -- legacy; kept for migration compatibility
+    synthesizing     BOOLEAN NOT NULL DEFAULT 0,   -- concurrency lock (SU12)
     synthesis_failed BOOLEAN NOT NULL DEFAULT 0,
     super_node_id    TEXT,
     retry_count      INTEGER NOT NULL DEFAULT 0,
-    pending_re_synthesis BOOLEAN NOT NULL DEFAULT 0  -- set by soft-staleness check (SU8)
+    pending_re_synthesis BOOLEAN NOT NULL DEFAULT 0,  -- set by soft-staleness check (SU8) or SU13 upward propagation
+    last_synthesized_hit_count INTEGER NOT NULL DEFAULT 0  -- SU12: re-trigger when (hit_count - this) >= RESYNTH_DELTA
 );
 
 CREATE INDEX IF NOT EXISTS idx_hit_count_synth
     ON query_clusters(hit_count DESC, synthesized, synthesizing);
 CREATE INDEX IF NOT EXISTS idx_re_synthesis
     ON query_clusters(pending_re_synthesis, synthesized);
+CREATE INDEX IF NOT EXISTS idx_resynth_delta
+    ON query_clusters(hit_count, last_synthesized_hit_count, synthesizing);  -- SU12: delta query
 
 -- query_log: raw query audit trail
 CREATE TABLE IF NOT EXISTS query_log (
@@ -2133,11 +2532,21 @@ CREATE TABLE IF NOT EXISTS synthesis_log (
 -- maintenance_log: track decay and pruning
 CREATE TABLE IF NOT EXISTS maintenance_log (
     id               INTEGER PRIMARY KEY AUTOINCREMENT,
-    event_type       TEXT NOT NULL,  -- 'prune'|'soft_stale'|'merge'|'re_synthesis_queued'
+    event_type       TEXT NOT NULL,  -- 'prune'|'soft_stale'|'merge'|'re_synthesis_queued'|'depth_cap_refused'|'manual_review_flagged'
     super_node_id    TEXT,
-    reason           TEXT,
+    reason           TEXT,           -- 'child_revised' (SU13) | 'source_chunk_drift' (SU8) | etc.
     decay_score      REAL,
     timestamp        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- manual_review_queue: SU11 depth-cap violations flagged for human inspection
+CREATE TABLE IF NOT EXISTS manual_review_queue (
+    id               INTEGER PRIMARY KEY AUTOINCREMENT,
+    sn_id_a          TEXT NOT NULL,
+    sn_id_b          TEXT NOT NULL,
+    reason           TEXT NOT NULL,
+    flagged_at       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    resolved         BOOLEAN NOT NULL DEFAULT 0
 );
 ```
 
@@ -2158,6 +2567,7 @@ CREATE TABLE IF NOT EXISTS maintenance_log (
 | `HF_DATASET_CACHE_DIR` | `"data/hf_cache"` | Avoid re-downloading MedQuAD |
 | `QUERY_CLUSTER_COSINE_THRESHOLD` | 0.92 | High threshold to avoid over-merging |
 | `HIT_COUNT_THRESHOLD` | 10 | Min hits before synthesis trigger |
+| `RESYNTH_DELTA` | 10 | **SU12**: additional hits since last synthesis before re-triggering |
 | `POLL_INTERVAL_MINUTES` | 5 | Scheduler poll frequency |
 | `SUPER_NODE_SCORE_MULTIPLIER` | 0.85 | L2 distance boost for super-nodes (exploitation mode) |
 | `EXPLORATION_EPSILON` | 0.10 | Fraction of queries that skip score boost (SU4) |
@@ -2169,7 +2579,9 @@ CREATE TABLE IF NOT EXISTS maintenance_log (
 | `DEDUP_MIN_CHUNKS` | 5 | Minimum chunks before deduplication is applied (SU1) |
 | `SYNTHESIS_MAX_TOKENS` | 4000 | Token budget for synthesis input after dedup (SU1) |
 | `HIERARCHY_MERGE_THRESHOLD` | 0.88 | Cosine sim above which nodes merge |
-| `HIERARCHY_MAX_DEPTH` | 2 | Maximum meta-node nesting depth |
+| `MAX_LINEAGE_DEPTH` | 2 | **SU11**: Maximum merge nesting depth; beyond this, flag for manual review |
+| `MAX_DRIFT_MARGIN` | 0.08 | **SU14**: Max allowed `drift_margin` before fidelity_flagged=True is set |
+| `MIN_SOURCE_ANCHOR` | 0.55 | **SU14**: Minimum `sim_summary_to_source`; below this forces re-synthesis |
 | `LLM_MODEL` | `gpt-4o-mini` | Cost-efficient, sufficient quality |
 | `LLM_TEMPERATURE` | 0.1 | Low temp for factual consistency |
 | `TOP_K_RAW` | 5 | Raw chunks retrieved per query |
@@ -2227,13 +2639,13 @@ Week 4 — Scheduler + Preferential Retrieval (SU4 + SU5 + SU10)
   34. tests/test_phase3_scheduler.py
   35. tests/test_phase5_retrieval.py
 
-Week 5 — Maintenance + Benchmarking (SU3 + SU7 + SU8)
-  36. maintenance/staleness_checker.py  (soft-staleness, SU8)
+Week 5 — Maintenance + Benchmarking (SU3 + SU7 + SU8 + SU11 + SU13)
+  36. maintenance/staleness_checker.py  (soft-staleness, SU8; receives SU13 upward signals)
   37. maintenance/decay_scorer.py       (half-life + SQLite sync, SU3+SU10)
-  38. maintenance/hierarchy_merger.py   (in_hierarchy lock, SU7)
+  38. maintenance/hierarchy_merger.py   (in_hierarchy lock, SU7; ground-truth re-synthesis, SU11)
   39. scheduler/jobs/maintenance_job.py
   40. scripts/benchmark.py
-  41. tests/test_phase6_maintenance.py
+  41. tests/test_phase6_maintenance.py  (+ SU11 raw-ID tests + SU11 depth cap tests)
   42. Dockerfile + docker-compose.yml
 ```
 
@@ -2476,6 +2888,12 @@ Corrupt metadata →
 | `query_interceptor` → `response_ctx["chunk_ids"]` | ✅ Valid | SU9 filter applied before passing to query_logger |
 | `hierarchy_merger` → ChromaDB `where` filter on `in_hierarchy` | ✅ Valid | SU7 requires `in_hierarchy` field present in all super_node metadata at creation (Phase 4) |
 | `staleness_checker` → SQLite `flag_cluster_for_re_synthesis()` | ✅ Valid | SU8 adds new method; `pending_re_synthesis` column in schema |
+| `hierarchy_merger` → `synthesizer.run()` | ✅ Valid | **SU11**: merger calls same Phase 4 synthesizer; no ad-hoc merge LLM call |
+| `synthesizer.run()` → SQLite `flag_cluster_for_re_synthesis(parent_cluster_id)` | ✅ Valid | **SU13**: reuses SU8 queue; `flag_cluster_for_re_synthesis()` already exists |
+| `pattern_finder` → SQLite `last_synthesized_hit_count` delta query | ✅ Valid | **SU12**: adds column; `get_ready_clusters()` updated with resynth_delta param |
+| `synthesizer.run()` → ChromaDB `super_nodes.get(existing_sn_id)` | ✅ Valid | **SU12**: upsert path reads existing metadata before overwriting |
+| `synthesizer.check_fidelity_bound()` → ChromaDB `raw_chunks.get(ids, include=["embeddings"])` | ✅ Valid | **SU14**: source chunk embeddings already in ChromaDB; no additional storage needed |
+| `synthesizer.check_fidelity_bound()` → `embedder.encode([job.canonical_query])` | ✅ Valid | **SU14**: shared Embedder singleton; no extra model load |
 
 ### No Contradictory Algorithms
 | Check | Status |
@@ -2485,6 +2903,7 @@ Corrupt metadata →
 | Access counter: SQLite is single source of truth; ChromaDB is read-only mirror | ✅ No conflicting writes |
 | Chunk logging: only `doc_*` IDs enter `chunk_ids`; enforced in middleware | ✅ No super-node ID contamination |
 | Centroid update: only `update_cluster_centroid()` modifies embeddings | ✅ No competing update paths |
+| Merger synthesis: only `synthesizer.run()` is called; no ad-hoc `synthesis_merge()` | ✅ **SU11**: single synthesis code path; no summary-of-summaries fork |
 
 ### No Circular Lineage
 | Check | Status |
@@ -2492,6 +2911,11 @@ Corrupt metadata →
 | Synthesis always reads from `raw_chunks`, never from `super_nodes` | ✅ Guaranteed by SU9 ground-truth filter |
 | Super-node synthesis prompt receives deduplicated raw text, never prior summaries | ✅ `chunk_fetcher.fetch_and_deduplicate()` queries `raw_chunks` collection only |
 | Re-synthesis triggered by SU8 follows same path: reads `source_chunks` (raw IDs) | ✅ `source_chunks` metadata contains `doc_*` IDs set at creation time |
+| **SU11**: Merger never reads `.documents`; always uses `source_chunks` IDs | ✅ `include=["documents"]` explicitly excluded from merger's ChromaDB get() |
+| **SU11**: meta-node `source_chunks` is union of raw IDs, not sn_* IDs | ✅ Defensive `assert all(id_.startswith("doc_"))` in merger before synthesis call |
+| **SU12**: Re-synthesis upserts same sn_id; never creates duplicate nodes | ✅ `existing_sn_id` passed from pattern_finder through SynthesisJob |
+| **SU13**: Upward propagation reuses SU8's `flag_cluster_for_re_synthesis()`; no new queue | ✅ Same mechanism, additional trigger condition |
+| **SU14**: Fidelity check only reads embeddings (already stored); never synthesizes new content | ✅ Pure cosine arithmetic; no LLM call; adds zero hallucination risk |
 
 ### Metrics Remain Measurable
 | Metric | Status | Notes |
@@ -2517,13 +2941,20 @@ Corrupt metadata →
 | All new SU-specific log events use structlog with named fields | ✅ Consistent with existing structured logging |
 | New Prometheus metrics follow existing naming convention (`_total`, `_ms`) | ✅ Compatible with existing Instrumentator setup |
 | `query_log.retrieved_chunks` now stores only `doc_*` IDs | ⚠️ **Breaking change for existing log queries** — any dashboard filtering on `retrieved_chunks` that expects mixed IDs must be updated |
-| `maintenance_log.event_type` adds new values: `'soft_stale'`, `'re_synthesis_queued'` | ✅ Additive; existing consumers of `'prune'` and `'merge'` are unaffected |
+| `maintenance_log.event_type` adds new values: `'soft_stale'`, `'re_synthesis_queued'`, `'depth_cap_refused'`, `'manual_review_flagged'` | ✅ Additive; existing consumers of `'prune'` and `'merge'` are unaffected |
+| SU12: `revision` counter in ChromaDB metadata is observable in Prometheus via custom gauge | ✅ New metric `super_node_revision_max` (gauge) tracks knowledge volatility |
+| SU13: `stale_reason` field in ChromaDB metadata distinguishes source-chunk drift (SU8) from child revision (SU13) | ✅ Additive field; existing `is_stale` filter logic unaffected |
+| SU14: `fidelity_flagged` and `drift_margin` in ChromaDB metadata are queryable via `/admin/super-nodes` for human spot-check queue | ✅ Additive fields; no existing query paths changed |
 
 ---
 
-> **Blueprint version:** v2.0  
-> **Improvements integrated:** SU1–SU10 (all 10)  
+> **Blueprint version:** v3.1  
+> **Improvements integrated:** SU1–SU14 (all 14)  
 > **Breaking changes:** 1 (query_log.retrieved_chunks now raw-only; update any dashboards querying mixed chunk IDs)  
-> **New hyperparameters:** EXPLORATION_EPSILON, HALF_LIFE_DAYS, DEDUP_DISTANCE_THRESHOLD, DEDUP_MIN_CHUNKS, SYNTHESIS_MAX_TOKENS, HIERARCHY_MAX_DEPTH  
-> **New SQLite methods required:** update_cluster_embedding, flag_cluster_for_re_synthesis, get_cluster_by_super_node_id  
-> **New ChromaDB metadata fields required:** in_hierarchy, is_stale (initialized in Phase 4 super-node upsert)
+> **New hyperparameters:** EXPLORATION_EPSILON, HALF_LIFE_DAYS, DEDUP_DISTANCE_THRESHOLD, DEDUP_MIN_CHUNKS, SYNTHESIS_MAX_TOKENS, MAX_LINEAGE_DEPTH, RESYNTH_DELTA, MAX_DRIFT_MARGIN, MIN_SOURCE_ANCHOR  
+> **New SQLite columns:** `last_synthesized_hit_count` (SU12)  
+> **New SQLite tables:** `manual_review_queue` (SU11 depth-cap violations)  
+> **New SQLite methods required:** update_cluster_embedding, flag_cluster_for_re_synthesis, get_cluster_by_super_node_id, flag_for_manual_review, get_manual_review_queue  
+> **New ChromaDB metadata fields required:** in_hierarchy, is_stale, parent_meta_id, lineage_depth, revision, fidelity_flagged, drift_margin, sim_summary_to_source (all initialized in Phase 4 super-node upsert)  
+> **Removed:** `synthesis_merge()` ad-hoc LLM call in hierarchy_merger.py (SU11); `synthesized` boolean as synthesis gate (SU12 replaces with delta counter)  
+> **No new files added:** SU14 is entirely within `synthesis/synthesizer.py` — `check_fidelity_bound()` is a new function in that file

@@ -54,3 +54,31 @@ SUMMARIZER_LLM_MODEL = os.getenv("SUMMARIZER_LLM_MODEL", "Qwen-2.5-32B-Instruct"
 
 # Phase 2: Query Clustering thresholds
 COSINE_THRESHOLD = float(os.getenv("COSINE_THRESHOLD", "0.92"))
+# Minimum number of cluster hits before Phase 3 triggers synthesis
+HIT_COUNT_THRESHOLD = int(os.getenv("HIT_COUNT_THRESHOLD", "10"))
+# SU12: number of *additional* hits after last synthesis before re-triggering
+RESYNTH_DELTA = int(os.getenv("RESYNTH_DELTA", "10"))
+
+# Phase 3: Synthesis Trigger thresholds
+POLL_INTERVAL_MINUTES = int(os.getenv("POLL_INTERVAL_MINUTES", "5"))
+CENTROID_SHIFT_THRESHOLD = float(os.getenv("CENTROID_SHIFT_THRESHOLD", "0.05"))
+
+# Phase 4: Synthesis quality thresholds
+# SU2: minimum fact-coverage score to accept an LLM synthesis
+VALIDATION_COVERAGE_THRESHOLD = float(os.getenv("VALIDATION_COVERAGE_THRESHOLD", "0.90"))
+MAX_SYNTHESIS_RETRIES = int(os.getenv("MAX_SYNTHESIS_RETRIES", "3"))
+# SU14: Synthesis Fidelity Bound
+# drift_margin > this → soft flag fidelity_flagged=True (node still served)
+MAX_DRIFT_MARGIN = float(os.getenv("MAX_DRIFT_MARGIN", "0.08"))
+# sim_summary_to_source < this → hard reject, force re-synthesis
+MIN_SOURCE_ANCHOR = float(os.getenv("MIN_SOURCE_ANCHOR", "0.55"))
+
+# Phase 6: Maintenance thresholds
+# SU3: half-life for exponential decay scoring (days)
+HALF_LIFE_DAYS = float(os.getenv("HALF_LIFE_DAYS", "7.0"))
+# Decay score below this → node is pruned
+DECAY_PRUNE_THRESHOLD = float(os.getenv("DECAY_PRUNE_THRESHOLD", "0.05"))
+# SU11: maximum merge nesting depth; deeper pairs go to manual_review_queue
+MAX_LINEAGE_DEPTH = int(os.getenv("MAX_LINEAGE_DEPTH", "2"))
+# Cosine similarity threshold above which two super-nodes are merged
+HIERARCHY_MERGE_THRESHOLD = float(os.getenv("HIERARCHY_MERGE_THRESHOLD", "0.88"))

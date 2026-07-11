@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SERA — Phase 3 Synthesis Dashboard</title>
+<meta name="description" content="Real-time Phase 3 simulation dashboard for SERA Self-Evolving RAG system">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         #07070f;
+    --surface:    rgba(255,255,255,0.045);
+    --surface2:   rgba(255,255,255,0.07);
+    --border:     rgba(255,255,255,0.09);
+    --cyan:       #22d3ee;
+    --purple:     #a78bfa;
+    --green:      #34d399;
+    --amber:      #fbbf24;
+    --red:        #f87171;
+    --blue:       #60a5fa;
+    --text:       #f1f5f9;
+    --muted:      #64748b;
+    --mono:       'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Animated background mesh ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: -1;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 0%,   rgba(34,211,238,.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%,  rgba(167,139,250,.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 50% 50%,   rgba(96,165,250,.04) 0%, transparent 70%);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(7,7,15,.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo {
+    font-weight: 800; font-size: 1.25rem; letter-spacing: -.5px;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .logo span { font-size: .75rem; font-weight: 400; opacity:.6; -webkit-text-fill-color: var(--muted); }
+  .header-stats { display: flex; gap: .75rem; margin-left: auto; flex-wrap: wrap; }
+  .stat-pill {
+    display: flex; align-items: center; gap: .4rem;
+    padding: .3rem .8rem; border-radius: 999px;
+    font-size: .75rem; font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: all .2s;
+  }
+  .stat-pill .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot-cyan   { background: var(--cyan);   box-shadow: 0 0 6px var(--cyan); }
+  .dot-purple { background: var(--purple); box-shadow: 0 0 6px var(--purple); }
+  .dot-green  { background: var(--green);  box-shadow: 0 0 6px var(--green); }
+  .dot-amber  { background: var(--amber);  box-shadow: 0 0 6px var(--amber); }
+
+  /* ── LAYOUT ── */
+  .layout { display: grid; grid-template-columns: 300px 1fr; height: calc(100vh - 57px); overflow: hidden; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    padding: 1.25rem;
+    border-right: 1px solid var(--border);
+    background: rgba(255,255,255,.02);
+    display: flex; flex-direction: column; gap: 1rem;
+    overflow-y: auto;
+  }
+  .sidebar-title {
+    font-size: .65rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
+    padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: .4rem; }
+  .form-label { font-size: .75rem; font-weight: 600; color: var(--muted); }
+
+  .select-wrap { position: relative; }
+  select, input[type=number], input[type=text] {
+    width: 100%; padding: .55rem .75rem;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: .5rem; color: var(--text);
+    font-family: inherit; font-size: .8rem;
+    outline: none; transition: border-color .2s;
+    appearance: none;
+  }
+  select:focus, input:focus { border-color: var(--cyan); }
+  select option { background: #1a1a2e; }
+
+  .custom-query-wrap { position: relative; }
+  #customQueryInput {
+    font-size: .78rem; padding-right: 2.5rem;
+  }
+  .custom-clear {
+    position: absolute; right: .6rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 1rem; line-height: 1; transition: color .15s;
+  }
+  .custom-clear:hover { color: var(--red); }
+
+  .range-group { display: flex; flex-direction: column; gap: .25rem; }
+  .range-header { display: flex; justify-content: space-between; align-items: center; }
+  .range-val { font-size: .8rem; font-weight: 700; color: var(--cyan); font-family: var(--mono); }
+  input[type=range] {
+    width: 100%; accent-color: var(--cyan); cursor: pointer;
+    height: 4px; border-radius: 2px;
+  }
+
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; }
+  .toggle-label { font-size: .78rem; color: var(--text); }
+  .toggle-sublabel { font-size: .68rem; color: var(--muted); }
+  .toggle {
+    position: relative; width: 36px; height: 20px;
+    display: flex; align-items: center;
+  }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute; inset: 0; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 999px; cursor: pointer;
+    transition: .2s;
+  }
+  .toggle-slider::before {
+    content: ''; position: absolute;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--muted); top: 2px; left: 2px;
+    transition: .2s;
+  }
+  .toggle input:checked + .toggle-slider { background: rgba(34,211,238,.2); border-color: var(--cyan); }
+  .toggle input:checked + .toggle-slider::before { background: var(--cyan); transform: translateX(16px); }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: .25rem 0; }
+
+  .btn {
+    width: 100%; padding: .65rem; border-radius: .5rem;
+    font-family: inherit; font-size: .82rem; font-weight: 600;
+    cursor: pointer; border: none; transition: all .2s;
+    display: flex; align-items: center; justify-content: center; gap: .5rem;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #0ea5e9, #6d28d9);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) { filter: brightness(1.15); transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+  .btn-ghost {
+    background: var(--surface); color: var(--cyan);
+    border: 1px solid rgba(34,211,238,.3);
+  }
+  .btn-ghost:hover { background: rgba(34,211,238,.1); }
+  .btn-danger {
+    background: rgba(248,113,113,.1); color: var(--red);
+    border: 1px solid rgba(248,113,113,.3);
+  }
+  .btn-danger:hover { background: rgba(248,113,113,.2); }
+
+  /* ── PROGRESS ── */
+  .progress-wrap { display: none; flex-direction: column; gap: .4rem; }
+  .progress-wrap.visible { display: flex; }
+  .progress-bar-bg {
+    background: var(--surface2); border-radius: 999px;
+    height: 6px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    transition: width .3s ease; width: 0%;
+  }
+  .progress-text { font-size: .72rem; color: var(--muted); font-family: var(--mono); }
+
+  /* ── MAIN CONTENT ── */
+  .main { display: flex; flex-direction: column; overflow: hidden; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.25rem;
+    background: rgba(7,7,15,.85);
+    backdrop-filter: blur(16px);
+    z-index: 90;
+  }
+  .tab {
+    padding: .75rem 1rem; font-size: .8rem; font-weight: 600;
+    cursor: pointer; border-bottom: 2px solid transparent;
+    color: var(--muted); transition: all .2s; margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+  .tab-badge {
+    display: inline-block; background: var(--surface2);
+    padding: .1rem .4rem; border-radius: 999px;
+    font-size: .65rem; font-family: var(--mono); margin-left: .35rem;
+  }
+
+  /* ── TAB PANELS ── */
+  .tab-panel { display: none; padding: 1.25rem; overflow-y: auto; flex: 1; }
+  .tab-panel.active { display: flex; flex-direction: column; gap: 1rem; }
+
+  /* ── CLUSTER GRID ── */
+  .cluster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: .75rem; padding: 3rem;
+    color: var(--muted); text-align: center;
+    border: 1px dashed var(--border); border-radius: 1rem;
+    grid-column: 1 / -1;
+  }
+  .empty-icon { font-size: 2.5rem; opacity: .4; }
+  .empty-title { font-weight: 600; font-size: .9rem; }
+  .empty-sub { font-size: .78rem; }
+
+  /* ── CLUSTER CARD ── */
+  .cluster-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem; padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    transition: border-color .25s, box-shadow .25s, transform .2s;
+    position: relative; overflow: hidden;
+  }
+  .cluster-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--glow-color, var(--cyan)), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .cluster-card:hover { border-color: rgba(255,255,255,.15); box-shadow: 0 8px 30px rgba(0,0,0,.4); transform: translateY(-2px); }
+  .cluster-card:hover::before { opacity: 1; }
+  .cluster-card.is-ready    { --glow-color: var(--amber); border-color: rgba(251,191,36,.25); background: rgba(251,191,36,.02); }
+  .cluster-card.is-synth    { --glow-color: var(--green); border-color: rgba(52,211,153,.25); }
+  .cluster-card.is-syncing  { --glow-color: var(--cyan); border-color: rgba(34,211,238,.3); animation: pulse-border 1.5s ease-in-out infinite; }
+  .cluster-card.is-failed   { --glow-color: var(--red); border-color: rgba(248,113,113,.25); }
+
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
+    50% { box-shadow: 0 0 0 4px rgba(34,211,238,.15); }
+  }
+
+  .card-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  
+  .card-hit-wrap {
+    display: flex; align-items: baseline; gap: .3rem;
+  }
+  .card-hit {
+    font-size: 2rem; font-weight: 800; line-height: 1;
+    font-family: var(--mono); color: var(--cyan);
+  }
+  .card-hit-label {
+    font-size: .65rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em;
+  }
+  
+  .card-badges { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: flex-end; }
+  .badge {
+    font-size: .62rem; font-weight: 700; padding: .25rem .6rem;
+    border-radius: 999px; border: 1px solid; text-transform: uppercase; letter-spacing: .05em;
+    display: inline-block; white-space: nowrap;
+  }
+  .badge-idle    { color: var(--muted);   border-color: var(--border);  background: rgba(255,255,255,.03); }
+  .badge-ready   { color: var(--amber);   border-color: rgba(251,191,36,.5);   background: rgba(251,191,36,.1); }
+  .badge-syncing { color: var(--cyan);    border-color: rgba(34,211,238,.5);    background: rgba(34,211,238,.1); }
+  .badge-done    { color: var(--green);   border-color: rgba(52,211,153,.5);   background: rgba(52,211,153,.1); }
+  .badge-failed  { color: var(--red);     border-color: rgba(248,113,113,.5);     background: rgba(248,113,113,.1); }
+
+  .card-query {
+    font-size: .9rem; font-weight: 500; line-height: 1.5; color: #fff;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    padding-bottom: .5rem; border-bottom: 1px dashed var(--border);
+  }
+
+  .card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: .2rem; }
+  .meta-item { display: flex; flex-direction: column; gap: .2rem; }
+  .meta-key { font-size: .6rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; font-weight: 600; }
+  .meta-val { font-size: .75rem; font-family: var(--mono); color: #cbd5e1; }
+
+  .chunk-list { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .2rem; }
+  .chunk-pill {
+    font-size: .62rem; font-family: var(--mono); padding: .2rem .5rem;
+    border-radius: 999px; background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1); color: var(--muted);
+  }
+  .chunk-more { font-size: .62rem; color: var(--muted); align-self: center; font-style: italic; }
+  
+  .chunk-details { cursor: pointer; }
+  .chunk-details summary { color: var(--blue); font-weight: 600; list-style: none; user-select: none; }
+  .chunk-details summary::-webkit-details-marker { display: none; }
+  .chunk-details summary::before { content: '▶ '; font-size: .6rem; opacity: .7; display: inline-block; width: 12px; }
+  .chunk-details[open] summary::before { content: '▼ '; }
+
+  .card-footer { display: flex; gap: .5rem; margin-top: .5rem; }
+  .card-btn {
+    flex: 1; padding: .5rem; font-size: .75rem; font-weight: 600;
+    border-radius: .4rem; border: 1px solid var(--border);
+    background: rgba(255,255,255,.03); color: var(--muted);
+    cursor: pointer; font-family: inherit; transition: all .2s;
+    text-align: center;
+  }
+  .card-btn:hover:not(:disabled) { background: rgba(255,255,255,.08); color: var(--text); border-color: rgba(255,255,255,.2); }
+  .card-btn:disabled { opacity: .4; cursor: not-allowed; }
+  .card-btn.primary { border-color: rgba(34,211,238,.4); color: var(--cyan); background: rgba(34,211,238,.1); }
+  .card-btn.primary:hover { background: rgba(34,211,238,.2); box-shadow: 0 0 12px rgba(34,211,238,.2); }
+
+  /* ── QUERY LOG TABLE ── */
+  .log-table-wrap { overflow-x: auto; border-radius: .75rem; border: 1px solid var(--border); }
+  .log-table { width: 100%; border-collapse: collapse; font-size: .75rem; }
+  .log-table th {
+    padding: .6rem .85rem; text-align: left;
+    font-size: .65rem; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .08em;
+    background: var(--surface2); border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .log-table td {
+    padding: .55rem .85rem; border-bottom: 1px solid rgba(255,255,255,.04);
+    vertical-align: middle; max-width: 220px;
+  }
+  .log-table tr:last-child td { border-bottom: none; }
+  .log-table tr { transition: background .1s; }
+  .log-table tr:hover td { background: rgba(255,255,255,.03); }
+  .log-table tr.biased td { background: rgba(251,191,36,.04); }
+  .log-table tr.biased td:first-child { border-left: 2px solid var(--amber); }
+
+  .mono-sm { font-family: var(--mono); font-size: .7rem; }
+  .query-cell {
+    max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: .77rem; cursor: pointer;
+  }
+  .query-cell:hover { color: var(--cyan); }
+  .match-yes { color: var(--green); }
+  .match-no  { color: var(--red); }
+
+  /* ── LATENCY BAR ── */
+  .latency-bar { display: flex; align-items: center; gap: .4rem; min-width: 90px; }
+  .latency-bg { flex: 1; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+  .latency-fill { height: 100%; border-radius: 2px; transition: width .3s; }
+  .latency-val { font-family: var(--mono); font-size: .68rem; color: var(--muted); white-space: nowrap; }
+
+  /* ── SIM RESULTS PANEL ── */
+  .sim-summary {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: .75rem; padding: 1rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: .75rem;
+  }
+  .sim-stat { display: flex; flex-direction: column; gap: .2rem; }
+  .sim-stat-val { font-size: 1.5rem; font-weight: 800; font-family: var(--mono); }
+  .sim-stat-key { font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+
+  /* ── MODAL ── */
+  .modal-bg {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,.7); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: #0f0f1a; border: 1px solid var(--border);
+    border-radius: 1rem; padding: 1.5rem; max-width: 700px; width: 100%;
+    max-height: 80vh; overflow-y: auto;
+    animation: slide-up .25s ease;
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .modal-title { font-weight: 700; font-size: .95rem; }
+  .modal-close {
+    background: none; border: none; color: var(--muted);
+    font-size: 1.3rem; cursor: pointer; transition: color .15s; line-height: 1;
+  }
+  .modal-close:hover { color: var(--text); }
+  .revision-grid { display: flex; flex-direction: column; gap: .75rem; }
+  .revision-card {
+    border: 1px solid var(--border); border-radius: .6rem; padding: .85rem;
+    background: var(--surface);
+  }
+  .rev-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+  .rev-num { font-family: var(--mono); font-size: .78rem; color: var(--purple); font-weight: 700; }
+  .rev-scores { display: flex; gap: .6rem; }
+  .rev-score { font-size: .7rem; font-family: var(--mono); }
+  .rev-text { font-size: .77rem; line-height: 1.55; color: #c8d3e0; white-space: pre-wrap; }
+  .rev-ts { font-size: .65rem; color: var(--muted); margin-top: .4rem; font-family: var(--mono); }
+
+  /* ── NOTIFICATION TOAST ── */
+  .toast {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300;
+    padding: .7rem 1.1rem; border-radius: .6rem;
+    font-size: .8rem; font-weight: 600;
+    background: #1a2035; border: 1px solid var(--border);
+    animation: toast-in .3s ease; display: flex; align-items: center; gap: .5rem;
+  }
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .toast-success { border-color: rgba(52,211,153,.4); }
+  .toast-error   { border-color: rgba(248,113,113,.4); }
+  .toast-info    { border-color: rgba(34,211,238,.4); }
+
+  .refresh-hint { font-size: .7rem; color: var(--muted); display: flex; align-items: center; gap: .4rem; }
+  .refresh-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.2); }
+
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HEADER -->
+<header class="header">
+  <div class="logo">SERA <span>Phase 3 · Synthesis Trigger Dashboard</span></div>
+  <div class="header-stats">
+    <div class="stat-pill"><span class="dot dot-cyan"></span><span id="hClusters">0 Clusters</span></div>
+    <div class="stat-pill"><span class="dot dot-amber"></span><span id="hReady">0 Ready</span></div>
+    <div class="stat-pill"><span class="dot dot-green"></span><span id="hSynthesized">0 Synthesized</span></div>
+    <div class="stat-pill"><span class="dot dot-purple"></span><span id="hLogs">0 Queries</span></div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════ LAYOUT -->
+<div class="layout">
+
+  <!-- ─── SIDEBAR ─── -->
+  <aside class="sidebar">
+    <div class="sidebar-title">⚙ Simulation Controls</div>
+
+    <!-- Biased Query Picker -->
+    <div class="form-group">
+      <label class="form-label">Biased Query (high-frequency)</label>
+      <div class="select-wrap">
+        <select id="biasQuerySelect" onchange="onBiasSelect()">
+          <option value="">— loading benchmark questions —</option>
+        </select>
+      </div>
+      <div class="custom-query-wrap" style="margin-top:.35rem">
+        <input type="text" id="customQueryInput" placeholder="Or type your own query…" oninput="onCustomQuery()">
+        <button class="custom-clear" onclick="clearCustomQuery()" title="Clear">✕</button>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Sliders -->
+    <div class="range-group">
+      <div class="range-header">
+        <label class="form-label">Total Queries</label>
+        <span class="range-val" id="totalVal">50</span>
+      </div>
+      <input type="range" id="totalSlider" min="5" max="300" value="50"
+        oninput="document.getElementById('totalVal').textContent=this.value">
+    </div>
+
+    <div class="range-group">
+      <div class="range-header">
+        <label class="form-label">Bias %</label>
+        <span class="range-val" id="biasVal">40%</span>
+      </div>
+      <input type="range" id="biasSlider" min="0" max="80" value="40"
+        oninput="document.getElementById('biasVal').textContent=this.value+'%'">
+    </div>
+
+    <hr class="divider">
+
+    <!-- Fast mode toggle -->
+    <div class="toggle-row">
+      <div>
+        <div class="toggle-label">Fast Mode</div>
+        <div class="toggle-sublabel">Skip ChromaDB retrieval (embed only)</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="fastModeToggle" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">Initialising…</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Action buttons -->
+    <button class="btn btn-primary" id="runBtn" onclick="startSimulation()">
+      ▶ Run Simulation
+    </button>
+    <button class="btn btn-ghost" onclick="triggerSynthesis()">
+      ⚡ Trigger Synthesis Now
+    </button>
+    <button class="btn btn-danger" onclick="confirmReset()">
+      🗑 Reset All Clusters
+    </button>
+
+    <div class="refresh-hint">
+      <span class="refresh-dot"></span>
+      Auto-refreshes every 5s
+    </div>
+  </aside>
+
+  <!-- ─── MAIN ─── -->
+  <main class="main">
+
+    <!-- Tabs -->
+    <nav class="tabs">
+      <div class="tab active" onclick="switchTab('clusters', this)">
+        Clusters <span class="tab-badge" id="tabClusters">0</span>
+      </div>
+      <div class="tab" onclick="switchTab('querylog', this)">
+        Query Log <span class="tab-badge" id="tabLogs">0</span>
+      </div>
+      <div class="tab" onclick="switchTab('simresults', this)">
+        Simulation Results <span class="tab-badge" id="tabResults">—</span>
+      </div>
+    </nav>
+
+    <!-- Panel: Clusters -->
+    <div class="tab-panel active" id="panel-clusters">
+      <div class="cluster-grid" id="clusterGrid">
+        <div class="empty-state">
+          <div class="empty-icon">🔮</div>
+          <div class="empty-title">No clusters yet</div>
+          <div class="empty-sub">Run a simulation or send some queries to the /query endpoint to generate clusters.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Query Log -->
+    <div class="tab-panel" id="panel-querylog">
+      <div class="log-table-wrap">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Query</th>
+              <th>Cluster ID</th>
+              <th>Hit Count</th>
+              <th>Match</th>
+              <th>Latency</th>
+              <th>Similarity</th>
+              <th>Chunks</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody id="logTableBody">
+            <tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--muted)">No query logs yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Panel: Simulation Results -->
+    <div class="tab-panel" id="panel-simresults">
+      <div id="simResultsContent" style="color:var(--muted);font-size:.82rem;padding:2rem;text-align:center">
+        Run a simulation to see per-query results here.
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ MODAL -->
+<div class="modal-bg" id="historyModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Synthesis History</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody" class="revision-grid"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════
+const state = {
+  clusters: [],
+  logs: [],
+  simJob: null,
+  pollTimer: null,
+  refreshTimer: null,
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  loadBenchmarkSamples();
+  refreshAll();
+  state.refreshTimer = setInterval(refreshAll, 5000);
+});
+
+async function refreshAll() {
+  await Promise.all([fetchClusters(), fetchQueryLog()]);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// BENCHMARK SAMPLES
+// ═══════════════════════════════════════════════════════════════════
+async function loadBenchmarkSamples() {
+  try {
+    const res = await fetch('/simulation/benchmark-samples?limit=50');
+    const data = await res.json();
+    const sel = document.getElementById('biasQuerySelect');
+    sel.innerHTML = '<option value="">— pick a benchmark question —</option>';
+    (data.samples || []).forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.question;
+      opt.textContent = s.question.length > 80 ? s.question.slice(0, 80) + '…' : s.question;
+      opt.title = s.question;
+      sel.appendChild(opt);
+    });
+  } catch(e) {
+    console.warn('Could not load benchmark samples:', e);
+  }
+}
+
+function onBiasSelect() {
+  const val = document.getElementById('biasQuerySelect').value;
+  if (val) document.getElementById('customQueryInput').value = '';
+}
+
+function onCustomQuery() {
+  const val = document.getElementById('customQueryInput').value;
+  if (val) document.getElementById('biasQuerySelect').value = '';
+}
+
+function clearCustomQuery() {
+  document.getElementById('customQueryInput').value = '';
+}
+
+function getBiasedQuery() {
+  return document.getElementById('customQueryInput').value.trim()
+      || document.getElementById('biasQuerySelect').value
+      || '';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SIMULATION
+// ═══════════════════════════════════════════════════════════════════
+async function startSimulation() {
+  const biasedQuery = getBiasedQuery();
+  if (!biasedQuery) { toast('Pick or type a biased query first.', 'error'); return; }
+
+  const totalQueries = parseInt(document.getElementById('totalSlider').value);
+  const biasPercent  = parseInt(document.getElementById('biasSlider').value);
+  const fastMode     = document.getElementById('fastModeToggle').checked;
+
+  setRunning(true);
+  showProgress(0, 'Starting simulation…');
+
+  try {
+    const res = await fetch('/simulation/run', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ total_queries: totalQueries, biased_query: biasedQuery, bias_percent: biasPercent, fast_mode: fastMode })
+    });
+    const { job_id } = await res.json();
+    state.simJob = job_id;
+    pollJob(job_id);
+  } catch(e) {
+    toast('Failed to start simulation: ' + e.message, 'error');
+    setRunning(false);
+    hideProgress();
+  }
+}
+
+async function pollJob(jobId) {
+  try {
+    const res  = await fetch(`/simulation/status/${jobId}`);
+    const job  = await res.json();
+    const pct  = job.progress || 0;
+    const done = job.results?.length || 0;
+    showProgress(pct, `Running… ${done} / ${job.total} queries`);
+
+    if (job.status === 'done') {
+      clearInterval(state.pollTimer);
+      setRunning(false);
+      hideProgress();
+      renderSimResults(job);
+      await refreshAll();
+      switchTabById('simresults');
+      toast(`Simulation complete — ${done} queries processed. Synthesis: ${JSON.stringify(job.synthesis)}`, 'success');
+    } else {
+      state.pollTimer = setTimeout(() => pollJob(jobId), 800);
+      await fetchClusters(); // live update clusters while running
+    }
+  } catch(e) {
+    console.error('Poll error:', e);
+    state.pollTimer = setTimeout(() => pollJob(jobId), 1500);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// CLUSTERS
+// ═══════════════════════════════════════════════════════════════════
+async function fetchClusters() {
+  try {
+    const res  = await fetch('/simulation/clusters');
+    const data = await res.json();
+    state.clusters = data.clusters || [];
+    renderClusters();
+    updateHeaderStats();
+  } catch(e) { /* silent */ }
+}
+
+function clusterStatus(c) {
+  if (c.synthesizing)     return 'syncing';
+  if (c.synthesis_failed) return 'failed';
+  if (c.synthesized)      return 'done';
+  if (c.hit_count >= 10)  return 'ready';
+  return 'idle';
+}
+
+function renderClusters() {
+  const grid = document.getElementById('clusterGrid');
+  document.getElementById('tabClusters').textContent = state.clusters.length;
+
+  if (!state.clusters.length) {
+    grid.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">🔮</div>
+      <div class="empty-title">No clusters yet</div>
+      <div class="empty-sub">Run a simulation or send queries to the /query endpoint.</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = state.clusters.map(c => {
+    const status = clusterStatus(c);
+    const statusLabel = { idle:'Idle', ready:'Ready', syncing:'Synthesizing…', done:'Synthesized', failed:'Failed' }[status];
+    const cardClass   = { idle:'', ready:'is-ready', syncing:'is-syncing', done:'is-synth', failed:'is-failed' }[status];
+    const badgeClass  = `badge-${status}`;
+    const hitColor    = status === 'ready' ? 'var(--amber)' : status === 'done' ? 'var(--green)' : 'var(--cyan)';
+
+    const chunks = c.chunk_ids || [];
+    const chunkHtml = chunks.slice(0, 4).map(id =>
+      `<span class="chunk-pill">${id}</span>`
+    ).join('') + (chunks.length > 4 ? `<span class="chunk-more">+${chunks.length - 4} more</span>` : '');
+
+    const lastSynced = c.last_synthesized_hit_count
+      ? `${c.hit_count - c.last_synthesized_hit_count} since last synth` : 'Never synthesized';
+
+    return `<div class="cluster-card ${cardClass}" id="cluster-${c.id}">
+      <div class="card-header">
+        <div class="card-hit-wrap">
+          <div class="card-hit" style="color:${hitColor}">${c.hit_count}</div>
+          <div class="card-hit-label">hits</div>
+        </div>
+        <div class="card-badges">
+          <span class="badge ${badgeClass}">${statusLabel}</span>
+          ${c.revision_count > 0 ? `<span class="badge badge-done">Rev ${c.revision_count}</span>` : ''}
+        </div>
+      </div>
+      <div class="card-query" title="${esc(c.canonical_query)}">${esc(c.canonical_query)}</div>
+      <div class="card-meta">
+        <div class="meta-item">
+          <span class="meta-key">First Seen</span>
+          <span class="meta-val">${fmtTime(c.first_seen)}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-key">Last Hit</span>
+          <span class="meta-val">${fmtTime(c.last_hit)}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-key">Cluster ID</span>
+          <span class="meta-val">#${c.id}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-key">Progress</span>
+          <span class="meta-val">${lastSynced}</span>
+        </div>
+      </div>
+      ${chunks.length ? `<div><div class="meta-key" style="margin-bottom:.3rem">Chunk IDs</div><div class="chunk-list">${chunkHtml}</div></div>` : ''}
+      <div class="card-footer">
+        ${c.history?.length ? `<button class="card-btn primary" onclick="showHistory(${c.id})">📖 View History (${c.revision_count})</button>` : `<button class="card-btn" disabled>No History Yet</button>`}
+        <button class="card-btn" onclick="copyCluster(${c.id})">Copy JSON</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function copyCluster(id) {
+  const c = state.clusters.find(x => x.id === id);
+  if (c) navigator.clipboard.writeText(JSON.stringify(c, null, 2));
+  toast('Cluster JSON copied!', 'info');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// QUERY LOG
+// ═══════════════════════════════════════════════════════════════════
+async function fetchQueryLog() {
+  try {
+    const res  = await fetch('/simulation/query-log?limit=150');
+    const data = await res.json();
+    state.logs = data.logs || [];
+    renderQueryLog();
+    updateHeaderStats();
+  } catch(e) { /* silent */ }
+}
+
+const MAX_LAT = 3000; // ms cap for bar scaling
+
+function renderQueryLog() {
+  const tbody = document.getElementById('logTableBody');
+  document.getElementById('tabLogs').textContent = state.logs.length;
+  document.getElementById('hLogs').textContent   = state.logs.length + ' Queries';
+
+  if (!state.logs.length) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--muted)">No query logs yet.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = state.logs.map((log, i) => {
+    const chunks = log.retrieved_chunks || [];
+    let chunksHtml = '<span class="mono-sm" style="color:var(--muted)">—</span>';
+    if (chunks.length > 0) {
+      chunksHtml = `<details class="chunk-details">
+        <summary>${chunks.length} chunks</summary>
+        <div class="chunk-list" style="margin-top:.4rem">
+          ${chunks.map(c => `<div class="chunk-pill" title="${esc(c)}" style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c)}</div>`).join('')}
+        </div>
+      </details>`;
+    }
+    const matchHtml = log.matched_existing
+      ? `<span class="match-yes">✓ Matched</span>`
+      : `<span class="match-no">✦ New</span>`;
+
+    // We don't store latency/similarity in DB; show from sim results if available
+    const simEntry = getSimEntry(log.raw_query);
+    const latMs    = simEntry?.latency_ms || 0;
+    const simScore = simEntry?.similarity_score || 0;
+    const latPct   = Math.min(latMs / MAX_LAT * 100, 100);
+    const latColor = latMs < 500 ? 'var(--green)' : latMs < 1500 ? 'var(--amber)' : 'var(--red)';
+
+    const isB = simEntry?.is_biased ? 'biased' : '';
+
+    return `<tr class="${isB}">
+      <td class="mono-sm">${state.logs.length - i}</td>
+      <td><div class="query-cell" title="${esc(log.raw_query)}" onclick="alert('${esc(log.raw_query.replace(/'/g,"\\'"  ))}')">${esc(log.raw_query)}</div></td>
+      <td class="mono-sm">${log.cluster_id ?? '—'}</td>
+      <td class="mono-sm">${log.hit_count ?? '—'}</td>
+      <td>${matchHtml}</td>
+      <td>
+        ${latMs ? `<div class="latency-bar">
+          <div class="latency-bg"><div class="latency-fill" style="width:${latPct}%;background:${latColor}"></div></div>
+          <span class="latency-val">${latMs.toFixed(0)}ms</span>
+        </div>` : '<span class="mono-sm" style="color:var(--muted)">—</span>'}
+      </td>
+      <td class="mono-sm">${simScore ? (simScore*100).toFixed(1)+'%' : '—'}</td>
+      <td>${chunksHtml}</td>
+      <td class="mono-sm" style="color:var(--muted)">${fmtTime(log.timestamp)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function getSimEntry(query) {
+  if (!state.simJob) return null;
+  const jobs = Object.values({});  // placeholder; results stored in simResults
+  return state._simResults?.find(r => r.query === query) || null;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SIM RESULTS PANEL
+// ═══════════════════════════════════════════════════════════════════
+function renderSimResults(job) {
+  state._simResults = (job.results || []).concat(state._simResults || []);
+  const synth  = job.synthesis || {};
+  const biased = (job.results || []).filter(r => r.is_biased).length;
+  const errors = (job.results || []).filter(r => r.error).length;
+  const avgLat = job.results?.length
+    ? (job.results.reduce((a,b) => a + (b.latency_ms||0), 0) / job.results.length).toFixed(1)
+    : 0;
+
+  document.getElementById('tabResults').textContent = state._simResults.length;
+
+  state._runCounter = (state._runCounter || 0) + 1;
+  const runId = state._runCounter;
+
+  const html = `
+    <div class="sim-run-block" style="margin-bottom: 2rem;">
+      <h3 style="margin-bottom: 1rem; color: var(--text); border-bottom: 1px dashed var(--border); padding-bottom: .5rem;">
+        Simulation Run #${runId} <span style="font-size:.7rem;color:var(--muted);margin-left:.5rem;font-weight:normal">(${new Date().toLocaleTimeString()})</span>
+      </h3>
+      <div class="sim-summary">
+        <div class="sim-stat"><span class="sim-stat-val" style="color:var(--cyan)">${job.total_queries}</span><span class="sim-stat-key">Total Queries</span></div>
+        <div class="sim-stat"><span class="sim-stat-val" style="color:var(--amber)">${biased}</span><span class="sim-stat-key">Biased Queries</span></div>
+        <div class="sim-stat"><span class="sim-stat-val" style="color:var(--green)">${synth.triggered ?? 0}</span><span class="sim-stat-key">Synthesis Triggered</span></div>
+        <div class="sim-stat"><span class="sim-stat-val" style="color:var(--purple)">${synth.skipped ?? 0}</span><span class="sim-stat-key">Skipped (P4 stub)</span></div>
+        <div class="sim-stat"><span class="sim-stat-val" style="color:var(--red)">${errors}</span><span class="sim-stat-key">Errors</span></div>
+        <div class="sim-stat"><span class="sim-stat-val" style="color:var(--blue)">${avgLat}ms</span><span class="sim-stat-key">Avg Latency</span></div>
+      </div>
+      <div class="log-table-wrap" style="margin-top:1rem">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Query</th><th>Biased</th><th>Cluster</th>
+              <th>Hit Count</th><th>Match</th><th>Latency</th><th>Similarity</th><th>Chunks</th><th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${(job.results || []).map(r => {
+              const latMs  = r.latency_ms || 0;
+              const latPct = Math.min(latMs / MAX_LAT * 100, 100);
+              const latCol = latMs < 500 ? 'var(--green)' : latMs < 1500 ? 'var(--amber)' : 'var(--red)';
+              const chunksArr = r.chunk_ids || [];
+              let chunksHtml = '<span class="mono-sm" style="color:var(--muted)">—</span>';
+              if (chunksArr.length > 0) {
+                chunksHtml = `<details class="chunk-details">
+                  <summary>${chunksArr.length} chunks</summary>
+                  <div class="chunk-list" style="margin-top:.4rem">
+                    ${chunksArr.map(c => `<div class="chunk-pill" title="${esc(c)}" style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c)}</div>`).join('')}
+                  </div>
+                </details>`;
+              }
+              return `<tr class="${r.is_biased ? 'biased' : ''}">
+                <td class="mono-sm">${r.index}</td>
+                <td><div class="query-cell" title="${esc(r.query)}">${esc(r.query)}</div></td>
+                <td style="text-align:center">${r.is_biased ? '<span class="badge badge-ready">⭐ Biased</span>' : '—'}</td>
+                <td class="mono-sm">${r.cluster_id ?? '—'}</td>
+                <td class="mono-sm">${r.hit_count ?? '—'}</td>
+                <td>${r.matched_existing ? '<span class="match-yes">✓</span>' : '<span class="match-no">✦</span>'}</td>
+                <td><div class="latency-bar">
+                  <div class="latency-bg"><div class="latency-fill" style="width:${latPct}%;background:${latCol}"></div></div>
+                  <span class="latency-val">${latMs.toFixed(0)}ms</span>
+                </div></td>
+                <td class="mono-sm">${r.similarity_score ? (r.similarity_score*100).toFixed(1)+'%' : '—'}</td>
+                <td>${chunksHtml}</td>
+                <td class="mono-sm" style="color:var(--muted)">${r.timestamp ? r.timestamp.slice(11,19) : '—'}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+
+  const content = document.getElementById('simResultsContent');
+  if (runId === 1) {
+    content.innerHTML = html;
+  } else {
+    content.innerHTML = html + content.innerHTML;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// HISTORY MODAL
+// ═══════════════════════════════════════════════════════════════════
+function showHistory(clusterId) {
+  const c = state.clusters.find(x => x.id === clusterId);
+  if (!c) return;
+  document.getElementById('modalTitle').textContent = `Cluster #${c.id} — Synthesis History`;
+  const body = document.getElementById('modalBody');
+  if (!c.history?.length) {
+    body.innerHTML = '<div style="color:var(--muted);text-align:center;padding:1rem">No synthesis history yet.</div>';
+  } else {
+    body.innerHTML = c.history.map((h, i) => {
+      const isLatest = i === 0;
+      const isFirst  = i === c.history.length - 1;
+      return `<div class="revision-card" style="${isLatest ? 'border-color:rgba(52,211,153,.35)' : ''}">
+        <div class="rev-header">
+          <span class="rev-num">${isLatest ? '✦ Latest — ' : ''}Revision ${h.revision}${isFirst && c.history.length > 1 ? ' (original)' : ''}</span>
+          <div class="rev-scores">
+            <span class="rev-score" style="color:var(--green)">Coverage: ${(h.coverage_score*100).toFixed(1)}%</span>
+            <span class="rev-score" style="color:${h.drift_margin > 0.08 ? 'var(--amber)' : 'var(--muted)'}">Drift: ${h.drift_margin.toFixed(3)}</span>
+          </div>
+        </div>
+        <div class="rev-text">${esc(h.summary || 'No summary stored.')}</div>
+        <div class="rev-ts">${h.timestamp}</div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('historyModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('historyModal').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SYNTHESIS TRIGGER
+// ═══════════════════════════════════════════════════════════════════
+async function triggerSynthesis() {
+  toast('Firing synthesis trigger…', 'info');
+  try {
+    const res  = await fetch('/simulation/trigger-synthesis', { method: 'POST' });
+    const data = await res.json();
+    toast(`Synthesis done — triggered:${data.synthesis.triggered} skipped:${data.synthesis.skipped} failed:${data.synthesis.failed}`, 'success');
+    await fetchClusters();
+  } catch(e) {
+    toast('Synthesis trigger failed: ' + e.message, 'error');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RESET
+// ═══════════════════════════════════════════════════════════════════
+async function confirmReset() {
+  if (!confirm('⚠️ This will DELETE all clusters, query logs, and simulation jobs.\n\nbenchmark_qa data is preserved.\n\nAre you sure?')) return;
+  try {
+    await fetch('/simulation/reset', { method: 'POST' });
+    state.clusters = []; state.logs = []; state._simResults = null;
+    renderClusters(); renderQueryLog();
+    document.getElementById('simResultsContent').innerHTML = 'Run a simulation to see per-query results here.';
+    document.getElementById('tabResults').textContent = '—';
+    updateHeaderStats();
+    toast('All clusters and logs cleared.', 'success');
+  } catch(e) {
+    toast('Reset failed: ' + e.message, 'error');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// HEADER STATS
+// ═══════════════════════════════════════════════════════════════════
+function updateHeaderStats() {
+  const total  = state.clusters.length;
+  const ready  = state.clusters.filter(c => c.hit_count >= 10 && !c.synthesized && !c.synthesizing).length;
+  const synth  = state.clusters.filter(c => c.synthesized).length;
+  document.getElementById('hClusters').textContent   = total + ' Clusters';
+  document.getElementById('hReady').textContent      = ready + ' Ready';
+  document.getElementById('hSynthesized').textContent = synth + ' Synthesized';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════════════════
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+function switchTabById(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.tab[onclick*="${name}"]`)?.classList.add('active');
+  document.getElementById('panel-' + name)?.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// PROGRESS UI
+// ═══════════════════════════════════════════════════════════════════
+function showProgress(pct, text) {
+  document.getElementById('progressWrap').classList.add('visible');
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = text;
+}
+function hideProgress() {
+  document.getElementById('progressWrap').classList.remove('visible');
+}
+function setRunning(running) {
+  document.getElementById('runBtn').disabled = running;
+  document.getElementById('runBtn').textContent = running ? '⏳ Running…' : '▶ Run Simulation';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════════════════
+function toast(msg, type = 'info') {
+  const icons = { success: '✓', error: '✕', info: 'ℹ' };
+  const colors = { success: 'var(--green)', error: 'var(--red)', info: 'var(--cyan)' };
+  const el = document.createElement('div');
+  el.className = `toast toast-${type}`;
+  el.innerHTML = `<span style="color:${colors[type]}">${icons[type]}</span> ${esc(msg)}`;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 5000);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════════════════════
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fmtTime(ts) {
+  if (!ts) return '—';
+  try {
+    const d = new Date(ts.replace(' ', 'T') + (ts.includes('Z') ? '' : 'Z'));
+    return d.toLocaleTimeString('en-GB', { hour12: false });
+  } catch { return ts.slice(11, 19) || ts; }
+}
+</script>
+</body>
+</html>

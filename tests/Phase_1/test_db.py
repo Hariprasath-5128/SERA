@@ -36,7 +36,7 @@ def run_test():
         print(f"Processing: {row.question_focus} (Doc ID: {row.document_id})")
         
         # Run the full pipeline
-        raw_html = get(row.document_url)
+        raw_html, source_type = get(row.document_url)
         text = clean(raw_html)
         cleaned_text = clean_text(text)
         sections = parse_sections(cleaned_text)
