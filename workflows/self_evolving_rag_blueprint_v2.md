@@ -329,7 +329,7 @@ QUERY PIPELINE:
 4. Embed query → BAAI/bge-m3
 5. ChromaDB top-k retrieval from raw_chunks
 6. Concatenate chunk texts as context
-7. Call gpt-4o-mini with context + query
+7. Call Meta-Llama-3.1-8B-Instruct with context + query
 8. Return answer + source metadata + latency
 ```
 
@@ -539,7 +539,7 @@ def test_query_returns_answer():
 8. `ingestion/dataset_loader.py`
 9. `ingestion/benchmark_loader.py`
 10. `ingestion/ingestor.py`
-11. `retrieval/retriever.py`
+11. `retriever.py`
 12. `generation/generator.py`
 13. `api/routes/ingest.py`
 14. `api/routes/query.py`
@@ -1150,10 +1150,10 @@ class ValidationError(SynthesisError):
       - Select one representative chunk per cluster
    b. Enforce token budget: truncate to max_tokens * 4 chars
 3. Build synthesis prompt (canonical_query + deduplicated source_material)
-4. Call LLM (gpt-4o-mini, temperature=0.1, max_tokens=1000)
+4. Call LLM (Qwen-2.5-32B-Instruct, temperature=0.1, max_tokens=1000)
 5. Extract candidate summary from response
 6. LLM-AS-JUDGE VALIDATION (SU2):
-   a. Send (source_material, summary) to gpt-4o-mini in JSON mode
+   a. Send (source_material, summary) to Qwen-2.5-32B-Instruct in JSON mode
    b. LLM extracts facts, checks coverage mathematically
    c. Returns: { passed: bool, coverage_score: float, missing_facts: list }
    d. IF coverage < 0.90:
@@ -1261,12 +1261,12 @@ Summary:
 def validate_entailment(source_text: str, summary: str) -> ValidationOutput:
     """
     SU2 — LLM-as-Judge Entailment Validation.
-    Replaces regex + spaCy NER with semantic entailment scoring via gpt-4o-mini
+    Replaces regex + spaCy NER with semantic entailment scoring via Qwen-2.5-32B-Instruct
     in strict JSON mode. Captures nuanced factual coverage that surface-form
     string matching cannot detect (e.g. paraphrased facts, implied relationships).
     """
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="Qwen-2.5-32B-Instruct",
         response_format={"type": "json_object"},
         messages=[
             {"role": "system", "content": LLM_JUDGE_PROMPT.format(
@@ -1534,7 +1534,7 @@ GET /api/v1/admin/super-nodes
 | All chunks collapsed into 1 cluster | Return single chunk as source_text; skip dedup |
 
 ### ⚠️ Hidden Engineering Problems
-1. **LLM judge cost:** Each validation call to gpt-4o-mini costs tokens. For high-volume synthesis, consider a local cross-encoder (e.g. `cross-encoder/nli-deberta-v3-small`) as a fast first-pass filter before escalating to gpt-4o-mini.
+1. **LLM judge cost:** Each validation call to Qwen-2.5-32B-Instruct costs compute/tokens. For high-volume synthesis, consider a local cross-encoder (e.g. `cross-encoder/nli-deberta-v3-small`) as a fast first-pass filter before escalating to Qwen-2.5-32B-Instruct.
 2. **spaCy still required:** `entity_extractor.py` is retained for the hallucination additions check. Keep `RUN python -m spacy download en_core_web_sm` in the Dockerfile.
 3. **AgglomerativeClustering requires sklearn ≥ 1.0** for `metric="cosine"`. Verified compatible with `scikit-learn==1.5.2` in requirements.txt.
 4. **Token budget:** The deduplication step (SU1) replaces the old truncation-only approach, but the final `max_chars` guard is still in place as a safety net.
@@ -1709,7 +1709,7 @@ def test_fidelity_bound_drift_margin_increases_with_depth(mocker):
 
 **SU2 — LLM-as-Judge Validation in `validator.py`**
 - *Old behavior:* `validate()` used regex number/date extraction plus spaCy NER to build sets of `source_facts` and `summary_facts`, computing coverage as set intersection ratio. This approach passed summaries that hallucinated relationships as long as the surface-form entities matched.
-- *New behavior:* `validate_entailment()` sends source and summary to `gpt-4o-mini` in strict JSON mode with a fact-extraction + coverage-calculation prompt. The LLM reasons over semantic meaning rather than string surface forms. `entity_extractor.py` is retained for hallucination addition detection (entities in summary not present in source).
+- *New behavior:* `validate_entailment()` sends source and summary to `Qwen-2.5-32B-Instruct` in strict JSON mode with a fact-extraction + coverage-calculation prompt. The LLM reasons over semantic meaning rather than string surface forms. `entity_extractor.py` is retained for hallucination addition detection (entities in summary not present in source).
 - *Reason:* Regex/NER cannot detect paraphrased facts, implied relationships, or fabricated connections between correctly extracted entities. LLM-as-judge validates the "Fact Coverage" metric with the semantic precision required for a research paper claim of ≥90% factual fidelity.
 
 **SU12 — Re-Synthesis Threshold Counter in `synthesizer.py`**
@@ -2582,7 +2582,8 @@ CREATE TABLE IF NOT EXISTS manual_review_queue (
 | `MAX_LINEAGE_DEPTH` | 2 | **SU11**: Maximum merge nesting depth; beyond this, flag for manual review |
 | `MAX_DRIFT_MARGIN` | 0.08 | **SU14**: Max allowed `drift_margin` before fidelity_flagged=True is set |
 | `MIN_SOURCE_ANCHOR` | 0.55 | **SU14**: Minimum `sim_summary_to_source`; below this forces re-synthesis |
-| `LLM_MODEL` | `gpt-4o-mini` | Cost-efficient, sufficient quality |
+| `GENERATOR_LLM_MODEL` | `Meta-Llama-3.1-8B-Instruct` | User-facing answer generation model |
+| `SUMMARIZER_LLM_MODEL` | `Qwen-2.5-32B-Instruct` | Phase 4 Summarizer and LLM-as-Judge validation model |
 | `LLM_TEMPERATURE` | 0.1 | Low temp for factual consistency |
 | `TOP_K_RAW` | 5 | Raw chunks retrieved per query |
 | `TOP_K_SUPER` | 3 | Super-nodes retrieved per query |

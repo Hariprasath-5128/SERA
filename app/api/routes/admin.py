@@ -1,14 +1,15 @@
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field
-import time
-import json
-import os
+from datetime import datetime, timezone
 from pathlib import Path
+import json
 import logging
-from datetime import datetime
+import os
+import time
+
+from fastapi import APIRouter, BackgroundTasks, HTTPException
+from pydantic import BaseModel, Field
 
 from app.config import DATA_DIR
-from app.db import sqlite_client
+from app.db import sqlite_client, super_node_store
 from app.db.chroma_client import ChromaClient
 
 logger = logging.getLogger(__name__)
@@ -143,3 +144,166 @@ def get_scheduler_status():
         "status": "running" if sched.running else "stopped",
         "jobs": jobs,
     }
+
+
+# ---------------------------------------------------------------------------
+# Phase 4 — Synthesis endpoints
+# ---------------------------------------------------------------------------
+
+class SynthesisResponse(BaseModel):
+    status:        str
+    super_node_id: str | None = None
+    coverage:      float | None = None
+    message:       str
+
+
+class SuperNodeSummary(BaseModel):
+    id:              str
+    source_query:    str
+    cluster_id:      int
+    revision:        int
+    fact_coverage:   float
+    fidelity_flagged: bool
+    drift_margin:    float
+    is_stale:        bool
+    hit_count:       int
+    created_at:      str
+    last_accessed:   str
+
+
+class SuperNodeListResponse(BaseModel):
+    nodes: list[SuperNodeSummary]
+    total: int
+
+
+@router.post("/synthesize/{cluster_id}", response_model=SynthesisResponse)
+def force_synthesize(cluster_id: int):
+    """
+    POST /admin/synthesize/{cluster_id}
+
+    Force synthesis for a specific cluster, bypassing the scheduler's
+    hit_count threshold. Useful for manual testing and debugging.
+
+    Behaviour
+    ----------
+    - Checks whether the cluster already has a super-node (SU12 re-synthesis).
+    - Acquires the synthesizing lock so the scheduler doesn't double-trigger.
+    - Runs the full Phase 4 pipeline synchronously.
+    - Returns super_node_id + fact_coverage on success.
+    """
+    from app.synthesis.synthesizer import (
+        SynthesisJob,
+        SynthesisError,
+        ValidationError,
+        run as synthesis_run,
+    )
+
+    cluster = sqlite_client.get_cluster(cluster_id)
+    if cluster is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Cluster {cluster_id} not found in SQLite.",
+        )
+
+    # Prevent double-synthesis if scheduler is already running this cluster
+    if cluster["synthesizing"]:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Cluster {cluster_id} is already being synthesized. Try again shortly.",
+        )
+
+    # Check for existing super-node (SU12)
+    existing_node = super_node_store.get_by_cluster(cluster_id)
+    existing_sn_id = existing_node["id"] if existing_node else None
+
+    # Acquire concurrency lock
+    sqlite_client.set_synthesizing(cluster_id, True)
+
+    try:
+        chunk_ids = json.loads(cluster["chunk_ids"])
+        job = SynthesisJob(
+            cluster_id=cluster_id,
+            canonical_query=cluster["canonical_query"],
+            chunk_ids=chunk_ids,
+            hit_count=cluster["hit_count"],
+            triggered_at=datetime.now(timezone.utc),
+            existing_sn_id=existing_sn_id,
+        )
+
+        sn_id = synthesis_run(job)
+
+        # Read back the coverage score from ChromaDB metadata
+        meta     = super_node_store.get_metadata(sn_id)
+        coverage = meta.get("fact_coverage", 0.0)
+
+        logger.info(
+            "admin: force_synthesize success | cluster_id=%d | sn_id=%s | coverage=%.3f",
+            cluster_id, sn_id, coverage,
+        )
+        return SynthesisResponse(
+            status="success",
+            super_node_id=sn_id,
+            coverage=coverage,
+            message=f"Super-node {'updated' if existing_sn_id else 'created'} successfully.",
+        )
+
+    except (SynthesisError, ValidationError) as exc:
+        logger.error("admin: force_synthesize failed | cluster_id=%d | %s", cluster_id, exc)
+        raise HTTPException(status_code=422, detail=str(exc))
+
+    except Exception as exc:
+        logger.error(
+            "admin: force_synthesize unexpected error | cluster_id=%d | %s",
+            cluster_id, exc, exc_info=True,
+        )
+        sqlite_client.set_synthesizing(cluster_id, False)
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(exc)}")
+
+
+@router.get("/super-nodes", response_model=SuperNodeListResponse)
+def list_super_nodes():
+    """
+    GET /admin/super-nodes
+
+    Returns all synthesized super-nodes with their metadata.
+    Used by the simulation dashboard to visualize the evolution of
+    raw clusters into validated knowledge entries.
+
+    Response fields per node
+    -------------------------
+    id              : ChromaDB document ID (sn_{cluster_id}_{ts})
+    source_query    : canonical cluster question
+    cluster_id      : originating SQLite cluster row
+    revision        : how many times this node has been re-synthesized (SU12)
+    fact_coverage   : LLM-judge score (0.0 – 1.0)
+    fidelity_flagged: SU14 soft overfit flag
+    drift_margin    : SU14 drift_margin research metric
+    is_stale        : SU8/SU13 staleness flag
+    hit_count       : number of user queries that triggered this cluster
+    created_at      : ISO8601 first synthesis timestamp
+    last_accessed   : ISO8601 last access timestamp
+    """
+    try:
+        raw_nodes = super_node_store.list_all()
+    except Exception as exc:
+        logger.error("admin: list_super_nodes failed — %s", exc, exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to read super-nodes: {str(exc)}")
+
+    summaries = []
+    for node in raw_nodes:
+        meta = node.get("metadata", {})
+        summaries.append(SuperNodeSummary(
+            id=node["id"],
+            source_query=meta.get("source_query", ""),
+            cluster_id=int(meta.get("cluster_id", 0)),
+            revision=int(meta.get("revision", 1)),
+            fact_coverage=float(meta.get("fact_coverage", 0.0)),
+            fidelity_flagged=bool(meta.get("fidelity_flagged", False)),
+            drift_margin=float(meta.get("drift_margin", 0.0)),
+            is_stale=bool(meta.get("is_stale", False)),
+            hit_count=int(meta.get("hit_count", 0)),
+            created_at=str(meta.get("created_at", "")),
+            last_accessed=str(meta.get("last_accessed", "")),
+        ))
+
+    return SuperNodeListResponse(nodes=summaries, total=len(summaries))

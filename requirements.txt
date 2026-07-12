@@ -9,3 +9,8 @@ openai
 fastapi
 uvicorn
 pydantic
+scikit-learn>=1.0
+spacy
+apscheduler
+numpy
+datasets
