@@ -430,6 +430,67 @@
   ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.2); }
 
+  /* ── ADMIN MODALS (login + backup) ── */
+  .admin-modal-bg {
+    display: none; position: fixed; inset: 0; z-index: 400;
+    background: rgba(0,0,0,.72); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }
+  .admin-modal-bg.open { display: flex; }
+  .admin-modal {
+    background: #0f1120; border: 1px solid var(--border);
+    border-radius: 1rem; padding: 2rem; width: 360px;
+    box-shadow: 0 0 60px rgba(34,211,238,.1);
+    animation: modal-slide .25s ease;
+  }
+  @keyframes modal-slide {
+    from { opacity:0; transform: translateY(-16px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  .admin-modal-icon {
+    font-size: 2.2rem; text-align: center; margin-bottom: .75rem;
+  }
+  .admin-modal-title {
+    text-align: center; font-size: 1rem; font-weight: 700;
+    margin-bottom: 1.5rem; color: var(--text);
+  }
+  .admin-field { margin-bottom: 1rem; }
+  .admin-field label {
+    display: block; font-size: .72rem; font-weight: 600;
+    color: var(--muted); text-transform: uppercase;
+    letter-spacing: .06em; margin-bottom: .35rem;
+  }
+  .admin-field input {
+    width: 100%; background: rgba(255,255,255,.05);
+    border: 1px solid var(--border); border-radius: .5rem;
+    padding: .55rem .75rem; color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: .85rem;
+    outline: none; transition: border-color .2s;
+  }
+  .admin-field input:focus { border-color: var(--cyan); }
+  .admin-err {
+    font-size: .75rem; color: var(--red); margin-bottom: .75rem;
+    text-align: center; min-height: 1rem;
+  }
+  .admin-modal-actions { display: flex; gap: .65rem; margin-top: 1.25rem; }
+  .admin-modal-actions button { flex: 1; }
+  .btn-lock {
+    display: flex; align-items: center; justify-content: center;
+    gap: .5rem; background: rgba(34,211,238,.1);
+    border: 1px solid rgba(34,211,238,.3); color: var(--cyan);
+    border-radius: .5rem; padding: .55rem .9rem;
+    font-size: .8rem; font-weight: 600; cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-lock:hover { background: rgba(34,211,238,.18); box-shadow: 0 0 12px rgba(34,211,238,.2); }
+  .backup-path {
+    margin-top: .75rem; padding: .55rem .75rem;
+    background: rgba(52,211,153,.07); border: 1px solid rgba(52,211,153,.2);
+    border-radius: .5rem; font-family: var(--mono);
+    font-size: .72rem; color: var(--green); word-break: break-all;
+    display: none;
+  }
+
   @media (max-width: 720px) {
     .layout { grid-template-columns: 1fr; }
     .sidebar { border-right: none; border-bottom: 1px solid var(--border); }
@@ -520,6 +581,9 @@
     <button class="btn btn-ghost" onclick="triggerSynthesis()">
       ⚡ Trigger Synthesis Now
     </button>
+    <button class="btn-lock" id="backupBtn" onclick="openAdminLogin()" title="Admin only">
+      🔒 Backup Dataset
+    </button>
     <button class="btn btn-danger" onclick="confirmReset()">
       🗑 Reset All Clusters
     </button>
@@ -599,6 +663,53 @@
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div id="modalBody" class="revision-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ ADMIN LOGIN MODAL -->
+<div class="admin-modal-bg" id="adminLoginModal" onclick="if(event.target===this)closeAdminLogin()">
+  <div class="admin-modal">
+    <div class="admin-modal-icon">🔐</div>
+    <div class="admin-modal-title">Admin Authentication Required</div>
+    <div class="admin-field">
+      <label for="adminUser">Username</label>
+      <input type="text" id="adminUser" placeholder="admin" autocomplete="off"
+             onkeydown="if(event.key==='Enter')submitAdminLogin()">
+    </div>
+    <div class="admin-field">
+      <label for="adminPass">Password</label>
+      <input type="password" id="adminPass" placeholder="••••••••"
+             onkeydown="if(event.key==='Enter')submitAdminLogin()">
+    </div>
+    <div class="admin-err" id="adminErr"></div>
+    <div class="admin-modal-actions">
+      <button class="btn btn-ghost" onclick="closeAdminLogin()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitAdminLogin()">Unlock →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ BACKUP FORM MODAL -->
+<div class="admin-modal-bg" id="backupModal" onclick="if(event.target===this)closeBackupModal()">
+  <div class="admin-modal" style="width:400px">
+    <div class="admin-modal-icon">💾</div>
+    <div class="admin-modal-title">Backup Dataset</div>
+    <div class="admin-field">
+      <label for="backupVersion">Version / Tag</label>
+      <input type="text" id="backupVersion" placeholder="e.g. v2, pre-phase5, 2024-07-12"
+             onkeydown="if(event.key==='Enter')executeBackup()">
+    </div>
+    <div class="admin-field">
+      <label for="backupMessage">Commit Message</label>
+      <input type="text" id="backupMessage" placeholder="e.g. Pre-Phase 5 stable state"
+             onkeydown="if(event.key==='Enter')executeBackup()">
+    </div>
+    <div class="admin-err" id="backupErr"></div>
+    <div class="backup-path" id="backupPath"></div>
+    <div class="admin-modal-actions">
+      <button class="btn btn-ghost" onclick="closeBackupModal()">Cancel</button>
+      <button class="btn btn-primary" id="backupSubmitBtn" onclick="executeBackup()">Create Backup</button>
+    </div>
   </div>
 </div>
 
@@ -1020,6 +1131,103 @@ async function triggerSynthesis() {
     await fetchClusters();
   } catch(e) {
     toast('Synthesis trigger failed: ' + e.message, 'error');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// ADMIN LOGIN + BACKUP
+// ═══════════════════════════════════════════════════════════════════
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'sera@admin';
+
+function openAdminLogin() {
+  document.getElementById('adminUser').value = '';
+  document.getElementById('adminPass').value = '';
+  document.getElementById('adminErr').textContent = '';
+  document.getElementById('adminLoginModal').classList.add('open');
+  setTimeout(() => document.getElementById('adminUser').focus(), 100);
+}
+
+function closeAdminLogin() {
+  document.getElementById('adminLoginModal').classList.remove('open');
+}
+
+function submitAdminLogin() {
+  const user = document.getElementById('adminUser').value.trim();
+  const pass = document.getElementById('adminPass').value;
+  if (user === ADMIN_USER && pass === ADMIN_PASS) {
+    closeAdminLogin();
+    openBackupModal();
+  } else {
+    document.getElementById('adminErr').textContent = '✕ Invalid credentials. Please try again.';
+    document.getElementById('adminPass').value = '';
+    document.getElementById('adminPass').focus();
+  }
+}
+
+function openBackupModal() {
+  // Auto-suggest a version tag based on current date
+  const today = new Date().toISOString().slice(0, 10);
+  document.getElementById('backupVersion').value = today;
+  document.getElementById('backupMessage').value = '';
+  document.getElementById('backupErr').textContent = '';
+  document.getElementById('backupPath').style.display = 'none';
+  document.getElementById('backupSubmitBtn').disabled = false;
+  document.getElementById('backupSubmitBtn').textContent = 'Create Backup';
+  document.getElementById('backupModal').classList.add('open');
+  setTimeout(() => document.getElementById('backupMessage').focus(), 100);
+}
+
+function closeBackupModal() {
+  document.getElementById('backupModal').classList.remove('open');
+}
+
+async function executeBackup() {
+  const version = document.getElementById('backupVersion').value.trim();
+  const message = document.getElementById('backupMessage').value.trim();
+
+  if (!version) {
+    document.getElementById('backupErr').textContent = '✕ Version tag is required.';
+    return;
+  }
+  if (!message) {
+    document.getElementById('backupErr').textContent = '✕ Commit message is required.';
+    return;
+  }
+
+  document.getElementById('backupErr').textContent = '';
+  document.getElementById('backupSubmitBtn').disabled = true;
+  document.getElementById('backupSubmitBtn').textContent = '⏳ Creating backup…';
+
+  try {
+    const res = await fetch('/admin/backup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ version, message })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.detail || 'Backup failed.');
+    }
+
+    // Show success path
+    const pathEl = document.getElementById('backupPath');
+    pathEl.textContent = '✓ Saved to: ' + (data.backup_path || 'data/backups/' + version);
+    pathEl.style.display = 'block';
+
+    document.getElementById('backupSubmitBtn').textContent = '✓ Done';
+    toast(`Backup "${version}" created successfully.`, 'success');
+
+    // Auto-close after 2s
+    setTimeout(closeBackupModal, 2000);
+
+  } catch(e) {
+    document.getElementById('backupErr').textContent = '✕ ' + e.message;
+    document.getElementById('backupSubmitBtn').disabled = false;
+    document.getElementById('backupSubmitBtn').textContent = 'Create Backup';
+    toast('Backup failed: ' + e.message, 'error');
   }
 }
 
