@@ -1,0 +1,88 @@
+# ============================================================
+# SERA — docker-compose.yml
+#
+# Usage:
+#   docker compose up --build       ← first time
+#   docker compose up -d            ← subsequent starts (detached)
+#   docker compose down             ← stop
+#   docker compose logs -f sera     ← live logs
+# ============================================================
+
+version: "3.9"
+
+services:
+  sera:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+
+    image: sera:latest
+    container_name: sera-api
+
+    # ── Ports ──────────────────────────────────────────────
+    ports:
+      - "8000:8000"
+
+    # ── Volume — persists ChromaDB + SQLite across restarts ─
+    # The ./data directory is mounted directly from the host.
+    # Git LFS already populated this directory when you cloned.
+    # Any new data learned by the system is written here and
+    # survives docker compose down / up.
+    volumes:
+      - ./data:/app/data
+
+    # ── Environment Variables ───────────────────────────────
+    # These override defaults in app/config.py.
+    # Do NOT commit real secrets — use a .env file (see below).
+    environment:
+      # ── HuggingFace token (needed to download BAAI/bge-m3) ──
+      HF_TOKEN: ${HF_TOKEN}
+
+      # ── LLM endpoint ────────────────────────────────────────
+      # Point to your local inference server on the HOST machine.
+      # 'host.docker.internal' is Docker's built-in DNS alias for
+      # the host OS.  Change the port to wherever Ollama/vLLM runs.
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://host.docker.internal:11434/v1}
+
+      # ── Model names ─────────────────────────────────────────
+      GENERATOR_LLM_MODEL:  ${GENERATOR_LLM_MODEL:-Meta-Llama-3.1-8B-Instruct}
+      SUMMARIZER_LLM_MODEL: ${SUMMARIZER_LLM_MODEL:-Qwen-2.5-32B-Instruct}
+
+      # ── Embedding model ──────────────────────────────────────
+      EMBEDDING_MODEL_NAME: ${EMBEDDING_MODEL_NAME:-BAAI/bge-m3}
+
+      # ── Phase 2 clustering thresholds ───────────────────────
+      COSINE_THRESHOLD:    ${COSINE_THRESHOLD:-0.92}
+      HIT_COUNT_THRESHOLD: ${HIT_COUNT_THRESHOLD:-10}
+      RESYNTH_DELTA:       ${RESYNTH_DELTA:-10}
+
+      # ── Phase 3 scheduler ────────────────────────────────────
+      POLL_INTERVAL_MINUTES: ${POLL_INTERVAL_MINUTES:-5}
+
+      # ── Phase 4 quality gates ────────────────────────────────
+      VALIDATION_COVERAGE_THRESHOLD: ${VALIDATION_COVERAGE_THRESHOLD:-0.90}
+      MAX_SYNTHESIS_RETRIES:         ${MAX_SYNTHESIS_RETRIES:-3}
+      MAX_DRIFT_MARGIN:              ${MAX_DRIFT_MARGIN:-0.08}
+      MIN_SOURCE_ANCHOR:             ${MIN_SOURCE_ANCHOR:-0.55}
+
+    # ── Restart policy ──────────────────────────────────────
+    restart: unless-stopped
+
+    # ── Resource limits (adjust to your hardware) ──────────
+    # These prevent the container from consuming all RAM.
+    # BAAI/bge-m3 embedding model alone uses ~1.5 GB.
+    deploy:
+      resources:
+        limits:
+          memory: 6g
+        reservations:
+          memory: 2g
+
+    # ── Healthcheck (mirrors Dockerfile HEALTHCHECK) ───────
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
