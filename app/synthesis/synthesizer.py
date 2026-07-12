@@ -241,7 +241,7 @@ def run(job: SynthesisJob) -> str:
                 source_chunks_text=source_text,
             )
 
-        summary = llm_call(SYSTEM_PROMPT, user_prompt, temperature=0.1)
+        summary = llm_call(SYSTEM_PROMPT, user_prompt, temperature=0.1, max_tokens=2500)
 
         # SU2 validation
         result = validator.validate(source_text, summary)

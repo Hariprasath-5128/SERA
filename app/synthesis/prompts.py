@@ -35,8 +35,8 @@ Three templates are defined:
 # ---------------------------------------------------------------------------
 
 SYSTEM_PROMPT = (
-    "You are a strict, highly precise knowledge architect. "
-    "Your goal is to create a compressed, self-contained knowledge entry "
+    "You are a highly precise knowledge architect. "
+    "Your goal is to create a comprehensive, self-contained knowledge entry "
     "based ONLY on the provided source passages."
 )
 
@@ -52,10 +52,11 @@ Source Material:
 {source_chunks_text}
 
 Instructions:
-1. Synthesize a single, dense, self-contained summary that definitively answers the core question.
-2. Include ALL key facts, numbers, dates, and critical nuances found in the source material.
-3. Do not include conversational filler, introductions, or external knowledge.
-4. Output ONLY the final compressed summary."""
+1. Synthesize a detailed, comprehensive, and self-contained summary that definitively answers the core question.
+2. Include ALL key facts, numbers, dates, explanations, and critical nuances found in the source material.
+3. There is no strict length limit; prioritize thoroughness and clarity over brevity.
+4. Do not include conversational filler or external knowledge.
+5. Output ONLY the final synthesis."""
 
 # ---------------------------------------------------------------------------
 # Re-synthesis prompt — used when the LLM-as-judge rejects the first draft

@@ -3,12 +3,13 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
+# override=True ensures stale OS-level env vars are always replaced by .env values
 BASE_DIR = Path(__file__).resolve().parent.parent
 env_path = BASE_DIR / ".env"
 if env_path.exists():
-    load_dotenv(dotenv_path=env_path)
+    load_dotenv(dotenv_path=env_path, override=True)
 else:
-    load_dotenv()
+    load_dotenv(override=True)
 
 # System Directories
 DATA_DIR = BASE_DIR / "data"

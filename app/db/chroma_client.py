@@ -74,21 +74,40 @@ class ChromaClient:
     @classmethod
     def backup_chroma(cls, backup_dir: str):
         """
-        Safely copies the ChromaDB persistence directory to the backup directory.
+        Exports only the super_nodes collection to a JSON file to save space,
+        as the raw chunks are static.
         """
         import os
-        import shutil
+        import json
         from pathlib import Path
+        from app.config import CHROMA_SUPER_COLLECTION
         
         os.makedirs(backup_dir, exist_ok=True)
-        dest_path = Path(backup_dir) / "chroma"
+        dest_path = Path(backup_dir) / "super_nodes_backup.json"
         
-        logger.info("chroma_client: backing up ChromaDB to %s", dest_path)
+        logger.info("chroma_client: exporting super_nodes to %s", dest_path)
         
-        if os.path.exists(CHROMA_PERSIST_PATH):
-            if os.path.exists(dest_path):
-                shutil.rmtree(dest_path)
-            shutil.copytree(CHROMA_PERSIST_PATH, dest_path)
+        try:
+            client = cls.get_client()
+            col = client.get_or_create_collection(name=CHROMA_SUPER_COLLECTION)
+            data = col.get(include=["embeddings", "metadatas", "documents"])
+            
+            # Convert any ndarrays to lists for JSON serialization if necessary
+            embeddings = data.get("embeddings") or []
+            if embeddings and hasattr(embeddings[0], "tolist"):
+                embeddings = [emb.tolist() for emb in embeddings]
+                
+            with open(dest_path, "w", encoding="utf-8") as f:
+                json.dump({
+                    "ids": data.get("ids", []),
+                    "embeddings": embeddings,
+                    "metadatas": data.get("metadatas", []),
+                    "documents": data.get("documents", [])
+                }, f)
+                
+            logger.info("chroma_client: successfully exported %d super nodes", len(data.get("ids", [])))
+        except Exception as e:
+            logger.error("Failed to backup super_nodes: %s", e)
 
     @classmethod
     def reset_to_ground_truth(cls):

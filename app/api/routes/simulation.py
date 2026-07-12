@@ -229,6 +229,21 @@ def get_simulation_status(job_id: str):
     return job
 
 
+@router.get("/chunk/{chunk_id}")
+def get_chunk(chunk_id: str):
+    """Fetch raw chunk text from ChromaDB by ID."""
+    from app.db.chroma_client import ChromaClient
+    try:
+        col = ChromaClient.get_collection()
+        res = col.get(ids=[chunk_id])
+        if res and res["documents"] and len(res["documents"]) > 0:
+            return {"text": res["documents"][0]}
+        return {"text": "Chunk content not found in database."}
+    except Exception as e:
+        logger.error("get_chunk failed: %s", e)
+        return {"text": f"Error loading chunk: {str(e)}"}
+
+
 @router.get("/clusters")
 def get_clusters():
     """Full cluster list with history for the dashboard."""

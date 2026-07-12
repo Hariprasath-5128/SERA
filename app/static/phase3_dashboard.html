@@ -602,6 +602,9 @@
       <div class="tab active" onclick="switchTab('clusters', this)">
         Clusters <span class="tab-badge" id="tabClusters">0</span>
       </div>
+      <div class="tab" onclick="switchTab('triggering', this)">
+        Triggering <span class="tab-badge" id="tabTriggering">0</span>
+      </div>
       <div class="tab" onclick="switchTab('querylog', this)">
         Query Log <span class="tab-badge" id="tabLogs">0</span>
       </div>
@@ -645,6 +648,27 @@
       </div>
     </div>
 
+    <!-- Panel: Triggering -->
+    <div class="tab-panel" id="panel-triggering">
+      <div class="log-table-wrap">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Query (Canonical & Asked)</th>
+              <th>Details</th>
+              <th>Fact Coverage</th>
+              <th>Relevance (1-Drift)</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="triggeringTableBody">
+            <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No super nodes synthesized yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- Panel: Simulation Results -->
     <div class="tab-panel" id="panel-simresults">
       <div id="simResultsContent" style="color:var(--muted);font-size:.82rem;padding:2rem;text-align:center">
@@ -663,6 +687,26 @@
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div id="modalBody" class="revision-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SYNTHESIS MODAL -->
+<div class="modal-bg" id="synthesisModal" onclick="if(event.target===this)closeSynthesisModal()">
+  <div class="modal" style="max-width: 900px;">
+    <div class="modal-header">
+      <div class="modal-title" id="synthesisModalTitle">Synthesis Details</div>
+      <button class="modal-close" onclick="closeSynthesisModal()">✕</button>
+    </div>
+    <div style="display: flex; gap: 1.5rem;">
+      <div style="flex: 2;">
+        <h4 style="margin-bottom: .5rem; color: var(--cyan);">Summary</h4>
+        <div id="synthesisModalSummary" style="background: var(--surface); padding: 1rem; border-radius: .5rem; white-space: pre-wrap; color: var(--text); font-size: .85rem; max-height: 400px; overflow-y: auto; text-align: left;"></div>
+      </div>
+      <div style="flex: 1;">
+        <h4 style="margin-bottom: .5rem; color: var(--purple);">Retrieved Chunks</h4>
+        <div id="synthesisModalChunks" style="background: var(--surface); padding: 1rem; border-radius: .5rem; max-height: 400px; overflow-y: auto;"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -736,6 +780,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 async function refreshAll() {
   await Promise.all([fetchClusters(), fetchQueryLog()]);
+  if (typeof renderTriggering === 'function') renderTriggering();
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -921,6 +966,83 @@ function renderClusters() {
       </div>
     </div>`;
   }).join('');
+}
+
+function renderTriggering() {
+  const tbody = document.getElementById('triggeringTableBody');
+  if (!tbody) return;
+  const synthesizedClusters = state.clusters.filter(c => c.synthesized && c.history && c.history.length > 0);
+  document.getElementById('tabTriggering').textContent = synthesizedClusters.length;
+
+  if (!synthesizedClusters.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No super nodes synthesized yet.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = synthesizedClusters.map(c => {
+    const h = c.history[0]; // Latest revision
+    const chunks = c.chunk_ids || [];
+    
+    // Find a sample asked query from logs
+    const sampleLog = state.logs.find(l => l.cluster_id === c.id);
+    const askedQuery = sampleLog ? sampleLog.raw_query : c.canonical_query;
+
+    const factPct = (h.coverage_score * 100).toFixed(1) + '%';
+    const relPct = ((1.0 - h.drift_margin) * 100).toFixed(1) + '%';
+    const factCol = h.coverage_score >= 0.9 ? 'var(--green)' : 'var(--amber)';
+    const relCol = h.drift_margin <= 0.08 ? 'var(--green)' : 'var(--amber)';
+
+    return '<tr>' +
+      '<td class="mono-sm">#' + c.id + '</td>' +
+      '<td>' +
+        '<div class="query-cell" style="color:var(--cyan);font-weight:600;margin-bottom:.3rem" title="' + esc(c.canonical_query) + '">' + esc(c.canonical_query) + '</div>' +
+        '<div class="query-cell" style="color:var(--muted);font-size:.75rem" title="' + esc(askedQuery) + '">Asked: ' + esc(askedQuery) + '</div>' +
+      '</td>' +
+      '<td><button class="card-btn primary" style="padding: .4rem .8rem; width: auto;" onclick="openSynthesisModal(' + c.id + ')">▶ View Details</button></td>' +
+      '<td style="color:' + factCol + ';font-weight:600">' + factPct + '</td>' +
+      '<td style="color:' + relCol + ';font-weight:600">' + relPct + '</td>' +
+      '<td class="mono-sm" style="color:var(--muted)">' + fmtTime(h.timestamp) + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function openSynthesisModal(clusterId) {
+  const c = state.clusters.find(x => x.id === clusterId);
+  if (!c || !c.history || !c.history.length) return;
+  const h = c.history[0];
+  const chunks = c.chunk_ids || [];
+
+  document.getElementById('synthesisModalTitle').textContent = `Synthesis Details — Cluster #${c.id}`;
+  document.getElementById('synthesisModalSummary').textContent = h.summary;
+
+  const chunksHtml = '<div class="chunk-list" style="display:flex; flex-direction:column; gap:.4rem;">' +
+        chunks.map(ch => '<div style="display:flex; align-items:center; gap:.5rem;">' +
+            '<button class="card-btn primary" style="padding:.2rem .4rem; flex:0 0 auto; min-width:unset; width:auto; line-height:1;" title="View Chunk Content" onclick="viewChunkContent(\'' + ch + '\')">▶</button>' +
+            '<div class="chunk-pill" title="' + esc(ch) + '" style="max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;">' + esc(ch) + '</div>' +
+          '</div>').join('') +
+      '</div>' +
+      '<div id="synthesisModalChunkContent" style="margin-top:1rem; padding:1rem; background:rgba(0,0,0,.3); border-radius:.5rem; border:1px solid var(--border); font-size:.8rem; white-space:pre-wrap; color:var(--text); max-height:250px; overflow-y:auto; display:none;"></div>';
+  document.getElementById('synthesisModalChunks').innerHTML = chunksHtml;
+
+  document.getElementById('synthesisModal').classList.add('open');
+}
+
+async function viewChunkContent(chunkId) {
+  const box = document.getElementById('synthesisModalChunkContent');
+  if (!box) return;
+  box.style.display = 'block';
+  box.innerHTML = '<span style="color:var(--muted)">Loading chunk...</span>';
+  try {
+    const res = await fetch('/simulation/chunk/' + encodeURIComponent(chunkId));
+    const data = await res.json();
+    box.innerHTML = '<div style="color:var(--cyan); font-family:var(--mono); font-size:.7rem; margin-bottom:.5rem;">' + esc(chunkId) + '</div>' + esc(data.text);
+  } catch(e) {
+    box.innerHTML = '<span style="color:var(--red)">Failed to load chunk: ' + esc(e.message) + '</span>';
+  }
+}
+
+function closeSynthesisModal() {
+  document.getElementById('synthesisModal').classList.remove('open');
 }
 
 function copyCluster(id) {

@@ -31,27 +31,22 @@ logger = logging.getLogger(__name__)
 # Lazy-loaded singleton client
 # ---------------------------------------------------------------------------
 
-_client: OpenAI | None = None
-
-
 def _get_client() -> OpenAI:
     """
-    Returns a cached client pointed at LLM_BASE_URL using the
-    OpenAI-compatible REST interface (Ollama / vLLM expose this by default).
-    No API key is sent — the server is local and unauthenticated.
+    Returns a fresh OpenAI-compatible client on every call.
+    Reads API key and base_url live from config so .env changes
+    are always picked up without restarting the process.
     """
-    global _client
-    if _client is None:
-        _client = OpenAI(
-            api_key="not-required",        # local server ignores this
-            base_url=config.LLM_BASE_URL,  # e.g. http://localhost:11434/v1
-        )
-        logger.info(
-            "llm_client: initialised — model=%s  base_url=%s",
-            config.SUMMARIZER_LLM_MODEL,
-            config.LLM_BASE_URL,
-        )
-    return _client
+    client = OpenAI(
+        api_key=config.OPENAI_API_KEY or "not-required",
+        base_url=config.LLM_BASE_URL,
+    )
+    logger.debug(
+        "llm_client: using model=%s  base_url=%s",
+        config.SUMMARIZER_LLM_MODEL,
+        config.LLM_BASE_URL,
+    )
+    return client
 
 
 # ---------------------------------------------------------------------------
