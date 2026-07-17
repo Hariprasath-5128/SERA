@@ -61,3 +61,17 @@ def handle_query(req: QueryRequest):
         source_chunks=source_chunks,
         latency_ms=latency
     )
+
+class DeleteRequest(BaseModel):
+    query: str
+
+@router.delete('/')
+def delete_query_history(req: DeleteRequest):
+    from app.db.sqlite_client import get_connection
+    try:
+        with get_connection() as conn:
+            conn.execute('DELETE FROM query_log WHERE raw_query = ?', (req.query,))
+        return {'status': 'deleted'}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+

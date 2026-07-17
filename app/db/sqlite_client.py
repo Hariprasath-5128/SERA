@@ -342,6 +342,48 @@ def get_cluster_by_super_node_id(super_node_id: str) -> Optional[sqlite3.Row]:
     return row
 
 
+def log_super_node_access(super_node_ids: list[str]) -> None:
+    """
+    SU10 — Atomic SQLite access counter increment.
+
+    Replaces the old ChromaDB metadata write for access_count.  SQLite's
+    atomic UPDATE prevents the read-increment-write race condition that
+    loses counter increments under concurrent benchmark load (50 threads
+    all reading the same value simultaneously).
+
+    Executes a single parameterised UPDATE with an IN-clause so every
+    supplied super_node_id is incremented in one statement under SQLite's
+    row-level lock — zero increments are lost regardless of concurrency.
+
+    ChromaDB ``access_count`` metadata is intentionally NOT updated here;
+    it is a stale mirror synced only during the Phase 6 maintenance pass.
+
+    Args:
+        super_node_ids: List of super_node_id strings whose clusters
+                        should have hit_count + 1 and last_hit refreshed.
+                        Silently no-ops if the list is empty.
+    """
+    if not super_node_ids:
+        return
+
+    placeholders = ",".join("?" * len(super_node_ids))
+    with get_connection() as conn:
+        conn.execute(
+            f"""
+            UPDATE query_clusters
+            SET hit_count = hit_count + 1,
+                last_hit  = CURRENT_TIMESTAMP
+            WHERE super_node_id IN ({placeholders})
+            """,
+            super_node_ids,
+        )
+    logger.debug(
+        "sqlite_client.log_super_node_access: incremented hit_count for %d node(s)",
+        len(super_node_ids),
+    )
+
+
+
 # ---------------------------------------------------------------------------
 # query_log helpers (Phase 2)
 # ---------------------------------------------------------------------------

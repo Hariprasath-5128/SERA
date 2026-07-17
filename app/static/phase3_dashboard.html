@@ -658,7 +658,7 @@
               <th>Query (Canonical & Asked)</th>
               <th>Details</th>
               <th>Fact Coverage</th>
-              <th>Relevance (1-Drift)</th>
+              <th>Relevance (sim→query)</th>
               <th>Time</th>
             </tr>
           </thead>
@@ -710,6 +710,72 @@
   </div>
 </div>
 
+<!-- ══════════════════════════════════════ FULL VALIDATION MODAL -->
+<div class="modal-bg" id="fullValidationModal" onclick="if(event.target===this)closeFullValidationModal()">
+  <div class="modal-window" style="max-width: 900px; width: 90%; background: var(--bg); border: 1px solid var(--border);">
+    <div class="modal-close" onclick="closeFullValidationModal()">✕</div>
+    <div class="modal-title" style="margin-bottom: 1rem;">Phase 4 Validation Suite Simulator</div>
+    
+    <div id="fullValLoading" style="text-align: center; padding: 3rem; color: var(--cyan);">
+      <span class="icon spinner" style="font-size: 2rem;"></span>
+      <div style="margin-top: 1rem; font-size: .9rem;">Orchestrating SU2, Hallucination, and SU14 tests...</div>
+    </div>
+
+    <div id="fullValContent" style="display: none; max-height: 70vh; overflow-y: auto; padding-right: 1rem;">
+      <!-- Fact Coverage -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: .5rem; padding: 1.5rem; margin-bottom: 1rem;">
+        <h4 style="margin-top: 0; margin-bottom: 1rem; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: .5rem;">1. Fact Coverage Engine (SU2)</h4>
+        <div style="display: flex; gap: 2rem; align-items: flex-start;">
+          <div id="fValBadge" style="padding: 1rem 2rem; border-radius: .5rem; font-weight: bold; font-size: 1.5rem; text-align: center; border: 2px solid transparent;"></div>
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: .5rem;">
+              <span style="color: var(--muted);">Coverage Score:</span>
+              <span id="fValScore" style="font-weight: bold; font-family: var(--mono); font-size: 1.1rem;"></span>
+            </div>
+            <div style="margin-top: 1rem;">
+              <span style="color: var(--muted); display: block; margin-bottom: .5rem;">Missing Facts Detected:</span>
+              <ul id="fValMissingFacts" style="margin: 0; padding-left: 1.5rem; color: var(--text); font-size: .9rem;"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hallucination Check -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: .5rem; padding: 1.5rem; margin-bottom: 1rem;">
+        <h4 style="margin-top: 0; margin-bottom: 1rem; color: var(--orange); border-bottom: 1px solid var(--border); padding-bottom: .5rem;">2. Hallucination Check (Advisory)</h4>
+        <span style="color: var(--muted); display: block; margin-bottom: .5rem;">Made-up entities/names not in source:</span>
+        <ul id="fValHallucinations" style="margin: 0; padding-left: 1.5rem; color: var(--text); font-size: .9rem;"></ul>
+      </div>
+
+      <!-- Fidelity Bound (SU14) -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: .5rem; padding: 1.5rem;">
+        <h4 style="margin-top: 0; margin-bottom: 1rem; color: var(--blue); border-bottom: 1px solid var(--border); padding-bottom: .5rem;">3. Fidelity Bound (SU14)</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <div style="color: var(--muted); font-size: .8rem; margin-bottom: .2rem;">Summary → Query Similarity</div>
+            <div id="fValSimQuery" style="font-family: var(--mono); font-weight: bold; font-size: 1.1rem;"></div>
+          </div>
+          <div>
+            <div style="color: var(--muted); font-size: .8rem; margin-bottom: .2rem;">Summary → Source Similarity</div>
+            <div id="fValSimSource" style="font-family: var(--mono); font-weight: bold; font-size: 1.1rem;"></div>
+          </div>
+          <div>
+            <div style="color: var(--muted); font-size: .8rem; margin-bottom: .2rem;">Best Chunk → Query Similarity</div>
+            <div id="fValSimChunk" style="font-family: var(--mono); font-weight: bold; font-size: 1.1rem;"></div>
+          </div>
+          <div>
+            <div style="color: var(--muted); font-size: .8rem; margin-bottom: .2rem;">Calculated Drift Margin</div>
+            <div id="fValDrift" style="font-family: var(--mono); font-weight: bold; font-size: 1.1rem;"></div>
+          </div>
+        </div>
+        <div id="fValDriftWarning" style="margin-top: 1rem; padding: .75rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--red); border-radius: .3rem; font-size: .85rem; display: none;">
+          ⚠️ <strong>Overfit Warning:</strong> The summary has drifted too far towards the query and away from the source material.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════════════════════════════════════ ADMIN LOGIN MODAL -->
 <div class="admin-modal-bg" id="adminLoginModal" onclick="if(event.target===this)closeAdminLogin()">
   <div class="admin-modal">
@@ -756,6 +822,15 @@
     </div>
   </div>
 </div>
+
+<div id="js-error-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#ff3860;color:#fff;padding:1rem 1.5rem;font-family:monospace;font-size:.85rem;"></div>
+
+<script>
+window.onerror = function(msg, src, line, col, err) {
+  const b = document.getElementById('js-error-banner');
+  if (b) { b.style.display = 'block'; b.textContent = 'JS ERROR at line ' + line + ': ' + msg; }
+};
+</script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
@@ -988,9 +1063,13 @@ function renderTriggering() {
     const askedQuery = sampleLog ? sampleLog.raw_query : c.canonical_query;
 
     const factPct = (h.coverage_score * 100).toFixed(1) + '%';
-    const relPct = ((1.0 - h.drift_margin) * 100).toFixed(1) + '%';
+    // Relevance: direct cosine similarity between summary and the canonical query.
+    // Range is 0–1, so multiply by 100 for percentage. Capped at 100%.
+    const rawRel = typeof h.sim_summary_to_query === 'number' ? h.sim_summary_to_query : (1.0 - h.drift_margin);
+    const relPctNum = Math.min(100, Math.max(0, rawRel * 100));
+    const relPct = relPctNum.toFixed(1) + '%';
     const factCol = h.coverage_score >= 0.9 ? 'var(--green)' : 'var(--amber)';
-    const relCol = h.drift_margin <= 0.08 ? 'var(--green)' : 'var(--amber)';
+    const relCol = relPctNum >= 80 ? 'var(--green)' : relPctNum >= 60 ? 'var(--orange)' : 'var(--red)';
 
     return '<tr>' +
       '<td class="mono-sm">#' + c.id + '</td>' +
@@ -1012,7 +1091,7 @@ function openSynthesisModal(clusterId) {
   const h = c.history[0];
   const chunks = c.chunk_ids || [];
 
-  document.getElementById('synthesisModalTitle').textContent = `Synthesis Details — Cluster #${c.id}`;
+  document.getElementById('synthesisModalTitle').textContent = 'Synthesis Details \u2014 Cluster #' + c.id;
   document.getElementById('synthesisModalSummary').textContent = h.summary;
 
   const chunksHtml = '<div class="chunk-list" style="display:flex; flex-direction:column; gap:.4rem;">' +
@@ -1021,7 +1100,12 @@ function openSynthesisModal(clusterId) {
             '<div class="chunk-pill" title="' + esc(ch) + '" style="max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;">' + esc(ch) + '</div>' +
           '</div>').join('') +
       '</div>' +
-      '<div id="synthesisModalChunkContent" style="margin-top:1rem; padding:1rem; background:rgba(0,0,0,.3); border-radius:.5rem; border:1px solid var(--border); font-size:.8rem; white-space:pre-wrap; color:var(--text); max-height:250px; overflow-y:auto; display:none;"></div>';
+      '<div id="synthesisModalChunkContent" style="margin-top:1rem; padding:1rem; background:rgba(0,0,0,.3); border-radius:.5rem; border:1px solid var(--border); font-size:.8rem; white-space:pre-wrap; color:var(--text); max-height:250px; overflow-y:auto; display:none;"></div>' +
+      '<div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border);">' +
+        '<button class="btn btn-primary" onclick="openFullValidationModal(' + c.id + ')" style="width: 100%; justify-content: center; padding: .5rem; font-size: .85rem;">' +
+          '<span class="icon">⚖️</span> Run Full Validation Suite (Phase 4)' +
+        '</button>' +
+      '</div>';
   document.getElementById('synthesisModalChunks').innerHTML = chunksHtml;
 
   document.getElementById('synthesisModal').classList.add('open');
@@ -1038,6 +1122,87 @@ async function viewChunkContent(chunkId) {
     box.innerHTML = '<div style="color:var(--cyan); font-family:var(--mono); font-size:.7rem; margin-bottom:.5rem;">' + esc(chunkId) + '</div>' + esc(data.text);
   } catch(e) {
     box.innerHTML = '<span style="color:var(--red)">Failed to load chunk: ' + esc(e.message) + '</span>';
+  }
+}
+
+function closeFullValidationModal() {
+  document.getElementById('fullValidationModal').classList.remove('open');
+}
+
+async function openFullValidationModal(clusterId) {
+  const c = state.clusters.find(x => x.id === clusterId);
+  if (!c || !c.history || !c.history.length) return;
+  const h = c.history[0];
+  const chunks = c.chunk_ids || [];
+  
+  document.getElementById('fullValidationModal').classList.add('open');
+  document.getElementById('fullValLoading').style.display = 'block';
+  document.getElementById('fullValContent').style.display = 'none';
+
+  try {
+    const valRes = await fetch('/simulation/validate-test', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        chunk_ids: chunks, 
+        summary_text: h.summary,
+        canonical_query: c.canonical_query
+      })
+    });
+    
+    if (!valRes.ok) throw new Error(await valRes.text());
+    const data = await valRes.json();
+    
+    // SU2
+    const badge = document.getElementById('fValBadge');
+    if (data.su2.passed) {
+      badge.textContent = 'PASSED';
+      badge.style.color = 'var(--green)';
+      badge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+      badge.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+    } else {
+      badge.textContent = 'FAILED';
+      badge.style.color = 'var(--red)';
+      badge.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+      badge.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+    }
+    
+    document.getElementById('fValScore').textContent = (data.su2.coverage_score * 100).toFixed(1) + '%';
+    document.getElementById('fValScore').style.color = data.su2.passed ? 'var(--green)' : 'var(--red)';
+    
+    const missingUl = document.getElementById('fValMissingFacts');
+    if (data.su2.missing_facts && data.su2.missing_facts.length > 0) {
+      missingUl.innerHTML = data.su2.missing_facts.map(f => '<li style="margin-bottom:.2rem;">' + esc(f) + '</li>').join('');
+    } else {
+      missingUl.innerHTML = '<div style="color:var(--green); font-size:.8rem;">None! All facts covered.</div>';
+    }
+
+    // Hallucinations
+    const halUl = document.getElementById('fValHallucinations');
+    if (data.hallucination.added_entities && data.hallucination.added_entities.length > 0) {
+      halUl.innerHTML = data.hallucination.added_entities.map(e => '<li style="margin-bottom:.2rem; color:var(--orange);">' + esc(e) + '</li>').join('');
+    } else {
+      halUl.innerHTML = '<div style="color:var(--green); font-size:.8rem;">No made-up entities detected.</div>';
+    }
+
+    // SU14 Fidelity
+    document.getElementById('fValSimQuery').textContent = (data.su14.sim_summary_to_query).toFixed(3);
+    document.getElementById('fValSimSource').textContent = (data.su14.sim_summary_to_source).toFixed(3);
+    document.getElementById('fValSimChunk').textContent = (data.su14.sim_raw_to_query_max).toFixed(3);
+    document.getElementById('fValDrift').textContent = (data.su14.drift_margin).toFixed(3);
+    
+    const driftWarning = document.getElementById('fValDriftWarning');
+    if (data.su14.suspected_overfit || data.su14.suspected_disconnect) {
+      driftWarning.style.display = 'block';
+    } else {
+      driftWarning.style.display = 'none';
+    }
+    
+    document.getElementById('fullValLoading').style.display = 'none';
+    document.getElementById('fullValContent').style.display = 'block';
+
+  } catch(e) {
+    document.getElementById('fullValLoading').innerHTML = '<div style="color:var(--red);">Error: ' + esc(e.message) + '</div>';
   }
 }
 

@@ -10,6 +10,7 @@ class ChromaClient:
     """Lazy-loaded wrapper for ChromaDB."""
     _client = None
     _collection = None
+    _super_nodes_collection = None
 
     @classmethod
     def get_client(cls):
@@ -28,6 +29,31 @@ class ChromaClient:
                 metadata={"hnsw:space": "cosine"}
             )
         return cls._collection
+
+    @classmethod
+    def get_super_nodes_collection(cls):
+        """
+        Phase 5 — Lazy-loaded getter for the super_nodes ChromaDB collection.
+        Uses the same cosine space as raw_chunks so that distance scores are
+        directly comparable when merging candidates in the retriever (SU4).
+        Returns the collection, or None if it does not exist yet
+        (i.e. Phase 3/4 has not produced any super-nodes yet).
+        """
+        if cls._super_nodes_collection is None:
+            from app.config import CHROMA_SUPER_COLLECTION
+            client = cls.get_client()
+            try:
+                cls._super_nodes_collection = client.get_or_create_collection(
+                    name=CHROMA_SUPER_COLLECTION,
+                    metadata={"hnsw:space": "cosine"}
+                )
+            except Exception:
+                logger.warning(
+                    "chroma_client: super_nodes collection not available yet — "
+                    "Phase 5 retriever will fall back to raw_chunks only."
+                )
+                return None
+        return cls._super_nodes_collection
 
     @classmethod
     def insert_chunks(cls, chunks: List[Chunk]):

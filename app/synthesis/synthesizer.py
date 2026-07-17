@@ -367,6 +367,7 @@ def run(job: SynthesisJob) -> str:
             "fidelity_flagged":   fidelity_flagged,
             "drift_margin":       fidelity["drift_margin"],
             "sim_summary_to_source": fidelity["sim_summary_to_source"],
+            "sim_summary_to_query":  fidelity["sim_summary_to_query"],
         },
     )
     logger.info(

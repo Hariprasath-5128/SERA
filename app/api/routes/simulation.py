@@ -50,6 +50,11 @@ class SimulationRequest(BaseModel):
     bias_percent: int = 40        # % of queries that will be the biased one
     fast_mode: bool = True         # skip retriever; only log embedding (faster)
 
+class ValidationTestRequest(BaseModel):
+    chunk_ids: List[str]
+    summary_text: str
+    canonical_query: str
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -116,8 +121,8 @@ def _simulation_worker(job_id: str, req: SimulationRequest):
                 retrieval_ms = (time.time() - t0) * 1000
 
                 chunk_ids = [
-                    r["chunk_id"] for r in retrieval_results
-                    if not r["chunk_id"].startswith("sn_")
+                    r["id"] for r in retrieval_results
+                    if not r["id"].startswith("sn_")
                 ]
                 distances = [r["distance"] for r in retrieval_results]
                 similarity_score = round(1.0 - min(distances), 4) if distances else 0.0
@@ -334,3 +339,58 @@ def trigger_synthesis():
     """Manually fire the Phase 3 pattern finder."""
     result = scan_and_trigger()
     return {"status": "ok", "synthesis": result}
+
+@router.post("/validate-test")
+def simulate_validation_engine(req: ValidationTestRequest):
+    """Run the full Phase 4 Validation Suite (SU2, Hallucinations, SU14)."""
+    from app.validation.validator import validate
+    from app.validation.entity_extractor import check_hallucination
+    from app.synthesis.synthesizer import check_fidelity_bound, _encode_text
+    from app.db.chroma_client import ChromaClient
+    
+    try:
+        # 1. Fetch chunks & embeddings
+        collection = ChromaClient.get_collection()
+        if not req.chunk_ids:
+            raise ValueError("No chunk_ids provided")
+            
+        res = collection.get(
+            ids=req.chunk_ids,
+            include=["documents", "embeddings"]
+        )
+        if not res or not res["documents"]:
+            raise ValueError("Could not fetch source chunks")
+            
+        source_text = "\n\n---\n\n".join(res["documents"])
+        source_embs = res["embeddings"]
+        
+        # 2. Run SU2 (Fact Coverage)
+        su2_res = validate(source_text, req.summary_text)
+        
+        # 3. Run Hallucination Check
+        hallucination_res = check_hallucination(source_text, req.summary_text)
+        
+        # 4. Run SU14 (Fidelity Bound)
+        summary_emb = _encode_text(req.summary_text)
+        query_emb = _encode_text(req.canonical_query)
+        su14_res = check_fidelity_bound(
+            summary_emb=summary_emb,
+            source_chunk_embs=source_embs,
+            source_query_emb=query_emb
+        )
+        
+        return {
+            "status": "success",
+            "su2": {
+                "passed": su2_res.passed,
+                "coverage_score": su2_res.coverage_score,
+                "missing_facts": su2_res.missing_facts
+            },
+            "hallucination": {
+                "added_entities": hallucination_res["added_entities"]
+            },
+            "su14": su14_res
+        }
+    except Exception as e:
+        logger.error("Simulation validate failed: %s", e)
+        raise HTTPException(status_code=500, detail=str(e))

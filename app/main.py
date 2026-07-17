@@ -62,11 +62,11 @@ app.include_router(ingest.router)
 app.include_router(admin.router)
 app.include_router(simulation.router)
 
-# Serve the Phase 3 dashboard as a static HTML file
-_static_dir = Path(__file__).resolve().parent / "static"
-_static_dir.mkdir(exist_ok=True)
-app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
-
 @app.get("/health")
 def health_check():
     return {"status": "ok", "message": "SERA API is running"}
+
+# Serve the frontend directory at the root
+_frontend_dir = Path(__file__).resolve().parent.parent / "frontend"
+_frontend_dir.mkdir(exist_ok=True)
+app.mount("/", StaticFiles(directory=str(_frontend_dir), html=True), name="frontend")

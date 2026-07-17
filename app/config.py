@@ -48,6 +48,12 @@ EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "BAAI/bge-m3")
 # Retrieval & LLM Generation Settings
 DEFAULT_TOP_K = int(os.getenv("DEFAULT_TOP_K", "5"))
 
+# Phase 5: Preferential Retrieval
+# SU4: ε-Greedy exploration rate — fraction of queries that skip the super-node boost
+EXPLORATION_EPSILON = float(os.getenv("EXPLORATION_EPSILON", "0.10"))
+# SU4: L2 distance multiplier applied to super-nodes during exploitation queries
+SUPER_NODE_SCORE_MULTIPLIER = float(os.getenv("SUPER_NODE_SCORE_MULTIPLIER", "0.85"))
+
 # We support OpenAI-compatible endpoints (like Ollama, vLLM, Groq, Together) via base_url
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", None) 
 GENERATOR_LLM_MODEL = os.getenv("GENERATOR_LLM_MODEL", "Llama-3.1-8B-Instruct")
