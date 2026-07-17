@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SERA — Self-Evolving RAG Dashboard</title>
+<meta name="description" content="SERA medical RAG system — full dashboard with chat, clusters, super-nodes and simulation."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ══ TOKENS ══ */
+:root{
+  --bg:#111827; --bg2:#1a2235; --bg3:#1e2a3a;
+  --surface:rgba(255,255,255,.05); --surface2:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.09); --border-h:rgba(99,102,241,.45);
+  --indigo:#6366f1; --indigo-d:#4f46e5; --indigo-g:rgba(99,102,241,.15);
+  --cyan:#22d3ee; --cyan-g:rgba(34,211,238,.12);
+  --purple:#a78bfa; --blue:#60a5fa;
+  --green:#10b981; --green2:#34d399;
+  --amber:#f59e0b; --amber2:#fbbf24;
+  --red:#ef4444; --red2:#f87171;
+  --text:#e2e8f0; --muted:#64748b; --muted2:#94a3b8;
+  --mono:'JetBrains Mono',monospace;
+  --radius:14px; --radius-s:8px;
+  --glass:blur(14px); --trans:.2s ease;
+  --shadow:0 8px 32px rgba(0,0,0,.45);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.6}
+button{cursor:pointer;font-family:inherit}
+input,textarea,select{font-family:inherit;outline:none}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:3px}
+
+/* mesh bg */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(99,102,241,.1) 0%,transparent 60%),
+             radial-gradient(ellipse 60% 40% at 80% 80%,rgba(34,211,238,.07) 0%,transparent 60%)}
+
+/* ══ LAYOUT ══ */
+#app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
+
+/* ══ NAV ══ */
+nav.topnav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:56px;position:sticky;top:0;z-index:200;
+  background:rgba(17,24,39,.88);backdrop-filter:var(--glass);
+  border-bottom:1px solid var(--border);
+}
+.brand{display:flex;align-items:center;gap:10px;font-size:1.1rem;font-weight:800;letter-spacing:-.3px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.brand-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--indigo),var(--cyan));
+  display:flex;align-items:center;justify-content:center;font-size:.95rem;-webkit-text-fill-color:initial}
+.brand-sub{font-size:.72rem;font-weight:400;color:var(--muted);-webkit-text-fill-color:var(--muted)}
+.nav-pills{display:flex;gap:.5rem;flex-wrap:wrap}
+.stat-pill{display:flex;align-items:center;gap:.4rem;padding:.28rem .75rem;border-radius:999px;
+  font-size:.72rem;font-weight:600;border:1px solid var(--border);background:var(--surface)}
+.dot{width:7px;height:7px;border-radius:50%}
+.dot-cyan{background:var(--cyan);box-shadow:0 0 6px var(--cyan)}
+.dot-purple{background:var(--purple);box-shadow:0 0 6px var(--purple)}
+.dot-green{background:var(--green);box-shadow:0 0 6px var(--green)}
+.dot-amber{background:var(--amber);box-shadow:0 0 6px var(--amber)}
+.dot-red{background:var(--red);box-shadow:0 0 6px var(--red)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.health-dot{width:10px;height:10px;border-radius:50%;background:var(--red);transition:background var(--trans)}
+.health-dot.online{background:var(--green);animation:pulse-green 2s infinite}
+@keyframes pulse-green{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}70%{box-shadow:0 0 0 8px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+.icon-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted2);border-radius:var(--radius-s);
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all var(--trans)}
+.icon-btn:hover{background:var(--surface2);color:var(--text);border-color:var(--border-h)}
+
+/* ══ BODY LAYOUT: Sidebar + Main ══ */
+.app-body{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - 56px);overflow:hidden}
+
+/* ══ SIDEBAR ══ */
+.sidebar{
+  padding:1.1rem;border-right:1px solid var(--border);
+  background:rgba(255,255,255,.02);
+  display:flex;flex-direction:column;gap:.9rem;overflow-y:auto;
+}
+.sb-title{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);padding-bottom:.45rem;border-bottom:1px solid var(--border)}
+.form-group{display:flex;flex-direction:column;gap:.35rem}
+.form-label{font-size:.72rem;font-weight:600;color:var(--muted)}
+.form-label small{font-weight:400;margin-left:.25rem}
+
+/* inputs */
+select,input[type=number],input[type=text]{
+  width:100%;padding:.5rem .7rem;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:.5rem;color:var(--text);font-size:.8rem;
+  transition:border-color var(--trans);appearance:none;
+}
+select:focus,input:focus{border-color:var(--cyan)}
+select option{background:#1a1a2e}
+.custom-query-wrap{position:relative;margin-top:.35rem}
+#customQueryInput{font-size:.78rem;padding-right:2.2rem}
+.custom-clear{position:absolute;right:.55rem;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--muted);font-size:.95rem;line-height:1;transition:color .15s}
+.custom-clear:hover{color:var(--red)}
+
+/* range */
+.range-group{display:flex;flex-direction:column;gap:.25rem}
+.range-header{display:flex;justify-content:space-between;align-items:center}
+.range-val{font-size:.8rem;font-weight:700;color:var(--cyan);font-family:var(--mono)}
+input[type=range]{width:100%;accent-color:var(--cyan);cursor:pointer;height:4px;border-radius:2px;background:var(--bg3)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--cyan);cursor:pointer}
+
+/* toggle */
+.toggle-row{display:flex;align-items:center;justify-content:space-between}
+.toggle-label{font-size:.78rem;color:var(--text)}
+.toggle-sublabel{font-size:.67rem;color:var(--muted)}
+.toggle{position:relative;width:36px;height:20px;display:flex;align-items:center}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:var(--surface2);border:1px solid var(--border);border-radius:999px;cursor:pointer;transition:.2s}
+.toggle-slider::before{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:var(--muted);top:2px;left:2px;transition:.2s}
+.toggle input:checked+.toggle-slider{background:rgba(34,211,238,.2);border-color:var(--cyan)}
+.toggle input:checked+.toggle-slider::before{background:var(--cyan);transform:translateX(16px)}
+hr.divider{border:none;border-top:1px solid var(--border)}
+
+/* sidebar buttons */
+.sb-btn{width:100%;padding:.6rem;border-radius:.5rem;font-size:.8rem;font-weight:600;
+  cursor:pointer;border:none;transition:all var(--trans);
+  display:flex;align-items:center;justify-content:center;gap:.5rem}
+.sb-btn-primary{background:linear-gradient(135deg,#0ea5e9,#6d28d9);color:#fff}
+.sb-btn-primary:hover:not(:disabled){filter:brightness(1.15);transform:translateY(-1px)}
+.sb-btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.sb-btn-ghost{background:var(--surface);color:var(--cyan);border:1px solid rgba(34,211,238,.3)}
+.sb-btn-ghost:hover{background:rgba(34,211,238,.1)}
+.sb-btn-lock{background:rgba(34,211,238,.1);color:var(--cyan);border:1px solid rgba(34,211,238,.3)}
+.sb-btn-lock:hover{background:rgba(34,211,238,.18);box-shadow:0 0 12px rgba(34,211,238,.2)}
+.sb-btn-danger{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.sb-btn-danger:hover{background:rgba(239,68,68,.2)}
+
+/* progress */
+.progress-wrap{display:none;flex-direction:column;gap:.35rem}
+.progress-wrap.visible{display:flex}
+.progress-bar-bg{background:var(--surface2);border-radius:999px;height:6px;overflow:hidden}
+.progress-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width .3s ease;width:0%}
+.progress-text{font-size:.7rem;color:var(--muted);font-family:var(--mono)}
+
+/* refresh hint */
+.refresh-hint{font-size:.68rem;color:var(--muted);display:flex;align-items:center;gap:.4rem}
+.refresh-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ══ MAIN CONTENT ══ */
+.main{display:flex;flex-direction:column;overflow:hidden}
+
+/* ══ TABS ══ */
+.tabs{display:flex;border-bottom:1px solid var(--border);padding:0 1rem;
+  background:rgba(17,24,39,.85);backdrop-filter:var(--glass);z-index:90}
+.tab{padding:.7rem 1rem;font-size:.8rem;font-weight:600;cursor:pointer;
+  border-bottom:2px solid transparent;color:var(--muted);transition:all var(--trans);margin-bottom:-1px}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+.tab-badge{display:inline-block;background:var(--surface2);padding:.1rem .4rem;
+  border-radius:999px;font-size:.62rem;font-family:var(--mono);margin-left:.35rem}
+
+/* ══ PANELS ══ */
+.tab-panel{display:none;padding:1.1rem;overflow-y:auto;flex:1;flex-direction:column;gap:1rem}
+.tab-panel.active{display:flex}
+
+/* ── CHAT PANEL ── */
+.chat-wrap{max-width:860px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:1rem}
+.chat-heading h1{font-size:1.6rem;font-weight:700;background:linear-gradient(135deg,var(--text),var(--indigo));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.chat-heading p{color:var(--muted2);font-size:.875rem;margin-top:3px}
+.query-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;backdrop-filter:var(--glass)}
+.query-row{display:flex;gap:10px;align-items:flex-end}
+.query-ta{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-s);
+  padding:12px 15px;color:var(--text);font-size:.92rem;resize:none;min-height:50px;max-height:140px;
+  transition:border-color var(--trans),box-shadow var(--trans)}
+.query-ta:focus{border-color:var(--indigo);box-shadow:0 0 0 3px var(--indigo-g)}
+.query-opts{display:flex;align-items:center;gap:16px;margin-top:12px;flex-wrap:wrap}
+.topk-wrap{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--muted2)}
+.topk-slider{width:130px;accent-color:var(--indigo)}
+.topk-val{min-width:18px;font-weight:700;color:var(--indigo);font-size:.85rem}
+
+/* answer card */
+.answer-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;backdrop-filter:var(--glass);animation:fade-in .3s}
+@keyframes fade-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.answer-meta{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.answer-text{font-size:.92rem;line-height:1.75}
+.answer-text p{margin-bottom:9px}.answer-text p:last-child{margin-bottom:0}
+.sources-hdr{font-size:.8rem;font-weight:600;color:var(--muted2);text-transform:uppercase;
+  letter-spacing:.06em;margin:16px 0 10px;display:flex;align-items:center;gap:8px}
+.chunk-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--radius-s);margin-bottom:8px;overflow:hidden}
+.chunk-header{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;transition:background var(--trans)}
+.chunk-header:hover{background:var(--surface2)}
+.chunk-dist{margin-left:auto;font-size:.75rem;color:var(--muted2);display:flex;align-items:center;gap:7px}
+.chunk-expand{color:var(--muted);transition:transform var(--trans);font-size:.78rem}
+.chunk-card.open .chunk-expand{transform:rotate(180deg)}
+.chunk-body{display:none;padding:0 14px 12px;border-top:1px solid var(--border)}
+.chunk-card.open .chunk-body{display:block}
+.chunk-text{font-size:.83rem;color:var(--muted2);line-height:1.65;margin-top:11px;margin-bottom:9px}
+.chunk-meta-row{display:flex;gap:14px;flex-wrap:wrap;font-size:.75rem;color:var(--muted)}
+
+/* hist */
+.hist-section h3{font-size:.85rem;font-weight:600;color:var(--muted2);margin-bottom:10px}
+.hist-item{display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:var(--radius-s);
+  border:1px solid var(--border);background:var(--surface);margin-bottom:7px;cursor:pointer;transition:all var(--trans);font-size:.83rem}
+.hist-item:hover{background:var(--surface2);border-color:var(--border-h)}
+.hist-q{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hist-t{font-size:.72rem;color:var(--muted);white-space:nowrap}
+
+/* ── CLUSTER GRID ── */
+.cluster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1rem}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.75rem;padding:3rem;color:var(--muted);text-align:center;
+  border:1px dashed var(--border);border-radius:1rem;grid-column:1/-1}
+.empty-icon{font-size:2.5rem;opacity:.4}
+.empty-title{font-weight:600;font-size:.9rem}
+.empty-sub{font-size:.78rem}
+
+/* cluster card */
+.cluster-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;
+  padding:1.1rem;display:flex;flex-direction:column;gap:.9rem;
+  transition:border-color .25s,box-shadow .25s,transform .2s;position:relative;overflow:hidden}
+.cluster-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--glow-color,var(--cyan)),transparent);
+  opacity:0;transition:opacity .3s}
+.cluster-card:hover{border-color:rgba(255,255,255,.15);box-shadow:0 8px 30px rgba(0,0,0,.4);transform:translateY(-2px)}
+.cluster-card:hover::before{opacity:1}
+.cluster-card.is-ready{--glow-color:var(--amber);border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.02)}
+.cluster-card.is-synth{--glow-color:var(--green2);border-color:rgba(52,211,153,.25)}
+.cluster-card.is-syncing{--glow-color:var(--cyan);border-color:rgba(34,211,238,.3);animation:pulse-border 1.5s ease-in-out infinite}
+.cluster-card.is-failed{--glow-color:var(--red);border-color:rgba(248,113,113,.25)}
+@keyframes pulse-border{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}50%{box-shadow:0 0 0 4px rgba(34,211,238,.15)}}
+.card-header{display:flex;align-items:center;justify-content:space-between;gap:.9rem}
+.card-hit-wrap{display:flex;align-items:baseline;gap:.3rem}
+.card-hit{font-size:1.9rem;font-weight:800;line-height:1;font-family:var(--mono);color:var(--cyan)}
+.card-hit-label{font-size:.62rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.card-badges{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
+.badge{font-size:.62rem;font-weight:700;padding:.22rem .55rem;border-radius:999px;border:1px solid;
+  text-transform:uppercase;letter-spacing:.05em;display:inline-block;white-space:nowrap}
+.badge-idle{color:var(--muted);border-color:var(--border);background:rgba(255,255,255,.03)}
+.badge-ready{color:var(--amber2);border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.1)}
+.badge-syncing{color:var(--cyan);border-color:rgba(34,211,238,.5);background:rgba(34,211,238,.1)}
+.badge-done{color:var(--green2);border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.1)}
+.badge-failed{color:var(--red2);border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.1)}
+.badge-indigo{color:var(--indigo);border-color:rgba(99,102,241,.4);background:var(--indigo-g)}
+.badge-cyan{color:var(--cyan);border-color:rgba(34,211,238,.35);background:var(--cyan-g)}
+.card-query{font-size:.88rem;font-weight:500;line-height:1.5;color:#fff;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  padding-bottom:.5rem;border-bottom:1px dashed var(--border)}
+.card-meta{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.15rem}
+.meta-item{display:flex;flex-direction:column;gap:.15rem}
+.meta-key{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+.meta-val{font-size:.75rem;font-family:var(--mono);color:#cbd5e1}
+.chunk-list{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.2rem}
+.chunk-pill{font-size:.62rem;font-family:var(--mono);padding:.2rem .5rem;border-radius:999px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--muted)}
+.chunk-more{font-size:.62rem;color:var(--muted);align-self:center;font-style:italic}
+.chunk-details{cursor:pointer}
+.chunk-details summary{color:var(--blue);font-weight:600;list-style:none;user-select:none}
+.chunk-details summary::-webkit-details-marker{display:none}
+.chunk-details summary::before{content:'▶ ';font-size:.6rem;opacity:.7;display:inline-block;width:12px}
+.chunk-details[open] summary::before{content:'▼ '}
+.card-footer{display:flex;gap:.45rem;margin-top:.4rem}
+.card-btn{flex:1;padding:.48rem;font-size:.73rem;font-weight:600;border-radius:.4rem;
+  border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);
+  cursor:pointer;font-family:inherit;transition:all var(--trans);text-align:center}
+.card-btn:hover:not(:disabled){background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(255,255,255,.2)}
+.card-btn:disabled{opacity:.4;cursor:not-allowed}
+.card-btn.primary{border-color:rgba(34,211,238,.4);color:var(--cyan);background:rgba(34,211,238,.1)}
+.card-btn.primary:hover{background:rgba(34,211,238,.2);box-shadow:0 0 12px rgba(34,211,238,.2)}
+
+/* ── LOG / TRIGGERING TABLES ── */
+.log-table-wrap{overflow-x:auto;border-radius:.75rem;border:1px solid var(--border)}
+.log-table{width:100%;border-collapse:collapse;font-size:.75rem}
+.log-table th{padding:.58rem .8rem;text-align:left;font-size:.63rem;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.08em;background:var(--surface2);
+  border-bottom:1px solid var(--border);white-space:nowrap}
+.log-table td{padding:.52rem .8rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;max-width:220px}
+.log-table tr:last-child td{border-bottom:none}
+.log-table tr{transition:background .1s}
+.log-table tr:hover td{background:rgba(255,255,255,.03)}
+.log-table tr.biased td{background:rgba(251,191,36,.04)}
+.log-table tr.biased td:first-child{border-left:2px solid var(--amber)}
+.mono-sm{font-family:var(--mono);font-size:.7rem}
+.query-cell{max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.76rem;cursor:pointer}
+.query-cell:hover{color:var(--cyan)}
+.match-yes{color:var(--green2)}
+.match-no{color:var(--red2)}
+.latency-bar{display:flex;align-items:center;gap:.4rem;min-width:90px}
+.latency-bg{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.latency-fill{height:100%;border-radius:2px;transition:width .3s}
+.latency-val{font-family:var(--mono);font-size:.68rem;color:var(--muted);white-space:nowrap}
+
+/* sim summary */
+.sim-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.65rem;padding:.85rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:.75rem}
+.sim-stat{display:flex;flex-direction:column;gap:.15rem}
+.sim-stat-val{font-size:1.4rem;font-weight:800;font-family:var(--mono)}
+.sim-stat-key{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+
+/* ══ SUPER-NODES PANEL ══ */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;
+  display:flex;flex-direction:column;gap:5px}
+.stat-label{font-size:.72rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
+.stat-value{font-size:1.75rem;font-weight:700;line-height:1}
+.sn-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.sn-search{flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius-s);padding:8px 13px;color:var(--text);font-size:.85rem;transition:border-color var(--trans)}
+.sn-search:focus{border-color:var(--indigo)}
+.filter-chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:500;
+  background:var(--surface);border:1px solid var(--border);color:var(--muted2);cursor:pointer;transition:all var(--trans)}
+.chip.active{background:var(--indigo-g);border-color:rgba(99,102,241,.4);color:var(--indigo)}
+.chip:hover{border-color:var(--border-h)}
+.sn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.sn-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;backdrop-filter:var(--glass);transition:all var(--trans);display:flex;flex-direction:column;gap:10px}
+.sn-card:hover{border-color:rgba(99,102,241,.35);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
+.sn-id{font-family:var(--mono);font-size:.78rem;color:var(--indigo)}
+.sn-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.sn-meta-item{display:flex;flex-direction:column;gap:2px}
+.sn-meta-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.sn-meta-val{font-size:.83rem;font-weight:500}
+.prog-bar{height:5px;border-radius:3px;background:var(--bg3);overflow:hidden;margin-top:3px}
+.prog-fill{height:100%;border-radius:3px;transition:width .5s ease}
+.prog-green{background:linear-gradient(90deg,var(--green),var(--green2))}
+.prog-amber{background:linear-gradient(90deg,var(--amber),var(--amber2))}
+.prog-red{background:linear-gradient(90deg,var(--red),var(--red2))}
+.prog-indigo{background:linear-gradient(90deg,var(--indigo),var(--cyan))}
+
+/* ══ MODALS ══ */
+.modal-bg{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.7);
+  backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
+.modal-bg.open{display:flex}
+.modal{background:#0f0f1a;border:1px solid var(--border);border-radius:1rem;
+  padding:1.4rem;max-width:700px;width:100%;max-height:85vh;overflow-y:auto;animation:slide-up .25s ease}
+.modal.wide{max-width:900px}
+.modal.narrow{max-width:380px}
+@keyframes slide-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.modal-title{font-weight:700;font-size:.95rem}
+.modal-close{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;transition:color .15s;line-height:1}
+.modal-close:hover{color:var(--text)}
+.revision-grid{display:flex;flex-direction:column;gap:.65rem}
+.revision-card{border:1px solid var(--border);border-radius:.6rem;padding:.8rem;background:var(--surface)}
+.rev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+.rev-num{font-family:var(--mono);font-size:.76rem;color:var(--purple);font-weight:700}
+.rev-scores{display:flex;gap:.55rem}
+.rev-score{font-size:.7rem;font-family:var(--mono)}
+.rev-text{font-size:.77rem;line-height:1.55;color:#c8d3e0;white-space:pre-wrap}
+.rev-ts{font-size:.63rem;color:var(--muted);margin-top:.35rem;font-family:var(--mono)}
+
+/* synthesis modal */
+.synth-body{display:flex;gap:1.2rem}
+.synth-summary-box{background:var(--surface);padding:.85rem;border-radius:.5rem;
+  white-space:pre-wrap;color:var(--text);font-size:.83rem;max-height:380px;overflow-y:auto;text-align:left}
+.synth-chunks-box{background:var(--surface);padding:.85rem;border-radius:.5rem;max-height:380px;overflow-y:auto}
+.synth-chunk-content{margin-top:.9rem;padding:.85rem;background:rgba(0,0,0,.3);border-radius:.5rem;
+  border:1px solid var(--border);font-size:.78rem;white-space:pre-wrap;color:var(--text);max-height:240px;overflow-y:auto;display:none}
+
+/* validation modal */
+.val-section{background:var(--surface);border:1px solid var(--border);border-radius:.5rem;padding:1.3rem;margin-bottom:.9rem}
+.val-section h4{margin:0 0 .85rem;padding-bottom:.45rem;border-bottom:1px solid var(--border);font-size:.88rem}
+.val-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.val-meta-item{display:flex;flex-direction:column;gap:.15rem}
+.val-meta-label{color:var(--muted);font-size:.77rem}
+.val-meta-val{font-family:var(--mono);font-weight:700;font-size:1.05rem}
+
+/* admin modals */
+.admin-field{margin-bottom:.9rem}
+.admin-field label{display:block;font-size:.7rem;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+.admin-field input{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);
+  border-radius:.5rem;padding:.5rem .7rem;color:var(--text);font-size:.85rem;transition:border-color var(--trans)}
+.admin-field input:focus{border-color:var(--cyan)}
+.admin-err{font-size:.73rem;color:var(--red);margin-bottom:.65rem;text-align:center;min-height:.9rem}
+.modal-actions{display:flex;gap:.6rem;margin-top:1rem}
+.modal-actions button{flex:1}
+.backup-path{margin-top:.65rem;padding:.5rem .7rem;background:rgba(52,211,153,.07);
+  border:1px solid rgba(52,211,153,.2);border-radius:.5rem;font-family:var(--mono);
+  font-size:.7rem;color:var(--green);word-break:break-all;display:none}
+
+/* settings modal */
+.settings-form label{display:block;font-size:.8rem;color:var(--muted2);margin-bottom:5px}
+.settings-form input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-s);
+  padding:9px 13px;color:var(--text);font-size:.88rem;transition:border-color var(--trans)}
+.settings-form input:focus{border-color:var(--indigo)}
+
+/* ══ COMMON BUTTONS ══ */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:var(--radius-s);
+  font-size:.85rem;font-weight:500;border:none;transition:all var(--trans);cursor:pointer}
+.btn-primary{background:linear-gradient(135deg,var(--indigo),var(--indigo-d));color:#fff}
+.btn-primary:hover{filter:brightness(1.15);transform:translateY(-1px);box-shadow:0 6px 20px rgba(99,102,241,.4)}
+.btn-secondary{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.btn-secondary:hover{background:var(--surface2);border-color:var(--border-h)}
+.btn-danger{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:var(--red)}
+.btn-danger:hover{background:rgba(239,68,68,.22)}
+.btn-sm{padding:5px 11px;font-size:.78rem}
+
+/* ══ TOAST ══ */
+#toast-container{position:fixed;bottom:22px;right:22px;display:flex;flex-direction:column;gap:8px;z-index:9999}
+.toast{display:flex;align-items:center;gap:9px;padding:11px 16px;border-radius:var(--radius-s);
+  backdrop-filter:var(--glass);box-shadow:var(--shadow);animation:toast-in .3s ease;
+  max-width:330px;font-size:.83rem;font-weight:600;background:#1a2035;border:1px solid var(--border)}
+@keyframes toast-in{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+.toast-success{border-color:rgba(52,211,153,.4)}
+.toast-error{border-color:rgba(248,113,113,.4)}
+.toast-info{border-color:rgba(34,211,238,.4)}
+
+/* error banner */
+#js-error-banner{display:none;position:fixed;top:0;left:0;right:0;z-index:9999;
+  background:#ff3860;color:#fff;padding:.9rem 1.3rem;font-family:monospace;font-size:.83rem}
+
+/* spinner */
+.spinner{display:inline-block;width:16px;height:16px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.2);border-top-color:#fff;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:720px){.app-body{grid-template-columns:1fr}.sidebar{border-right:none;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<div id="js-error-banner"></div>
+
+<!-- ══ TOP NAV ══ -->
+<nav class="topnav">
+  <div style="display:flex;align-items:center;gap:14px">
+    <div class="brand">
+      <div class="brand-icon">🧠</div>
+      SERA <span class="brand-sub">Phase 5 · Self-Evolving RAG</span>
+    </div>
+    <div class="nav-pills">
+      <div class="stat-pill"><span class="dot dot-cyan"></span><span id="hClusters">0 Clusters</span></div>
+      <div class="stat-pill"><span class="dot dot-amber"></span><span id="hReady">0 Ready</span></div>
+      <div class="stat-pill"><span class="dot dot-green"></span><span id="hSynthesized">0 Synthesized</span></div>
+      <div class="stat-pill"><span class="dot dot-purple"></span><span id="hLogs">0 Queries</span></div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="health-dot" id="healthDot"></div>
+    <span style="font-size:.75rem;color:var(--muted)" id="healthLabel">Checking…</span>
+    <a href="home.html" class="sb-btn sb-btn-primary" style="padding:4px 12px; font-size:0.75rem; border-radius: 6px; text-decoration:none; margin-left: 8px;">💬 Chat</a>
+    <button class="icon-btn" onclick="openSettings()" title="Settings">⚙</button>
+  </div>
+</nav>
+
+<!-- ══ BODY ══ -->
+<div class="app-body">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sb-title">⚙ Simulation Controls</div>
+
+    <!-- Biased query -->
+    <div class="form-group">
+      <label class="form-label">Biased Query <small>(high-frequency)</small></label>
+      <select id="biasQuerySelect" onchange="onBiasSelect()">
+        <option value="">— loading benchmark questions —</option>
+      </select>
+      <div class="custom-query-wrap">
+        <input type="text" id="customQueryInput" placeholder="Or type your own query…" oninput="onCustomQuery()">
+        <button class="custom-clear" onclick="clearCustomQuery()">✕</button>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Sliders -->
+    <div class="range-group">
+      <div class="range-header">
+        <label class="form-label">Total Queries</label>
+        <span class="range-val" id="totalVal">50</span>
+      </div>
+      <input type="range" id="totalSlider" min="5" max="300" value="50"
+        oninput="document.getElementById('totalVal').textContent=this.value">
+    </div>
+
+    <div class="range-group">
+      <div class="range-header">
+        <label class="form-label">Bias %</label>
+        <span class="range-val" id="biasVal">40%</span>
+      </div>
+      <input type="range" id="biasSlider" min="0" max="80" value="40"
+        oninput="document.getElementById('biasVal').textContent=this.value+'%'">
+    </div>
+
+    <hr class="divider">
+
+    <!-- Fast mode -->
+    <div class="toggle-row">
+      <div>
+        <div class="toggle-label">Fast Mode</div>
+        <div class="toggle-sublabel">Skip ChromaDB retrieval (embed only)</div>
+      </div>
+      <label class="toggle"><input type="checkbox" id="fastModeToggle" checked><span class="toggle-slider"></span></label>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">Initialising…</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Action buttons -->
+    <button class="sb-btn sb-btn-primary" id="runBtn" onclick="startSimulation()">▶ Run Simulation</button>
+    <button class="sb-btn sb-btn-ghost" onclick="triggerSynthesis()">⚡ Trigger Synthesis Now</button>
+    <button class="sb-btn sb-btn-lock" id="backupBtn" onclick="openAdminLogin()">🔒 Backup Dataset</button>
+    <button class="sb-btn sb-btn-danger" onclick="confirmReset()">🗑 Reset All Clusters</button>
+
+    
+    <div class="refresh-hint" style="margin-top:auto">
+      <span class="refresh-dot"></span> Auto-refreshes every 5s
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+    <nav class="tabs">
+      <div class="tab active" onclick="switchTab('clusters',this)">Clusters <span class="tab-badge" id="tabClusters">0</span></div>
+      <div class="tab" onclick="switchTab('triggering',this)">Triggering <span class="tab-badge" id="tabTriggering">0</span></div>
+      <div class="tab" onclick="switchTab('querylog',this)">Query Log <span class="tab-badge" id="tabLogs">0</span></div>
+      <div class="tab" onclick="switchTab('simresults',this)">Sim Results <span class="tab-badge" id="tabResults">—</span></div>
+      <div class="tab" onclick="switchTab('supernodes',this)">Super-Nodes <span class="tab-badge" id="tabSN">0</span></div>
+      
+    </nav>
+
+    <!-- CLUSTERS -->
+    <div class="tab-panel active" id="panel-clusters">
+      <div class="cluster-grid" id="clusterGrid">
+        <div class="empty-state"><div class="empty-icon">🔮</div><div class="empty-title">No clusters yet</div><div class="empty-sub">Run a simulation or send queries to /query to generate clusters.</div></div>
+      </div>
+    </div>
+
+    <!-- TRIGGERING -->
+    <div class="tab-panel" id="panel-triggering">
+      <div class="log-table-wrap">
+        <table class="log-table">
+          <thead><tr>
+            <th>ID</th><th>Query (Canonical &amp; Asked)</th><th>Details</th>
+            <th>Fact Coverage</th><th>Relevance (sim→query)</th><th>Time</th>
+          </tr></thead>
+          <tbody id="triggeringTableBody">
+            <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No super-nodes synthesized yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUERY LOG -->
+    <div class="tab-panel" id="panel-querylog">
+      <div class="log-table-wrap">
+        <table class="log-table">
+          <thead><tr>
+            <th>#</th><th>Query</th><th>Cluster ID</th><th>Hit Count</th>
+            <th>Match</th><th>Latency</th><th>Similarity</th><th>Chunks</th><th>Timestamp</th>
+          </tr></thead>
+          <tbody id="logTableBody">
+            <tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--muted)">No query logs yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SIM RESULTS -->
+    <div class="tab-panel" id="panel-simresults">
+      <div id="simResultsContent" style="color:var(--muted);font-size:.82rem;padding:2rem;text-align:center">
+        Run a simulation to see per-query results here.
+      </div>
+    </div>
+
+    <!-- SUPER-NODES -->
+    <div class="tab-panel" id="panel-supernodes">
+      <div class="stat-grid">
+        <div class="stat-card"><span class="stat-label">Total</span><span class="stat-value" style="color:var(--indigo)" id="sn-total">—</span></div>
+        <div class="stat-card"><span class="stat-label">Stale</span><span class="stat-value" style="color:var(--amber)" id="sn-stale">—</span></div>
+        <div class="stat-card"><span class="stat-label">Flagged</span><span class="stat-value" style="color:var(--red)" id="sn-flagged">—</span></div>
+        <div class="stat-card"><span class="stat-label">Avg Coverage</span><span class="stat-value" style="color:var(--cyan)" id="sn-coverage">—</span></div>
+      </div>
+      <div class="sn-filters">
+        <input class="sn-search" type="text" id="snSearch" placeholder="Search by query…" oninput="filterSuperNodes()"/>
+        <div class="filter-chips">
+          <span class="chip active" data-filter="all" onclick="setSnFilter(this)">All</span>
+          <span class="chip" data-filter="stale" onclick="setSnFilter(this)">Stale</span>
+          <span class="chip" data-filter="flagged" onclick="setSnFilter(this)">Flagged</span>
+          <span class="chip" data-filter="ok" onclick="setSnFilter(this)">Healthy</span>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="loadSuperNodes()">⟳ Refresh</button>
+      </div>
+      <div class="sn-grid" id="snGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted)">Loading…</div>
+      </div>
+    </div>
+
+    </main>
+</div>
+
+<!-- ══ HISTORY MODAL ══ -->
+<div class="modal-bg" id="historyModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Synthesis History</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody" class="revision-grid"></div>
+  </div>
+</div>
+
+<!-- ══ SYNTHESIS DETAILS MODAL ══ -->
+<div class="modal-bg" id="synthesisModal" onclick="if(event.target===this)closeSynthesisModal()">
+  <div class="modal wide">
+    <div class="modal-header">
+      <div class="modal-title" id="synthesisModalTitle">Synthesis Details</div>
+      <button class="modal-close" onclick="closeSynthesisModal()">✕</button>
+    </div>
+    <div class="synth-body">
+      <div style="flex:2">
+        <h4 style="margin-bottom:.5rem;color:var(--cyan)">Summary</h4>
+        <div class="synth-summary-box" id="synthesisModalSummary"></div>
+      </div>
+      <div style="flex:1">
+        <h4 style="margin-bottom:.5rem;color:var(--purple)">Retrieved Chunks</h4>
+        <div class="synth-chunks-box" id="synthesisModalChunks"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FULL VALIDATION MODAL ══ -->
+<div class="modal-bg" id="fullValidationModal" onclick="if(event.target===this)closeFullValidationModal()">
+  <div class="modal wide">
+    <div class="modal-header">
+      <div class="modal-title">Phase 4 Validation Suite</div>
+      <button class="modal-close" onclick="closeFullValidationModal()">✕</button>
+    </div>
+    <div id="fullValLoading" style="text-align:center;padding:3rem;color:var(--cyan)">
+      <div class="spinner" style="width:28px;height:28px;margin:0 auto .8rem"></div>
+      <div style="font-size:.88rem">Orchestrating SU2, Hallucination, and SU14 tests…</div>
+    </div>
+    <div id="fullValContent" style="display:none;max-height:68vh;overflow-y:auto;padding-right:.5rem">
+      <!-- SU2 -->
+      <div class="val-section">
+        <h4 style="color:var(--cyan)">1. Fact Coverage Engine (SU2)</h4>
+        <div style="display:flex;gap:1.5rem;align-items:flex-start">
+          <div id="fValBadge" style="padding:.8rem 1.5rem;border-radius:.5rem;font-weight:700;font-size:1.3rem;text-align:center;border:2px solid transparent"></div>
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
+              <span style="color:var(--muted)">Coverage Score:</span>
+              <span id="fValScore" style="font-weight:700;font-family:var(--mono);font-size:1.05rem"></span>
+            </div>
+            <div style="margin-top:.8rem"><span style="color:var(--muted);display:block;margin-bottom:.4rem">Missing Facts:</span>
+              <ul id="fValMissingFacts" style="margin:0;padding-left:1.3rem;color:var(--text);font-size:.87rem"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Hallucination -->
+      <div class="val-section">
+        <h4 style="color:var(--amber)">2. Hallucination Check (Advisory)</h4>
+        <span style="color:var(--muted);display:block;margin-bottom:.4rem">Made-up entities/names not in source:</span>
+        <ul id="fValHallucinations" style="margin:0;padding-left:1.3rem;color:var(--text);font-size:.87rem"></ul>
+      </div>
+      <!-- SU14 -->
+      <div class="val-section">
+        <h4 style="color:var(--blue)">3. Fidelity Bound (SU14)</h4>
+        <div class="val-meta-grid">
+          <div class="val-meta-item"><div class="val-meta-label">Summary → Query Similarity</div><div class="val-meta-val" id="fValSimQuery"></div></div>
+          <div class="val-meta-item"><div class="val-meta-label">Summary → Source Similarity</div><div class="val-meta-val" id="fValSimSource"></div></div>
+          <div class="val-meta-item"><div class="val-meta-label">Best Chunk → Query Similarity</div><div class="val-meta-val" id="fValSimChunk"></div></div>
+          <div class="val-meta-item"><div class="val-meta-label">Drift Margin</div><div class="val-meta-val" id="fValDrift"></div></div>
+        </div>
+        <div id="fValDriftWarning" style="margin-top:.85rem;padding:.65rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--red);border-radius:.35rem;font-size:.83rem;display:none">
+          ⚠️ <strong>Overfit Warning:</strong> Summary has drifted too far towards the query and away from the source material.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADMIN LOGIN ══ -->
+<div class="modal-bg" id="adminLoginModal" onclick="if(event.target===this)closeAdminLogin()">
+  <div class="modal narrow">
+    <div class="modal-header"><div class="modal-title">🔐 Admin Authentication</div></div>
+    <div class="admin-field"><label for="adminUser">Username</label>
+      <input type="text" id="adminUser" placeholder="admin" autocomplete="off" onkeydown="if(event.key==='Enter')submitAdminLogin()"></div>
+    <div class="admin-field"><label for="adminPass">Password</label>
+      <input type="password" id="adminPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')submitAdminLogin()"></div>
+    <div class="admin-err" id="adminErr"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeAdminLogin()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitAdminLogin()">Unlock →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BACKUP MODAL ══ -->
+<div class="modal-bg" id="backupModal" onclick="if(event.target===this)closeBackupModal()">
+  <div class="modal narrow">
+    <div class="modal-header"><div class="modal-title">💾 Backup Dataset</div></div>
+    <div class="admin-field"><label for="backupVersion">Version / Tag</label>
+      <input type="text" id="backupVersion" placeholder="e.g. v2, pre-phase5, 2026-07-17" onkeydown="if(event.key==='Enter')executeBackup()"></div>
+    <div class="admin-field"><label for="backupMessage">Commit Message</label>
+      <input type="text" id="backupMessage" placeholder="e.g. Pre-Phase 5 stable state" onkeydown="if(event.key==='Enter')executeBackup()"></div>
+    <div class="admin-err" id="backupErr"></div>
+    <div class="backup-path" id="backupPath"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeBackupModal()">Cancel</button>
+      <button class="btn btn-primary" id="backupSubmitBtn" onclick="executeBackup()">Create Backup</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SETTINGS MODAL ══ -->
+<div class="modal-bg" id="settingsModal" onclick="if(event.target===this)closeSettings()">
+  <div class="modal narrow">
+    <div class="modal-header"><div class="modal-title">⚙ Settings</div><button class="modal-close" onclick="closeSettings()">✕</button></div>
+    <div class="settings-form">
+      <div class="form-group">
+        <label>API Base URL</label>
+        <input type="text" id="baseUrlInput" placeholder="http://localhost:8000"/>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeSettings()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script>
+window.onerror=function(m,s,l){
+  const b=document.getElementById('js-error-banner');
+  if(b){b.style.display='block';b.textContent='JS ERROR line '+l+': '+m}
+};
+
+/* ══ STATE ══ */
+const S={
+  clusters:[],logs:[],simJob:null,
+  pollTimer:null,refreshTimer:null,
+  _simResults:null,_runCounter:0,
+  allSN:[],snFilter:'all',
+  queryHistory:JSON.parse(sessionStorage.getItem('sera_hist')||'[]'),
+};
+let BASE_URL=localStorage.getItem('sera_base_url')||'http://localhost:8000';
+const MAX_LAT=3000;
+const ADMIN_USER='admin', ADMIN_PASS='sera@admin';
+
+/* ══ INIT ══ */
+window.addEventListener('DOMContentLoaded',()=>{
+  loadBenchmarkSamples();
+  refreshAll();
+  S.refreshTimer=setInterval(refreshAll,5000);
+  checkHealth();
+  setInterval(checkHealth,5000);
+  });
+
+async function refreshAll(){
+  await Promise.all([fetchClusters(),fetchQueryLog()]);
+  if(typeof renderTriggering==='function')renderTriggering();
+}
+
+/* ══ API helper ══ */
+async function api(path,opts={}){
+  const r=await fetch(BASE_URL+path,{headers:{'Content-Type':'application/json',...(opts.headers||{})},...opts});
+  if(!r.ok){const e=await r.json().catch(()=>({detail:r.statusText}));throw new Error(e.detail||r.statusText)}
+  return r.json();
+}
+
+/* ══ HEALTH ══ */
+async function checkHealth(){
+  const d=document.getElementById('healthDot'),l=document.getElementById('healthLabel');
+  try{await api('/health');d.classList.add('online');l.textContent='Online'}
+  catch{d.classList.remove('online');l.textContent='Offline'}
+}
+
+/* ══ SETTINGS ══ */
+function openSettings(){document.getElementById('baseUrlInput').value=BASE_URL;document.getElementById('settingsModal').classList.add('open')}
+function closeSettings(){document.getElementById('settingsModal').classList.remove('open')}
+function saveSettings(){
+  BASE_URL=document.getElementById('baseUrlInput').value.replace(/\/$/,'');
+  localStorage.setItem('sera_base_url',BASE_URL);
+  closeSettings();checkHealth();toast('API URL updated','info');
+}
+
+/* ══ BENCHMARK SAMPLES ══ */
+async function loadBenchmarkSamples(){
+  try{
+    const r=await fetch(BASE_URL+'/simulation/benchmark-samples?limit=50');
+    const d=await r.json();
+    const sel=document.getElementById('biasQuerySelect');
+    sel.innerHTML='<option value="">— pick a benchmark question —</option>';
+    (d.samples||[]).forEach(s=>{
+      const o=document.createElement('option');
+      o.value=s.question;
+      o.textContent=s.question.length>80?s.question.slice(0,80)+'…':s.question;
+      o.title=s.question;sel.appendChild(o);
+    });
+  }catch(e){console.warn('benchmark samples:',e)}
+}
+function onBiasSelect(){const v=document.getElementById('biasQuerySelect').value;if(v)document.getElementById('customQueryInput').value=''}
+function onCustomQuery(){const v=document.getElementById('customQueryInput').value;if(v)document.getElementById('biasQuerySelect').value=''}
+function clearCustomQuery(){document.getElementById('customQueryInput').value=''}
+function getBiasedQuery(){return document.getElementById('customQueryInput').value.trim()||document.getElementById('biasQuerySelect').value||''}
+
+/* ══ SIMULATION ══ */
+async function startSimulation(){
+  const bq=getBiasedQuery();
+  if(!bq){toast('Pick or type a biased query first.','error');return}
+  const total=parseInt(document.getElementById('totalSlider').value);
+  const bias=parseInt(document.getElementById('biasSlider').value);
+  const fast=document.getElementById('fastModeToggle').checked;
+  setRunning(true);showProgress(0,'Starting simulation…');
+  try{
+    const d=await api('/simulation/run',{method:'POST',body:JSON.stringify({total_queries:total,biased_query:bq,bias_percent:bias,fast_mode:fast})});
+    S.simJob=d.job_id;pollJob(d.job_id);
+  }catch(e){toast('Failed to start: '+e.message,'error');setRunning(false);hideProgress()}
+}
+
+async function pollJob(jobId){
+  try{
+    const job=await api('/simulation/status/'+jobId);
+    const pct=job.progress||0,done=(job.results||[]).length;
+    showProgress(pct,'Running… '+done+' / '+job.total+' queries');
+    if(job.status==='done'){
+      clearTimeout(S.pollTimer);setRunning(false);hideProgress();
+      renderSimResults(job);await refreshAll();switchTabById('simresults');
+      toast('Simulation complete — '+done+' queries. Synthesis: '+JSON.stringify(job.synthesis),'success');
+    }else{
+      S.pollTimer=setTimeout(()=>pollJob(jobId),800);
+      fetchClusters();
+    }
+  }catch(e){console.error('poll:',e);S.pollTimer=setTimeout(()=>pollJob(jobId),1500)}
+}
+
+/* ══ CLUSTERS ══ */
+async function fetchClusters(){
+  try{const d=await api('/simulation/clusters');S.clusters=d.clusters||[];renderClusters();updateHeaderStats()}
+  catch(e){/*silent*/}
+}
+function clusterStatus(c){
+  if(c.synthesizing)return'syncing';if(c.synthesis_failed)return'failed';
+  if(c.synthesized)return'done';if(c.hit_count>=10)return'ready';return'idle';
+}
+function renderClusters(){
+  const g=document.getElementById('clusterGrid');
+  document.getElementById('tabClusters').textContent=S.clusters.length;
+  if(!S.clusters.length){
+    g.innerHTML='<div class="empty-state"><div class="empty-icon">🔮</div><div class="empty-title">No clusters yet</div><div class="empty-sub">Run a simulation or send queries to /query to generate clusters.</div></div>';
+    return;
+  }
+  g.innerHTML=S.clusters.map(c=>{
+    const st=clusterStatus(c);
+    const stLabel={idle:'Idle',ready:'Ready',syncing:'Synthesizing…',done:'Synthesized',failed:'Failed'}[st];
+    const cardCls={idle:'',ready:'is-ready',syncing:'is-syncing',done:'is-synth',failed:'is-failed'}[st];
+    const badgeCls='badge-'+st;
+    const hitCol=st==='ready'?'var(--amber2)':st==='done'?'var(--green2)':'var(--cyan)';
+    const chunks=c.chunk_ids||[];
+    const chunkHtml=chunks.slice(0,4).map(id=>'<span class="chunk-pill">'+esc(id)+'</span>').join('')
+      +(chunks.length>4?'<span class="chunk-more">+'+( chunks.length-4)+' more</span>':'');
+    const lastSynced=c.last_synthesized_hit_count
+      ?(c.hit_count-c.last_synthesized_hit_count)+' since last synth':'Never synthesized';
+    return `<div class="cluster-card ${cardCls}" id="cluster-${c.id}">
+      <div class="card-header">
+        <div class="card-hit-wrap"><div class="card-hit" style="color:${hitCol}">${c.hit_count}</div><div class="card-hit-label">hits</div></div>
+        <div class="card-badges">
+          <span class="badge ${badgeCls}">${stLabel}</span>
+          ${c.revision_count>0?'<span class="badge badge-done">Rev '+c.revision_count+'</span>':''}
+        </div>
+      </div>
+      <div class="card-query" title="${esc(c.canonical_query)}">${esc(c.canonical_query)}</div>
+      <div class="card-meta">
+        <div class="meta-item"><span class="meta-key">First Seen</span><span class="meta-val">${fmtTime(c.first_seen)}</span></div>
+        <div class="meta-item"><span class="meta-key">Last Hit</span><span class="meta-val">${fmtTime(c.last_hit)}</span></div>
+        <div class="meta-item"><span class="meta-key">Cluster ID</span><span class="meta-val">#${c.id}</span></div>
+        <div class="meta-item"><span class="meta-key">Progress</span><span class="meta-val">${lastSynced}</span></div>
+      </div>
+      ${chunks.length?'<div><div class="meta-key" style="margin-bottom:.3rem">Chunk IDs</div><div class="chunk-list">'+chunkHtml+'</div></div>':''}
+      <div class="card-footer">
+        ${c.history?.length?'<button class="card-btn primary" onclick="showHistory('+c.id+')">📖 History ('+c.revision_count+')</button>':'<button class="card-btn" disabled>No History</button>'}
+        <button class="card-btn" onclick="copyCluster(${c.id})">Copy JSON</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ══ TRIGGERING TAB ══ */
+function renderTriggering(){
+  const tbody=document.getElementById('triggeringTableBody');
+  if(!tbody)return;
+  const synth=S.clusters.filter(c=>c.synthesized&&c.history&&c.history.length>0);
+  document.getElementById('tabTriggering').textContent=synth.length;
+  if(!synth.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No super-nodes synthesized yet.</td></tr>';return}
+  tbody.innerHTML=synth.map(c=>{
+    const h=c.history[0];
+    const sampleLog=S.logs.find(l=>l.cluster_id===c.id);
+    const askedQ=sampleLog?sampleLog.raw_query:c.canonical_query;
+    const factPct=(h.coverage_score*100).toFixed(1)+'%';
+    const rawRel=typeof h.sim_summary_to_query==='number'?h.sim_summary_to_query:(1.0-h.drift_margin);
+    const relNum=Math.min(100,Math.max(0,rawRel*100));
+    const relPct=relNum.toFixed(1)+'%';
+    const factCol=h.coverage_score>=0.9?'var(--green2)':'var(--amber2)';
+    const relCol=relNum>=80?'var(--green2)':relNum>=60?'var(--amber)':'var(--red)';
+    return '<tr>'
+      +'<td class="mono-sm">#'+c.id+'</td>'
+      +'<td><div class="query-cell" style="color:var(--cyan);font-weight:600;margin-bottom:.25rem" title="'+esc(c.canonical_query)+'">'+esc(c.canonical_query)+'</div>'
+      +'<div class="query-cell" style="color:var(--muted);font-size:.73rem" title="'+esc(askedQ)+'">Asked: '+esc(askedQ)+'</div></td>'
+      +'<td><button class="card-btn primary" style="padding:.35rem .7rem;width:auto;min-width:unset" onclick="openSynthesisModal('+c.id+')">▶ View Details</button></td>'
+      +'<td style="color:'+factCol+';font-weight:600">'+factPct+'</td>'
+      +'<td style="color:'+relCol+';font-weight:600">'+relPct+'</td>'
+      +'<td class="mono-sm" style="color:var(--muted)">'+fmtTime(h.timestamp)+'</td>'
+      +'</tr>';
+  }).join('');
+}
+
+/* ══ SYNTHESIS MODAL ══ */
+function openSynthesisModal(clusterId){
+  const c=S.clusters.find(x=>x.id===clusterId);
+  if(!c||!c.history?.length)return;
+  const h=c.history[0];const chunks=c.chunk_ids||[];
+  document.getElementById('synthesisModalTitle').textContent='Synthesis Details — Cluster #'+c.id;
+  document.getElementById('synthesisModalSummary').textContent=h.summary||'';
+  document.getElementById('synthesisModalChunks').innerHTML=
+    '<div class="chunk-list" style="display:flex;flex-direction:column;gap:.35rem">'
+    +chunks.map(ch=>'<div style="display:flex;align-items:center;gap:.4rem">'
+      +'<button class="card-btn primary" style="padding:.2rem .4rem;flex:0 0 auto;min-width:unset;width:auto;line-height:1" onclick="viewChunkContent(\''+esc(ch)+'\')">▶</button>'
+      +'<div class="chunk-pill" title="'+esc(ch)+'" style="max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">'+esc(ch)+'</div>'
+      +'</div>').join('')
+    +'</div>'
+    +'<div class="synth-chunk-content" id="synthChunkContent"></div>'
+    +'<div style="margin-top:1.2rem;padding-top:.9rem;border-top:1px solid var(--border)">'
+    +'<button class="btn btn-primary" style="width:100%;justify-content:center;font-size:.83rem" onclick="openFullValidationModal('+c.id+')">⚖️ Run Full Validation Suite (Phase 4)</button>'
+    +'</div>';
+  document.getElementById('synthesisModal').classList.add('open');
+}
+async function viewChunkContent(chunkId){
+  const box=document.getElementById('synthChunkContent');
+  if(!box)return;
+  box.style.display='block';
+  box.innerHTML='<span style="color:var(--muted)">Loading chunk…</span>';
+  try{
+    const r=await fetch(BASE_URL+'/simulation/chunk/'+encodeURIComponent(chunkId));
+    const d=await r.json();
+    box.innerHTML='<div style="color:var(--cyan);font-family:var(--mono);font-size:.7rem;margin-bottom:.4rem">'+esc(chunkId)+'</div>'+esc(d.text);
+  }catch(e){box.innerHTML='<span style="color:var(--red)">Failed: '+esc(e.message)+'</span>'}
+}
+function closeSynthesisModal(){document.getElementById('synthesisModal').classList.remove('open')}
+
+/* ══ FULL VALIDATION MODAL ══ */
+async function openFullValidationModal(clusterId){
+  const c=S.clusters.find(x=>x.id===clusterId);
+  if(!c||!c.history?.length)return;
+  const h=c.history[0];const chunks=c.chunk_ids||[];
+  document.getElementById('fullValidationModal').classList.add('open');
+  document.getElementById('fullValLoading').style.display='block';
+  document.getElementById('fullValContent').style.display='none';
+  try{
+    const data=await api('/simulation/validate-test',{method:'POST',body:JSON.stringify({chunk_ids:chunks,summary_text:h.summary,canonical_query:c.canonical_query})});
+    const badge=document.getElementById('fValBadge');
+    if(data.su2.passed){badge.textContent='PASSED';badge.style.color='var(--green)';badge.style.borderColor='rgba(16,185,129,.3)';badge.style.backgroundColor='rgba(16,185,129,.1)'}
+    else{badge.textContent='FAILED';badge.style.color='var(--red)';badge.style.borderColor='rgba(239,68,68,.3)';badge.style.backgroundColor='rgba(239,68,68,.1)'}
+    document.getElementById('fValScore').textContent=(data.su2.coverage_score*100).toFixed(1)+'%';
+    document.getElementById('fValScore').style.color=data.su2.passed?'var(--green)':'var(--red)';
+    const mf=document.getElementById('fValMissingFacts');
+    mf.innerHTML=data.su2.missing_facts?.length?data.su2.missing_facts.map(f=>'<li style="margin-bottom:.2rem">'+esc(f)+'</li>').join(''):'<div style="color:var(--green);font-size:.8rem">None! All facts covered.</div>';
+    const hal=document.getElementById('fValHallucinations');
+    hal.innerHTML=data.hallucination.added_entities?.length?data.hallucination.added_entities.map(e=>'<li style="margin-bottom:.2rem;color:var(--amber)">'+esc(e)+'</li>').join(''):'<div style="color:var(--green);font-size:.8rem">No made-up entities detected.</div>';
+    document.getElementById('fValSimQuery').textContent=data.su14.sim_summary_to_query.toFixed(3);
+    document.getElementById('fValSimSource').textContent=data.su14.sim_summary_to_source.toFixed(3);
+    document.getElementById('fValSimChunk').textContent=data.su14.sim_raw_to_query_max.toFixed(3);
+    document.getElementById('fValDrift').textContent=data.su14.drift_margin.toFixed(3);
+    document.getElementById('fValDriftWarning').style.display=(data.su14.suspected_overfit||data.su14.suspected_disconnect)?'block':'none';
+    document.getElementById('fullValLoading').style.display='none';
+    document.getElementById('fullValContent').style.display='block';
+  }catch(e){document.getElementById('fullValLoading').innerHTML='<div style="color:var(--red)">Error: '+esc(e.message)+'</div>'}
+}
+function closeFullValidationModal(){document.getElementById('fullValidationModal').classList.remove('open')}
+
+function copyCluster(id){const c=S.clusters.find(x=>x.id===id);if(c)navigator.clipboard.writeText(JSON.stringify(c,null,2));toast('Cluster JSON copied!','info')}
+
+/* ══ QUERY LOG ══ */
+async function fetchQueryLog(){
+  try{const d=await api('/simulation/query-log?limit=150');S.logs=d.logs||[];renderQueryLog();updateHeaderStats()}
+  catch(e){/*silent*/}
+}
+function renderQueryLog(){
+  const tbody=document.getElementById('logTableBody');
+  document.getElementById('tabLogs').textContent=S.logs.length;
+  document.getElementById('hLogs').textContent=S.logs.length+' Queries';
+  if(!S.logs.length){tbody.innerHTML='<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--muted)">No query logs yet.</td></tr>';return}
+  tbody.innerHTML=S.logs.map((log,i)=>{
+    const chunks=log.retrieved_chunks||[];
+    let chunksHtml='<span class="mono-sm" style="color:var(--muted)">—</span>';
+    if(chunks.length){chunksHtml=`<details class="chunk-details"><summary>${chunks.length} chunks</summary><div class="chunk-list" style="margin-top:.35rem">${chunks.map(c=>'<div class="chunk-pill" title="'+esc(c)+'" style="max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(c)+'</div>').join('')}</div></details>`}
+    const matchHtml=log.matched_existing?'<span class="match-yes">✓ Matched</span>':'<span class="match-no">✦ New</span>';
+    const simEntry=getSimEntry(log.raw_query);
+    const latMs=simEntry?.latency_ms||0,simScore=simEntry?.similarity_score||0;
+    const latPct=Math.min(latMs/MAX_LAT*100,100);
+    const latCol=latMs<500?'var(--green2)':latMs<1500?'var(--amber2)':'var(--red2)';
+    const isB=simEntry?.is_biased?'biased':'';
+    return `<tr class="${isB}">
+      <td class="mono-sm">${S.logs.length-i}</td>
+      <td><div class="query-cell" title="${esc(log.raw_query)}" onclick="alert('${esc(log.raw_query.replace(/'/g,"\\'"))}')">${esc(log.raw_query)}</div></td>
+      <td class="mono-sm">${log.cluster_id??'—'}</td>
+      <td class="mono-sm">${log.hit_count??'—'}</td>
+      <td>${matchHtml}</td>
+      <td>${latMs?`<div class="latency-bar"><div class="latency-bg"><div class="latency-fill" style="width:${latPct}%;background:${latCol}"></div></div><span class="latency-val">${latMs.toFixed(0)}ms</span></div>`:'<span class="mono-sm" style="color:var(--muted)">—</span>'}</td>
+      <td class="mono-sm">${simScore?(simScore*100).toFixed(1)+'%':'—'}</td>
+      <td>${chunksHtml}</td>
+      <td class="mono-sm" style="color:var(--muted)">${fmtTime(log.timestamp)}</td>
+    </tr>`;
+  }).join('');
+}
+function getSimEntry(query){return S._simResults?.find(r=>r.query===query)||null}
+
+/* ══ SIM RESULTS ══ */
+function renderSimResults(job){
+  S._simResults=(job.results||[]).concat(S._simResults||[]);
+  const synth=job.synthesis||{},biased=(job.results||[]).filter(r=>r.is_biased).length;
+  const errors=(job.results||[]).filter(r=>r.error).length;
+  const avgLat=job.results?.length?(job.results.reduce((a,b)=>a+(b.latency_ms||0),0)/job.results.length).toFixed(1):0;
+  document.getElementById('tabResults').textContent=S._simResults.length;
+  S._runCounter=(S._runCounter||0)+1;const runId=S._runCounter;
+  const html=`<div class="sim-run-block" style="margin-bottom:2rem">
+    <h3 style="margin-bottom:.85rem;color:var(--text);border-bottom:1px dashed var(--border);padding-bottom:.45rem">
+      Simulation Run #${runId} <span style="font-size:.7rem;color:var(--muted);margin-left:.5rem;font-weight:400">(${new Date().toLocaleTimeString()})</span>
+    </h3>
+    <div class="sim-summary">
+      <div class="sim-stat"><span class="sim-stat-val" style="color:var(--cyan)">${job.total||0}</span><span class="sim-stat-key">Total Queries</span></div>
+      <div class="sim-stat"><span class="sim-stat-val" style="color:var(--amber)">${biased}</span><span class="sim-stat-key">Biased Queries</span></div>
+      <div class="sim-stat"><span class="sim-stat-val" style="color:var(--green2)">${synth.triggered??0}</span><span class="sim-stat-key">Synthesis Triggered</span></div>
+      <div class="sim-stat"><span class="sim-stat-val" style="color:var(--purple)">${synth.skipped??0}</span><span class="sim-stat-key">Skipped</span></div>
+      <div class="sim-stat"><span class="sim-stat-val" style="color:var(--red)">${errors}</span><span class="sim-stat-key">Errors</span></div>
+      <div class="sim-stat"><span class="sim-stat-val" style="color:var(--blue)">${avgLat}ms</span><span class="sim-stat-key">Avg Latency</span></div>
+    </div>
+    <div class="log-table-wrap" style="margin-top:.85rem">
+      <table class="log-table">
+        <thead><tr><th>#</th><th>Query</th><th>Biased</th><th>Cluster</th><th>Hit Count</th><th>Match</th><th>Latency</th><th>Similarity</th><th>Chunks</th><th>Time</th></tr></thead>
+        <tbody>${(job.results||[]).map(r=>{
+          const latMs=r.latency_ms||0,latPct=Math.min(latMs/MAX_LAT*100,100);
+          const latCol=latMs<500?'var(--green2)':latMs<1500?'var(--amber2)':'var(--red2)';
+          const chunksArr=r.chunk_ids||[];
+          let cH='<span class="mono-sm" style="color:var(--muted)">—</span>';
+          if(chunksArr.length)cH=`<details class="chunk-details"><summary>${chunksArr.length} chunks</summary><div class="chunk-list" style="margin-top:.35rem">${chunksArr.map(c=>'<div class="chunk-pill" title="'+esc(c)+'" style="max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(c)+'</div>').join('')}</div></details>`;
+          return `<tr class="${r.is_biased?'biased':''}">
+            <td class="mono-sm">${r.index}</td>
+            <td><div class="query-cell" title="${esc(r.query)}">${esc(r.query)}</div></td>
+            <td style="text-align:center">${r.is_biased?'<span class="badge badge-ready">⭐</span>':'—'}</td>
+            <td class="mono-sm">${r.cluster_id??'—'}</td>
+            <td class="mono-sm">${r.hit_count??'—'}</td>
+            <td>${r.matched_existing?'<span class="match-yes">✓</span>':'<span class="match-no">✦</span>'}</td>
+            <td><div class="latency-bar"><div class="latency-bg"><div class="latency-fill" style="width:${latPct}%;background:${latCol}"></div></div><span class="latency-val">${latMs.toFixed(0)}ms</span></div></td>
+            <td class="mono-sm">${r.similarity_score?(r.similarity_score*100).toFixed(1)+'%':'—'}</td>
+            <td>${cH}</td>
+            <td class="mono-sm" style="color:var(--muted)">${r.timestamp?r.timestamp.slice(11,19):'—'}</td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table>
+    </div>
+  </div>`;
+  const content=document.getElementById('simResultsContent');
+  content.innerHTML=runId===1?html:html+content.innerHTML;
+}
+
+/* ══ HISTORY MODAL ══ */
+function showHistory(clusterId){
+  const c=S.clusters.find(x=>x.id===clusterId);
+  if(!c)return;
+  document.getElementById('modalTitle').textContent='Cluster #'+c.id+' — Synthesis History';
+  const body=document.getElementById('modalBody');
+  if(!c.history?.length){body.innerHTML='<div style="color:var(--muted);text-align:center;padding:1rem">No synthesis history yet.</div>'}
+  else{
+    body.innerHTML=c.history.map((h,i)=>{
+      const isLatest=i===0,isFirst=i===c.history.length-1;
+      return `<div class="revision-card" style="${isLatest?'border-color:rgba(52,211,153,.35)':''}">
+        <div class="rev-header">
+          <span class="rev-num">${isLatest?'✦ Latest — ':''}Revision ${h.revision}${isFirst&&c.history.length>1?' (original)':''}</span>
+          <div class="rev-scores">
+            <span class="rev-score" style="color:var(--green2)">Coverage: ${(h.coverage_score*100).toFixed(1)}%</span>
+            <span class="rev-score" style="color:${h.drift_margin>0.08?'var(--amber)':'var(--muted)'}">Drift: ${h.drift_margin.toFixed(3)}</span>
+          </div>
+        </div>
+        <div class="rev-text">${esc(h.summary||'No summary stored.')}</div>
+        <div class="rev-ts">${h.timestamp}</div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('historyModal').classList.add('open');
+}
+function closeModal(){document.getElementById('historyModal').classList.remove('open')}
+
+/* ══ SYNTHESIS TRIGGER ══ */
+async function triggerSynthesis(){
+  toast('Firing synthesis trigger…','info');
+  try{
+    const d=await api('/simulation/trigger-synthesis',{method:'POST'});
+    toast('Synthesis — triggered:'+d.synthesis.triggered+' skipped:'+d.synthesis.skipped+' failed:'+d.synthesis.failed,'success');
+    fetchClusters();
+  }catch(e){toast('Trigger failed: '+e.message,'error')}
+}
+
+/* ══ SUPER-NODES TAB ══ */
+async function loadSuperNodes(){
+  try{
+    const d=await api('/admin/super-nodes');
+    S.allSN=d.nodes||[];
+    const stale=S.allSN.filter(n=>n.is_stale).length;
+    const flagged=S.allSN.filter(n=>n.fidelity_flagged).length;
+    const avgCov=S.allSN.length?(S.allSN.reduce((s,n)=>s+(n.fact_coverage||0),0)/S.allSN.length*100).toFixed(1)+'%':'—';
+    document.getElementById('sn-total').textContent=S.allSN.length;
+    document.getElementById('sn-stale').textContent=stale;
+    document.getElementById('sn-flagged').textContent=flagged;
+    document.getElementById('sn-coverage').textContent=avgCov;
+    document.getElementById('tabSN').textContent=S.allSN.length;
+    filterSuperNodes();
+  }catch(e){document.getElementById('snGrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--red)">'+esc(e.message)+'</div>'}
+}
+function setSnFilter(chip){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');S.snFilter=chip.dataset.filter;filterSuperNodes()}
+function filterSuperNodes(){
+  const q=(document.getElementById('snSearch').value||'').toLowerCase();
+  let nodes=S.allSN;
+  if(S.snFilter==='stale')nodes=nodes.filter(n=>n.is_stale);
+  if(S.snFilter==='flagged')nodes=nodes.filter(n=>n.fidelity_flagged);
+  if(S.snFilter==='ok')nodes=nodes.filter(n=>!n.is_stale&&!n.fidelity_flagged);
+  if(q)nodes=nodes.filter(n=>(n.source_query||'').toLowerCase().includes(q));
+  renderSuperNodes(nodes);
+}
+function renderSuperNodes(nodes){
+  const grid=document.getElementById('snGrid');
+  if(!nodes.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--muted)">No super-nodes match the filter.</div>';return}
+  grid.innerHTML=nodes.map(n=>{
+    const cov=(n.fact_coverage||0)*100;
+    const covCls=cov>=85?'green':cov>=70?'amber':'red';
+    const staleBadge=n.is_stale?'<span class="badge badge-ready">⚠ Stale</span>':'';
+    const flagBadge=n.fidelity_flagged?'<span class="badge badge-failed">⚠ Flagged</span>':'';
+    const accessed=n.last_accessed?new Date(n.last_accessed).toLocaleDateString():'—';
+    return `<div class="sn-card">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:7px">
+        <div><div class="sn-id">${esc(n.id)}</div><div style="display:flex;gap:5px;margin-top:4px;flex-wrap:wrap">${staleBadge}${flagBadge}</div></div>
+        <span class="badge badge-indigo" style="white-space:nowrap">Rev ${n.revision||1}</span>
+      </div>
+      <div style="font-size:.83rem;color:var(--muted2);line-height:1.5">${esc((n.source_query||'').slice(0,110))}${(n.source_query||'').length>110?'…':''}</div>
+      <div class="sn-meta-grid">
+        <div class="sn-meta-item"><span class="sn-meta-label">Coverage</span>
+          <span class="sn-meta-val" style="color:var(--${covCls==='green'?'green2':covCls==='amber'?'amber2':'red2'})">${cov.toFixed(1)}%</span>
+          <div class="prog-bar"><div class="prog-fill prog-${covCls}" style="width:${cov}%"></div></div>
+        </div>
+        <div class="sn-meta-item"><span class="sn-meta-label">Drift Margin</span><span class="sn-meta-val">${(n.drift_margin||0).toFixed(3)}</span></div>
+        <div class="sn-meta-item"><span class="sn-meta-label">Hit Count</span><span class="sn-meta-val" style="color:var(--cyan)">🔥 ${n.hit_count||0}</span></div>
+        <div class="sn-meta-item"><span class="sn-meta-label">Last Accessed</span><span class="sn-meta-val" style="font-size:.77rem;color:var(--muted2)">${accessed}</span></div>
+      </div>
+      <button class="card-btn primary" onclick="forceSynthAdmin(${n.cluster_id})">🔄 Re-Synthesize</button>
+    </div>`;
+  }).join('');
+}
+async function forceSynthAdmin(id){
+  try{toast('Triggering synthesis for cluster #'+id+'…','info');
+    const r=await api('/admin/synthesize/'+id,{method:'POST'});
+    toast('Synthesized! Node: '+(r.super_node_id||'created'),'success');
+    fetchClusters();loadSuperNodes();
+  }catch(e){toast('Synthesis failed: '+e.message,'error')}
+}
+
+/* ══ ADMIN ══ */
+function openAdminLogin(){document.getElementById('adminUser').value='';document.getElementById('adminPass').value='';document.getElementById('adminErr').textContent='';document.getElementById('adminLoginModal').classList.add('open');setTimeout(()=>document.getElementById('adminUser').focus(),100)}
+function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('open')}
+function submitAdminLogin(){
+  const u=document.getElementById('adminUser').value.trim(),p=document.getElementById('adminPass').value;
+  if(u===ADMIN_USER&&p===ADMIN_PASS){closeAdminLogin();openBackupModal()}
+  else{document.getElementById('adminErr').textContent='✕ Invalid credentials.';document.getElementById('adminPass').value='';document.getElementById('adminPass').focus()}
+}
+function openBackupModal(){
+  const today=new Date().toISOString().slice(0,10);
+  document.getElementById('backupVersion').value=today;
+  document.getElementById('backupMessage').value='';
+  document.getElementById('backupErr').textContent='';
+  document.getElementById('backupPath').style.display='none';
+  document.getElementById('backupSubmitBtn').disabled=false;
+  document.getElementById('backupSubmitBtn').textContent='Create Backup';
+  document.getElementById('backupModal').classList.add('open');
+  setTimeout(()=>document.getElementById('backupMessage').focus(),100);
+}
+function closeBackupModal(){document.getElementById('backupModal').classList.remove('open')}
+async function executeBackup(){
+  const v=document.getElementById('backupVersion').value.trim();
+  const m=document.getElementById('backupMessage').value.trim();
+  if(!v){document.getElementById('backupErr').textContent='✕ Version tag required.';return}
+  if(!m){document.getElementById('backupErr').textContent='✕ Commit message required.';return}
+  document.getElementById('backupErr').textContent='';
+  document.getElementById('backupSubmitBtn').disabled=true;
+  document.getElementById('backupSubmitBtn').textContent='⏳ Creating…';
+  try{
+    const d=await api('/admin/backup',{method:'POST',body:JSON.stringify({version:v,message:m})});
+    const pe=document.getElementById('backupPath');pe.textContent='✓ Saved to: '+(d.backup_path||'data/backups/'+v);pe.style.display='block';
+    document.getElementById('backupSubmitBtn').textContent='✓ Done';
+    toast('Backup "'+v+'" created successfully.','success');
+    setTimeout(closeBackupModal,2000);
+  }catch(e){document.getElementById('backupErr').textContent='✕ '+e.message;document.getElementById('backupSubmitBtn').disabled=false;document.getElementById('backupSubmitBtn').textContent='Create Backup';toast('Backup failed: '+e.message,'error')}
+}
+
+/* ══ RESET ══ */
+async function confirmReset(){
+  if(!confirm('⚠️ This will DELETE all clusters, query logs, and simulation jobs.\n\nbenchmark_qa data is preserved.\n\nAre you sure?'))return;
+  try{
+    await api('/simulation/reset',{method:'POST'});
+    S.clusters=[];S.logs=[];S._simResults=null;
+    renderClusters();renderQueryLog();
+    document.getElementById('simResultsContent').innerHTML='Run a simulation to see per-query results here.';
+    document.getElementById('tabResults').textContent='—';
+    updateHeaderStats();
+    toast('All clusters and logs cleared.','success');
+  }catch(e){toast('Reset failed: '+e.message,'error')}
+}
+
+/* ══ HEADER STATS ══ */
+function updateHeaderStats(){
+  const total=S.clusters.length;
+  const ready=S.clusters.filter(c=>c.hit_count>=10&&!c.synthesized&&!c.synthesizing).length;
+  const synth=S.clusters.filter(c=>c.synthesized).length;
+  document.getElementById('hClusters').textContent=total+' Clusters';
+  document.getElementById('hReady').textContent=ready+' Ready';
+  document.getElementById('hSynthesized').textContent=synth+' Synthesized';
+}
+
+/* ══ TABS ══ */
+function switchTab(name,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-'+name).classList.add('active');
+  if(name==='supernodes'&&!S.allSN.length)loadSuperNodes();
+}
+function switchTabById(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.tab[onclick*="${name}"]`)?.classList.add('active');
+  document.getElementById('panel-'+name)?.classList.add('active');
+}
+
+/* ══ PROGRESS ══ */
+function showProgress(pct,text){document.getElementById('progressWrap').classList.add('visible');document.getElementById('progressFill').style.width=pct+'%';document.getElementById('progressText').textContent=text}
+function hideProgress(){document.getElementById('progressWrap').classList.remove('visible')}
+function setRunning(r){document.getElementById('runBtn').disabled=r;document.getElementById('runBtn').textContent=r?'⏳ Running…':'▶ Run Simulation'}
+
+/* ══ TOAST ══ */
+function toast(msg,type='info'){
+  const icons={success:'✓',error:'✕',info:'ℹ'};const colors={success:'var(--green2)',error:'var(--red2)',info:'var(--cyan)'};
+  const el=document.createElement('div');el.className='toast toast-'+type;
+  el.innerHTML='<span style="color:'+colors[type]+'">'+icons[type]+'</span> '+esc(msg);
+  document.getElementById('toast-container').appendChild(el);setTimeout(()=>el.remove(),5000);
+}
+
+/* ══ UTILS ══ */
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function fmtTime(ts){
+  if(!ts)return'—';
+  try{const d=new Date(ts.replace(' ','T')+(ts.includes('Z')?'':'Z'));return d.toLocaleTimeString('en-GB',{hour12:false})}
+  catch{return ts.slice(11,19)||ts}
+}
+
+/* shimmer keyframe for skeleton */
+const shimmerStyle=document.createElement('style');
+shimmerStyle.textContent='@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}';
+document.head.appendChild(shimmerStyle);
+</script>
+</body>
+</html>
