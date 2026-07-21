@@ -66,6 +66,12 @@ app.include_router(simulation.router)
 def health_check():
     return {"status": "ok", "message": "SERA API is running"}
 
+from fastapi.responses import RedirectResponse
+
+@app.get("/")
+def read_root():
+    return RedirectResponse(url="/home.html")
+
 # Serve the frontend directory at the root
 _frontend_dir = Path(__file__).resolve().parent.parent / "frontend"
 _frontend_dir.mkdir(exist_ok=True)
