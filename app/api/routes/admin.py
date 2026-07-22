@@ -29,6 +29,10 @@ class ActionResponse(BaseModel):
     backup_path: str | None = None
 
 
+class ConfigUpdateRequest(BaseModel):
+    HIERARCHY_MERGE_THRESHOLD: float
+
+
 @router.post("/backup", response_model=ActionResponse)
 def trigger_backup(req: BackupRequest):
     """
@@ -122,6 +126,75 @@ def trigger_synthesis_manual():
         "clusters_failed": result["failed"],
         "clusters_skipped": result["skipped"],
     }
+
+@router.post("/trigger-maintenance")
+def trigger_maintenance_manual(background_tasks: BackgroundTasks):
+    """
+    Manually trigger the full maintenance pipeline (staleness check, decay, hierarchy merger)
+    as a background task.
+    """
+    from app.scheduler.jobs.maintenance_job import run_staleness_job, run_decay_job, run_merger_job
+    
+    def run_all():
+        run_staleness_job()
+        run_decay_job()
+        run_merger_job()
+        
+    background_tasks.add_task(run_all)
+    return {"status": "triggered", "message": "Maintenance pipeline triggered in the background."}
+
+
+@router.get("/config")
+def get_config():
+    """
+    GET /admin/config
+    Returns current active configurations.
+    """
+    from app import config
+    return {
+        "HIERARCHY_MERGE_THRESHOLD": getattr(config, "HIERARCHY_MERGE_THRESHOLD", 0.88),
+    }
+
+
+@router.post("/config")
+def update_config(req: ConfigUpdateRequest):
+    """
+    POST /admin/config
+    Updates active configurations in memory and persists them to the .env file.
+    """
+    from app import config
+    if not (0.0 <= req.HIERARCHY_MERGE_THRESHOLD <= 1.0):
+        raise HTTPException(status_code=400, detail="Threshold must be between 0.0 and 1.0")
+        
+    config.HIERARCHY_MERGE_THRESHOLD = req.HIERARCHY_MERGE_THRESHOLD
+    
+    # Persist to .env file
+    try:
+        env_path = config.BASE_DIR / ".env"
+        if env_path.exists():
+            with open(env_path, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+            
+            found = False
+            for i, line in enumerate(lines):
+                if line.strip().startswith("HIERARCHY_MERGE_THRESHOLD="):
+                    lines[i] = f"HIERARCHY_MERGE_THRESHOLD={req.HIERARCHY_MERGE_THRESHOLD}\n"
+                    found = True
+                    break
+            
+            if not found:
+                lines.append(f"HIERARCHY_MERGE_THRESHOLD={req.HIERARCHY_MERGE_THRESHOLD}\n")
+                
+            with open(env_path, "w", encoding="utf-8") as f:
+                f.writelines(lines)
+        else:
+            with open(env_path, "w", encoding="utf-8") as f:
+                f.write(f"HIERARCHY_MERGE_THRESHOLD={req.HIERARCHY_MERGE_THRESHOLD}\n")
+    except Exception as e:
+        logger.error("Failed to write updated config to .env: %s", e)
+        
+    logger.info("Admin updated HIERARCHY_MERGE_THRESHOLD to %s", req.HIERARCHY_MERGE_THRESHOLD)
+    return {"status": "success", "message": f"HIERARCHY_MERGE_THRESHOLD updated to {req.HIERARCHY_MERGE_THRESHOLD}."}
 
 @router.get("/scheduler-status")
 def get_scheduler_status():

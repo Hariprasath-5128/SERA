@@ -5,6 +5,7 @@ from apscheduler.events import EVENT_JOB_EXECUTED, EVENT_JOB_ERROR
 
 from app import config
 from app.scheduler.jobs.pattern_finder import scan_and_trigger
+from app.scheduler.jobs.maintenance_job import run_staleness_job, run_decay_job, run_merger_job
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +30,27 @@ def create_scheduler() -> BackgroundScheduler:
         func=scan_and_trigger,
         trigger=IntervalTrigger(minutes=config.POLL_INTERVAL_MINUTES),
         id="pattern_finder",
+        replace_existing=True,
+    )
+
+    scheduler.add_job(
+        func=run_staleness_job,
+        trigger=IntervalTrigger(hours=1),
+        id="staleness_checker",
+        replace_existing=True,
+    )
+
+    scheduler.add_job(
+        func=run_decay_job,
+        trigger=IntervalTrigger(hours=6),
+        id="decay_scorer",
+        replace_existing=True,
+    )
+
+    scheduler.add_job(
+        func=run_merger_job,
+        trigger=IntervalTrigger(hours=24),
+        id="hierarchy_merger",
         replace_existing=True,
     )
     

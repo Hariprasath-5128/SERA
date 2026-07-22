@@ -2056,8 +2056,11 @@ def compute_exponential_decay(meta: dict, half_life_days: int = 7) -> float:
     That formula guaranteed terminal decay for all nodes regardless of recent usage.
     This formula judges relevancy based on recency of access, not total age.
     """
+    from datetime import timezone
     last_accessed = datetime.fromisoformat(meta["last_accessed"])
-    days_since_last_access = (datetime.utcnow() - last_accessed).days
+    # Use timezone-aware subtraction to avoid TypeError with offset-aware datetimes
+    now = datetime.now(timezone.utc) if last_accessed.tzinfo is not None else datetime.utcnow()
+    days_since_last_access = (now - last_accessed).days
 
     # Exponential half-life decay
     decay_factor = math.exp(-days_since_last_access / half_life_days)

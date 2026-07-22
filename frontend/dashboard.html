@@ -504,9 +504,21 @@ hr.divider{border:none;border-top:1px solid var(--border)}
 
     <hr class="divider">
 
+    <div class="range-group">
+      <div class="range-header">
+        <label class="form-label">Hierarchy Merge Sim</label>
+        <span class="range-val" id="sidebarMergeVal">0.88</span>
+      </div>
+      <input type="range" id="sidebarMergeSlider" min="0.50" max="0.99" step="0.01" value="0.88"
+        oninput="onSidebarMergeThresholdChange(this.value)">
+    </div>
+
+    <hr class="divider">
+
     <!-- Action buttons -->
     <button class="sb-btn sb-btn-primary" id="runBtn" onclick="startSimulation()">▶ Run Simulation</button>
     <button class="sb-btn sb-btn-ghost" onclick="triggerSynthesis()">⚡ Trigger Synthesis Now</button>
+    <button class="sb-btn sb-btn-ghost" onclick="triggerMaintenanceNow()">🛠 Run Maintenance Pipeline</button>
     <button class="sb-btn sb-btn-lock" id="backupBtn" onclick="openAdminLogin()">🔒 Backup Dataset</button>
     <button class="sb-btn sb-btn-danger" onclick="confirmReset()">🗑 Reset All Clusters</button>
 
@@ -721,6 +733,10 @@ hr.divider{border:none;border-top:1px solid var(--border)}
         <label>API Base URL</label>
         <input type="text" id="baseUrlInput" placeholder="http://localhost:8000"/>
       </div>
+      <div class="form-group">
+        <label>Hierarchy Merge Threshold: <span id="mergeThresholdValue">0.88</span></label>
+        <input type="range" id="mergeThresholdInput" min="0.50" max="0.99" step="0.01" value="0.88" oninput="document.getElementById('mergeThresholdValue').textContent=this.value" style="width: 100%; accent-color: var(--primary); background: rgba(255,255,255,0.1); border-radius: 4px; outline: none;"/>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeSettings()">Cancel</button>
@@ -752,6 +768,7 @@ const ADMIN_USER='admin', ADMIN_PASS='sera@admin';
 /* ══ INIT ══ */
 window.addEventListener('DOMContentLoaded',()=>{
   loadBenchmarkSamples();
+  fetchConfig();
   refreshAll();
   S.refreshTimer=setInterval(refreshAll,5000);
   checkHealth();
@@ -770,6 +787,56 @@ async function api(path,opts={}){
   return r.json();
 }
 
+async function fetchConfig(){
+  try {
+    const cfg = await api('/admin/config');
+    const th = cfg.HIERARCHY_MERGE_THRESHOLD || 0.88;
+    const sbSlider = document.getElementById('sidebarMergeSlider');
+    const sbVal = document.getElementById('sidebarMergeVal');
+    if (sbSlider) sbSlider.value = th;
+    if (sbVal) sbVal.textContent = parseFloat(th).toFixed(2);
+    const modalSlider = document.getElementById('mergeThresholdInput');
+    const modalVal = document.getElementById('mergeThresholdValue');
+    if (modalSlider) modalSlider.value = th;
+    if (modalVal) modalVal.textContent = parseFloat(th).toFixed(2);
+  } catch (e) {
+    console.warn('Failed to load config:', e);
+  }
+}
+
+let _sidebarMergeDebounce = null;
+function onSidebarMergeThresholdChange(val){
+  document.getElementById('sidebarMergeVal').textContent = parseFloat(val).toFixed(2);
+  const modalVal = document.getElementById('mergeThresholdValue');
+  const modalSlider = document.getElementById('mergeThresholdInput');
+  if (modalVal) modalVal.textContent = parseFloat(val).toFixed(2);
+  if (modalSlider) modalSlider.value = val;
+
+  clearTimeout(_sidebarMergeDebounce);
+  _sidebarMergeDebounce = setTimeout(async ()=>{
+    try {
+      await api('/admin/config', {
+        method: 'POST',
+        body: JSON.stringify({ HIERARCHY_MERGE_THRESHOLD: parseFloat(val) })
+      });
+      toast(`Hierarchy Merge Threshold updated to ${parseFloat(val).toFixed(2)}`, 'info');
+    } catch (e) {
+      console.error('Failed to update hierarchy threshold:', e);
+      toast('Failed to update hierarchy threshold on server', 'error');
+    }
+  }, 400);
+}
+
+async function triggerMaintenanceNow(){
+  try {
+    const res = await api('/admin/trigger-maintenance', { method: 'POST' });
+    toast(res.message || 'Maintenance pipeline triggered', 'success');
+  } catch (e) {
+    console.error('Failed to trigger maintenance:', e);
+    toast('Failed to trigger maintenance pipeline', 'error');
+  }
+}
+
 /* ══ HEALTH ══ */
 async function checkHealth(){
   const d=document.getElementById('healthDot'),l=document.getElementById('healthLabel');
@@ -778,12 +845,35 @@ async function checkHealth(){
 }
 
 /* ══ SETTINGS ══ */
-function openSettings(){document.getElementById('baseUrlInput').value=BASE_URL;document.getElementById('settingsModal').classList.add('open')}
+async function openSettings(){
+  document.getElementById('baseUrlInput').value=BASE_URL;
+  try {
+    const cfg = await api('/admin/config');
+    const th = cfg.HIERARCHY_MERGE_THRESHOLD || 0.88;
+    document.getElementById('mergeThresholdInput').value = th;
+    document.getElementById('mergeThresholdValue').textContent = th.toFixed(2);
+  } catch (e) {
+    console.warn('Failed to load settings from server:', e);
+  }
+  document.getElementById('settingsModal').classList.add('open');
+}
 function closeSettings(){document.getElementById('settingsModal').classList.remove('open')}
-function saveSettings(){
+async function saveSettings(){
   BASE_URL=document.getElementById('baseUrlInput').value.replace(/\/$/,'');
   localStorage.setItem('sera_base_url',BASE_URL);
-  closeSettings();checkHealth();toast('API URL updated','info');
+  const thVal = parseFloat(document.getElementById('mergeThresholdInput').value);
+  try {
+    await api('/admin/config', {
+      method: 'POST',
+      body: JSON.stringify({ HIERARCHY_MERGE_THRESHOLD: thVal })
+    });
+    toast('Settings updated successfully', 'success');
+  } catch (e) {
+    console.error('Failed to save configuration:', e);
+    toast('API base URL updated, but threshold failed to update on server', 'warning');
+  }
+  closeSettings();
+  checkHealth();
 }
 
 /* ══ BENCHMARK SAMPLES ══ */

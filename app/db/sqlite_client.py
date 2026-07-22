@@ -265,8 +265,10 @@ def get_ready_clusters(
             SELECT * FROM query_clusters
             WHERE synthesizing = 0
               AND synthesis_failed = 0
-              AND hit_count >= ?
-              AND (hit_count - last_synthesized_hit_count) >= ?
+              AND (
+                (hit_count >= ? AND (hit_count - last_synthesized_hit_count) >= ?)
+                OR pending_re_synthesis = 1
+              )
             ORDER BY hit_count DESC
             """,
             (min_hit_count, resynth_delta),
@@ -528,3 +530,86 @@ def reset_to_ground_truth() -> None:
             conn.execute("DELETE FROM sqlite_sequence WHERE name IN ('query_log', 'query_clusters', 'maintenance_log', 'manual_review_queue')")
         except sqlite3.OperationalError:
             pass
+
+
+class PendingCluster:
+    def __init__(self, row: sqlite3.Row):
+        self.id = row["id"]
+        self.super_node_id = row["super_node_id"]
+        self.canonical_query = row["canonical_query"]
+        self.hit_count = row["hit_count"]
+        self.chunk_ids = row["chunk_ids"]
+        self.pending_re_synthesis = row["pending_re_synthesis"]
+
+
+def log_maintenance_event(
+    event_type: str,
+    super_node_id: Optional[str] = None,
+    reason: Optional[str] = None,
+    decay_score: Optional[float] = None,
+) -> None:
+    """
+    Record a maintenance event to the maintenance_log table.
+    """
+    with get_connection() as conn:
+        conn.execute(
+            """
+            INSERT INTO maintenance_log (event_type, super_node_id, reason, decay_score)
+            VALUES (?, ?, ?, ?)
+            """,
+            (event_type, super_node_id, reason, decay_score),
+        )
+
+
+def flag_for_manual_review(sn_id_a: str, sn_id_b: str, reason: str) -> None:
+    """
+    Flag two super-nodes for manual review because merging them would exceed the depth cap.
+    """
+    with get_connection() as conn:
+        conn.execute(
+            """
+            INSERT INTO manual_review_queue (sn_id_a, sn_id_b, reason)
+            VALUES (?, ?, ?)
+            """,
+            (sn_id_a, sn_id_b, reason),
+        )
+
+
+def get_manual_review_queue() -> list[sqlite3.Row]:
+    """
+    Retrieve all unresolved manual review queue entries.
+    """
+    with get_connection() as conn:
+        rows = conn.execute(
+            "SELECT * FROM manual_review_queue WHERE resolved = 0"
+        ).fetchall()
+    return rows
+
+
+def get_clusters_pending_re_synthesis() -> list[PendingCluster]:
+    """
+    Fetch all clusters that are pending re-synthesis (pending_re_synthesis = 1).
+    """
+    with get_connection() as conn:
+        rows = conn.execute(
+            "SELECT * FROM query_clusters WHERE pending_re_synthesis = 1"
+        ).fetchall()
+    return [PendingCluster(row) for row in rows]
+
+
+def reset_cluster_after_pruning(super_node_id: str) -> None:
+    """
+    Reset a cluster's synthesis status when its super-node has been pruned/deleted.
+    """
+    with get_connection() as conn:
+        conn.execute(
+            """
+            UPDATE query_clusters
+            SET synthesized = 0,
+                super_node_id = NULL,
+                last_synthesized_hit_count = 0,
+                pending_re_synthesis = 0
+            WHERE super_node_id = ?
+            """,
+            (super_node_id,),
+        )

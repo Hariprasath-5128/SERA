@@ -67,7 +67,7 @@ class SynthesisJob:
     existing_sn_id : if set, Phase 4 will UPSERT this ID (SU12 re-synthesis).
                      If None, a fresh sn_* ID is minted.
     """
-    cluster_id:      int
+    cluster_id:      Optional[int]
     canonical_query: str
     chunk_ids:       list[str]
     hit_count:       int
@@ -210,7 +210,7 @@ def run(job: SynthesisJob) -> str:
     """
     max_retries = config.MAX_SYNTHESIS_RETRIES
     logger.info(
-        "synthesizer: START cluster_id=%d | chunks=%d | query='%s'",
+        "synthesizer: START cluster_id=%s | chunks=%d | query='%s'",
         job.cluster_id, len(job.chunk_ids), job.canonical_query[:60],
     )
 
@@ -260,13 +260,14 @@ def run(job: SynthesisJob) -> str:
         )
 
     if not result or not result.passed:
-        sqlite_client.set_synthesizing(job.cluster_id, False)
-        # Mark cluster as failed so scheduler stops retrying
-        with sqlite_client.get_connection() as conn:
-            conn.execute(
-                "UPDATE query_clusters SET synthesis_failed=1 WHERE id=?",
-                (job.cluster_id,)
-            )
+        if job.cluster_id is not None:
+            sqlite_client.set_synthesizing(job.cluster_id, False)
+            # Mark cluster as failed so scheduler stops retrying
+            with sqlite_client.get_connection() as conn:
+                conn.execute(
+                    "UPDATE query_clusters SET synthesis_failed=1 WHERE id=?",
+                    (job.cluster_id,)
+                )
         raise ValidationError(
             f"synthesizer: Max retries ({max_retries}) exceeded for "
             f"cluster_id={job.cluster_id}. "
@@ -295,7 +296,7 @@ def run(job: SynthesisJob) -> str:
         source_query_emb=query_emb,
     )
     logger.info(
-        "synthesizer: SU14 fidelity | cluster_id=%d | "
+        "synthesizer: SU14 fidelity | cluster_id=%s | "
         "sim_to_source=%.3f | drift_margin=%.3f | overfit=%s | disconnect=%s",
         job.cluster_id,
         fidelity["sim_summary_to_source"],
@@ -315,7 +316,7 @@ def run(job: SynthesisJob) -> str:
     fidelity_flagged = False
     if fidelity["suspected_overfit"]:
         logger.warning(
-            "synthesizer: SU14 soft flag — cluster_id=%d | drift_margin=%.3f",
+            "synthesizer: SU14 soft flag — cluster_id=%s | drift_margin=%.3f",
             job.cluster_id, fidelity["drift_margin"],
         )
         fidelity_flagged = True
@@ -357,7 +358,7 @@ def run(job: SynthesisJob) -> str:
             "last_accessed":      now_iso,
             "access_count":       0,
             "decay_score":        1.0,
-            "cluster_id":         job.cluster_id,
+            "cluster_id":         job.cluster_id if job.cluster_id is not None else -1,
             "fact_coverage":      result.coverage_score,
             "in_hierarchy":       False,
             "is_stale":           False,
@@ -376,30 +377,36 @@ def run(job: SynthesisJob) -> str:
     )
 
     # ── Step 9: SQLite audit trail ────────────────────────────────────────
-    source_centroid = (
-        np.mean(source_embeddings, axis=0)
-        if source_embeddings
-        else np.zeros(summary_emb.shape)
-    )
-    sqlite_client.insert_super_node_history(
-        cluster_id=job.cluster_id,
-        super_node_id=sn_id,
-        revision=revision,
-        summary=summary,
-        embedding_hash=_emb_sha256(summary_emb),
-        coverage_score=result.coverage_score,
-        drift_margin=fidelity["drift_margin"],
-        chunk_ids_hash=_sha256(json.dumps(sorted(job.chunk_ids))),
-        centroid_hash=_emb_sha256(source_centroid),
-        centroid=source_centroid.astype(np.float32).tobytes(),
-    )
+    if job.cluster_id is not None:
+        source_centroid = (
+            np.mean(source_embeddings, axis=0)
+            if source_embeddings
+            else np.zeros(summary_emb.shape)
+        )
+        sqlite_client.insert_super_node_history(
+            cluster_id=job.cluster_id,
+            super_node_id=sn_id,
+            revision=revision,
+            summary=summary,
+            embedding_hash=_emb_sha256(summary_emb),
+            coverage_score=result.coverage_score,
+            drift_margin=fidelity["drift_margin"],
+            chunk_ids_hash=_sha256(json.dumps(sorted(job.chunk_ids))),
+            centroid_hash=_emb_sha256(source_centroid),
+            centroid=source_centroid.astype(np.float32).tobytes(),
+        )
 
-    # Mark cluster as synthesized in SQLite
-    sqlite_client.mark_cluster_synthesized(job.cluster_id, sn_id)
-    logger.info(
-        "synthesizer: cluster_id=%d marked synthesized | sn_id=%s",
-        job.cluster_id, sn_id,
-    )
+        # Mark cluster as synthesized in SQLite
+        sqlite_client.mark_cluster_synthesized(job.cluster_id, sn_id)
+        logger.info(
+            "synthesizer: cluster_id=%s marked synthesized | sn_id=%s",
+            job.cluster_id, sn_id,
+        )
+    else:
+        logger.info(
+            "synthesizer: synthesized meta-node/cluster-less node | sn_id=%s",
+            sn_id,
+        )
 
     # ── Step 10: SU13 — Upward Staleness Propagation ─────────────────────
     if revision > 1 and parent_meta_id:
