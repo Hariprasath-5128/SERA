@@ -74,9 +74,13 @@ def patch_sqlite_path(db_path: Path, monkeypatch):
 
     import app.config as cfg
     import app.db.sqlite_client as sc
+    import app.logging_.query_logger as ql
 
     monkeypatch.setattr(cfg, "SQLITE_DB_PATH", db_path)
     monkeypatch.setattr(sc, "SQLITE_DB_PATH", db_path)
+
+    # Reset cached dimension so mock embeddings (dim=8) don't trigger the corruption check
+    ql._EMB_DIM = None
 
     # Also patch the config values that sqlite_client imports at call time
     monkeypatch.setattr(cfg, "COSINE_THRESHOLD", 0.92)

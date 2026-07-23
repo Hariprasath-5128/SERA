@@ -9,15 +9,7 @@ from app.synthesis import synthesizer
 
 logger = logging.getLogger(__name__)
 
-@dataclass
-class SynthesisJob:
-    cluster_id: int
-    canonical_query: str
-    chunk_ids: List[str]
-    hit_count: int
-    triggered_at: datetime
-    existing_sn_id: Optional[str] = None
-
+from app.synthesis.synthesizer import SynthesisJob
 
 def scan_and_trigger() -> Dict[str, int]:
     """

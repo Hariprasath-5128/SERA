@@ -25,6 +25,7 @@ CACHE_DIR.mkdir(parents=True, exist_ok=True)
 # API Keys & Tokens
 HF_TOKEN = os.getenv("HF_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY_FALLBACK = os.getenv("OPENAI_API_KEY_FALLBACK")
 
 # Ingestion & Crawling Settings
 USER_AGENT = os.getenv("USER_AGENT", "SERABot/2.0 (+https://github.com/user/SERA)")
@@ -86,6 +87,9 @@ HALF_LIFE_DAYS = float(os.getenv("HALF_LIFE_DAYS", "7.0"))
 # Decay score below this → node is pruned
 DECAY_PRUNE_THRESHOLD = float(os.getenv("DECAY_PRUNE_THRESHOLD", "0.05"))
 # SU11: maximum merge nesting depth; deeper pairs go to manual_review_queue
-MAX_LINEAGE_DEPTH = int(os.getenv("MAX_LINEAGE_DEPTH", "2"))
-# Cosine similarity threshold above which two super-nodes are merged
-HIERARCHY_MERGE_THRESHOLD = float(os.getenv("HIERARCHY_MERGE_THRESHOLD", "0.88"))
+# Depth 3 allows: Disease → Aspect (symptoms/treatment/causes) → Detail
+MAX_LINEAGE_DEPTH = int(os.getenv("MAX_LINEAGE_DEPTH", "3"))
+# Cosine similarity threshold above which two super-nodes are merged into a meta-node.
+# 0.75 is chosen to group thematically related nodes (e.g. different aspects of the
+# same disease: symptoms, causes, treatments) without merging unrelated diseases.
+HIERARCHY_MERGE_THRESHOLD = float(os.getenv("HIERARCHY_MERGE_THRESHOLD", "0.75"))

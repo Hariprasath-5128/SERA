@@ -259,12 +259,13 @@ def test_merger_enforces_depth_cap():
     """Verify that merges exceeding MAX_LINEAGE_DEPTH are blocked and queued for manual review (SU11)."""
     mock_super_coll = MagicMock()
     
-    # Both super-nodes are already at lineage_depth=2 (MAX_LINEAGE_DEPTH = 2)
+    # Both super-nodes are at lineage_depth=3 (MAX_LINEAGE_DEPTH = 3)
+    # merged_depth = max(3,3)+1 = 4 > 3 → should be blocked
     mock_super_coll.get.return_value = {
         "ids": ["sn_A", "sn_B"],
         "metadatas": [
-            {"type": "super_node", "in_hierarchy": False, "hit_count": 5, "lineage_depth": 2, "source_chunks": '["doc_1"]', "source_query": "Q1"},
-            {"type": "super_node", "in_hierarchy": False, "hit_count": 5, "lineage_depth": 2, "source_chunks": '["doc_2"]', "source_query": "Q2"}
+            {"type": "super_node", "in_hierarchy": False, "hit_count": 5, "lineage_depth": 3, "source_chunks": '["doc_1"]', "source_query": "Q1"},
+            {"type": "super_node", "in_hierarchy": False, "hit_count": 5, "lineage_depth": 3, "source_chunks": '["doc_2"]', "source_query": "Q2"}
         ],
         "embeddings": [[0.1, 0.2], [0.1, 0.2]]
     }
@@ -282,10 +283,10 @@ def test_merger_enforces_depth_cap():
         # Verify routed to manual review queue
         mock_flag_review.assert_called_once_with(
             "sn_A", "sn_B",
-            reason="lineage_depth_cap: would reach depth 3 > cap 2"
+            reason="lineage_depth_cap: would reach depth 4 > cap 3"
         )
         mock_log_event.assert_called_once_with(
             event_type="depth_cap_refused",
             super_node_id="sn_A",
-            reason="Hierarchy merge depth limit reached (3 > 2) for pair sn_A and sn_B"
+            reason="Hierarchy merge depth limit reached (4 > 3) for pair sn_A and sn_B"
         )

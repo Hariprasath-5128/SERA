@@ -10,7 +10,8 @@ def test_backup_and_reset():
     assert resp.status_code == 200
     data = resp.json()
     assert data["status"] == "success"
-    assert "backups/v1" in data["backup_path"]
+    import os
+    assert os.path.join("backups", "v1") in data["backup_path"]
     
     # 2. Trigger Reset
     resp = client.post("/admin/reset", json={"commit_message": "Resetting for tests"})

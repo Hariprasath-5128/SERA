@@ -69,3 +69,53 @@ Your previous synthesis was rejected. Missing facts: {missing_facts}
 Re-synthesize ensuring ALL of the above facts are present.
 Source Material:
 {source_chunks_text}"""
+
+# ---------------------------------------------------------------------------
+# Meta-Node Prompt — used ONLY when hierarchy_merger creates a parent node
+# from two or more child super-nodes (SU11 Ground-Truth Re-Synthesis)
+#
+# This structured prompt enforces a disease-centric hierarchical layout:
+#   Disease Name → [ Overview | Symptoms | Causes | Effects | Treatments | ... ]
+# so that parent meta-nodes serve as organised disease encyclopaedia entries.
+# ---------------------------------------------------------------------------
+
+META_NODE_SYSTEM_PROMPT = (
+    "You are a senior medical knowledge architect. "
+    "Your task is to merge multiple related medical knowledge entries into a single, "
+    "well-structured disease encyclopaedia entry. "
+    "Use ONLY information present in the provided source passages. "
+    "Never add external knowledge or invented facts."
+)
+
+META_NODE_PROMPT_TEMPLATE = """\
+Multiple related medical super-nodes are being merged into a single parent knowledge entry.
+
+Child Node Topics:
+{child_queries}
+
+Combined Source Material:
+{source_chunks_text}
+
+Instructions:
+You MUST structure your output using ALL of the following section headings.
+If information for a section is not present in the source material, write "Information not available in source material."
+
+## Overview
+Provide a concise definition and general description of the disease or medical topic.
+
+## Symptoms
+List and describe all symptoms, signs, and clinical presentations mentioned in the source.
+
+## Causes
+Describe all known causes, risk factors, genetic factors, and mechanisms of disease.
+
+## Effects
+Describe the physiological effects, complications, long-term impact, and prognosis.
+
+## Treatments
+Describe all treatment options, medications, surgical interventions, and management strategies.
+
+## Related Information
+Include any additional relevant information such as epidemiology, diagnosis methods, or prevention strategies.
+
+Output ONLY the structured encyclopaedia entry using the headings above. Do not include conversational filler."""

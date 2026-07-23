@@ -48,6 +48,8 @@ from app.synthesis.prompts import (
     SYSTEM_PROMPT,
     USER_PROMPT_TEMPLATE,
     RESYNTH_PROMPT_TEMPLATE,
+    META_NODE_SYSTEM_PROMPT,
+    META_NODE_PROMPT_TEMPLATE,
 )
 from app.validation import entity_extractor, validator
 
@@ -73,6 +75,10 @@ class SynthesisJob:
     hit_count:       int
     triggered_at:    datetime
     existing_sn_id:  Optional[str] = None
+    # Optional override for meta-node merges (supplies structured disease prompt)
+    prompt_template:        Optional[str] = None
+    prompt_system_override: Optional[str] = None
+    child_queries:          Optional[list[str]] = None
 
 
 @dataclass
@@ -231,17 +237,29 @@ def run(job: SynthesisJob) -> str:
 
     for attempt in range(max_retries):
         if attempt == 0:
-            user_prompt = USER_PROMPT_TEMPLATE.format(
-                canonical_query=job.canonical_query,
-                source_chunks_text=source_text,
-            )
+            # Use structured meta-node prompt if provided, else default
+            if job.prompt_template:
+                child_q_str = "\n".join(
+                    f"- {q}" for q in (job.child_queries or [job.canonical_query])
+                )
+                user_prompt = job.prompt_template.format(
+                    child_queries=child_q_str,
+                    source_chunks_text=source_text,
+                    canonical_query=job.canonical_query,
+                )
+            else:
+                user_prompt = USER_PROMPT_TEMPLATE.format(
+                    canonical_query=job.canonical_query,
+                    source_chunks_text=source_text,
+                )
         else:
             user_prompt = RESYNTH_PROMPT_TEMPLATE.format(
                 missing_facts=missing_facts,
                 source_chunks_text=source_text,
             )
 
-        summary = llm_call(SYSTEM_PROMPT, user_prompt, temperature=0.1, max_tokens=2500)
+        active_system = job.prompt_system_override or SYSTEM_PROMPT
+        summary = llm_call(active_system, user_prompt, temperature=0.1, max_tokens=2500)
 
         # SU2 validation
         result = validator.validate(source_text, summary)
@@ -279,7 +297,7 @@ def run(job: SynthesisJob) -> str:
     if hallucination["added_entities"]:
         logger.warning(
             "synthesizer: %d potential hallucination(s) detected for "
-            "cluster_id=%d: %s",
+            "cluster_id=%s: %s",
             len(hallucination["added_entities"]),
             job.cluster_id,
             hallucination["added_entities"],

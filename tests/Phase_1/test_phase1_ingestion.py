@@ -104,7 +104,7 @@ def test_ingest_deduplicates_docs(monkeypatch, tmp_path):
 
 def test_query_returns_answer():
     # Test the query endpoint basic shape
-    response = client.post("/query", json={"query": "What is Mabry syndrome?", "top_k": 1})
+    response = client.post("/query/", json={"query": "What is Mabry syndrome?", "top_k": 1})
     assert response.status_code == 200
     # The actual implementation of query might return a canned answer if generation isn't hooked up yet
     assert "answer" in response.json()

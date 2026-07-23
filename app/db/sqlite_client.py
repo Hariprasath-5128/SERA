@@ -119,6 +119,28 @@ def init_db():
                 ON query_log(cluster_id, timestamp DESC)
         """)
 
+        # ── Phase 6 — Maintenance Audit Tables ──────────────────────────────
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS maintenance_log (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_type      TEXT NOT NULL,
+                super_node_id   TEXT NOT NULL,
+                reason          TEXT NOT NULL,
+                decay_score     REAL,
+                timestamp       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS manual_review_queue (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                sn_a_id     TEXT NOT NULL,
+                sn_b_id     TEXT NOT NULL,
+                reason      TEXT NOT NULL,
+                created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
         # ── Phase 3 — super_node_history migration ───────────────────────────
         migration_path = BASE_DIR / "app" / "db" / "migrations" / "002_super_node_history.sql"
         if migration_path.exists():
@@ -305,12 +327,19 @@ def set_synthesizing(cluster_id: int, value: bool) -> None:
 
     Set synthesizing=1 atomically BEFORE calling the synthesizer to prevent
     double-synthesis on overlapping scheduler ticks.  Set to 0 on failure.
+    Also clears synthesis_failed when acquiring the lock so UI updates immediately.
     """
     with get_connection() as conn:
-        conn.execute(
-            "UPDATE query_clusters SET synthesizing = ? WHERE id = ?",
-            (1 if value else 0, cluster_id),
-        )
+        if value:
+            conn.execute(
+                "UPDATE query_clusters SET synthesizing = 1, synthesis_failed = 0 WHERE id = ?",
+                (cluster_id,),
+            )
+        else:
+            conn.execute(
+                "UPDATE query_clusters SET synthesizing = 0 WHERE id = ?",
+                (cluster_id,),
+            )
 
 
 def flag_cluster_for_re_synthesis(cluster_id: int) -> None:
@@ -519,7 +548,7 @@ def reset_to_ground_truth() -> None:
     """
     logger.warning("sqlite_client: RESETTING TO GROUND TRUTH. Wiping all clusters and logs.")
     with get_connection() as conn:
-        for table in ["query_log", "query_clusters", "maintenance_log", "manual_review_queue"]:
+        for table in ["query_log", "super_node_history", "query_clusters", "maintenance_log", "manual_review_queue"]:
             try:
                 conn.execute(f"DELETE FROM {table}")
             except sqlite3.OperationalError:

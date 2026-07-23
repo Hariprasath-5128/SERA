@@ -441,6 +441,7 @@ hr.divider{border:none;border-top:1px solid var(--border)}
     <div class="health-dot" id="healthDot"></div>
     <span style="font-size:.75rem;color:var(--muted)" id="healthLabel">Checking…</span>
     <a href="home.html" class="sb-btn sb-btn-primary" style="padding:4px 12px; font-size:0.75rem; border-radius: 6px; text-decoration:none; margin-left: 8px;">💬 Chat</a>
+    <button class="icon-btn" onclick="openLlmSettings()" title="LLM Config" style="margin-right: 4px;">🧠</button>
     <button class="icon-btn" onclick="openSettings()" title="Settings">⚙</button>
   </div>
 </nav>
@@ -536,7 +537,8 @@ hr.divider{border:none;border-top:1px solid var(--border)}
       <div class="tab" onclick="switchTab('querylog',this)">Query Log <span class="tab-badge" id="tabLogs">0</span></div>
       <div class="tab" onclick="switchTab('simresults',this)">Sim Results <span class="tab-badge" id="tabResults">—</span></div>
       <div class="tab" onclick="switchTab('supernodes',this)">Super-Nodes <span class="tab-badge" id="tabSN">0</span></div>
-      
+      <div class="tab" onclick="switchTab('maintenance',this)" id="tab-maintenance">Maintenance <span class="tab-badge" id="tabMaint">0</span></div>
+      <div class="tab" onclick="switchTab('hierarchy',this)" id="tab-hierarchy">Hierarchy 🌲</div>
     </nav>
 
     <!-- CLUSTERS -->
@@ -603,6 +605,102 @@ hr.divider{border:none;border-top:1px solid var(--border)}
       </div>
       <div class="sn-grid" id="snGrid">
         <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted)">Loading…</div>
+      </div>
+    </div>
+
+    <!-- MAINTENANCE -->
+    <div class="tab-panel" id="panel-maintenance">
+      <!-- Header row -->
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+        <h2 style="font-size:1rem;font-weight:700;color:var(--text)">🛠 Maintenance Audit</h2>
+        <div style="display:flex;gap:.6rem">
+          <button class="btn btn-secondary btn-sm" onclick="loadMaintenanceLog()">⟳ Refresh Log</button>
+          <button class="btn btn-primary btn-sm" id="trigMaintBtn" onclick="triggerMaintenanceNow()">▶ Run Maintenance Now</button>
+        </div>
+      </div>
+
+      <!-- Audit log table -->
+      <div style="margin-bottom:1.5rem">
+        <div style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem">Audit Log</div>
+        <div class="log-table-wrap">
+          <table class="log-table" id="maintLogTable">
+            <thead><tr>
+              <th>#</th><th>Event Type</th><th>Super-Node ID</th><th>Reason</th><th>Decay Score</th><th>Timestamp</th>
+            </tr></thead>
+            <tbody id="maintLogBody">
+              <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No maintenance events yet. Click Refresh.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Manual Review Queue -->
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem">
+          <div style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Manual Review Queue <span style="color:var(--amber)">(depth-cap exceeded pairs)</span></div>
+          <button class="btn btn-secondary btn-sm" onclick="loadManualReviewQueue()">⟳ Refresh</button>
+        </div>
+        <div class="log-table-wrap">
+          <table class="log-table" id="reviewTable">
+            <thead><tr>
+              <th>ID</th><th>Node A</th><th>Node B</th><th>Reason</th><th>Created</th><th>Action</th>
+            </tr></thead>
+            <tbody id="reviewTableBody">
+              <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No pending reviews. 🎉</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIERARCHY -->
+    <div class="tab-panel" id="panel-hierarchy" style="display:none;flex-direction:column;gap:1rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <h2 style="font-size:1rem;font-weight:700">🌲 Knowledge Hierarchy Graph</h2>
+        <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted2)">
+            <span>Sim Threshold:</span>
+            <input type="range" id="hierarchyThreshold" min="0.50" max="0.99" step="0.01" value="0.75"
+              style="width:130px;accent-color:var(--cyan)"
+              oninput="document.getElementById('hierThreshVal').textContent=parseFloat(this.value).toFixed(2);renderHierarchyGraph()">
+            <span id="hierThreshVal" style="font-family:var(--mono);font-weight:700;color:var(--cyan);min-width:2.5rem">0.75</span>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="loadHierarchyGraph()">⟳ Refresh</button>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div style="display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.75rem">
+        <div style="display:flex;align-items:center;gap:.4rem">
+          <div style="width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan)"></div>
+          <span>Super-Node (leaf topic)</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.4rem">
+          <div style="width:14px;height:14px;background:var(--purple);transform:rotate(45deg);box-shadow:0 0 6px var(--purple)"></div>
+          <span>Meta-Node (disease parent)</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.4rem">
+          <div style="width:14px;height:14px;border-radius:50%;background:var(--amber);box-shadow:0 0 6px var(--amber)"></div>
+          <span>Stale Node</span>
+        </div>
+      </div>
+
+      <!-- Canvas -->
+      <div style="position:relative;flex:1;min-height:480px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+        <canvas id="hierCanvas" style="width:100%;height:100%;display:block"></canvas>
+        <div id="hierTooltip" style="display:none;position:absolute;background:#0f0f1a;border:1px solid var(--border);
+          border-radius:.5rem;padding:.6rem .9rem;font-size:.75rem;max-width:280px;pointer-events:none;z-index:10;line-height:1.6"></div>
+        <div id="hierEmpty" style="display:flex;align-items:center;justify-content:center;position:absolute;inset:0;
+          color:var(--muted);font-size:.88rem;flex-direction:column;gap:.5rem">
+          <span style="font-size:2.5rem;opacity:.3">🌐</span>
+          <span>No hierarchy data yet. Run maintenance to merge super-nodes.</span>
+        </div>
+      </div>
+
+      <!-- Node info panel -->
+      <div id="hierNodeInfo" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem">
+        <div style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem">Selected Node</div>
+        <div id="hierNodeDetails" style="font-size:.82rem;line-height:1.8"></div>
       </div>
     </div>
 
@@ -733,14 +831,49 @@ hr.divider{border:none;border-top:1px solid var(--border)}
         <label>API Base URL</label>
         <input type="text" id="baseUrlInput" placeholder="http://localhost:8000"/>
       </div>
-      <div class="form-group">
-        <label>Hierarchy Merge Threshold: <span id="mergeThresholdValue">0.88</span></label>
-        <input type="range" id="mergeThresholdInput" min="0.50" max="0.99" step="0.01" value="0.88" oninput="document.getElementById('mergeThresholdValue').textContent=this.value" style="width: 100%; accent-color: var(--primary); background: rgba(255,255,255,0.1); border-radius: 4px; outline: none;"/>
-      </div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeSettings()">Cancel</button>
       <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LLM CONFIG MODAL ══ -->
+<div class="modal-bg" id="llmSettingsModal" onclick="if(event.target===this)closeLlmSettings()">
+  <div class="modal narrow">
+    <div class="modal-header"><div class="modal-title">🧠 LLM Config</div><button class="modal-close" onclick="closeLlmSettings()">✕</button></div>
+    <div class="settings-form">
+      <div class="form-group">
+        <label>LLM Model</label>
+        <select id="llmModelSelect" style="background: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 8px; border-radius: 6px;">
+          <option value="llama-3.1-8b-instant">llama-3.1-8b-instant (Fast)</option>
+          <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile (Large)</option>
+          <option value="gemma2-9b-it">gemma2-9b-it</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>API Key Selection</label>
+        <select id="llmKeySelect" style="background: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 8px; border-radius: 6px;">
+          <option value="false">Primary API Key</option>
+          <option value="true">Fallback API Key</option>
+        </select>
+      </div>
+      <div class="form-group" style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; border: 1px solid var(--border);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <label style="margin:0;">API Status <span id="apiStatusBadge" style="padding:2px 6px; border-radius:4px; font-size:0.65rem; background:var(--muted); color:#fff; margin-left:6px;">Unknown</span></label>
+          <button class="sb-btn sb-btn-ghost" style="padding: 4px 8px; font-size: 0.7rem; width: auto;" onclick="checkTokenLimits()">Check Limits</button>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--muted); font-family: var(--mono);">
+          Limit: <span id="apiLimitText" style="color:var(--text);">---</span><br>
+          Remaining: <span id="apiRemainingText" style="color:var(--text);">---</span><br>
+          Reset: <span id="apiResetText" style="color:var(--text);">---</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeLlmSettings()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveLlmSettings()">Save Config</button>
     </div>
   </div>
 </div>
@@ -847,31 +980,78 @@ async function checkHealth(){
 /* ══ SETTINGS ══ */
 async function openSettings(){
   document.getElementById('baseUrlInput').value=BASE_URL;
-  try {
-    const cfg = await api('/admin/config');
-    const th = cfg.HIERARCHY_MERGE_THRESHOLD || 0.88;
-    document.getElementById('mergeThresholdInput').value = th;
-    document.getElementById('mergeThresholdValue').textContent = th.toFixed(2);
-  } catch (e) {
-    console.warn('Failed to load settings from server:', e);
-  }
   document.getElementById('settingsModal').classList.add('open');
+}
+
+/* ══ LLM SETTINGS ══ */
+async function openLlmSettings(){
+  try {
+    const llmCfg = await api('/admin/llm-config');
+    document.getElementById('llmModelSelect').value = llmCfg.model || 'llama-3.1-8b-instant';
+    document.getElementById('llmKeySelect').value = llmCfg.use_fallback ? 'true' : 'false';
+    
+    // Clear status
+    document.getElementById('apiStatusBadge').textContent = 'Unknown';
+    document.getElementById('apiStatusBadge').style.background = 'var(--muted)';
+    document.getElementById('apiLimitText').textContent = '---';
+    document.getElementById('apiRemainingText').textContent = '---';
+    document.getElementById('apiResetText').textContent = '---';
+    
+    // Auto-fetch token limits
+    setTimeout(() => { checkTokenLimits(); }, 200);
+  } catch (e) {
+    console.warn('Failed to load LLM settings:', e);
+  }
+  document.getElementById('llmSettingsModal').classList.add('open');
+}
+function closeLlmSettings(){document.getElementById('llmSettingsModal').classList.remove('open')}
+async function saveLlmSettings(){
+  try {
+    const model = document.getElementById('llmModelSelect').value;
+    const use_fallback = document.getElementById('llmKeySelect').value === 'true';
+    await fetch(BASE_URL+'/admin/llm-config', {
+      method: 'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ model: model, use_fallback: use_fallback })
+    });
+    toast('LLM Config saved successfully', 'success');
+  } catch(e) {
+    toast('Failed to save LLM config', 'error');
+  }
+  closeLlmSettings();
+}
+
+async function checkTokenLimits() {
+  const model = document.getElementById('llmModelSelect').value;
+  const use_fallback = document.getElementById('llmKeySelect').value;
+  document.getElementById('apiStatusBadge').textContent = 'Checking...';
+  document.getElementById('apiStatusBadge').style.background = 'var(--amber)';
+  
+  try {
+    const res = await api(`/admin/llm-status?model=${model}&use_fallback=${use_fallback}`);
+    if (res.status === 'active') {
+       document.getElementById('apiStatusBadge').textContent = 'Active';
+       document.getElementById('apiStatusBadge').style.background = 'var(--green)';
+    } else if (res.status === 'rate_limited') {
+       document.getElementById('apiStatusBadge').textContent = 'Rate Limited';
+       document.getElementById('apiStatusBadge').style.background = 'var(--red)';
+    } else {
+       document.getElementById('apiStatusBadge').textContent = 'Error';
+       document.getElementById('apiStatusBadge').style.background = 'var(--red)';
+    }
+    document.getElementById('apiLimitText').textContent = res.limit;
+    document.getElementById('apiRemainingText').textContent = res.remaining;
+    document.getElementById('apiResetText').textContent = res.reset_time || '---';
+  } catch(e) {
+    document.getElementById('apiStatusBadge').textContent = 'Failed';
+    document.getElementById('apiStatusBadge').style.background = 'var(--red)';
+  }
 }
 function closeSettings(){document.getElementById('settingsModal').classList.remove('open')}
 async function saveSettings(){
   BASE_URL=document.getElementById('baseUrlInput').value.replace(/\/$/,'');
   localStorage.setItem('sera_base_url',BASE_URL);
-  const thVal = parseFloat(document.getElementById('mergeThresholdInput').value);
-  try {
-    await api('/admin/config', {
-      method: 'POST',
-      body: JSON.stringify({ HIERARCHY_MERGE_THRESHOLD: thVal })
-    });
-    toast('Settings updated successfully', 'success');
-  } catch (e) {
-    console.error('Failed to save configuration:', e);
-    toast('API base URL updated, but threshold failed to update on server', 'warning');
-  }
+  toast('Settings updated successfully', 'success');
   closeSettings();
   checkHealth();
 }
@@ -971,6 +1151,7 @@ function renderClusters(){
       ${chunks.length?'<div><div class="meta-key" style="margin-bottom:.3rem">Chunk IDs</div><div class="chunk-list">'+chunkHtml+'</div></div>':''}
       <div class="card-footer">
         ${c.history?.length?'<button class="card-btn primary" onclick="showHistory('+c.id+')">📖 History ('+c.revision_count+')</button>':'<button class="card-btn" disabled>No History</button>'}
+        ${st==='failed'?'<button class="card-btn" style="background:var(--red);color:#fff;border-color:var(--red2)" onclick="forceSynthAdmin('+c.id+')">🔄 Re-Try</button>':''}
         <button class="card-btn" onclick="copyCluster(${c.id})">Copy JSON</button>
       </div>
     </div>`;
@@ -1355,6 +1536,301 @@ function fmtTime(ts){
 const shimmerStyle=document.createElement('style');
 shimmerStyle.textContent='@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}';
 document.head.appendChild(shimmerStyle);
+
+/* ══════════════════════════════════════════════════════════════════
+   MAINTENANCE TAB
+   ══════════════════════════════════════════════════════════════════ */
+
+async function loadMaintenanceLog(){
+  const tbody=document.getElementById('maintLogBody');
+  tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--cyan)"><div class="spinner"></div></td></tr>';
+  try{
+    const r=await fetch(BASE_URL+'/admin/maintenance-log?limit=50');
+    if(!r.ok)throw new Error(await r.text());
+    const d=await r.json();
+    document.getElementById('tabMaint').textContent=d.total;
+    if(!d.events||!d.events.length){
+      tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No maintenance events yet.</td></tr>';
+      return;
+    }
+    const evtColor={'merge':'var(--green)','soft_stale':'var(--amber)','prune':'var(--red)','depth_cap_refused':'var(--purple)'};
+    tbody.innerHTML=d.events.map(e=>`
+      <tr>
+        <td class="mono-sm">${e.id}</td>
+        <td><span class="badge" style="border-color:${evtColor[e.event_type]||'var(--muted)'};color:${evtColor[e.event_type]||'var(--muted)'}">
+          ${esc(e.event_type)}</span></td>
+        <td class="mono-sm" style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(e.super_node_id||'')}">
+          ${esc(e.super_node_id||'—')}</td>
+        <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.72rem;color:var(--muted2)" title="${esc(e.reason||'')}">
+          ${esc(e.reason||'—')}</td>
+        <td class="mono-sm">${e.decay_score!=null?Number(e.decay_score).toFixed(3):'—'}</td>
+        <td class="mono-sm" style="white-space:nowrap">${fmtTime(e.timestamp)}</td>
+      </tr>`).join('');
+  }catch(err){
+    tbody.innerHTML=`<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--red)">Error: ${esc(err.message)}</td></tr>`;
+    showToast('Failed to load maintenance log','error');
+  }
+}
+
+async function loadManualReviewQueue(){
+  const tbody=document.getElementById('reviewTableBody');
+  tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--cyan)"><div class="spinner"></div></td></tr>';
+  try{
+    const r=await fetch(BASE_URL+'/admin/manual-review-queue');
+    if(!r.ok)throw new Error(await r.text());
+    const d=await r.json();
+    if(!d.queue||!d.queue.length){
+      tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No pending reviews. 🎉</td></tr>';
+      return;
+    }
+    tbody.innerHTML=d.queue.map(q=>`
+      <tr>
+        <td class="mono-sm">${q.id}</td>
+        <td class="mono-sm" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(q.sn_id_a)}">${esc(q.sn_id_a)}</td>
+        <td class="mono-sm" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(q.sn_id_b)}">${esc(q.sn_id_b)}</td>
+        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.72rem;color:var(--muted2)" title="${esc(q.reason||'')}">${esc(q.reason||'—')}</td>
+        <td class="mono-sm">${fmtTime(q.created_at)}</td>
+        <td><button class="btn btn-danger btn-sm" onclick="resolveReview(${q.id},this)">✓ Resolve</button></td>
+      </tr>`).join('');
+  }catch(err){
+    tbody.innerHTML=`<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--red)">Error: ${esc(err.message)}</td></tr>`;
+    showToast('Failed to load review queue','error');
+  }
+}
+
+async function resolveReview(id,btn){
+  btn.disabled=true;btn.textContent='…';
+  try{
+    const r=await fetch(BASE_URL+`/admin/resolve-review/${id}`,{method:'POST'});
+    if(!r.ok)throw new Error(await r.text());
+    showToast(`Review #${id} resolved ✓`,'success');
+    loadManualReviewQueue();
+  }catch(err){
+    btn.disabled=false;btn.textContent='✓ Resolve';
+    showToast('Resolve failed: '+err.message,'error');
+  }
+}
+
+// Auto-load maintenance data when tab is activated
+const _origSwitchTab=window.switchTab;
+window.switchTab=function(name,el){
+  _origSwitchTab&&_origSwitchTab(name,el);
+  // Show hierarchy panel (not using CSS active class pattern for canvas)
+  document.querySelectorAll('.tab-panel').forEach(p=>{
+    if(p.id==='panel-hierarchy') p.style.display='none';
+  });
+  if(name==='maintenance'){loadMaintenanceLog();loadManualReviewQueue();}
+  if(name==='hierarchy'){
+    const p=document.getElementById('panel-hierarchy');
+    p.style.display='flex';
+    loadHierarchyGraph();
+  }
+};
+
+/* ══════════════════════════════════════════════════════════════════
+   HIERARCHY GRAPH (Force-Directed Canvas)
+   ══════════════════════════════════════════════════════════════════ */
+
+let _hierData={nodes:[],edges:[]};
+let _hierPhysics=[];     // [{x,y,vx,vy,node}]
+let _hierAnim=null;
+let _hierCanvas=null;
+let _hierCtx=null;
+let _selectedHierNode=null;
+
+async function loadHierarchyGraph(){
+  try{
+    const r=await fetch(BASE_URL+'/admin/hierarchy-graph');
+    if(!r.ok)throw new Error(await r.text());
+    _hierData=await r.json();
+    renderHierarchyGraph();
+  }catch(err){
+    showToast('Hierarchy graph load failed: '+err.message,'error');
+  }
+}
+
+function renderHierarchyGraph(){
+  _hierCanvas=document.getElementById('hierCanvas');
+  _hierCtx=_hierCanvas.getContext('2d');
+  const container=_hierCanvas.parentElement;
+  _hierCanvas.width=container.clientWidth||800;
+  _hierCanvas.height=container.clientHeight||480;
+
+  const empty=document.getElementById('hierEmpty');
+  if(!_hierData.nodes||!_hierData.nodes.length){
+    empty.style.display='flex'; return;
+  }
+  empty.style.display='none';
+
+  // Initialise physics particles randomly to prevent perfectly balanced circular locks
+  const W=_hierCanvas.width, H=_hierCanvas.height;
+  _hierPhysics=_hierData.nodes.map((n,i)=>({
+    x: W/2 + (Math.random()-0.5)*W*0.6,
+    y: H/2 + (Math.random()-0.5)*H*0.6,
+    vx:0, vy:0, node:n, r: n.type==='meta_node'?18:12
+  }));
+
+  const idxMap={};
+  _hierData.nodes.forEach((n,i)=>idxMap[n.id]=i);
+
+  if(_hierAnim)cancelAnimationFrame(_hierAnim);
+  let tick=0;
+
+    function step(){
+    tick++;
+    const REPEL=6000, SPRING=0.04, DAMP=0.82, ATTRACT=0.005;
+    const N=_hierPhysics.length;
+
+    // Repulsion
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const a=_hierPhysics[i], b=_hierPhysics[j];
+        const dx=b.x-a.x, dy=b.y-a.y;
+        const d2=dx*dx+dy*dy+1;
+        const f=REPEL/d2;
+        const fx=f*dx/Math.sqrt(d2), fy=f*dy/Math.sqrt(d2);
+        a.vx-=fx; a.vy-=fy; b.vx+=fx; b.vy+=fy;
+      }
+    }
+    // Spring edges
+    for(const e of _hierData.edges){
+      const ai=idxMap[e.from], bi=idxMap[e.to];
+      if(ai==null||bi==null)continue;
+      const a=_hierPhysics[ai], b=_hierPhysics[bi];
+      const dx=b.x-a.x, dy=b.y-a.y;
+      const d=Math.sqrt(dx*dx+dy*dy)||1;
+      const f=SPRING*(d-180);
+      a.vx+=f*dx/d; a.vy+=f*dy/d;
+      b.vx-=f*dx/d; b.vy-=f*dy/d;
+    }
+    // Centre gravity
+    for(const p of _hierPhysics){
+      p.vx+=(W/2-p.x)*ATTRACT; p.vy+=(H/2-p.y)*ATTRACT;
+      p.vx*=DAMP; p.vy*=DAMP;
+      p.x+=p.vx; p.y+=p.vy;
+      p.x=Math.max(p.r+5,Math.min(W-p.r-5,p.x));
+      p.y=Math.max(p.r+5,Math.min(H-p.r-5,p.y));
+    }
+
+    // Draw
+    const ctx=_hierCtx;
+    ctx.clearRect(0,0,W,H);
+
+    // Edges
+    for(const e of _hierData.edges){
+      const ai=idxMap[e.from], bi=idxMap[e.to];
+      if(ai==null||bi==null)continue;
+      const a=_hierPhysics[ai], b=_hierPhysics[bi];
+      ctx.beginPath();
+      ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle='rgba(99,102,241,0.35)'; ctx.lineWidth=1.5;
+      ctx.stroke();
+      // Arrowhead
+      const angle=Math.atan2(b.y-a.y,b.x-a.x);
+      const tip={x:b.x-Math.cos(angle)*b.r,y:b.y-Math.sin(angle)*b.r};
+      ctx.beginPath();
+      ctx.moveTo(tip.x,tip.y);
+      ctx.lineTo(tip.x-10*Math.cos(angle-0.4),tip.y-10*Math.sin(angle-0.4));
+      ctx.lineTo(tip.x-10*Math.cos(angle+0.4),tip.y-10*Math.sin(angle+0.4));
+      ctx.closePath();
+      ctx.fillStyle='rgba(99,102,241,0.5)'; ctx.fill();
+    }
+
+    // Nodes
+    for(const p of _hierPhysics){
+      const n=p.node;
+      const isSelected=_selectedHierNode&&_selectedHierNode.id===n.id;
+      const color= n.is_stale?'#f59e0b': n.type==='meta_node'?'#a78bfa':'#22d3ee';
+      const glowColor= n.is_stale?'rgba(245,158,11,.6)': n.type==='meta_node'?'rgba(167,139,250,.5)':'rgba(34,211,238,.4)';
+
+      ctx.beginPath();
+      if(n.type==='meta_node'){
+        // Diamond for meta-node
+        ctx.moveTo(p.x, p.y-p.r); ctx.lineTo(p.x+p.r,p.y);
+        ctx.lineTo(p.x, p.y+p.r); ctx.lineTo(p.x-p.r,p.y);
+        ctx.closePath();
+      } else {
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      }
+      ctx.shadowColor=glowColor; ctx.shadowBlur=isSelected?20:8;
+      ctx.fillStyle=color; ctx.fill();
+      ctx.shadowBlur=0;
+      ctx.strokeStyle=isSelected?'#fff':'rgba(255,255,255,.2)';
+      ctx.lineWidth=isSelected?2.5:1;
+      ctx.stroke();
+
+      // Label
+      ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font='bold 9px Inter,sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      const label=n.label.length>20?n.label.slice(0,18)+'…':n.label;
+      ctx.fillText(label,p.x,p.y+p.r+10);
+    }
+
+    if(tick<120)_hierAnim=requestAnimationFrame(step);
+    else _hierAnim=null;
+  }
+  _hierAnim=requestAnimationFrame(step);
+
+  // Mouse interactions
+  _hierCanvas.onmousemove=function(e){
+    const rect=_hierCanvas.getBoundingClientRect();
+    const mx=(e.clientX-rect.left)*(_hierCanvas.width/rect.width);
+    const my=(e.clientY-rect.top)*(_hierCanvas.height/rect.height);
+    const tip=document.getElementById('hierTooltip');
+    let hovered=null;
+    for(const p of _hierPhysics){
+      const dx=mx-p.x, dy=my-p.y;
+      if(dx*dx+dy*dy<=p.r*p.r*2){hovered=p.node;break;}
+    }
+    if(hovered){
+      tip.style.display='block';
+      tip.style.left=(e.clientX-rect.left+14)+'px';
+      tip.style.top=(e.clientY-rect.top+14)+'px';
+      tip.innerHTML=`<strong style="color:var(--cyan)">${esc(hovered.type==='meta_node'?'🔷 Meta-Node':'🔵 Super-Node')}</strong><br>
+        <span style="color:var(--muted)">ID:</span> ${esc(hovered.id)}<br>
+        <span style="color:var(--muted)">Query:</span> ${esc(hovered.label)}<br>
+        <span style="color:var(--muted)">Hit Count:</span> ${hovered.hit_count}<br>
+        <span style="color:var(--muted)">Depth:</span> ${hovered.depth}<br>
+        <span style="color:var(--muted)">Stale:</span> ${hovered.is_stale?'<span style="color:var(--amber)">⚠ Yes</span>':'<span style="color:var(--green)">✓ No</span>'}`;
+      _hierCanvas.style.cursor='pointer';
+    } else {
+      tip.style.display='none';
+      _hierCanvas.style.cursor='default';
+    }
+  };
+
+  _hierCanvas.onclick=function(e){
+    const rect=_hierCanvas.getBoundingClientRect();
+    const mx=(e.clientX-rect.left)*(_hierCanvas.width/rect.width);
+    const my=(e.clientY-rect.top)*(_hierCanvas.height/rect.height);
+    let clicked=null;
+    for(const p of _hierPhysics){
+      const dx=mx-p.x,dy=my-p.y;
+      if(dx*dx+dy*dy<=p.r*p.r*2){clicked=p.node;break;}
+    }
+    _selectedHierNode=clicked;
+    const info=document.getElementById('hierNodeInfo');
+    const details=document.getElementById('hierNodeDetails');
+    if(clicked){
+      info.style.display='block';
+      details.innerHTML=`
+        <b>ID:</b> <span style="font-family:var(--mono);color:var(--indigo)">${esc(clicked.id)}</span><br>
+        <b>Type:</b> ${clicked.type==='meta_node'?'<span style="color:var(--purple)">🔷 Meta-Node (Disease Parent)</span>':'<span style="color:var(--cyan)">🔵 Super-Node (Sub-topic)</span>'}<br>
+        <b>Topic:</b> ${esc(clicked.label)}<br>
+        <b>Hit Count:</b> ${clicked.hit_count} &nbsp;|&nbsp; <b>Depth:</b> ${clicked.depth}<br>
+        <b>In Hierarchy:</b> ${clicked.in_hierarchy?'Yes (locked)':'No (mergeable)'}<br>
+        <b>Stale:</b> ${clicked.is_stale?'<span style="color:var(--amber)">⚠ Yes — pending re-synthesis</span>':'<span style="color:var(--green)">✓ Fresh</span>'}<br>
+        ${clicked.parent_meta_id?`<b>Parent:</b> <span style="font-family:var(--mono);font-size:.72rem;color:var(--purple)">${esc(clicked.parent_meta_id)}</span>`:''}`;
+    } else {
+      info.style.display='none';
+    }
+    // Restart animation to show selection highlight
+    if(_hierAnim)cancelAnimationFrame(_hierAnim);
+    tick=0;
+    _hierAnim=requestAnimationFrame(step);
+  };
+}
+
 </script>
 </body>
 </html>

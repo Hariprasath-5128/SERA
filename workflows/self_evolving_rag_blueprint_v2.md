@@ -1775,93 +1775,119 @@ app/
    b. Do NOT write access_count back to ChromaDB during query path
 ```
 
+### Implementation Refinements & Deviations (Implemented in Codebase)
+
+The actual codebase implementation contains several refinements and deviations from the original blueprint specifications to maintain compatibility, ensure robustness, and enhance the UI:
+- **Class-Based Retriever**: Instead of a standalone `retrieve` function returning a custom type, the codebase retains the class-based structure `Retriever.search(query, top_k, epsilon) -> List[Dict[str, Any]]` from Phase 1. This avoids breaking compatibility with `app/api/routes/query.py` and downstream middleware.
+- **Delegated Database Calls**: Rather than querying ChromaDB directly in `retriever.py`, direct collection queries are encapsulated in [router.py](file:///c:/Projects/SERA/app/retrieval/router.py) (`query_super_nodes()` and `query_raw_chunks()`), which gracefully handles missing or empty collections.
+- **Unified Key Mapping**: The final implementation standardises on returning `"id"` uniformly for all result types (raw chunks, super-nodes, and meta-nodes) to match `query.py`'s expectations, correcting a pre-existing key mismatch (`chunk_id` vs `id`) in the Phase 1 retriever.
+- **LLM Validation Fallback**: Inside [validator.py](file:///c:/Projects/SERA/app/validation/validator.py), JSON decoding errors or validation exceptions from the LLM-as-judge are captured and automatically fall back to the spaCy named entity overlap check in [entity_extractor.py](file:///c:/Projects/SERA/app/validation/entity_extractor.py) to prevent background scheduler crashes.
+- **Multi-page Frontend & Redirect**: The single-page tabbed dashboard was split into two premium pages: `home.html` (for search/chat with real-time deletion) and `dashboard.html` (for clusters/simulations/admin actions). A root-level redirect was added to `app/main.py` to route `/` requests to `/home.html` to avoid 404 errors.
+
 ### Updated Component: `retrieval/retriever.py` (SU4 + SU5 + SU10)
 ```python
-import random
 import json
+import logging
+from typing import List, Dict, Any
 
-def retrieve(query: str, top_k: int = 5,
-             epsilon: float = config.EXPLORATION_EPSILON) -> RetrievalResult:
-    """
-    Unified retrieval function combining:
-    - SU4: ε-Greedy Exploration to prevent filter bubble on super-nodes
-    - SU5: Hierarchical masking to prevent parent/child vector collision
-    - SU10: Atomic SQLite access logging to prevent concurrency counter loss
-    """
-    q_emb = embedder.encode([query])[0]
+from app.ingestion.embedder import Embedder
+from app.retrieval.score_booster import compute_boost
+from app.retrieval.router import query_super_nodes, query_raw_chunks
+from app.db import sqlite_client
+from app.config import DEFAULT_TOP_K, EXPLORATION_EPSILON
 
-    # Dual collection search
-    sn_results = chroma_client.super_nodes.query(
-        query_embeddings=[q_emb], n_results=top_k,
-        include=["documents", "metadatas", "distances", "ids"]
-    )
-    raw_results = chroma_client.raw_chunks.query(
-        query_embeddings=[q_emb], n_results=top_k,
-        include=["documents", "metadatas", "distances"]
-    )
+logger = logging.getLogger(__name__)
 
-    # ── SU5: Hierarchical Masking ────────────────────────────────────────────
-    # First pass: collect children IDs of any retrieved meta_nodes
-    masked_node_ids = set()
-    for meta in sn_results["metadatas"][0]:
-        if meta.get("type") == "meta_node":
-            children_ids = json.loads(meta.get("children", "[]"))
-            masked_node_ids.update(children_ids)
 
-    # ── SU4: ε-Greedy Strategy ───────────────────────────────────────────────
-    apply_boost = random.random() > epsilon
-    multiplier = config.SUPER_NODE_SCORE_MULTIPLIER if apply_boost else 1.0
-    # Log which strategy was chosen for observability
-    log.info("retrieval_strategy", mode="exploit" if apply_boost else "explore",
-             epsilon=epsilon)
+class Retriever:
 
-    # ── Build candidate list ─────────────────────────────────────────────────
-    candidates = []
-    super_node_ids_in_results = []
+    @classmethod
+    def search(
+        cls,
+        query: str,
+        top_k: int = DEFAULT_TOP_K,
+        epsilon: float = EXPLORATION_EPSILON,
+    ) -> List[Dict[str, Any]]:
+        """
+        Phase 5 unified retrieval combining SU4, SU5, and SU10.
+        """
+        if not query.strip():
+            return []
 
-    for doc, meta, dist, id_ in zip(
-        sn_results["documents"][0],
-        sn_results["metadatas"][0],
-        sn_results["distances"][0],
-        sn_results["ids"][0]
-    ):
-        # SU5: Skip child nodes shadowed by their retrieved parent meta_node
-        if id_ in masked_node_ids:
-            continue
+        # ── 1. Embed query ────────────────────────────────────────────────────
+        model = Embedder.get_model()
+        q_emb: list = model.encode(
+            [query], convert_to_numpy=True, show_progress_bar=False
+        )[0].tolist()
 
-        boosted_score = dist * multiplier
-        candidates.append({
-            "doc": doc, "meta": meta, "score": boosted_score,
-            "type": meta.get("type", "super_node"), "id": id_
-        })
-        if meta.get("type") == "super_node":
-            super_node_ids_in_results.append(id_)
+        # ── 2. Dual-collection query ──────────────────────────────────────────
+        sn_candidates = query_super_nodes(q_emb, top_k)
+        raw_candidates = query_raw_chunks(q_emb, top_k)
 
-    for doc, meta, dist in zip(
-        raw_results["documents"][0],
-        raw_results["metadatas"][0],
-        raw_results["distances"][0]
-    ):
-        candidates.append({
-            "doc": doc, "meta": meta, "score": dist,
-            "type": "raw_chunk", "id": None
-        })
+        # ── 3. SU4 -- epsilon-Greedy strategy ─────────────────────────────────
+        multiplier, mode = compute_boost(epsilon=epsilon)
 
-    # Sort ascending (lower L2 = better)
-    candidates.sort(key=lambda x: x["score"])
-    top = candidates[:top_k]
+        # ── 4. SU5 -- Hierarchical masking ────────────────────────────────────
+        masked_ids: set = set()
+        for c in sn_candidates:
+            if c["meta"].get("type") == "meta_node":
+                try:
+                    children = json.loads(c["meta"].get("children", "[]"))
+                    masked_ids.update(children)
+                except (json.JSONDecodeError, TypeError):
+                    logger.warning(
+                        "retriever: could not parse children JSON for meta_node %s -- skipping mask",
+                        c["id"],
+                    )
+        masked_count = 0
 
-    # ── SU10: Atomic SQLite Access Logging ───────────────────────────────────
-    # Never write hit_count to ChromaDB during the query path.
-    # SQLite provides atomic increment; ChromaDB does not.
-    if super_node_ids_in_results:
-        log_super_node_access(super_node_ids_in_results)
+        # ── 5. Build merged candidate list ───────────────────────────────────
+        candidates: List[Dict[str, Any]] = []
 
-    return RetrievalResult(
-        documents=[c["doc"] for c in top],
-        types=[c["type"] for c in top],
-        scores=[c["score"] for c in top]
-    )
+        for c in sn_candidates:
+            if c["id"] in masked_ids:
+                masked_count += 1
+                logger.debug("retriever: SU5 masked child super-node %s", c["id"])
+                continue
+
+            node_type = c["meta"].get("type", "super_node")
+            candidates.append({
+                "id":       c["id"],
+                "text":     c["doc"],
+                "metadata": c["meta"],
+                "distance": c["distance"] * multiplier,  # SU4 boost
+                "type":     node_type,
+            })
+
+        for c in raw_candidates:
+            candidates.append({
+                "id":       c["id"],
+                "text":     c["doc"],
+                "metadata": c["meta"],
+                "distance": c["distance"],
+                "type":     "raw_chunk",
+            })
+
+        # ── 6. Re-rank and slice top_k ────────────────────────────────────────
+        candidates.sort(key=lambda x: x["distance"])
+        top = candidates[:top_k]
+
+        # ── 7. SU10 -- Atomic SQLite access logging ───────────────────────────
+        super_node_ids_in_top = [
+            c["id"]
+            for c in top
+            if c["type"] in ("super_node", "meta_node") and c.get("id")
+        ]
+        if super_node_ids_in_top:
+            try:
+                sqlite_client.log_super_node_access(super_node_ids_in_top)
+            except Exception:
+                logger.exception(
+                    "retriever: SU10 log_super_node_access failed (non-fatal)"
+                )
+
+        return top
+```
 
 
 def log_super_node_access(super_node_ids: list[str]):

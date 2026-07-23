@@ -305,6 +305,9 @@ def force_synthesize(cluster_id: int):
 
         sn_id = synthesis_run(job)
 
+        # Mark it synthesized so it unlocks and saves the sn_id to the cluster
+        sqlite_client.mark_cluster_synthesized(cluster_id, sn_id)
+
         # Read back the coverage score from ChromaDB metadata
         meta     = super_node_store.get_metadata(sn_id)
         coverage = meta.get("fact_coverage", 0.0)
@@ -380,3 +383,217 @@ def list_super_nodes():
         ))
 
     return SuperNodeListResponse(nodes=summaries, total=len(summaries))
+
+
+# ---------------------------------------------------------------------------
+# Phase 6 — Maintenance & Hierarchy endpoints
+# ---------------------------------------------------------------------------
+
+@router.get("/maintenance-log")
+def get_maintenance_log(limit: int = 50):
+    """
+    GET /admin/maintenance-log?limit=N
+
+    Returns the last N maintenance audit log entries from SQLite.
+    Used by the Maintenance tab in the dashboard to display audit events.
+    """
+    try:
+        with sqlite_client.get_connection() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, event_type, super_node_id, reason, decay_score,
+                       timestamp
+                FROM maintenance_log
+                ORDER BY timestamp DESC
+                LIMIT ?
+                """,
+                (limit,)
+            ).fetchall()
+        return {
+            "events": [
+                {
+                    "id":            r["id"],
+                    "event_type":    r["event_type"],
+                    "super_node_id": r["super_node_id"],
+                    "reason":        r["reason"],
+                    "decay_score":   r["decay_score"],
+                    "timestamp":     r["timestamp"],
+                }
+                for r in rows
+            ],
+            "total": len(rows),
+        }
+    except Exception as e:
+        logger.error("admin: get_maintenance_log failed — %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/manual-review-queue")
+def get_manual_review_queue():
+    """
+    GET /admin/manual-review-queue
+
+    Returns all unresolved entries in the manual_review_queue.
+    Each entry represents a pair of super-nodes that could not be
+    auto-merged because the resulting depth would exceed MAX_LINEAGE_DEPTH.
+    """
+    try:
+        rows = sqlite_client.get_manual_review_queue()
+        return {
+            "queue": [
+                {
+                    "id":         r["id"],
+                    "sn_id_a":    r["sn_id_a"],
+                    "sn_id_b":    r["sn_id_b"],
+                    "reason":     r["reason"],
+                    "resolved":   bool(r["resolved"]),
+                    "created_at": r["created_at"],
+                }
+                for r in rows
+            ],
+            "total": len(rows),
+        }
+    except Exception as e:
+        logger.error("admin: get_manual_review_queue failed — %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/resolve-review/{review_id}")
+def resolve_manual_review(review_id: int):
+    """
+    POST /admin/resolve-review/{review_id}
+
+    Marks a manual review queue entry as resolved so it no longer appears
+    in the pending queue. Does not automatically merge the nodes —
+    that must be done manually or via a forced synthesis call.
+    """
+    try:
+        with sqlite_client.get_connection() as conn:
+            result = conn.execute(
+                "UPDATE manual_review_queue SET resolved = 1 WHERE id = ?",
+                (review_id,)
+            )
+            if result.rowcount == 0:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Review queue entry {review_id} not found."
+                )
+        logger.info("admin: resolved manual review entry id=%d", review_id)
+        return {"status": "resolved", "id": review_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("admin: resolve_manual_review failed — %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/hierarchy-graph")
+def get_hierarchy_graph():
+    """
+    GET /admin/hierarchy-graph
+
+    Builds and returns the full hierarchy as a JSON graph:
+      { nodes: [{id, label, type, depth, hit_count, is_stale}],
+        edges: [{from, to, label}] }
+
+    Used by the Hierarchy tab to render the force-directed node graph.
+    Meta-nodes (type='meta_node') are the parent disease-level entries.
+    Super-nodes (type='super_node') are the child sub-topic entries.
+    """
+    try:
+        super_coll = ChromaClient.get_super_nodes_collection()
+        if super_coll is None:
+            return {"nodes": [], "edges": [], "message": "No super-nodes collection yet."}
+
+        all_nodes = super_coll.get(include=["metadatas"])
+        ids       = all_nodes.get("ids", [])
+        metas     = all_nodes.get("metadatas", [])
+
+        graph_nodes = []
+        graph_edges = []
+
+        for node_id, meta in zip(ids, metas):
+            if not meta:
+                continue
+            node_type   = meta.get("type", "super_node")
+            depth       = int(meta.get("lineage_depth", 0))
+            hit_count   = int(meta.get("hit_count", 0))
+            is_stale    = bool(meta.get("is_stale", False))
+            source_query = meta.get("source_query", node_id)
+
+            graph_nodes.append({
+                "id":        node_id,
+                "label":     source_query[:60] + ("…" if len(source_query) > 60 else ""),
+                "type":      node_type,
+                "depth":     depth,
+                "hit_count": hit_count,
+                "is_stale":  is_stale,
+                "in_hierarchy": bool(meta.get("in_hierarchy", False)),
+                "parent_meta_id": meta.get("parent_meta_id", ""),
+            })
+
+            # Build edges from parent to children
+            if node_type == "meta_node":
+                import json as _json
+                try:
+                    children = _json.loads(meta.get("children", "[]"))
+                    for child_id in children:
+                        graph_edges.append({
+                            "from":  node_id,
+                            "to":    child_id,
+                            "label": f"depth {depth}",
+                        })
+                except Exception:
+                    pass
+
+        return {
+            "nodes": graph_nodes,
+            "edges": graph_edges,
+            "total_nodes": len(graph_nodes),
+            "total_edges": len(graph_edges),
+        }
+
+    except Exception as e:
+        logger.error("admin: get_hierarchy_graph failed — %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+class LLMConfigRequest(BaseModel):
+    model: str
+    use_fallback: bool
+
+@router.get("/llm-config")
+def get_llm_config():
+    from app import config
+    from app.generation import llm_client
+    return {
+        "model": config.SUMMARIZER_LLM_MODEL,
+        "use_fallback": llm_client._GLOBAL_USE_FALLBACK,
+        "has_fallback_key": bool(config.OPENAI_API_KEY_FALLBACK)
+    }
+
+@router.post("/llm-config")
+def update_llm_config(req: LLMConfigRequest):
+    from app import config
+    from app.generation import llm_client
+    import os
+    import re
+    
+    # Update in memory
+    config.SUMMARIZER_LLM_MODEL = req.model
+    llm_client._GLOBAL_USE_FALLBACK = req.use_fallback
+    
+    # Update .env
+    env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env")
+    if os.path.exists(env_path):
+        with open(env_path, "r") as f:
+            content = f.read()
+        content = re.sub(r"SUMMARIZER_LLM_MODEL=.*", f"SUMMARIZER_LLM_MODEL={req.model}", content)
+        with open(env_path, "w") as f:
+            f.write(content)
+            
+    return {"status": "ok"}
+
+@router.get("/llm-status")
+def get_llm_status(model: str, use_fallback: bool):
+    from app.generation.llm_client import check_token_limits
+    return check_token_limits(model, use_fallback)
