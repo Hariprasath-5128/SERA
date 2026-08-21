@@ -15,17 +15,19 @@ class ChromaClient:
     @classmethod
     def get_client(cls):
         if cls._client is None:
+            import app.config as config
             # We persist the database to the path defined in config.py
-            cls._client = chromadb.PersistentClient(path=CHROMA_PERSIST_PATH)
+            cls._client = chromadb.PersistentClient(path=config.CHROMA_PERSIST_PATH)
         return cls._client
 
     @classmethod
     def get_collection(cls):
         if cls._collection is None:
+            import app.config as config
             client = cls.get_client()
             # We use cosine similarity to find the closest vectors
             cls._collection = client.get_or_create_collection(
-                name=CHROMA_RAW_COLLECTION,
+                name=config.CHROMA_RAW_COLLECTION,
                 metadata={"hnsw:space": "cosine"}
             )
         return cls._collection
@@ -40,11 +42,11 @@ class ChromaClient:
         (i.e. Phase 3/4 has not produced any super-nodes yet).
         """
         if cls._super_nodes_collection is None:
-            from app.config import CHROMA_SUPER_COLLECTION
+            import app.config as config
             client = cls.get_client()
             try:
                 cls._super_nodes_collection = client.get_or_create_collection(
-                    name=CHROMA_SUPER_COLLECTION,
+                    name=config.CHROMA_SUPER_COLLECTION,
                     metadata={"hnsw:space": "cosine"}
                 )
             except Exception:

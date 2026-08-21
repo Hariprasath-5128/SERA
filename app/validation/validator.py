@@ -89,8 +89,14 @@ def validate_entailment(source_text: str, summary: str) -> ValidationOutput:
         json_mode=True,
     )
 
+    import re
+    cleaned_text = response_text.strip()
+    if cleaned_text.startswith("```"):
+        cleaned_text = re.sub(r"^```(?:json)?\s*", "", cleaned_text)
+        cleaned_text = re.sub(r"\s*```$", "", cleaned_text)
+
     try:
-        result_dict = json.loads(response_text)
+        result_dict = json.loads(cleaned_text)
         # Ensure it conforms to our Pydantic schema
         return ValidationOutput(**result_dict)
     except (json.JSONDecodeError, PydanticValidationError) as exc:
@@ -105,44 +111,40 @@ def validate(source_text: str, summary: str) -> ValidationResult:
     """
     Main entry point called by synthesizer.py (Step 6).
 
-    Includes fallback logic: if the LLM judge fails to return valid JSON,
-    it falls back to entity_extractor's rough overlap check to prevent a
-    total pipeline collapse.
+    Uses the strict LLM-as-judge first. If JSON parsing fails,
+    it falls back to the entity_extractor's overlap check.
     """
-    logger.debug("validator: starting LLM entailment check")
+    logger.debug("validator: running LLM-as-judge coverage check")
     
     try:
-        output = validate_entailment(source_text, summary)
-        
-        # Override 'passed' based on our configured threshold, in case the LLM 
-        # did the math wrong.
-        passed = output.coverage_score >= config.VALIDATION_COVERAGE_THRESHOLD
+        llm_result = validate_entailment(source_text, summary)
         
         logger.info(
-            "validator: LLM judge finished | passed=%s | score=%.3f | missing=%d",
-            passed, output.coverage_score, len(output.missing_facts)
+            "validator: LLM check finished | passed=%s | score=%.3f | missing=%d",
+            llm_result.passed, llm_result.coverage_score, len(llm_result.missing_facts)
         )
         
         return ValidationResult(
-            passed=passed,
-            coverage_score=output.coverage_score,
-            missing_facts=output.missing_facts,
-            source_fact_count=0,   # Not provided by LLM schema; left as 0
-            summary_fact_count=0
+            passed=llm_result.passed,
+            coverage_score=llm_result.coverage_score,
+            missing_facts=llm_result.missing_facts,
+            source_fact_count=0,
+            summary_fact_count=0,
         )
         
-    except Exception as exc:
-        logger.warning(
-            "validator: LLM entailment failed (%s), falling back to entity extraction",
-            exc
-        )
-        # Fallback SU2 mechanism using the entity_extractor
+    except ValueError:
+        logger.warning("validator: LLM judge failed (malformed JSON). Running strict entity fallback.")
         fallback = entity_extractor.fallback_validate(source_text, summary)
+        
+        logger.info(
+            "validator: entity check finished | passed=%s | score=%.3f | missing=%d",
+            fallback["passed"], fallback["coverage_score"], len(fallback["missing_facts"])
+        )
         
         return ValidationResult(
             passed=fallback["passed"],
             coverage_score=fallback["coverage_score"],
             missing_facts=fallback["missing_facts"],
             source_fact_count=0,
-            summary_fact_count=0
+            summary_fact_count=0,
         )

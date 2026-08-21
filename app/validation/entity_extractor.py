@@ -177,19 +177,19 @@ def fallback_validate(source_text: str, summary: str) -> dict:
     source_entities  = extract_entities(source_text)
     summary_entities = extract_entities(summary)
 
-    if not source_entities:
-        # Cannot validate without source entities — conservatively pass
+    if len(source_entities) < 3:
+        # Cannot validate with too few source entities (esp. with en_core_web_sm missing medical terms)
         logger.warning(
-            "entity_extractor: fallback_validate — no source entities found; "
-            "conservatively passing"
+            "entity_extractor: fallback_validate — too few source entities found (%d); "
+            "conservatively passing", len(source_entities)
         )
         return {"passed": True, "coverage_score": 1.0, "missing_facts": []}
 
     matched      = source_entities & summary_entities
     missing      = sorted(source_entities - summary_entities)
     coverage     = len(matched) / len(source_entities)
-    # Relaxed threshold for fallback (0.70 vs 0.90 for LLM judge)
-    passed       = coverage >= 0.70
+    # Strict threshold for fallback to ensure specific names and values are preserved
+    passed       = coverage >= 0.85
 
     logger.warning(
         "entity_extractor: fallback_validate used — coverage=%.3f | passed=%s | "

@@ -685,8 +685,24 @@ hr.divider{border:none;border-top:1px solid var(--border)}
         </div>
       </div>
 
+      <!-- Graph Metrics -->
+      <div style="display:flex;gap:1.5rem;background:var(--surface);padding:.8rem;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:1rem;margin-top:1rem;">
+        <div style="display:flex;flex-direction:column;">
+          <span style="font-size:.7rem;color:var(--muted);text-transform:uppercase;">Super Nodes</span>
+          <span id="statSuperNodes" style="font-size:1.2rem;font-weight:600;color:var(--cyan)">0</span>
+        </div>
+        <div style="display:flex;flex-direction:column;">
+          <span style="font-size:.7rem;color:var(--muted);text-transform:uppercase;">Meta Nodes</span>
+          <span id="statMetaNodes" style="font-size:1.2rem;font-weight:600;color:var(--purple)">0</span>
+        </div>
+        <div style="display:flex;flex-direction:column;">
+          <span style="font-size:.7rem;color:var(--muted);text-transform:uppercase;">Connections</span>
+          <span id="statEdges" style="font-size:1.2rem;font-weight:600;color:var(--text)">0</span>
+        </div>
+      </div>
+
       <!-- Canvas -->
-      <div style="position:relative;flex:1;min-height:480px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+      <div style="position:relative;flex:1;height:80vh;min-height:800px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
         <canvas id="hierCanvas" style="width:100%;height:100%;display:block"></canvas>
         <div id="hierTooltip" style="display:none;position:absolute;background:#0f0f1a;border:1px solid var(--border);
           border-radius:.5rem;padding:.6rem .9rem;font-size:.75rem;max-width:280px;pointer-events:none;z-index:10;line-height:1.6"></div>
@@ -847,9 +863,9 @@ hr.divider{border:none;border-top:1px solid var(--border)}
       <div class="form-group">
         <label>LLM Model</label>
         <select id="llmModelSelect" style="background: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 8px; border-radius: 6px;">
-          <option value="llama-3.1-8b-instant">llama-3.1-8b-instant (Fast)</option>
-          <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile (Large)</option>
-          <option value="gemma2-9b-it">gemma2-9b-it</option>
+          <option value="llama3:latest">llama3:latest (Local Ollama - Unlimited)</option>
+          <option value="qwen/qwen3.6-27b">qwen/qwen3.6-27b (Fast & Optimized)</option>
+          <option value="openai/gpt-oss-120b">openai/gpt-oss-120b (Large & Powerful)</option>
         </select>
       </div>
       <div class="form-group">
@@ -1028,7 +1044,7 @@ async function checkTokenLimits() {
   document.getElementById('apiStatusBadge').style.background = 'var(--amber)';
   
   try {
-    const res = await api(`/admin/llm-status?model=${model}&use_fallback=${use_fallback}`);
+    const res = await api(`/admin/llm-status?model=${encodeURIComponent(model)}&use_fallback=${use_fallback}`);
     if (res.status === 'active') {
        document.getElementById('apiStatusBadge').textContent = 'Active';
        document.getElementById('apiStatusBadge').style.background = 'var(--green)';
@@ -1038,13 +1054,15 @@ async function checkTokenLimits() {
     } else {
        document.getElementById('apiStatusBadge').textContent = 'Error';
        document.getElementById('apiStatusBadge').style.background = 'var(--red)';
+       toast('API Error: ' + (res.message || 'Unknown error'), 'error');
     }
-    document.getElementById('apiLimitText').textContent = res.limit;
-    document.getElementById('apiRemainingText').textContent = res.remaining;
+    document.getElementById('apiLimitText').textContent = res.limit || 'N/A';
+    document.getElementById('apiRemainingText').textContent = res.remaining || 'N/A';
     document.getElementById('apiResetText').textContent = res.reset_time || '---';
   } catch(e) {
     document.getElementById('apiStatusBadge').textContent = 'Failed';
     document.getElementById('apiStatusBadge').style.background = 'var(--red)';
+    toast('Network Error: ' + e.message, 'error');
   }
 }
 function closeSettings(){document.getElementById('settingsModal').classList.remove('open')}
@@ -1662,6 +1680,19 @@ function renderHierarchyGraph(){
   }
   empty.style.display='none';
 
+  // Update Metrics UI
+  const superCount = _hierData.nodes.filter(n => n.type === 'super_node').length;
+  const metaCount = _hierData.nodes.filter(n => n.type === 'meta_node').length;
+  const edgeCount = _hierData.edges ? _hierData.edges.length : 0;
+  
+  const elSuper = document.getElementById('statSuperNodes');
+  const elMeta = document.getElementById('statMetaNodes');
+  const elEdges = document.getElementById('statEdges');
+  
+  if(elSuper) elSuper.textContent = superCount;
+  if(elMeta) elMeta.textContent = metaCount;
+  if(elEdges) elEdges.textContent = edgeCount;
+
   // Initialise physics particles randomly to prevent perfectly balanced circular locks
   const W=_hierCanvas.width, H=_hierCanvas.height;
   _hierPhysics=_hierData.nodes.map((n,i)=>({
@@ -1678,7 +1709,7 @@ function renderHierarchyGraph(){
 
     function step(){
     tick++;
-    const REPEL=6000, SPRING=0.04, DAMP=0.82, ATTRACT=0.005;
+    const REPEL=16000, SPRING=0.015, DAMP=0.82, ATTRACT=0.003;
     const N=_hierPhysics.length;
 
     // Repulsion
@@ -1762,8 +1793,11 @@ function renderHierarchyGraph(){
       // Label
       ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font='bold 9px Inter,sans-serif';
       ctx.textAlign='center'; ctx.textBaseline='middle';
-      const label=n.label.length>20?n.label.slice(0,18)+'…':n.label;
-      ctx.fillText(label,p.x,p.y+p.r+10);
+      let cleanLabel = n.label.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+      cleanLabel = cleanLabel.replace(/^["'\*]+|["'\*]+$/g, '').trim(); // strip quotes/asterisks
+      if(!cleanLabel) cleanLabel = "Unknown Node";
+      const label=cleanLabel.length>25?cleanLabel.slice(0,23)+'…':cleanLabel;
+      ctx.fillText(label,p.x,p.y+p.r+12);
     }
 
     if(tick<120)_hierAnim=requestAnimationFrame(step);
@@ -1783,12 +1817,14 @@ function renderHierarchyGraph(){
       if(dx*dx+dy*dy<=p.r*p.r*2){hovered=p.node;break;}
     }
     if(hovered){
+      let hoverLabel = hovered.label.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+      hoverLabel = hoverLabel.replace(/^["'\*]+|["'\*]+$/g, '').trim();
       tip.style.display='block';
       tip.style.left=(e.clientX-rect.left+14)+'px';
       tip.style.top=(e.clientY-rect.top+14)+'px';
       tip.innerHTML=`<strong style="color:var(--cyan)">${esc(hovered.type==='meta_node'?'🔷 Meta-Node':'🔵 Super-Node')}</strong><br>
         <span style="color:var(--muted)">ID:</span> ${esc(hovered.id)}<br>
-        <span style="color:var(--muted)">Query:</span> ${esc(hovered.label)}<br>
+        <span style="color:var(--muted)">Query:</span> ${esc(hoverLabel)}<br>
         <span style="color:var(--muted)">Hit Count:</span> ${hovered.hit_count}<br>
         <span style="color:var(--muted)">Depth:</span> ${hovered.depth}<br>
         <span style="color:var(--muted)">Stale:</span> ${hovered.is_stale?'<span style="color:var(--amber)">⚠ Yes</span>':'<span style="color:var(--green)">✓ No</span>'}`;
@@ -1812,11 +1848,13 @@ function renderHierarchyGraph(){
     const info=document.getElementById('hierNodeInfo');
     const details=document.getElementById('hierNodeDetails');
     if(clicked){
+      let clickedLabel = clicked.label.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+      clickedLabel = clickedLabel.replace(/^["'\*]+|["'\*]+$/g, '').trim();
       info.style.display='block';
       details.innerHTML=`
         <b>ID:</b> <span style="font-family:var(--mono);color:var(--indigo)">${esc(clicked.id)}</span><br>
         <b>Type:</b> ${clicked.type==='meta_node'?'<span style="color:var(--purple)">🔷 Meta-Node (Disease Parent)</span>':'<span style="color:var(--cyan)">🔵 Super-Node (Sub-topic)</span>'}<br>
-        <b>Topic:</b> ${esc(clicked.label)}<br>
+        <b>Topic:</b> ${esc(clickedLabel)}<br>
         <b>Hit Count:</b> ${clicked.hit_count} &nbsp;|&nbsp; <b>Depth:</b> ${clicked.depth}<br>
         <b>In Hierarchy:</b> ${clicked.in_hierarchy?'Yes (locked)':'No (mergeable)'}<br>
         <b>Stale:</b> ${clicked.is_stale?'<span style="color:var(--amber)">⚠ Yes — pending re-synthesis</span>':'<span style="color:var(--green)">✓ Fresh</span>'}<br>

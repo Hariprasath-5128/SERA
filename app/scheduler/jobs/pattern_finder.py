@@ -34,6 +34,19 @@ def scan_and_trigger() -> Dict[str, int]:
             existing_sn_id=cluster.existing_sn_id,
         )
         try:
+            # Pre-flight guard: skip clusters with no source chunks.
+            # These are orphan clusters whose ChromaDB documents were deleted
+            # or never ingested. Mark them failed immediately so the scheduler
+            # stops retrying them on every tick.
+            if not cluster.chunk_ids:
+                logger.warning(
+                    f"Skipping cluster {cluster.cluster_id} — chunk_ids is empty. "
+                    "Marking as synthesis_failed to prevent future retries."
+                )
+                sqlite_client.mark_cluster_failed(cluster.cluster_id)
+                results["failed"] += 1
+                continue
+
             # SU12: Lock BEFORE calling synthesizer
             sqlite_client.set_synthesizing(cluster.cluster_id, True)
             

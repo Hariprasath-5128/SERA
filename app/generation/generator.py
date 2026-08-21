@@ -36,21 +36,16 @@ class Generator:
         # 1. Compile the context window
         context_text = ""
         for i, chunk in enumerate(retrieved_chunks, 1):
-            source = chunk['metadata'].get('source_url', 'Unknown')
-            section = chunk['metadata'].get('section', 'General')
             text = chunk['text']
-            context_text += f"\n--- Source {i} ({section} - {source}) ---\n{text}\n"
+            context_text += f"{text}\n\n"
 
-        # 2. Build the strict prompt
         system_prompt = (
-            "You are SERA, an expert medical AI assistant. "
-            "You must answer the user's medical question strictly using ONLY the provided context chunks. "
-            "If the context does not contain enough information to answer the question, state that clearly. "
-            "Do not invent or hallucinate external information. "
-            "Cite your sources (e.g. [Source 1]) when stating facts."
+            "You are a medical expert. Provide a concise, accurate medical answer to the following question. "
+            "Do not include formatting, conversational filler, or phrases like 'Based on the context'. "
+            "Just state the medical facts."
         )
         
-        user_prompt = f"Context Information:{context_text}\n\nUser Question: {query}\n\nAnswer:"
+        user_prompt = f"Background facts to incorporate:\n{context_text}\n\nQuestion: {query}\n\nAnswer directly with medical facts:"
         
         # 3. Call the LLM (gpt-4o-mini by default)
         try:

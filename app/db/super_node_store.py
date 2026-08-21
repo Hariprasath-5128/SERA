@@ -53,19 +53,20 @@ def _get_collection() -> chromadb.Collection:
     """
     global _client, _collection
     if _collection is None:
+        import app.config as config
         if _client is None:
-            _client = chromadb.PersistentClient(path=CHROMA_PERSIST_PATH)
+            _client = chromadb.PersistentClient(path=config.CHROMA_PERSIST_PATH)
             logger.info(
                 "super_node_store: ChromaDB client initialised at %s",
-                CHROMA_PERSIST_PATH,
+                config.CHROMA_PERSIST_PATH,
             )
         _collection = _client.get_or_create_collection(
-            name=CHROMA_SUPER_COLLECTION,
+            name=config.CHROMA_SUPER_COLLECTION,
             metadata={"hnsw:space": "cosine"},
         )
         logger.info(
             "super_node_store: collection '%s' ready",
-            CHROMA_SUPER_COLLECTION,
+            config.CHROMA_SUPER_COLLECTION,
         )
     return _collection
 

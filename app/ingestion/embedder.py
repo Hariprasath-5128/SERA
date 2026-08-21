@@ -10,7 +10,8 @@ class Embedder:
     def get_model(cls):
         # Lazy loading: Only loads into RAM when called for the first time!
         if cls._model is None:
-            cls._model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+            # Force CPU to avoid CUDA OOM conflicts with local Ollama processes
+            cls._model = SentenceTransformer(EMBEDDING_MODEL_NAME, device="cpu")
         return cls._model
 
 def encode(chunks: List[Chunk], batch_size: int = 64) -> List[Chunk]:

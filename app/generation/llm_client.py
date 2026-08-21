@@ -57,8 +57,8 @@ def _get_client(use_fallback: bool = False) -> OpenAI:
 
 @retry(
     retry=retry_if_exception_type(Exception),
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=1, max=10),
+    stop=stop_after_attempt(5),
+    wait=wait_exponential(multiplier=2, min=10, max=30),
     before_sleep=before_sleep_log(logger, logging.WARNING),
     reraise=True,
 )
@@ -75,8 +75,8 @@ def _call_with_retry(
         "temperature": temperature,
         "max_tokens":  max_tokens,
     }
-    if json_mode:
-        kwargs["response_format"] = {"type": "json_object"}
+    # if json_mode:
+    #     kwargs["response_format"] = {"type": "json_object"}
 
     response = client.chat.completions.create(**kwargs)
     return response.choices[0].message.content.strip()

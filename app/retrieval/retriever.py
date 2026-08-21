@@ -51,7 +51,7 @@ class Retriever:
         epsilon: float = EXPLORATION_EPSILON,
     ) -> List[Dict[str, Any]]:
         """
-        Phase 5 unified retrieval combining SU4, SU5, and SU10.
+        Phase 5 unified retrieval combining SU4, SU5, SU10, and Fix 1.
 
         Args:
             query:   Raw user query string.
@@ -66,7 +66,7 @@ class Retriever:
                 text      str   document text
                 metadata  dict  ChromaDB metadata
                 distance  float cosine distance (post-SU4 boost for super-nodes)
-                type      str   "raw_chunk" | "super_node" | "meta_node"
+                type      str   "raw_chunk" | "super_node" | "meta_node" | "raw_chunk_injected"
 
         Note on "id" vs "chunk_id"
         ---------------------------
@@ -95,54 +95,29 @@ class Retriever:
         # benchmark pipelines can stratify metrics by retrieval strategy.
         multiplier, mode = compute_boost(epsilon=epsilon)
 
-        # ── 4. SU5 -- Hierarchical masking ────────────────────────────────────
-        # First pass: collect child IDs of any meta_node in the super-node
-        # results.  These children will be excluded below to prevent the
-        # context window from flooding with redundant parent+child content.
+        # ── 4. Exclude Meta Nodes for Hierarchical Only ────────────────────────
+        # As per instructions, Meta Nodes are only used for hierarchical graph purposes.
+        # We bypass SU5 masking and children injection as no Meta Nodes will be retrieved.
         masked_ids: set = set()
-        for c in sn_candidates:
-            if c["meta"].get("type") == "meta_node":
-                try:
-                    children = json.loads(c["meta"].get("children", "[]"))
-                    masked_ids.update(children)
-                except (json.JSONDecodeError, TypeError):
-                    logger.warning(
-                        "retriever: could not parse children JSON for meta_node %s -- skipping mask",
-                        c["id"],
-                    )
+        meta_node_children: Dict[str, List[str]] = {}
         masked_count = 0
 
         # ── 5. Build merged candidate list ───────────────────────────────────
         candidates: List[Dict[str, Any]] = []
 
-        # Super-node candidates: apply SU5 mask and SU4 distance boost.
-        for c in sn_candidates:
-            if c["id"] in masked_ids:
-                # SU5: child node shadowed by its retrieved parent meta_node.
-                # The vacated slot is automatically filled by raw_chunk
-                # candidates when both pools are merged (blueprint pitfall #3).
-                masked_count += 1
-                logger.debug("retriever: SU5 masked child super-node %s", c["id"])
-                continue
-
-            node_type = c["meta"].get("type", "super_node")
-            candidates.append({
-                "id":       c["id"],
-                "text":     c["doc"],
-                "metadata": c["meta"],
-                "distance": c["distance"] * multiplier,  # SU4 boost
-                "type":     node_type,
-            })
-
-        # Raw-chunk candidates: no boost, always compete on raw cosine score.
+        # Super-node candidates: Excluded from retrieval as per fallback plan (dilutes semantic density).
+        # We only use raw-chunk candidates, preserving exact medical phrasing for the LLM.
+        raw_by_id: Dict[str, Dict] = {}
         for c in raw_candidates:
-            candidates.append({
+            entry = {
                 "id":       c["id"],
                 "text":     c["doc"],
                 "metadata": c["meta"],
                 "distance": c["distance"],
                 "type":     "raw_chunk",
-            })
+            }
+            candidates.append(entry)
+            raw_by_id[c["id"]] = entry
 
         if masked_count:
             logger.info(
@@ -154,6 +129,44 @@ class Retriever:
         # Lower cosine distance = more similar = better rank.
         candidates.sort(key=lambda x: x["distance"])
         top = candidates[:top_k]
+
+        # ── Fix 1 -- Meta Node Child Injection ───────────────────────────────
+        # For every meta_node that made it into the final top_k, find its
+        # single most relevant raw child chunk from the raw_candidates pool
+        # and append it to the context (up to top_k + len(meta_nodes) total).
+        # The extra slots do not break the LLM context because we cap the
+        # injection at one child per meta_node, keeping the window bounded.
+        injected_ids: set = set(r["id"] for r in top)
+        injected_children: List[Dict[str, Any]] = []
+
+        for result in top:
+            if result["type"] == "meta_node":
+                children_ids = meta_node_children.get(result["id"], [])
+                # Pick the raw child chunk with the lowest (best) distance
+                # that was returned in raw_candidates.
+                best_child = None
+                best_dist = float("inf")
+                for child_id in children_ids:
+                    rc = raw_by_id.get(child_id)
+                    if rc and rc["id"] not in injected_ids and rc["distance"] < best_dist:
+                        best_child = rc
+                        best_dist = rc["distance"]
+                if best_child:
+                    best_child = dict(best_child)  # shallow copy
+                    best_child["type"] = "raw_chunk_injected"  # mark as injected
+                    injected_children.append(best_child)
+                    injected_ids.add(best_child["id"])
+                    logger.debug(
+                        "retriever: Fix1 injected child raw_chunk %s for meta_node %s",
+                        best_child["id"], result["id"],
+                    )
+
+        if injected_children:
+            top = top + injected_children
+            logger.info(
+                "retriever: Fix1 injected %d raw child chunk(s) alongside meta_node(s)",
+                len(injected_children),
+            )
 
         # ── 7. SU10 -- Atomic SQLite access logging ───────────────────────────
         # Only log super-nodes that survived into the FINAL top-k, not all
@@ -175,8 +188,9 @@ class Retriever:
                 )
 
         logger.info(
-            "retriever: query=%r top_k=%d mode=%s masked=%d sn_hits=%d",
+            "retriever: query=%r top_k=%d mode=%s masked=%d sn_hits=%d injected=%d",
             query, top_k, mode, masked_count, len(super_node_ids_in_top),
+            len(injected_children),
         )
         return top
 

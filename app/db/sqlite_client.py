@@ -342,6 +342,18 @@ def set_synthesizing(cluster_id: int, value: bool) -> None:
             )
 
 
+def mark_cluster_failed(cluster_id: int) -> None:
+    """
+    Mark a cluster as synthesis_failed = 1 and clear the synthesizing lock.
+    This prevents the scheduler from retrying the cluster indefinitely.
+    """
+    with get_connection() as conn:
+        conn.execute(
+            "UPDATE query_clusters SET synthesizing = 0, synthesis_failed = 1 WHERE id = ?",
+            (cluster_id,),
+        )
+
+
 def flag_cluster_for_re_synthesis(cluster_id: int) -> None:
     """
     SU8 / SU13 — mark a cluster as needing re-synthesis.
