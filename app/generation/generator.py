@@ -40,24 +40,31 @@ class Generator:
             context_text += f"{text}\n\n"
 
         system_prompt = (
-            "You are a medical expert. Provide a concise, accurate medical answer to the following question. "
-            "Do not include formatting, conversational filler, or phrases like 'Based on the context'. "
-            "Just state the medical facts."
+            "You are a precise medical expert. Answer the question using ONLY the facts "
+            "provided in the background context. Extract and state the most relevant medical "
+            "facts directly. Do not add introductions, conclusions, or phrases like "
+            "'Based on the context' or 'According to'. Do not repeat the question. "
+            "State medical facts concisely and precisely."
         )
         
-        user_prompt = f"Background facts to incorporate:\n{context_text}\n\nQuestion: {query}\n\nAnswer directly with medical facts:"
+        user_prompt = (
+            f"Context:\n{context_text}\n\n"
+            f"Question: {query}\n\n"
+            f"Answer (medical facts only, no filler):"
+        )
         
-        # 3. Call the LLM (gpt-4o-mini by default)
+        # 3. Call the LLM
         try:
             logger.info(f"Generating answer using {GENERATOR_LLM_MODEL}...")
+            client = Generator.get_client()
             response = client.chat.completions.create(
                 model=GENERATOR_LLM_MODEL,
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
                 ],
-                temperature=0.0, # Zero temperature to prevent hallucination
-                max_tokens=500
+                temperature=0.1,
+                max_tokens=300
             )
             return response.choices[0].message.content.strip()
         except Exception as e:

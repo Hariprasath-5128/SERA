@@ -206,6 +206,21 @@ def insert_cluster(
         return cur.lastrowid
 
 
+def get_parent_super_node_by_chunk_id(chunk_id: str) -> Optional[str]:
+    """
+    Given a raw chunk_id, check if it belongs to a synthesized cluster.
+    If yes, return the parent super_node_id.
+    """
+    with get_connection() as conn:
+        search_pattern = f'%"{chunk_id}"%'
+        row = conn.execute(
+            "SELECT super_node_id FROM query_clusters WHERE synthesized = 1 AND super_node_id IS NOT NULL AND chunk_ids LIKE ? ORDER BY hit_count DESC LIMIT 1",
+            (search_pattern,)
+        ).fetchone()
+        if row:
+            return row["super_node_id"]
+        return None
+
 def get_cluster(cluster_id: int) -> Optional[sqlite3.Row]:
     """Fetch a single cluster row by primary key. Returns None if not found."""
     with get_connection() as conn:

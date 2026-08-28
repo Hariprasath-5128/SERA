@@ -90,10 +90,18 @@ def validate_entailment(source_text: str, summary: str) -> ValidationOutput:
     )
 
     import re
-    cleaned_text = response_text.strip()
-    if cleaned_text.startswith("```"):
-        cleaned_text = re.sub(r"^```(?:json)?\s*", "", cleaned_text)
-        cleaned_text = re.sub(r"\s*```$", "", cleaned_text)
+    import re
+    match = re.search(r'\{[^{}]*"passed"[^{}]*"coverage_score"[^{}]*"missing_facts"[^{}]*\}', response_text, re.IGNORECASE | re.DOTALL)
+    if match:
+        cleaned_text = match.group(0)
+    else:
+        # fallback to finding the first { and the next }
+        start_idx = response_text.find('{')
+        end_idx = response_text.find('}', start_idx)
+        if start_idx != -1 and end_idx != -1:
+            cleaned_text = response_text[start_idx:end_idx+1]
+        else:
+            cleaned_text = response_text.strip()
 
     try:
         result_dict = json.loads(cleaned_text)

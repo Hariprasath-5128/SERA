@@ -222,7 +222,7 @@ def run(job: SynthesisJob) -> str:
 
     # ── Step 1: Fetch + Deduplicate (SU1) ─────────────────────────────────
     source_text, source_embeddings = chunk_fetcher.fetch_and_deduplicate(
-        job.chunk_ids, max_tokens=4000
+        job.chunk_ids, max_tokens=1500
     )
     if not source_text:
         raise SynthesisError(
@@ -259,7 +259,7 @@ def run(job: SynthesisJob) -> str:
             )
 
         active_system = job.prompt_system_override or SYSTEM_PROMPT
-        summary = llm_call(active_system, user_prompt, temperature=0.1, max_tokens=2500)
+        summary = llm_call(active_system, user_prompt, temperature=0.1, max_tokens=1000)
 
         # SU2 validation
         result = validator.validate(source_text, summary)
