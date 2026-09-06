@@ -12,18 +12,7 @@ import app.config as config
 from app.retrieval.retriever import Retriever
 from app.logging_.query_logger import log_query
 
-BENCHMARK_QUERIES = [
-    "What are the combined treatment pathways and dietary guidelines for a patient managing both Type 2 Diabetes and Hypertension?",
-    "How do the side effects of Lisinopril compare with other ACE inhibitors, and what are the long-term renal impacts?",
-    "Can chronic stress trigger asthma attacks, and how do cortisol levels link these two conditions?",
-    "What is the relationship between insulin resistance, high cholesterol, and cardiovascular disease risk?",
-    "How does a mild concussion affect cognitive function over time, and what are the recommended rehabilitation stages?",
-    "What are the early warning signs of a heart attack versus a panic attack, and how do their physiological causes differ?",
-    "How do dietary choices for managing cholesterol affect blood pressure regulation and overall heart health?",
-    "What are the long-term cardiovascular risks of untreated sleep apnea compared to chronic hypertension?",
-    "How do beta-blockers and calcium channel blockers differ in their mechanisms for treating high blood pressure and arrhythmia?",
-    "What are the interactions between alcohol consumption, liver damage, and the efficacy of common hypertension medications?",
-]
+from scripts.seed_complex_queries_v2 import QUESTIONS as BENCHMARK_QUERIES
 
 HIT_THRESHOLD = 15  # Feed each query 15 times to guarantee cluster formation
 

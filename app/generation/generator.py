@@ -23,7 +23,7 @@ class Generator:
         return cls._client
 
     @classmethod
-    def generate_answer(cls, query: str, retrieved_chunks: List[Dict[str, Any]]) -> str:
+    def generate_answer(cls, query: str, retrieved_chunks: List[Dict[str, Any]], max_words=None) -> str:
         """
         Synthesizes a final conversational answer using an LLM, heavily grounded
         by the raw chunks retrieved from ChromaDB.
@@ -35,16 +35,29 @@ class Generator:
         
         # 1. Compile the context window
         context_text = ""
+        current_words = 0
+        
         for i, chunk in enumerate(retrieved_chunks, 1):
             text = chunk['text']
+            words = text.split()
+            
+            if max_words is not None:
+                if current_words + len(words) > max_words:
+                    allowed_words = max_words - current_words
+                    if allowed_words > 0:
+                        context_text += " ".join(words[:allowed_words]) + "\n\n"
+                    break
+            
             context_text += f"{text}\n\n"
+            current_words += len(words)
 
         system_prompt = (
             "You are a precise medical expert. Answer the question using ONLY the facts "
-            "provided in the background context. Extract and state the most relevant medical "
-            "facts directly. Do not add introductions, conclusions, or phrases like "
-            "'Based on the context' or 'According to'. Do not repeat the question. "
-            "State medical facts concisely and precisely."
+            "provided in the background context. Extract and state all relevant medical "
+            "facts comprehensively. Include all relevant symptoms, side effects, mechanisms, "
+            "and treatments mentioned. Use bullet points and bold headers to structure your response. "
+            "Do not add introductions, conclusions, or phrases like 'Based on the context'. "
+            "Do not repeat the question."
         )
         
         user_prompt = (

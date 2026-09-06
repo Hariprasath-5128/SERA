@@ -1,0 +1,107 @@
+{
+  "num_questions": 10,
+  "static_scores": {
+    "rougeL": 0.18322232288228418,
+    "biobert": 0.7464229464530945,
+    "recall": 0.19857773544674323,
+    "volume": 36.4
+  },
+  "dynamic_scores": {
+    "rougeL": 0.16768412495407028,
+    "biobert": 0.7464852333068848,
+    "recall": 0.17795798729198237,
+    "volume": 33.5
+  },
+  "details": [
+    {
+      "question": "What are the combined treatment pathways and dietary guidelines for a patient managing both Type 2 Diabetes and Hypertension?",
+      "static_rougeL": 0.16453900709219857,
+      "dynamic_rougeL": 0.11836115326251896,
+      "static_recall": 0.26875,
+      "dynamic_recall": 0.1,
+      "static_volume": 38,
+      "dynamic_volume": 34
+    },
+    {
+      "question": "How do the side effects of Lisinopril compare with other ACE inhibitors, and what are the long-term renal impacts?",
+      "static_rougeL": 0.15966386554621848,
+      "dynamic_rougeL": 0.1146131805157593,
+      "static_recall": 0.1349206349206349,
+      "dynamic_recall": 0.1746031746031746,
+      "static_volume": 43,
+      "dynamic_volume": 27
+    },
+    {
+      "question": "Can chronic stress trigger asthma attacks, and how do cortisol levels link these two conditions?",
+      "static_rougeL": 0.22622950819672133,
+      "dynamic_rougeL": 0.19378427787934188,
+      "static_recall": 0.16058394160583941,
+      "dynamic_recall": 0.145985401459854,
+      "static_volume": 49,
+      "dynamic_volume": 40
+    },
+    {
+      "question": "What is the relationship between insulin resistance, high cholesterol, and cardiovascular disease risk?",
+      "static_rougeL": 0.24496124031007752,
+      "dynamic_rougeL": 0.21575342465753425,
+      "static_recall": 0.2204724409448819,
+      "dynamic_recall": 0.2125984251968504,
+      "static_volume": 40,
+      "dynamic_volume": 41
+    },
+    {
+      "question": "How does a mild concussion affect cognitive function over time, and what are the recommended rehabilitation stages?",
+      "static_rougeL": 0.13097345132743363,
+      "dynamic_rougeL": 0.15167548500881833,
+      "static_recall": 0.145985401459854,
+      "dynamic_recall": 0.145985401459854,
+      "static_volume": 24,
+      "dynamic_volume": 27
+    },
+    {
+      "question": "What are the early warning signs of a heart attack versus a panic attack, and how do their physiological causes differ?",
+      "static_rougeL": 0.23703703703703705,
+      "dynamic_rougeL": 0.22522522522522523,
+      "static_recall": 0.296551724137931,
+      "dynamic_recall": 0.2482758620689655,
+      "static_volume": 62,
+      "dynamic_volume": 61
+    },
+    {
+      "question": "How do dietary choices for managing cholesterol affect blood pressure regulation and overall heart health?",
+      "static_rougeL": 0.13263525305410123,
+      "dynamic_rougeL": 0.1206030150753769,
+      "static_recall": 0.2967032967032967,
+      "dynamic_recall": 0.25274725274725274,
+      "static_volume": 37,
+      "dynamic_volume": 29
+    },
+    {
+      "question": "What are the long-term cardiovascular risks of untreated sleep apnea compared to chronic hypertension?",
+      "static_rougeL": 0.16491228070175437,
+      "dynamic_rougeL": 0.19330855018587362,
+      "static_recall": 0.18421052631578946,
+      "dynamic_recall": 0.20175438596491227,
+      "static_volume": 23,
+      "dynamic_volume": 26
+    },
+    {
+      "question": "How do beta-blockers and calcium channel blockers differ in their mechanisms for treating high blood pressure and arrhythmia?",
+      "static_rougeL": 0.21428571428571427,
+      "dynamic_rougeL": 0.21448467966573817,
+      "static_recall": 0.15833333333333333,
+      "dynamic_recall": 0.14166666666666666,
+      "static_volume": 28,
+      "dynamic_volume": 25
+    },
+    {
+      "question": "What are the interactions between alcohol consumption, liver damage, and the efficacy of common hypertension medications?",
+      "static_rougeL": 0.15698587127158556,
+      "dynamic_rougeL": 0.12903225806451613,
+      "static_recall": 0.11926605504587157,
+      "dynamic_recall": 0.1559633027522936,
+      "static_volume": 20,
+      "dynamic_volume": 25
+    }
+  ]
+}

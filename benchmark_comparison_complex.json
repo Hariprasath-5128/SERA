@@ -1,0 +1,107 @@
+{
+  "num_questions": 10,
+  "static_scores": {
+    "rougeL": 0.2136575717542489,
+    "biobert": 0.7679328918457031,
+    "recall": 0.22197186142782996,
+    "volume": 29.7
+  },
+  "dynamic_scores": {
+    "rougeL": 0.22086367432356263,
+    "biobert": 0.7778700590133667,
+    "recall": 0.23180606969690154,
+    "volume": 28.9
+  },
+  "details": [
+    {
+      "question": "How do insulin resistance, dyslipidemia, and hypertension interact to accelerate cardiovascular disease risk, and how does management differ from treating each condition alone?",
+      "static_rougeL": 0.2364394993045897,
+      "dynamic_rougeL": 0.24963715529753266,
+      "static_recall": 0.16666666666666666,
+      "dynamic_recall": 0.32608695652173914,
+      "static_volume": 31,
+      "dynamic_volume": 34
+    },
+    {
+      "question": "Compare the mechanisms of ACE inhibitors and calcium channel blockers in controlling blood pressure, and explain how each affects long-term cardiac and renal outcomes.",
+      "static_rougeL": 0.2559366754617414,
+      "dynamic_rougeL": 0.2332439678284182,
+      "static_recall": 0.3263157894736842,
+      "dynamic_recall": 0.29473684210526313,
+      "static_volume": 30,
+      "dynamic_volume": 32
+    },
+    {
+      "question": "How do beta-blockers and calcium channel blockers differ in treating both hypertension and arrhythmia, and what determines drug choice in a patient with coexisting heart failure?",
+      "static_rougeL": 0.24496644295302014,
+      "dynamic_rougeL": 0.24329159212880141,
+      "static_recall": 0.22826086956521738,
+      "dynamic_recall": 0.1956521739130435,
+      "static_volume": 20,
+      "dynamic_volume": 25
+    },
+    {
+      "question": "Explain how statins reduce cardiovascular events through LDL lowering and pleiotropic effects, and how this integrates with dietary cholesterol management.",
+      "static_rougeL": 0.1749174917491749,
+      "dynamic_rougeL": 0.2110236220472441,
+      "static_recall": 0.12903225806451613,
+      "dynamic_recall": 0.2661290322580645,
+      "static_volume": 20,
+      "dynamic_volume": 24
+    },
+    {
+      "question": "How does the Mediterranean diet influence blood pressure, LDL cholesterol, and overall heart-disease risk compared with sodium restriction alone?",
+      "static_rougeL": 0.13270142180094788,
+      "dynamic_rougeL": 0.1391304347826087,
+      "static_recall": 0.2336448598130841,
+      "dynamic_recall": 0.205607476635514,
+      "static_volume": 44,
+      "dynamic_volume": 34
+    },
+    {
+      "question": "What is the physiological link between chronic high blood pressure, left ventricular hypertrophy, and progression to systolic versus diastolic heart failure?",
+      "static_rougeL": 0.18045112781954886,
+      "dynamic_rougeL": 0.282574568288854,
+      "static_recall": 0.2077922077922078,
+      "dynamic_recall": 0.23376623376623376,
+      "static_volume": 18,
+      "dynamic_volume": 16
+    },
+    {
+      "question": "How do untreated sleep apnea and chronic hypertension independently and jointly raise the risk of stroke and coronary artery disease?",
+      "static_rougeL": 0.25,
+      "dynamic_rougeL": 0.18027210884353742,
+      "static_recall": 0.25274725274725274,
+      "dynamic_recall": 0.1978021978021978,
+      "static_volume": 33,
+      "dynamic_volume": 22
+    },
+    {
+      "question": "Compare type 1 and type 2 diabetes in terms of pathophysiology, insulin use, and long-term cardiovascular and renal complications.",
+      "static_rougeL": 0.2724358974358974,
+      "dynamic_rougeL": 0.26421404682274247,
+      "static_recall": 0.21052631578947367,
+      "dynamic_recall": 0.18796992481203006,
+      "static_volume": 29,
+      "dynamic_volume": 49
+    },
+    {
+      "question": "How does the progression from insulin resistance to type 2 diabetes affect HbA1c, and how are treatment targets adjusted as beta-cell function declines?",
+      "static_rougeL": 0.21613832853025938,
+      "dynamic_rougeL": 0.23179791976225855,
+      "static_recall": 0.176,
+      "dynamic_recall": 0.192,
+      "static_volume": 22,
+      "dynamic_volume": 25
+    },
+    {
+      "question": "What are the combined treatment pathways and dietary guidelines for a patient managing both type 2 diabetes and hypertension?",
+      "static_rougeL": 0.17258883248730966,
+      "dynamic_rougeL": 0.17345132743362832,
+      "static_recall": 0.2887323943661972,
+      "dynamic_recall": 0.21830985915492956,
+      "static_volume": 50,
+      "dynamic_volume": 28
+    }
+  ]
+}

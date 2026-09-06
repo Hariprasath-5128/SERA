@@ -1,0 +1,107 @@
+{
+  "num_questions": 10,
+  "static_scores": {
+    "rougeL": 0.13923810930530658,
+    "biobert": 0.7569721937179565,
+    "recall": 0.15132443774200727,
+    "volume": 38.8
+  },
+  "dynamic_scores": {
+    "rougeL": 0.1425887950128578,
+    "biobert": 0.7546723484992981,
+    "recall": 0.14240705360814537,
+    "volume": 36.0
+  },
+  "details": [
+    {
+      "question": "What are the early symptoms of Type 2 Diabetes?",
+      "static_rougeL": 0.09124087591240876,
+      "dynamic_rougeL": 0.08518518518518518,
+      "static_recall": 0.13333333333333333,
+      "dynamic_recall": 0.11851851851851852,
+      "static_volume": 48,
+      "dynamic_volume": 40
+    },
+    {
+      "question": "How is hypertension diagnosed in adults?",
+      "static_rougeL": 0.1781609195402299,
+      "dynamic_rougeL": 0.1234991423670669,
+      "static_recall": 0.15976331360946747,
+      "dynamic_recall": 0.10059171597633136,
+      "static_volume": 43,
+      "dynamic_volume": 25
+    },
+    {
+      "question": "What are the common side effects of Lisinopril?",
+      "static_rougeL": 0.09560229445506692,
+      "dynamic_rougeL": 0.08610567514677103,
+      "static_recall": 0.09433962264150944,
+      "dynamic_recall": 0.07547169811320754,
+      "static_volume": 25,
+      "dynamic_volume": 20
+    },
+    {
+      "question": "Can asthma be triggered by seasonal allergies?",
+      "static_rougeL": 0.12374581939799331,
+      "dynamic_rougeL": 0.07462686567164178,
+      "static_recall": 0.22535211267605634,
+      "dynamic_recall": 0.06338028169014084,
+      "static_volume": 51,
+      "dynamic_volume": 40
+    },
+    {
+      "question": "What is the recommended treatment for mild concussions?",
+      "static_rougeL": 0.14057507987220447,
+      "dynamic_rougeL": 0.11092436974789917,
+      "static_recall": 0.09659090909090909,
+      "dynamic_recall": 0.0625,
+      "static_volume": 43,
+      "dynamic_volume": 34
+    },
+    {
+      "question": "What are the long-term effects of high blood pressure?",
+      "static_rougeL": 0.15675675675675677,
+      "dynamic_rougeL": 0.22585034013605443,
+      "static_recall": 0.2222222222222222,
+      "dynamic_recall": 0.21367521367521367,
+      "static_volume": 34,
+      "dynamic_volume": 39
+    },
+    {
+      "question": "How does insulin resistance lead to diabetes?",
+      "static_rougeL": 0.20064724919093851,
+      "dynamic_rougeL": 0.20606060606060603,
+      "static_recall": 0.15384615384615385,
+      "dynamic_recall": 0.20279720279720279,
+      "static_volume": 38,
+      "dynamic_volume": 36
+    },
+    {
+      "question": "What are the best dietary choices for managing cholesterol?",
+      "static_rougeL": 0.09541984732824427,
+      "dynamic_rougeL": 0.1291390728476821,
+      "static_recall": 0.1079136690647482,
+      "dynamic_recall": 0.2302158273381295,
+      "static_volume": 21,
+      "dynamic_volume": 22
+    },
+    {
+      "question": "Can chronic stress cause physical illness?",
+      "static_rougeL": 0.1345565749235474,
+      "dynamic_rougeL": 0.2112482853223594,
+      "static_recall": 0.17777777777777778,
+      "dynamic_recall": 0.21481481481481482,
+      "static_volume": 32,
+      "dynamic_volume": 56
+    },
+    {
+      "question": "What are the early warning signs of a heart attack?",
+      "static_rougeL": 0.17567567567567569,
+      "dynamic_rougeL": 0.17324840764331212,
+      "static_recall": 0.14210526315789473,
+      "dynamic_recall": 0.14210526315789473,
+      "static_volume": 53,
+      "dynamic_volume": 48
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+id,question,reference,pipeline,top_k,num_chunks_retrieved,answer,rouge_l,biobert_f1,concept_recall,raiv,context_tokens,output_tokens,total_tokens,latency,sair,uair,total_claims
+da523bca-2f3b-4afc-a462-146a222e8072,What are the early symptoms of type 2 diabetes?,"Type 2 diabetes is a chronic condition characterized by high blood sugar levels, insulin resistance, and impaired insulin secretion. The early symptoms of type 2 diabetes can be subtle and may not always be noticeable. However, some common early symptoms include:
+
+1. Increased thirst and urination: As blood sugar levels rise, the body tries to dilute the excess sugar by producing more urine, leading to increased thirst and urination.
+2. Fatigue: High blood sugar levels can cause fatigue, weakness, and a general feeling of being tired or sluggish.
+3. Blurred vision: High blood sugar levels can cause the lens in the eye to swell, leading to blurred vision or double vision.
+4. Slow healing of cuts and wounds: High blood sugar levels can impair the body's ability to heal wounds, leading to slow healing of cuts and wounds.
+5. Tingling or numbness in hands and feet: High blood sugar levels can damage the nerves, leading to tingling or numbness in the hands and feet.
+6. Recurring skin, gum, or bladder infections: High blood sugar levels can impair the immune system, making it harder for the body to fight off infections.
+7. Increased hunger: High blood sugar levels can cause increased hunger and cravings for sweet or starchy foods.
+8. Weight loss: Despite increased hunger, some people with type 2 diabetes may experience weight loss due to the body's inability to effectively use glucose for energy.
+9. Dizziness or lightheadedness: High blood sugar levels can cause dizziness or lightheadedness, especially when standing up or changing positions.
+10. Pale or yellowish skin: High blood sugar levels can cause a condition called jaundice, characterized by pale or yellowish skin.
+
+It's essential to note that many people with type 2 diabetes do not exhibit any symptoms at all, especially in the early stages. This is why it's crucial to get regular check-ups and screenings, especially if you have risk factors for the condition.
+
+Mechanisms:
+
+1. Insulin resistance: The body's cells become resistant to insulin, making it harder for glucose to enter the cells.
+2. Impaired insulin secretion: The pancreas produces less insulin, making it harder for glucose to enter the cells.
+3. Hyperglycemia: High blood sugar levels can cause damage to the body's tissues and organs.
+
+Treatments:
+
+1. Lifestyle changes: Diet, exercise, and weight loss can help manage blood sugar levels.
+2. Medications: Oral medications, such as metformin, and injectable medications, such as insulin, can help regulate blood sugar levels.
+3. Insulin therapy: Insulin injections or pumps can help regulate blood sugar levels.
+
+Clinical considerations:
+
+1. Screening: The American Diabetes Association recommends screening for type 2 diabetes in adults aged 45 and older, as well as in those with risk factors, such as obesity, family history, or physical inactivity.
+2. Diagnosis: A diagnosis of type 2 diabetes is typically made through a combination of physical examination, medical history, and laboratory tests, such as a fasting plasma glucose (FPG) test or an oral glucose tolerance test (OGTT).
+3. Complications: Untreated or poorly managed type 2 diabetes can lead to complications, such as kidney disease, nerve damage, and vision loss.
+
+It's essential to work with a healthcare provider to develop a personalized treatment plan and to monitor blood sugar levels regularly to prevent complications and improve overall health.",dynamic,5,3,"The early symptoms of type 2 diabetes include:
+
+* Increased thirst
+* Increased hunger
+* Fatigue
+* Increased urination, especially at night
+* Unexplained weight loss
+* Blurred vision
+* Numbness or tingling in the feet or hands
+* Sores that do not heal
+* Bladder, kidney, skin, or other infections that are more frequent or heal slowly",0.0835,0.7729,0.0852,83,1221,58,1279,87.696,87.5,12.5,8
+8cbc892f-fadf-4c3e-9dcc-e426a99edb1b,How is type 2 diabetes diagnosed?,"Type 2 diabetes is typically diagnosed using a combination of medical history, physical examination, and laboratory tests. The diagnostic process involves evaluating the presence of symptoms, risk factors, and laboratory values to confirm the diagnosis. Here's a step-by-step guide to the diagnostic process:
+
+1. Medical History:
+	* Patients with type 2 diabetes often report symptoms such as increased thirst and urination, fatigue, blurred vision, or recurring skin infections.
+	* Healthcare providers ask about the patient's medical history, including any previous diagnoses, surgeries, or illnesses.
+2. Physical Examination:
+	* A thorough physical examination is performed to look for signs of diabetes-related complications, such as:
+		+ Nerve damage (neuropathy): numbness, tingling, or weakness in the hands and feet.
+		+ Kidney damage (nephropathy): high blood pressure, proteinuria (excess protein in the urine), or decreased kidney function.
+		+ Eye damage (retinopathy): blurred vision, floaters, or vision loss.
+3. Laboratory Tests:
+	* Fasting Plasma Glucose (FPG) Test:
+		+ Patients are asked to fast for at least 8 hours before the test.
+		+ A blood sample is taken to measure the glucose level.
+		+ A diagnosis of type 2 diabetes is made if the FPG level is ≥126 mg/dL (7.0 mmol/L).
+	* Oral Glucose Tolerance Test (OGTT):
+		+ Patients are asked to fast for at least 8 hours before the test.
+		+ A blood sample is taken to measure the glucose level.
+		+ A 75-gram oral glucose load is administered.
+		+ Blood samples are taken at 1-hour and 2-hour intervals to measure the glucose level.
+		+ A diagnosis of type 2 diabetes is made if the OGTT result is ≥200 mg/dL (11.1 mmol/L) at 1 hour or ≥300 mg/dL (16.7 mmol/L) at 2 hours.
+	* Hemoglobin A1c (HbA1c) Test:
+		+ This test measures the average blood glucose level over the past 2-3 months.
+		+ A diagnosis of type 2 diabetes is made if the HbA1c level is ≥6.5%.
+4. Additional Tests:
+	* Lipid profile: to assess cholesterol and triglyceride levels.
+	* Urinalysis: to detect proteinuria or other signs of kidney damage.
+	* Electrolyte panel: to assess potassium, sodium, and chloride levels.
+	* Thyroid function tests: to rule out hypothyroidism or hyperthyroidism.
+5. Clinical Considerations:
+	* Patients with a history of gestational diabetes, polycystic ovary syndrome (PCOS), or a family history of type 2 diabetes may be at increased risk for developing the condition.
+	* Patients with certain ethnicities, such as African Americans, Hispanics/Latinos, and American Indians, are at higher risk for developing type 2 diabetes.
+	* Patients with a body mass index (BMI) ≥30 kg/m² or those who are overweight or obese are at increased risk for developing type 2 diabetes.
+
+In summary, the diagnosis of type 2 diabetes involves a combination of medical history, physical examination, and laboratory tests. The FPG test is the most commonly used diagnostic test, but the OGTT and HbA1c tests may also be used. Additional tests may be necessary to rule out other conditions or assess for complications.",dynamic,5,2,"Relevant medical facts:
+
+* Early symptoms of type 2 diabetes may include increased thirst, increased hunger, fatigue, increased urination, especially at night, unexplained weight loss, blurred vision, numbness or tingling in the feet or hands, and sores that do not heal.
+* Many people with type 2 diabetes may not exhibit any symptoms until the condition has progressed, and some may not be diagnosed until they develop complications such as blurred vision or heart trouble.
+* Key facts: Nearly 7 million people in the United States have type 2 diabetes and do not know they have the disease. Many people with type 2 diabetes have no signs or symptoms. Some people with type 2 diabetes may not suspect they have the condition due to the mild nature of the symptoms.
+* Early diagnosis and treatment can prevent damage to the body and reduce the risk of complications.
+* Type 2 diabetes is diagnosed through a combination of medical history, physical examination, and laboratory tests, including:
+	+ Fasting plasma glucose (FPG) test: Measures the level of glucose in the blood after an overnight fast.
+	+ Oral glucose tolerance test (OGTT): Measures the body's ability to regulate blood sugar levels after consuming a sugary drink.
+	+ Hemoglobin A1c (HbA1c) test: Measures the average blood sugar levels over the past 2-3 months.
+* Diagnosis is typically made when two or more of the following criteria are met:
+	+ FPG ≥ 126 mg/dL
+	+ OGTT ≥ 200 mg/dL
+	+ HbA1c ≥ 6.5%
+* If the diagnosis is uncertain, a 75-g OGTT may be performed to confirm the diagnosis.",0.1981,0.6122,0.2624,35,784,264,1048,77.995,70.0,30.0,10

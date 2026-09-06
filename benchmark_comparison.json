@@ -1,88 +1,88 @@
 {
   "num_questions": 15,
   "static_scores": {
-    "rougeL": 0.11656247947704554,
-    "biobert": 0.704647421836853
+    "rougeL": 0.21005336506795969,
+    "biobert": 0.7474209666252136
   },
   "dynamic_scores": {
-    "rougeL": 0.15559515588686101,
-    "biobert": 0.7301841378211975
+    "rougeL": 0.2259847885556582,
+    "biobert": 0.7500818967819214
   },
   "details": [
     {
       "question": "What are the combined treatment pathways and dietary guidelines for a patient managing both Type 2 Diabetes and Hypertension?",
-      "static_rougeL": 0.07964601769911504,
-      "dynamic_rougeL": 0.1679790026246719
+      "static_rougeL": 0.09937888198757765,
+      "dynamic_rougeL": 0.09278350515463916
     },
     {
       "question": "How do the side effects of Lisinopril compare with other ACE inhibitors, and what are the long-term renal impacts?",
-      "static_rougeL": 0.14869888475836432,
-      "dynamic_rougeL": 0.14569536423841062
+      "static_rougeL": 0.16875,
+      "dynamic_rougeL": 0.17123287671232879
     },
     {
       "question": "Can chronic stress trigger asthma attacks, and how do cortisol levels link these two conditions?",
-      "static_rougeL": 0.1317829457364341,
-      "dynamic_rougeL": 0.19011406844106465
+      "static_rougeL": 0.23076923076923075,
+      "dynamic_rougeL": 0.31351351351351353
     },
     {
       "question": "What is the relationship between insulin resistance, high cholesterol, and cardiovascular disease risk?",
-      "static_rougeL": 0.10970464135021098,
-      "dynamic_rougeL": 0.15217391304347824
+      "static_rougeL": 0.24925816023738875,
+      "dynamic_rougeL": 0.23640661938534277
     },
     {
       "question": "How does a mild concussion affect cognitive function over time, and what are the recommended rehabilitation stages?",
-      "static_rougeL": 0.1095890410958904,
-      "dynamic_rougeL": 0.16499999999999998
+      "static_rougeL": 0.0930232558139535,
+      "dynamic_rougeL": 0.1407035175879397
     },
     {
       "question": "What are the early warning signs of a heart attack versus a panic attack, and how do their physiological causes differ?",
-      "static_rougeL": 0.33415233415233414,
-      "dynamic_rougeL": 0.38020833333333337
+      "static_rougeL": 0.28260869565217395,
+      "dynamic_rougeL": 0.32571428571428573
     },
     {
       "question": "How do dietary choices for managing cholesterol affect blood pressure regulation and overall heart health?",
-      "static_rougeL": 0.08695652173913043,
-      "dynamic_rougeL": 0.10810810810810811
+      "static_rougeL": 0.18487394957983191,
+      "dynamic_rougeL": 0.16230366492146595
     },
     {
       "question": "What are the long-term cardiovascular risks of untreated sleep apnea compared to chronic hypertension?",
-      "static_rougeL": 0.1306122448979592,
-      "dynamic_rougeL": 0.08494208494208494
+      "static_rougeL": 0.2556390977443609,
+      "dynamic_rougeL": 0.25698324022346364
     },
     {
       "question": "How do beta-blockers and calcium channel blockers differ in their mechanisms for treating high blood pressure and arrhythmia?",
-      "static_rougeL": 0.14901960784313725,
-      "dynamic_rougeL": 0.17699115044247787
+      "static_rougeL": 0.24199288256227758,
+      "dynamic_rougeL": 0.27476038338658143
     },
     {
       "question": "What are the interactions between alcohol consumption, liver damage, and the efficacy of common hypertension medications?",
-      "static_rougeL": 0.06730769230769232,
-      "dynamic_rougeL": 0.10328638497652583
+      "static_rougeL": 0.1818181818181818,
+      "dynamic_rougeL": 0.189873417721519
     },
     {
       "question": "How do seasonal allergies and chronic asthma interact, and what is the combined pharmacological management plan?",
-      "static_rougeL": 0.10434782608695652,
-      "dynamic_rougeL": 0.16706443914081145
+      "static_rougeL": 0.2214532871972318,
+      "dynamic_rougeL": 0.2074468085106383
     },
     {
       "question": "What are the early symptoms of Type 2 Diabetes, and how do they relate to the physiological mechanisms of insulin resistance?",
-      "static_rougeL": 0.08664259927797834,
-      "dynamic_rougeL": 0.1325301204819277
+      "static_rougeL": 0.27397260273972607,
+      "dynamic_rougeL": 0.35377358490566035
     },
     {
       "question": "Compare the treatment strategies for mild concussions in children versus adults, highlighting recovery timelines.",
-      "static_rougeL": 0.04672897196261683,
-      "dynamic_rougeL": 0.18012422360248448
+      "static_rougeL": 0.174496644295302,
+      "dynamic_rougeL": 0.1875
     },
     {
       "question": "What are the common side effects of Lisinopril, and how do they compare to the side effects of Amlodipine?",
-      "static_rougeL": 0.1076923076923077,
-      "dynamic_rougeL": 0.06666666666666668
+      "static_rougeL": 0.17073170731707316,
+      "dynamic_rougeL": 0.16494845360824742
     },
     {
       "question": "How do stress-induced hormone changes affect gut health and overall immune system function?",
-      "static_rougeL": 0.055555555555555546,
-      "dynamic_rougeL": 0.11304347826086956
+      "static_rougeL": 0.3220338983050848,
+      "dynamic_rougeL": 0.3118279569892473
     }
   ]
 }
